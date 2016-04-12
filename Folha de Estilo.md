@@ -38,45 +38,45 @@ ___
 
 Todo arquivo .cpp deve ter um .hpp correspondente, com mesmo nome. Ambos devem ter o nome da classe a qual eles implementam.
 
-'''c++
+```c++
 class Guard : public Object
-'''
-'''c++
+```
+```c++
 guard.cpp
-'''
-'''c++
+```
+```c++
 guard.hpp
-'''
+```
 
 ## 3.  Nomenclatura
 
 A Nomenclatura deve seguir o padrão "CamelCase" para Classes e Enums.
 
-'''c++
+```c++
 class Guard : public Object
-'''
+```
 
 Para metodos, atributos, variaves e namespaces o padrão usado deve ser o "snake_case".
 
-'''c++
+```c++
 void update_vision();
-'''
+```
 
 Para constantes e macros deverá ser usado o "SCREAMING_SNAKE_CASE".
 
-'''c++
+```c++
 #define SPEED 150.5
-'''
+```
 
 Em structs será usado "snake_case", o mesmo deverá ser acompanhado de um "typedef" que segue o padrão CamelCase.
 
-'''c++
+```c++
 typedef struct _Area
 {
     double left, right;
     double top, bottom;
 } Area;
-'''
+```
 
 #### 1.1 Nome do Arquivo
 The source file name consists of the case-sensitive name of the top-level class it contains, plus the `.java` extension.
