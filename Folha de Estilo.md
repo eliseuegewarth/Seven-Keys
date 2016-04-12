@@ -5,13 +5,16 @@ Este documento descreve as convenções adotadas para o desenvolvimento do jogo 
 *You also can read in english at [Stylesheet](Stylesheet.md)*.
 
 ##Sumário
-####  [2. Nomenclatura]()
+#### [1. Cabeçalho]()
+#### [2. Escopo]()
+#### [3. Nomenclatura]()
 ###### [2.1 Classes]()
-###### [2.2 Atributos]()
-###### [2.3 Constantes]()
-###### [2.4 Métodos]()
-###### [2.5 Parameters]()
-###### [2.6 Variáveis Locais]()
+###### [2.1.1 Atributos]()
+###### [2.1.2 Métodos]()
+###### [2.1.3 Constantes]()
+###### [2.1.4 Parameters]()
+###### [2.1.5 Variáveis Locais]()
+
 ___
 
 ####   [3. Formatação de código](#4-formatting)
