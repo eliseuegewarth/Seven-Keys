@@ -139,47 +139,66 @@ public class News implements Serializable {
 	...
 ```
 
-## 2. Programming Practices
+## Scoping
 
-#### 2.1 `@Override`
-`@Override` must be used whenever it is legal. It must be placed on the line before the overridden method.
-``` Java
-	@Override
-	protected void onPreExecute() {
-	...
-	}
+2.1 Includes
+	
+	primeiro o header do arquivo fonte
+	depois as bibliotecas da engine
+	depois as bibliotecas especificas do jogo
+	depois as bibliotecas padroes do c/c++
+
+```c++
+
+#include "boss.h"
+
+#include "core/level.h"
+#include "core/environment.h"
+#include "core/keyboardevent.h"
+
+#include <core/animation.h>
+
+#include <iostream>
+
 ```
 
-#### 2.2 Exceções
-Caught exceptions should never be ignored. The runtime error should be treated into the appropriate scope.
-``` Java
-try {
-		URL url = new URL(urls[0]);
-		FeedParser handler = new FeedParser();
-		InputStream is = url.openStream();
-		feed = handler.parse(is);
+2.2 Namespaces
 
-		FeedPersistencia.getInstance(this.context).writeFeedFile(feed);
-		this.updated = true;
+Namespaces should be used whenever possible
+Namespaces should always be named
 
-		return feed;
+```c++
 
-	} catch (MalformedURLException e) {
-		e.printStackTrace();
-	} catch (IOException e) {
-		e.printStackTrace();
-	}
+using namespace std;
+
 ```
 
-#### 2.3 Static Members
-Whenever a reference to a static member have to be called, it should be called directly from the class.
-``` Java
-public static FeedPersistencia getInstance(Context context) {
-	 ...
-	}
-...
+2.3 Local Variables
 
-FeedPersistencia.getInstance(this.context).writeFeedFile(feed);
+Declare as variaveis o mais localmente possivel
+As variaveis devem ser declaradas o mais proximo do seu uso
+Todas as variaveis devem ser inicializadas.
+
+
+```c++
+
+	for(int id = 1; id < quantidade_salas; id++){	
+        Room * aux = room_list.at(rand() % id);
+		CreateRoom(aux, &id, aux->pos_x, aux->pos_y, quantidade_salas, stage_id);
+        aux ++;
+	}
+
+```
+
+
+2.4 Static and Global Variables
+
+Variaveis estaticas devem ser usadas somente quando necessario devido a seus riscos de variacoes e mau uso ao longo do codigo, quando nao utilizada como constante (const).
+
+```c++
+
+static Font_Manager *instance;
+
 ```
 
 ## 3. Naming
@@ -230,8 +249,105 @@ public void setStateName(String stateName) {
 	this.stateName = stateName;
 }
 ```
+4 Classes
 
-## 4. Formatting
+4.1 Constructors and destructors
+
+Construtores devem sempre ser definidos em cada classe
+
+.hpp
+```c++
+Animation(const string& image, double x, double y, double w, double h,
+        int frames, unsigned long speed_in_ms, bool loop = false);
+
+    ~Animation();
+```
+.cpp
+```c++
+Animation::Animation(const string& texture, double x, double y, double w,
+    double h, int frames, unsigned long speed_in_ms, bool loop)
+    : m_impl(new Animation::Impl(texture, x, y, w, h, frames, speed_in_ms, loop))
+{
+}
+```
+
+Apenas destrutores virtuais sao permitidos, quando necessarios
+
+4.2 Structs
+
+Structs devem possuir apenas dados primarios e nao podem ser implementadas quaisquer tipo de funcoes ou afins
+
+```c++
+
+typedef struct _ItemInfo {
+        string name;
+        string type;
+        int variations;
+        int weight;
+        bool walkable;
+        bool unique;
+        double mass;
+        int x, y;
+    } ItemInfo;
+
+```
+
+4.3 Classes
+
+Classes devem possuir metodos e atributos condizentes com o que seu nome especifica
+
+3.3 Inheritance
+
+Prefer using Composition instead of Inheritance, but use Inheritance when it suits
+Multiple Inheritance should be used only when, between it's base classes, there is only one non-virtual class
+3.4 Virtual Classes
+
+Virtual classes may be used when convenient
+
+3.5 Operator Overloading
+
+May be used if it's result is obvious and expected
+
+3.6 Access Control
+
+Class members should be private unless they're static const
+
+3.7 Declaration Order
+
+public before private
+using declarations, typedefs and enums
+Constants (static const data members)
+Constructors
+Destructors
+Methods, including static methods
+Data Members
+class CZString
+{
+    public:
+        enum DuplicationPolicy
+        {
+            noDuplication = 0,
+            duplicate,
+            duplicateOnCopy
+        };
+        CZString(ArrayIndex index);
+        CZString(const char* cstr, DuplicationPolicy allocate);
+        CZString(const CZString& other);
+        ~CZString();
+        CZString& operator=(const CZString& other);
+        bool operator<(const CZString& other) const;
+        bool operator==(const CZString& other) const;
+        ArrayIndex index() const;
+        const char* c_str() const;
+        bool isStaticString() const;
+
+    private:
+        void swap(CZString& other);
+        const char* cstr_{nullptr};
+        ArrayIndex index_;
+};
+
+## 7. Formatting
 
 #### 4.1 Braces
 
