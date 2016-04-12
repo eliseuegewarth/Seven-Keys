@@ -5,7 +5,7 @@ Este documento descreve as convenções adotadas para o desenvolvimento do jogo 
 *You also can read in english at [Stylesheet](Stylesheet.md)*.
 
 ##Sumário
-#### [1. Cabeçalho]()
+#### [1. Arquivos Header (.hpp)]()
 #### [2. Escopo]()
 #### [3. Nomenclatura]()
 ###### [2.1 Classes]()
@@ -18,7 +18,7 @@ Este documento descreve as convenções adotadas para o desenvolvimento do jogo 
 ___
 
 ####   [3. Formatação de código](#4-formatting)
-###### [2.1 Arquivo Fonte]()
+###### [3.1 Arquivo Fonte]()
 ###### [3.1 Braces](#41-braces-1)
 ###### [3.2 Block Indentation](#42-block-indentation-1)
 ###### [3.3 Statements Per Line](#43-statements-per-line-1)
@@ -34,9 +34,51 @@ ___
 ___
 
 
-## 1. Source Files
+## 1. Arquivos Header (.hpp)
 
-#### 1.1 File Name
+Todo arquivo .cpp deve ter um .hpp correspondente, com mesmo nome. Ambos devem ter o nome da classe a qual eles implementam.
+
+'''c++
+class Guard : public Object
+'''
+'''c++
+guard.cpp
+'''
+'''c++
+guard.hpp
+'''
+
+## 3.  Nomenclatura
+
+A Nomenclatura deve seguir o padrão "CamelCase" para Classes e Enums.
+
+'''c++
+class Guard : public Object
+'''
+
+Para metodos, atributos, variaves e namespaces o padrão usado deve ser o "snake_case".
+
+'''c++
+void update_vision();
+'''
+
+Para constantes e macros deverá ser usado o "SCREAMING_SNAKE_CASE".
+
+'''c++
+#define SPEED 150.5
+'''
+
+Em structs será usado "snake_case", o mesmo deverá ser acompanhado de um "typedef" que segue o padrão CamelCase.
+
+'''c++
+typedef struct _Area
+{
+    double left, right;
+    double top, bottom;
+} Area;
+'''
+
+#### 1.1 Nome do Arquivo
 The source file name consists of the case-sensitive name of the top-level class it contains, plus the `.java` extension.
 
 
@@ -108,7 +150,7 @@ public class News implements Serializable {
 	}
 ```
 
-#### 2.2 Caught Exceptions
+#### 2.2 Exceções
 Caught exceptions should never be ignored. The runtime error should be treated into the appropriate scope.
 ``` Java
 try {
