@@ -14,6 +14,24 @@ Após isso, extraia a engine necessária para rodar o jogo:
 $ tar -vzxf ijengine-0.0.5.tar.gz
 ```
 
+Certifique-se que as seguintes bibliotecas estejam instaladas no seu computador:
+
+*libsdl2-image-dev*,
+*libsdl2-mixer-dev* e
+*libsdl2-ttf-dev*
+
+Se não estiverem, execute os seguintes comandos:
+
+```sh
+$ sudo apt install libsdl2-image-dev
+```
+```sh
+$ sudo apt install libsdl2-mixer-dev
+```
+```sh
+$ sudo apt install libsdl2-ttf-dev
+```
+
 Realize a instalação da engine através do MakeFile:
 
 ```sh
