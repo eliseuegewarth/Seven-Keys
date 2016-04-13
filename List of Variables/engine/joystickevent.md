@@ -4,43 +4,43 @@
 
 
 
-```sh
+```c++
 static bool joystick_was_init = false;
 ```
 
-```sh
+```c++
 static map<int, JoyStickEvent::Button> m_joystick_table;
 ```
 
-```sh
+```c++
 void init_table_joystick()
 ```
 
-```sh
+```c++
 JoyStickEvent::JoyStickEvent(State state, Button button)
     : m_state(state), m_button(button)
 ```
 
-```sh
+```c++
 JoyStickEvent::State
 ```
 
-```sh
+```c++
 JoyStickEvent::Button
 ```
 
-```sh
+```c++
 JoyStickEvent::Button button = m_joystick_table[event.cbutton.button];
 ```
 
-```sh
+```c++
 JoyStickEvent::PRESSED : JoyStickEvent::RELEASED);
 ```
 
-```sh
+```c++
 JoyStickEvent::State state = (event.type == SDL_CONTROLLERBUTTONDOWN ?
 ```
 
-```sh
+```c++
 JoyStickEvent::from_SDL(const SDL_Event& event)
 ```
