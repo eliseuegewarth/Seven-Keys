@@ -29,7 +29,7 @@ SevenKeys::SevenKeys()
 
 Level *
 SevenKeys::load_level(const string& id)
-{   
+{
     if (id == "fone")
     {
         return new FrontEnd("logo", "logo", "res/images/fone.png");
@@ -45,7 +45,7 @@ SevenKeys::load_level(const string& id)
     else if (id == "classificacao")
     {
         return new FrontEnd("classificacao", "title", "res/images/classificacao_indicativa.png");
-    } 
+    }
     else if (id == "title")
     {
         return new TitleScreen();
@@ -68,7 +68,7 @@ SevenKeys::load_level(const string& id)
         Level *lvl = new Level(id, id);
         lvl->set_dimensions(w, h);
 
-        /*string *str; //mudando uma variavel constante
+        /*string *str;
         str = (string*)(&id);
         *str = "stage1";*/
 
@@ -86,7 +86,7 @@ SevenKeys::load_level(const string& id)
         sprintf(num_id2, "%s", num_id.c_str());
         int novo_id = atoi(num_id2);
         char path[256];
-        if(novo_id < 6) 
+        if(novo_id < 6)
             sprintf(path, "res/interface/transicao/Fase%d.png", novo_id);
         else
             sprintf(path, "res/interface/transicao/Bonus.png");
@@ -104,7 +104,7 @@ SevenKeys::load_level(const string& id)
 
         return new FrontEnd(id, novo, path);
     }
-    
+
     else if(strstr(id.c_str(), "death"))
     {
         Environment *env = Environment::get_instance();
@@ -150,11 +150,11 @@ SevenKeys::load_level(const string& id)
     else if (id == "creditos")
     {
         return new Creditos();
-    } 
+    }
     else if (id == "extras")
     {
         return new Extras();
-    } 
+    }
 
     return nullptr;
 }
