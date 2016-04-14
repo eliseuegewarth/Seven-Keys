@@ -98,7 +98,6 @@ Todas as variaveis devem ser inicializadas.
 	}
 ```
 
-
 ### 2.4 Variaveis globais e estaticas (static)
 
 Variaveis estaticas devem ser usadas somente quando necessario devido a seus riscos de variacoes e mau uso ao longo do codigo, quando nao utilizada como constante (const).
