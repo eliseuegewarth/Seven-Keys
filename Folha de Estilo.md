@@ -208,7 +208,10 @@ void show_health()
 O tipo de retorno deve ser declarado sempre antes do nome da função.
 
 ```c++
-void show_realth()
+void show_health()
+{
+	...
+}
 ```
 
 ## 6.  Formatação
