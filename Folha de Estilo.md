@@ -186,7 +186,7 @@ typedef struct _ItemInfo {
         int x, y;
     } ItemInfo;
 
-		```
+```
 ## 5.  Funções
 
 As funções devem possuir as funcionalidades características de sua nomenclatura.
