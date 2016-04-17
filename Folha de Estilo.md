@@ -19,19 +19,24 @@ ___
 
 #### [3. Nomenclatura]()
 
-####  [4. Praticas de programação]()
-###### [4.1 Exceções]()
-###### [4.2 Assertivas]()
-###### [4.1 Javadoc C++]()
+#### [4. Classes]()
 
-#### [5. Funções]()
-###### [5.1 Tipo de Retorno]()
+##### [4.3 Funções]()
+###### [4.3.1 Tipo de Retorno]()
 
-#### [6. Formatação]()
+#### [5. Formatação]()
 
-#### [7. Comentários]()
+#### [6. Comentários]()
 
-#### [8. Outras Características Funcionais]()
+#### [7. Outras Características Funcionais]()
+###### [8.1 Operadores]()
+###### [8.2 Casting]()
+###### [8.3 Identação]()
+###### [8.4 Tamanho Maximo da linha]()
+###### [8.5 Chaves]()
+
+###### [8. Assertivas]()
+###### [8. Javadoc C++]()
 
 ___
 
@@ -109,7 +114,7 @@ static Font_Manager *instance;
 ## 3.  Nomenclatura
 
 A Nomenclatura deve seguir o padrão "CamelCase" para Classes e Enums.
-
+Nomes de classes devem ser compostos por substantivos.
 ```c++
 class Guard : public Object
 ```
@@ -120,7 +125,8 @@ Para atributos o padrão adotado é o "lowerCamelCase".
 static ActionID removeGuardID;
 ```
 
-Para metodos, variaves e namespaces o padrão usado deve ser o "snake_case".
+Para metodos, funções, variaves e namespaces o padrão usado deve ser o "snake_case".
+Metodos e Funções devem conter pelo menos um verbo e um substantivo.
 
 ```c++
 void update_vision();
@@ -187,11 +193,12 @@ typedef struct _ItemInfo {
     } ItemInfo;
 
 ```
-## 5.  Funções
+### 4.3  Metodos
 
-As funções devem possuir as funcionalidades características de sua nomenclatura.
+Os metodos devem possuir as funcionalidades características de sua nomenclatura. Eles devem ser separados de outras declarações da classe por linhas em branco antes e depois, formando paragrafos.
 
 ```c++
+...
 
 void show_health()
 {
@@ -201,17 +208,23 @@ void show_health()
 		Rect borda {(double)env->canvas->w()/15, (double)env->canvas->h()/24, 100*2, 12};
 		env->canvas->draw(borda, Color::RED);
 }
+
+...
 ```
 
-### 5.1 Tipo de retorno
+#### 4.3.1 Tipo de retorno
 
-O tipo de retorno deve ser declarado sempre antes do nome da função.
+O tipo de retorno deve ser declarado sempre antes do nome da função na mesma linha.
 
 ```c++
+...
+
 void show_health()
 {
 	...
 }
+
+...
 ```
 
 ## 6.  Formatação
@@ -241,10 +254,67 @@ str = (string*)(&id);
 ## 8.  Outras Características Funcionais
 
 ### 8.1 Operadores
-### 8.1 Indenting
-### 8.2 Maximum Line Length
-### 8.4 Braces
-### 8.5 Functions
-### 8.6 Loops, Conditionals and Switch statements
-### 8.7 Pointer Declarations
-### 8.8 Return
+
+Para operadores deve-se dar um espaço antes e um depois.
+
+```c++
+m_player->set_stamina(m_player->stamina() + 0.05);
+```
+### 8.2 Casting
+
+Deve-se evitar o *cast* forçado como o seguinte:
+
+```c++
+m_player->x() + (moviment.first * delta)/1000.0;
+```
+A maneira correta de se fazer é usando o *cast* da propria linguagem:
+
+```c++
+m_player->x() + (moviment.first * delta) / (double)1000;
+```
+
+### 8.3 Identação
+
+Para identação sera usado o padrão de tabulação de 4 espaços.
+
+### 8.4 Tamanho Maximo da linha
+
+Deve-se evitar ultrapassar o limite de 80 caracteres por linha.
+Para quebras de linha, em casos de expressões muito grandes, deve-se usar os seguintes principios:
+·Quebrar após virgula;
+
+```c++
+
+Impl(Button *button, const string& idle_image_id,
+	const string& active_image_id)
+	: m_button(button), m_text(nullptr), m_idle(Color::GREEN),
+	m_active(Color::BLUE), m_border(Color::BLACK), m_thickness(1),
+	m_state(IDLE)
+```
+
+·Quebrar antes de operadores;
+
+```c++
+
+Item* pill = new Item(m_player, "icon_pill", path, (double)env->canvas->w()
+* 1/35 + 2, (double)env->canvas->h() * 25/30 + 2, 9999, true);
+m_player->add_child(pill);
+```
+
+·Alinhar a nova linha com o mesmo nivel do inicio da expressão da linha anterior
+
+### 8.5 Chaves
+
+As chaves devem ser abertas uma linha abaixo do termino da expressão ou declaração e deve ser fechada uma linha abaixo do bloco de instruções:
+
+```c++
+
+if (x + m_player->w() > env->canvas->w())
+{
+	x = env->canvas->w() - m_player->w();
+}
+```
+
+### 8.7 Loops, Conditionals and Switch statements
+### 8.8 Pointer Declarations
+### 8.9 Return
