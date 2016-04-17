@@ -1,46 +1,26 @@
-# Seven Keys
+#JoyStickEvent
 
-# Class JoyStickEvent
+    ·static bool joystick_was_init = false;
+    ·static map<int, JoyStickEvent::Button> m_joystick_table;
 
+    ·void init_table_joystick()
 
+##JoyStickEvent::JoyStickEvent
 
-```c++
-static bool joystick_was_init = false;
-```
+##JoyStickEvent::State
 
-```c++
-static map<int, JoyStickEvent::Button> m_joystick_table;
-```
+##JoyStickEvent::state() const
 
-```c++
-void init_table_joystick()
-```
+##JoyStickEvent::Button
 
-```c++
-JoyStickEvent::JoyStickEvent(State state, Button button)
-    : m_state(state), m_button(button)
-```
+##JoyStickEvent::button() const
 
-```c++
-JoyStickEvent::State
-```
+##JoyStickEvent
 
-```c++
-JoyStickEvent::Button
-```
+##JoyStickEvent::from_SDL(const SDL_Event& event)
 
-```c++
-JoyStickEvent::Button button = m_joystick_table[event.cbutton.button];
-```
+##JoyStickEvent::State state = (event.type == SDL_CONTROLLERBUTTONDOWN ?
 
-```c++
-JoyStickEvent::PRESSED : JoyStickEvent::RELEASED);
-```
+##JoyStickEvent::PRESSED : JoyStickEvent::RELEASED);
 
-```c++
-JoyStickEvent::State state = (event.type == SDL_CONTROLLERBUTTONDOWN ?
-```
-
-```c++
-JoyStickEvent::from_SDL(const SDL_Event& event)
-```
+##JoyStickEvent::Button button = m_joystick_table[event.cbutton.button];

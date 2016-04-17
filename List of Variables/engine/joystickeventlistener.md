@@ -1,7 +1,6 @@
-# Seven Keys
+#JoyStickEventListener
 
-# Class JoyStickEvent
+##class JoyStickEvent;
 
-```c++
-virtual bool onJoyStickEvent(const JoyStickEvent& event) = 0;
-```
+##class JoyStickEventListener
+    ·virtual bool onJoyStickEvent(const JoyStickEvent& event) = 0;
