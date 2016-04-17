@@ -32,6 +32,13 @@ $ sudo apt install libsdl2-mixer-dev
 $ sudo apt install libsdl2-ttf-dev
 ```
 
+Agora verifique se o compilador *g++* está instalado no seu computador.
+Se não estiver, execute o seguinte comando:
+
+```sh
+sudo apt-get install g++
+```
+
 Realize a instalação da engine através do MakeFile:
 
 ```sh
@@ -40,13 +47,14 @@ $ sudo make install
 Após realizada a instalação da engine, volte a pasta Manteam/Game e realize a instalação do jogo, também utilizando seu MakeFile:
 
 ```sh
-$ cd ../..
-$ make -j8
+$ cd ..
+```
+```sh
+$ sudo make -j8
 ```
 
-Para rodar o jogo, acesse a pasta /ManaTeam/Game/bin e execute o arquivo binário:
+Para rodar o jogo execute o arquivo binário com o seguinte comando:
 
 ```sh
-$ cd ijengine-0.0.5
-$ ./7keys
+$ ./bin/7keys
 ```
