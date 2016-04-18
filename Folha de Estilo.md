@@ -17,41 +17,42 @@ ___
 ###### [2.4 Variaveis Globais e Estáticas](#24-variaveis-globais-e-estaticas-static)
 
 #### [3. Nomenclatura](#3-nomenclatura)
-###### [3.1 Classes e Enums](#24-variaveis-globais-e-estaticas-static)
-###### [3.2 Atributos](#24-variaveis-globais-e-estaticas-static)
-###### [3.3 Metodos, Funções, Variaves, Namespaces](#24-variaveis-globais-e-estaticas-static)
-###### [3.4 Constantes e Macros](#24-variaveis-globais-e-estaticas-static)
-###### [3.5 Structs](#24-variaveis-globais-e-estaticas-static)
-###### [3.6 Typedef](#24-variaveis-globais-e-estaticas-static)
-###### [3.7 Ponteiros](#24-variaveis-globais-e-estaticas-static)
+###### [3.1 Classes e Enums](#31-classes-e-enums-1)
+###### [3.2 Atributos](#32-atributos-1)
+###### [3.3 Metodos, Funções, Variaves, Namespaces](#33-metodos-funções-variaves-namespaces-1)
+###### [3.4 Constantes e Macros](#34-constantes-e-macros-1)
+###### [3.5 Structs](#35-structs-1)
+###### [3.6 Typedef](#36-typedef-1)
+###### [3.7 Ponteiros](#37-ponteiros-1)
 
 #### [4. Classes](#4-classes-1)
-###### [4.1 Ordem de Declaração](#41-construtores-e-destrutores)
+###### [4.1 Ordem de Declaração](#41-ordem-de-declaração-1)
 ###### [4.2 Construtores e Destrutores](#42-construtores-e-destrutores)
-###### [4.3 Métodos e Funções](#41-construtores-e-destrutores)
-###### [4.3.1 Retorno](#41-construtores-e-destrutores)
-###### [4.4 Herança](#41-construtores-e-destrutores)
-###### [4.5 Abstract vs Virtual](#41-construtores-e-destrutores)
-###### [4.6 Sobrecarga](#41-construtores-e-destrutores)
+###### [4.3 Métodos e Funções](#43-métodos-e-funções-1)
+###### [4.3.1 Retorno](#431-retorno-1)
+###### [4.4 Herança](#44-herança-1)
+###### [4.5 Abstract vs Virtual](#45-abstract-vs-virtual-1)
+###### [4.6 Sobrecarga](#46-sobrecarga-1)
 
-#### [5. Formatação]()
-###### [5.1 Indentação](#41-construtores-e-destrutores)
-###### [5.2 Tamanho máximo da linha](#41-construtores-e-destrutores)
-###### [5.3 Operadores](#41-construtores-e-destrutores)
-###### [5.4 Chaves](#41-construtores-e-destrutores)
-###### [5.5 Estruturas de Controle (if, switch)](#41-construtores-e-destrutores)
-###### [5.6 Estruturas de Repetição (while, for, do-while)](#41-construtores-e-destrutores)
-###### [5.7 Variáveis e Atributos]()
-###### [5.8 Structs e Enums]()
+#### [5. Formatação](#5-formatação-1)
+###### [5.1 Indentação](#51-indentação-1)
+###### [5.2 Tamanho máximo da linha](#52-tamanho-maximo-da-linha)
+###### [5.3 Operadores](#53-operadores-1)
+###### [5.4 Chaves](#54-chaves-1)
+###### [5.5 Estruturas de Controle (if, switch)](#55-estruturas-de-controle-if-switch-1)
+###### [5.6 Estruturas de Repetição (while, for, do-while)](#56-estruturas-de-repetição-while-for-do-while-1)
+###### [5.7 Variáveis e Atributos](#57-variáveis-e-atributos-1)
+###### [5.8 Structs e Enums](#58-structs-e-enums-1)
 
-#### [6. Comentários]()
-###### [6.1 Comentário de Linha](#41-construtores-e-destrutores)
-###### [6.2 Comentário de Bloco](#41-construtores-e-destrutores)
+#### [6. Comentários](#6-comentários-1)
+###### [6.1 Comentário de Linha](#61-comentário-de-linha-1)
+###### [6.2 Comentário de Bloco](#62-comentário-de-bloco-1)
 
-#### [7. Outras Características Funcionais]()
-###### [7.1 JavaDoc]()
-###### [7.2 Assertivas]()
-###### [7.3 Exceções]()
+#### [7. Outras Características Funcionais](#7-outras-características-funcionais-1)
+###### [7.1 JavaDoc](#71-javadoc-1)
+###### [7.2 Assertivas](#72-assertivas-1)
+###### [7.3 Exceções](#73-exceções-1)
+###### [7.3 Exceções](#74-casting)
 
 ___
 
@@ -223,23 +224,6 @@ void show_health()
 ### 4.4 Herança
 ### 4.5 Abstract vs Virtual
 ### 4.6 Sobrecarga
-### 4.2 Structs
-
-Structs devem possuir apenas dados primarios e nao podem ser implementadas quaisquer tipo de funcionalidades ou afins.
-
-```c++
-typedef struct _ItemInfo {
-        string name;
-        string type;
-        int variations;
-        int weight;
-        bool walkable;
-        bool unique;
-        double mass;
-        int x, y;
-    } ItemInfo;
-
-```
 
 ## 5. Formatação
 ### 5.1 Indentação
@@ -292,6 +276,22 @@ if (x + m_player->w() > env->canvas->w())
 ### 5.6 Estruturas de Repetição (while, for, do-while)
 ### 5.7 Variáveis e Atributos
 ### 5.8 Structs e Enums
+
+Structs devem possuir apenas dados primarios e nao podem ser implementadas quaisquer tipo de funcionalidades ou afins.
+
+```c++
+typedef struct _ItemInfo {
+        string name;
+        string type;
+        int variations;
+        int weight;
+        bool walkable;
+        bool unique;
+        double mass;
+        int x, y;
+    } ItemInfo;
+
+```
 
 ## 6. Comentários
 ### 6.1 Comentário de Linha
