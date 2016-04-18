@@ -144,13 +144,19 @@ Metodos e Funções devem conter pelo menos um verbo e um substantivo.
 void update_vision();
 ```
 ### 3.4 Constantes e Macros
-Para constantes e macros deverá ser usado o "SCREAMING_SNAKE_CASE".
+Para constantes e macros deverá ser usado o "SCREAMING_SNAKE_CASE", exceto em parametros que deve ser adotado o estilo "snake_case".
 
 ```c++
 #define SPEED 150.5
 ```
+Em parametros:
+
+```c++
+void Player::get_weapon(string weapon_id)
+```
+
 ### 3.5 Structs
-Em structs será usado "snake_case", o mesmo deverá ser acompanhado de um "typedef" que segue o padrão CamelCase.
+Em structs será usado "snake_case", o mesmo deverá ser acompanhado de um *typedef*.
 
 ```c++
 typedef struct _Area
@@ -160,12 +166,66 @@ typedef struct _Area
 } Area;
 ```
 ### 3.6 Typedef
+Para *typedef* o padrão a ser seguido é o padrão CamelCase em tipos compostos como uma *struct* e *enum*.
+
+```c++
+typedef struct _Area
+{
+    ...
+} Area;
+```
+Para tipos simples como *int* e *double* deve ser usado o padrão *snake_case*.
+
+```c++
+typedef unsigned int natural_numbers;
+```
+
 ### 3.7 Ponteiros
+Na declaração de ponteiros deve-se usar o *asterisco* junto ao nome da variavel, e deve seguir o modelo "snake_case" assim como o exemplo.
+
+```c++
+Environment *env = Environment::get_instance();
+```
 
 ## 4. Classes
 
 Classes devem possuir metodos e atributos condizentes com o que seu nome especifica.
 ### 4.1 Ordem de Declaração
+As declarações devem vir na ordem do mais aberto (public) para o mais fechado (private) no contexto de encapsulamento.
+*public* antes de *protected*, *protected* antes de *private*.
+As primeiras declarações devem ser de Construtores e Destrutores, logo depois os atributos, seguidos dos metodos.
+
+```c++
+class Player : public Sprite
+{
+public:
+    typedef enum { NONE, IDLE, RUNNING, DUCK } State;
+
+    Player(Object *parent, const string& id);
+    ~Player();
+    int m_sanity_loss;
+
+    Direction direction() const;
+    void set_direction(Direction direction);
+
+    const pair<double, double>& moviment() const;
+    void set_moviment(double xaxis, double yaxis);
+
+    static ActionID hitExitDoorID;
+    static ActionID jumpNextLevelID;
+
+    void set_current(string room, int x, int y);
+
+    int life();
+    double health();
+
+private:
+    class Impl;
+    unique_ptr<Impl> m_impl;
+
+};
+```
+
 ### 4.2 Construtores e Destrutores
 
 Construtores devem sempre ser definidos em cada classe.
