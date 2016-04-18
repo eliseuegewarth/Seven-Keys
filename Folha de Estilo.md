@@ -374,7 +374,7 @@ As variaveis e atributos devem ser usadas no padrão snake_case, as variaveis de
 <tipo>{espaço}<variavel>{espaço}={espaço}<inicialização>;
 
 ```c++
-double w = env->canvas->w(); 
+double w = env->canvas->w();
 ```
 As funções e metodos devem seguir o seguinte formato:
 <Construtor>(<tipo>{espaço}<variavel>{virgula}{espaço}...);
@@ -426,6 +426,20 @@ str = (string*)(&id);
 
 ## 7. Outras Características Funcionais
 ### 7.1 JavaDoc
+A documentação no estilo "JavaDoc" deve ser usada para comentarios de classe ou metodos.
+É aconselhavel apenas o uso de @param, @return, @throws e em alguns casos @deprecated.
+Para qualquer comentario ao estilo JavaDoc deve seguir o seguinte padrao para comentarios de classe e metodos:
+```c++
+/**
+ *  
+ */
+```
+Para comentarios de @param, @return, @throws e @deprecated deve ser usado o seguinte padrao.
+```c++
+/**
+ * @param
+ */
+```
 ### 7.2 Assertivas
 ### 7.3 Exceções
 ### 7.4 Casting
