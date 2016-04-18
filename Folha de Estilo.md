@@ -12,14 +12,14 @@ ___
 
 #### [2. Escopo](#2-escopo-1)
 ###### [2.1 Includes](#21-includes-1)
-###### [2.2 Namespaces](#22-namespaces)
-###### [2.3 Variaveis Locais](#23-variaveis-locais)
-###### [2.4 Variaveis Globais e Estáticas](#24-variaveis-globais-e-estaticas-static)
+###### [2.2 Namespaces](#22-namespaces-1)
+###### [2.3 Variáveis Locais](#23-variáveis-locais-1)
+###### [2.4 Variáveis globais e estáticas (static)](#24-váriaveis-globais-e-estáticas-static-1)
 
-#### [3. Nomenclatura](#3-nomenclatura)
+#### [3. Nomenclatura](#3-nomenclatura-1)
 ###### [3.1 Classes e Enums](#31-classes-e-enums-1)
 ###### [3.2 Atributos](#32-atributos-1)
-###### [3.3 Metodos, Funções, Variaves, Namespaces](#33-metodos-funções-variaves-namespaces-1)
+###### [3.3 Métodos, Funções, Variáveis, Namespaces](#33-métodos-funções-variáveis-namespaces-1)
 ###### [3.4 Constantes e Macros](#34-constantes-e-macros-1)
 ###### [3.5 Structs](#35-structs-1)
 ###### [3.6 Typedef](#36-typedef-1)
@@ -27,7 +27,7 @@ ___
 
 #### [4. Classes](#4-classes-1)
 ###### [4.1 Ordem de Declaração](#41-ordem-de-declaração-1)
-###### [4.2 Construtores e Destrutores](#42-construtores-e-destrutores)
+###### [4.2 Construtores e Destrutores](#42-construtores-e-destrutores-1)
 ###### [4.3 Métodos e Funções](#43-métodos-e-funções-1)
 ###### [4.3.1 Retorno](#431-retorno-1)
 ###### [4.4 Herança](#44-herança-1)
@@ -36,7 +36,7 @@ ___
 
 #### [5. Formatação](#5-formatação-1)
 ###### [5.1 Indentação](#51-indentação-1)
-###### [5.2 Tamanho máximo da linha](#52-tamanho-maximo-da-linha)
+###### [5.2 Tamanho máximo da linha](#52-tamanho-máximo-da-linha-1)
 ###### [5.3 Operadores](#53-operadores-1)
 ###### [5.4 Chaves](#54-chaves-1)
 ###### [5.5 Estruturas de Controle (if, switch)](#55-estruturas-de-controle-if-switch-1)
@@ -52,7 +52,7 @@ ___
 ###### [7.1 JavaDoc](#71-javadoc-1)
 ###### [7.2 Assertivas](#72-assertivas-1)
 ###### [7.3 Exceções](#73-exceções-1)
-###### [7.4 Casting](#74-casting)
+###### [7.4 Casting](#74-casting-1)
 
 ___
 
@@ -101,7 +101,7 @@ Namespaces should always be named
 ```c++
 using namespace std;
 ```
-### 2.3 Variaveis Locais
+### 2.3 Variáveis Locais
 
 Declare as variaveis o mais localmente possivel
 As variaveis devem ser declaradas o mais proximo do seu uso
@@ -115,7 +115,7 @@ Todas as variaveis devem ser inicializadas.
         aux ++;
 	}
 ```
-### 2.4 Variaveis globais e estaticas (static)
+### 2.4 Variáveis globais e estáticas (static)
 
 Variaveis estaticas devem ser usadas somente quando necessario devido a seus riscos de variacoes e mau uso ao longo do codigo, quando nao utilizada como constante (const).
 
@@ -136,7 +136,7 @@ Para atributos o padrão adotado é o "lowerCamelCase".
 ```c++
 static ActionID removeGuardID;
 ```
-### 3.3 Metodos, Funções, Variaves, Namespaces
+### 3.3 Métodos, Funções, Variáveis, Namespaces
 Para metodos, funções, variaves e namespaces o padrão usado deve ser o "snake_case".
 Metodos e Funções devem conter pelo menos um verbo e um substantivo.
 
@@ -229,7 +229,7 @@ void show_health()
 ### 5.1 Indentação
 
 Para identação sera usado o padrão de tabulação de 4 espaços.
-### 5.2 Tamanho Maximo da linha
+### 5.2 Tamanho máximo da linha
 
 Deve-se evitar ultrapassar o limite de 80 caracteres por linha.
 Para quebras de linha, em casos de expressões muito grandes, deve-se usar os seguintes principios:
