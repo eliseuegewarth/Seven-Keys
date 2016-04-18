@@ -8,35 +8,50 @@ Este documento descreve as convenções adotadas para o desenvolvimento do jogo 
 
 ___
 
-#### [1. Arquivos Header (.hpp)]()
+#### [1. Arquivos Header (.hpp)](#1-arquivos-header-hpp-1)
 
-#### [2. Escopo]()
-###### [2.1 Includes]()
-###### [2.1.1 Atributos]()
-###### [2.1.2 Namespaces]()
-###### [2.1.3 Variaveis Locais]()
-###### [2.1.4 Variaveis Globais e Estáticas]()
+#### [2. Escopo](#2-escopo-1)
+###### [2.1 Includes](#21-includes-1)
+###### [2.2 Namespaces](#22-namespaces)
+###### [2.3 Variaveis Locais](#23-variaveis-locais)
+###### [2.4 Variaveis Globais e Estáticas](#24-variaveis-globais-e-estaticas-static)
 
-#### [3. Nomenclatura]()
+#### [3. Nomenclatura](#3-nomenclatura)
+###### [3.1 Classes e Enums](#24-variaveis-globais-e-estaticas-static)
+###### [3.2 Atributos](#24-variaveis-globais-e-estaticas-static)
+###### [3.3 Metodos, Funções, Variaves, Namespaces](#24-variaveis-globais-e-estaticas-static)
+###### [3.4 Constantes e Macros](#24-variaveis-globais-e-estaticas-static)
+###### [3.5 Structs](#24-variaveis-globais-e-estaticas-static)
+###### [3.6 Typedef](#24-variaveis-globais-e-estaticas-static)
+###### [3.7 Ponteiros](#24-variaveis-globais-e-estaticas-static)
 
-#### [4. Classes]()
-
-##### [4.3 Funções]()
-###### [4.3.1 Tipo de Retorno]()
+#### [4. Classes](#4-classes-1)
+###### [4.1 Ordem de Declaração](#41-construtores-e-destrutores)
+###### [4.2 Construtores e Destrutores](#42-construtores-e-destrutores)
+###### [4.3 Métodos e Funções](#41-construtores-e-destrutores)
+###### [4.3.1 Retorno](#41-construtores-e-destrutores)
+###### [4.4 Herança](#41-construtores-e-destrutores)
+###### [4.5 Abstract vs Virtual](#41-construtores-e-destrutores)
+###### [4.6 Sobrecarga](#41-construtores-e-destrutores)
 
 #### [5. Formatação]()
+###### [5.1 Indentação](#41-construtores-e-destrutores)
+###### [5.2 Tamanho máximo da linha](#41-construtores-e-destrutores)
+###### [5.3 Operadores](#41-construtores-e-destrutores)
+###### [5.4 Chaves](#41-construtores-e-destrutores)
+###### [5.5 Estruturas de Controle (if, switch)](#41-construtores-e-destrutores)
+###### [5.6 Estruturas de Repetição (while, for, do-while)](#41-construtores-e-destrutores)
+###### [5.7 Variáveis e Atributos]()
+###### [5.8 Structs e Enums]()
 
 #### [6. Comentários]()
+###### [6.1 Comentário de Linha](#41-construtores-e-destrutores)
+###### [6.2 Comentário de Bloco](#41-construtores-e-destrutores)
 
 #### [7. Outras Características Funcionais]()
-###### [8.1 Operadores]()
-###### [8.2 Casting]()
-###### [8.3 Identação]()
-###### [8.4 Tamanho Maximo da linha]()
-###### [8.5 Chaves]()
-
-###### [8. Assertivas]()
-###### [8. Javadoc C++]()
+###### [7.1 JavaDoc]()
+###### [7.2 Assertivas]()
+###### [7.3 Exceções]()
 
 ___
 
@@ -59,7 +74,6 @@ guard.hpp
 ```
 
 ## 2. Escopo
-
 ### 2.1 Includes
 
 	-Primeiro o header do arquivo fonte
@@ -78,7 +92,6 @@ guard.hpp
 
 #include <iostream>
 ```
-
 ### 2.2 Namespaces
 
 Namespaces should be used whenever possible
@@ -87,7 +100,6 @@ Namespaces should always be named
 ```c++
 using namespace std;
 ```
-
 ### 2.3 Variaveis Locais
 
 Declare as variaveis o mais localmente possivel
@@ -102,7 +114,6 @@ Todas as variaveis devem ser inicializadas.
         aux ++;
 	}
 ```
-
 ### 2.4 Variaveis globais e estaticas (static)
 
 Variaveis estaticas devem ser usadas somente quando necessario devido a seus riscos de variacoes e mau uso ao longo do codigo, quando nao utilizada como constante (const).
@@ -111,33 +122,33 @@ Variaveis estaticas devem ser usadas somente quando necessario devido a seus ris
 static Font_Manager *instance;
 ```
 
-## 3.  Nomenclatura
-
+## 3. Nomenclatura
+### 3.1 Classes e Enums
 A Nomenclatura deve seguir o padrão "CamelCase" para Classes e Enums.
 Nomes de classes devem ser compostos por substantivos.
 ```c++
 class Guard : public Object
 ```
-
+### 3.2 Atributos
 Para atributos o padrão adotado é o "lowerCamelCase".
 
 ```c++
 static ActionID removeGuardID;
 ```
-
+### 3.3 Metodos, Funções, Variaves, Namespaces
 Para metodos, funções, variaves e namespaces o padrão usado deve ser o "snake_case".
 Metodos e Funções devem conter pelo menos um verbo e um substantivo.
 
 ```c++
 void update_vision();
 ```
-
+### 3.4 Constantes e Macros
 Para constantes e macros deverá ser usado o "SCREAMING_SNAKE_CASE".
 
 ```c++
 #define SPEED 150.5
 ```
-
+### 3.5 Structs
 Em structs será usado "snake_case", o mesmo deverá ser acompanhado de um "typedef" que segue o padrão CamelCase.
 
 ```c++
@@ -147,12 +158,14 @@ typedef struct _Area
     double top, bottom;
 } Area;
 ```
+### 3.6 Typedef
+### 3.7 Ponteiros
 
 ## 4. Classes
 
 Classes devem possuir metodos e atributos condizentes com o que seu nome especifica.
-
-### 4.1 Construtores e Destrutores
+### 4.1 Ordem de Declaração
+### 4.2 Construtores e Destrutores
 
 Construtores devem sempre ser definidos em cada classe.
 
@@ -175,25 +188,7 @@ Animation::Animation(const string& texture, double x, double y, double w,
 ```
 
 Apenas destrutores virtuais sao permitidos, quando necessarios.
-
-### 4.2 Structs
-
-Structs devem possuir apenas dados primarios e nao podem ser implementadas quaisquer tipo de funcionalidades ou afins.
-
-```c++
-typedef struct _ItemInfo {
-        string name;
-        string type;
-        int variations;
-        int weight;
-        bool walkable;
-        bool unique;
-        double mass;
-        int x, y;
-    } ItemInfo;
-
-```
-### 4.3  Metodos
+### 4.3 Métodos e Funções
 
 Os metodos devem possuir as funcionalidades características de sua nomenclatura. Eles devem ser separados de outras declarações da classe por linhas em branco antes e depois, formando paragrafos.
 
@@ -211,8 +206,7 @@ void show_health()
 
 ...
 ```
-
-#### 4.3.1 Tipo de retorno
+#### 4.3.1 Retorno
 
 O tipo de retorno deve ser declarado sempre antes do nome da função na mesma linha.
 
@@ -226,58 +220,32 @@ void show_health()
 
 ...
 ```
+### 4.4 Herança
+### 4.5 Abstract vs Virtual
+### 4.6 Sobrecarga
+### 4.2 Structs
 
-## 6.  Formatação
-
-### 6.1 Variables, Functions
-### 6.2 Class Members
-### 6.3 Classes, Structs, Enums
-### 6.4 Namespaces
-### 6.5 Macros
-
-## 7.  Comentários
-
-Para comentários de uma única linha devem ser utilizadas barras duplas
+Structs devem possuir apenas dados primarios e nao podem ser implementadas quaisquer tipo de funcionalidades ou afins.
 
 ```c++
-// Room Criation
+typedef struct _ItemInfo {
+        string name;
+        string type;
+        int variations;
+        int weight;
+        bool walkable;
+        bool unique;
+        double mass;
+        int x, y;
+    } ItemInfo;
+
 ```
 
-Para comentários de duas ou mais linhas devem ser utilizadas a barra com o asterisco
-
-```c++
-/*string *str;
-str = (string*)(&id);
-*str = "stage1";*/
-```
-
-## 8.  Outras Características Funcionais
-
-### 8.1 Operadores
-
-Para operadores deve-se dar um espaço antes e um depois.
-
-```c++
-m_player->set_stamina(m_player->stamina() + 0.05);
-```
-### 8.2 Casting
-
-Deve-se evitar o *cast* forçado como o seguinte:
-
-```c++
-m_player->x() + (moviment.first * delta)/1000.0;
-```
-A maneira correta de se fazer é usando o *cast* da propria linguagem:
-
-```c++
-m_player->x() + (moviment.first * delta) / (double)1000;
-```
-
-### 8.3 Identação
+## 5. Formatação
+### 5.1 Indentação
 
 Para identação sera usado o padrão de tabulação de 4 espaços.
-
-### 8.4 Tamanho Maximo da linha
+### 5.2 Tamanho Maximo da linha
 
 Deve-se evitar ultrapassar o limite de 80 caracteres por linha.
 Para quebras de linha, em casos de expressões muito grandes, deve-se usar os seguintes principios:
@@ -302,8 +270,14 @@ m_player->add_child(pill);
 ```
 
 ·Alinhar a nova linha com o mesmo nivel do inicio da expressão da linha anterior
+### 5.3 Operadores
 
-### 8.5 Chaves
+Para operadores deve-se dar um espaço antes e um depois.
+
+```c++
+m_player->set_stamina(m_player->stamina() + 0.05);
+```
+### 5.4 Chaves
 
 As chaves devem ser abertas uma linha abaixo do termino da expressão ou declaração e deve ser fechada uma linha abaixo do bloco de instruções:
 
@@ -314,7 +288,42 @@ if (x + m_player->w() > env->canvas->w())
 	x = env->canvas->w() - m_player->w();
 }
 ```
+### 5.5 Estruturas de Controle (if, switch)
+### 5.6 Estruturas de Repetição (while, for, do-while)
+### 5.7 Variáveis e Atributos
+### 5.8 Structs e Enums
 
-### 8.7 Loops, Conditionals and Switch statements
-### 8.8 Pointer Declarations
-### 8.9 Return
+## 6. Comentários
+### 6.1 Comentário de Linha
+Para comentários de uma única linha devem ser utilizadas barras duplas
+
+```c++
+// Room Criation
+```
+### 6.2 Comentário de Bloco
+Para comentários de duas ou mais linhas devem ser utilizadas a barra com o asterisco
+
+```c++
+/*
+string *str;
+str = (string*)(&id);
+*str = "stage1";
+*/
+```
+
+## 7. Outras Características Funcionais
+### 7.1 JavaDoc
+### 7.2 Assertivas
+### 7.3 Exceções
+### 7.4 Casting
+
+Deve-se evitar o *cast* forçado como o seguinte:
+
+```c++
+m_player->x() + (moviment.first * delta)/1000.0;
+```
+A maneira correta de se fazer é usando o *cast* da propria linguagem:
+
+```c++
+m_player->x() + (moviment.first * delta) / (double)1000;
+```
