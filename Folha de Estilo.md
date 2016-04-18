@@ -14,7 +14,7 @@ ___
 ###### [2.1 Includes](#21-includes-1)
 ###### [2.2 Namespaces](#22-namespaces-1)
 ###### [2.3 Variáveis Locais](#23-variáveis-locais-1)
-###### [2.4 Variáveis globais e estáticas (static)](#24-váriaveis-globais-e-estáticas-static-1)
+###### [2.4 Variáveis globais e estáticas (static)](#24-variáveis-globais-e-estáticas-static-1)
 
 #### [3. Nomenclatura](#3-nomenclatura-1)
 ###### [3.1 Classes e Enums](#31-classes-e-enums-1)
@@ -109,7 +109,8 @@ Todas as variaveis devem ser inicializadas.
 
 
 ```c++
-	for(int id = 1; id < quantidade_salas; id++){
+	for(int id = 1; id < quantidade_salas; id++)
+	{
         Room * aux = room_list.at(rand() % id);
 		CreateRoom(aux, &id, aux->pos_x, aux->pos_y, quantidade_salas, stage_id);
         aux ++;
@@ -327,14 +328,61 @@ As chaves devem ser abertas uma linha abaixo do termino da expressão ou declara
 
 ```c++
 
-if (x + m_player->w() > env->canvas->w())
+if(x + m_player->w() > env->canvas->w())
 {
 	x = env->canvas->w() - m_player->w();
 }
 ```
 ### 5.5 Estruturas de Controle (if, switch)
+
+O padrão a ser seguido é de sem espaços entre a estrutura de controle e o parentese da condição, e entre as operações das condições.
+
+Codigo ruim:
+```c++
+ if(id != Button::clickedID)
+ {
+     return false;
+ }
+```
+
+codigo bom:
+```c++
+ if(id != Button::clickedID)
+ {
+     return false;
+ }
+ else
+ {
+     //nothing to do.
+ }
+```
+
 ### 5.6 Estruturas de Repetição (while, for, do-while)
+
+O padrão a ser seguido é sem espaços entre a estrutura de repetição e o parentese, e nas condições de repetição espaços apos os <ponto e virgula>, e entre os sinais de relação e operação espaço antes e depois.
+```c++
+for(int id = 1; id < quantidade_salas; id++)
+{
+    Room * aux = room_list.at(rand() % id);
+    CreateRoom(aux, &id, aux->pos_x, aux->pos_y, quantidade_salas, stage_id);
+    aux ++;
+}
+```
 ### 5.7 Variáveis e Atributos
+
+As variaveis e atributos devem ser usadas no padrão snake_case, as variaveis devem ser por padrão declaradas com o tipo seguido por um espaco o nome da variavel e a mesma deve ser inicializada.
+<tipo>{espaço}<variavel>{espaço}={espaço}<inicialização>;
+
+```c++
+double w = env->canvas->w(); 
+```
+As funções e metodos devem seguir o seguinte formato:
+<Construtor>(<tipo>{espaço}<variavel>{virgula}{espaço}...);
+
+```c++
+Animation(const string& image, double x, double y, double w, double h,
+          int frames, unsigned long speed_in_ms, bool loop = false);
+```
 ### 5.8 Structs e Enums
 
 Structs devem possuir apenas dados primarios e nao podem ser implementadas quaisquer tipo de funcionalidades ou afins.
@@ -351,6 +399,11 @@ typedef struct _ItemInfo {
         int x, y;
     } ItemInfo;
 
+```
+A declaração de enum deve ser usada com um typedef seguida por seus parametros entre chaves.
+<typedef>{espaço}<enum>{espaço}<{PARAMETRO1, PARAMETRO2}>{espaço}<NomeType>;
+```c++
+typedef enum { NONE, BLEND } BlendMode;
 ```
 
 ## 6. Comentários
