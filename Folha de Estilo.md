@@ -52,7 +52,7 @@ ___
 ###### [7.1 JavaDoc](#71-javadoc-1)
 ###### [7.2 Assertivas](#72-assertivas-1)
 ###### [7.3 Exceções](#73-exceções-1)
-###### [7.3 Exceções](#74-casting)
+###### [7.4 Casting](#74-casting)
 
 ___
 
