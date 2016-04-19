@@ -30,9 +30,6 @@ ___
 ###### [4.2 Construtores e Destrutores](#42-construtores-e-destrutores-1)
 ###### [4.3 Métodos e Funções](#43-métodos-e-funções-1)
 ###### [4.3.1 Retorno](#431-retorno-1)
-###### [4.4 Herança](#44-herança-1)
-###### [4.5 Abstract vs Virtual](#45-abstract-vs-virtual-1)
-###### [4.6 Sobrecarga](#46-sobrecarga-1)
 
 #### [5. Formatação](#5-formatação-1)
 ###### [5.1 Indentação](#51-indentação-1)
@@ -282,10 +279,6 @@ void show_health()
 
 ...
 ```
-### 4.4 Herança
-### 4.5 Abstract vs Virtual
-### 4.6 Sobrecarga
-
 ## 5. Formatação
 ### 5.1 Indentação
 
@@ -437,11 +430,64 @@ Para qualquer comentario ao estilo JavaDoc deve seguir o seguinte padrao para co
 Para comentarios de @param, @return, @throws e @deprecated deve ser usado o seguinte padrao.
 ```c++
 /**
+ * <descrição>
+ * @deprecated
  * @param
+ * @throws
+ * @return
  */
 ```
 ### 7.2 Assertivas
+Assertivas devem ser usadas sempre que houver um comportamento inesperado, condições impossiveis e dados corrompidos que não podem ser tratados.
+Seus parametros devem conter no minimo uma condição e uma mensagem de erro ou com o estado e/ou valor esperado.
+
+```c++
+assert(percent >= 0   && "Must be >= 0")
+```
+
 ### 7.3 Exceções
+Exceções devem ser tratadas no contexto mais adequado usando *catch*, se o contexto não for adequado a exceção deve ser propagada usando *throw*.
+
+Código ruim:
+```c++
+...
+
+try
+{
+	srand(time(NULL));
+	SevenKeys keys;
+	keys.init("7 Keys", 1280, 720, 1, true);
+	keys.run();
+} catch (Exception ex)
+{
+	cerr << ex.message() << endl;
+	return -1;
+}
+...
+
+```
+
+```c++
+try
+{
+	audio_manager = new AudioManagerWrapper();
+
+    if (not audio_manager)
+    {
+        throw AudioManagerSfxAllocationException("Out of memory for a new AudioManagerSfx");
+    }
+
+    audio_manager->init();
+} catch (AudioManagerMusicAllocationException audio_manager_music_allocation_exception)
+{
+	// Do something significant
+	...
+}
+
+...
+```
+A exceção "AudioManagerSfxAllocationException" não tem um catch para trata-la e é propagada para quem chamou o metodo.
+
 ### 7.4 Casting
 
 Deve-se evitar o *cast* forçado como o seguinte:
