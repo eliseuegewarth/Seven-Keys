@@ -1,14 +1,27 @@
 #MouseMotionEvent
 
-##MouseMotionEvent::MouseMotionEvent(int x, int y, int x_rel, int y_rel,
-    MotionState left, MotionState right, MotionState middle)
-    : m_x(x), m_y(y), m_x_rel(x_rel), m_y_rel(y_rel),
-      m_buttons { left, right, middle }
+##class MouseMotionEvent
 
-##MouseMotionEvent::MotionState
+###variables
+    typedef enum MotionState;
+    typedef enum Button;
 
-##MouseMotionEvent::state(MouseMotionEvent::Button button) const
+    int m_x, m_y;
+    int m_x_rel, m_y_rel;
+    MotionState m_buttons[3];
 
+##MouseMotionEvent::MouseMotionEvent()
+###parameters
+    ·int x
+    ·int y
+    ·int x_rel
+    ·int y_rel
+    ·MotionState left
+    ·MotionState right
+    ·MotionState middle
+##MouseMotionEvent::state() const
+###parameters
+    ·MouseMotionEvent::Button button
 ##int MouseMotionEvent::x() const
 
 ##int MouseMotionEvent::y() const
@@ -17,10 +30,13 @@
 
 ##intMouseMotionEvent::y_rel() const
 
-##MouseMotionEvent::from_SDL(const SDL_Event& event)
-    ·int x = event.motion.x;
-    ·int y = event.motion.y;
-    ·int xrel = event.motion.xrel;
-    ·int yrel = event.motion.yrel;
-    ·Uint8 state = event.motion.state;
-    ·MotionState left = UP, right = UP, middle = UP;
+##MouseMotionEvent::from_SDL()
+###parameters
+    ·const SDL_Event& event
+###variables
+    ·int x
+    ·int y
+    ·int xrel
+    ·int yrel
+    ·Uint8 state
+    ·MotionState left
