@@ -1,291 +1,503 @@
 # Stylesheet
 
-This document describes the conventions adopted for development of Seven Keys game.
+This document describe the conventions adopted for the development of games named Seven Keys.
 
-*Você também pode ler em português em [Folha de Estilo](Folha de Estilo.md)*.
+*Você pode ler isso em português em [Folha de Estilo](Folha de Estilo.md)*
 
-#Summary
-##   [1. Source Files](#1-source-files-1)
-#### [1.1 File Name](#11-file-name-1)
-#### [1.2 Structure](#12-structure-1)
-#### [1.3 Include Statements](#13-import-statements-1)
-#### [1.4 Class Declaration](#14-class-declaration-1)
+## Sumary
+
 ___
 
-##   [2. Programming Practices](#2-programming-practices-1)
-#### [2.2 Caught Exceptions](#22-caught-exceptions-1)
-#### [2.3 Static Members](#23-static-members-1)
+#### [1. Archive Header (.hpp)](#1-archive-header-hpp-1)
+
+#### [2. Escope](#2-escope-1)
+###### [2.1 Include](#21-include-1)
+###### [2.2 Namespaces](#22-namespaces-1)
+###### [2.3 Local Variable](#23-local-variable-1)
+###### [2.4 Globals and Statics Variables](#24-globals-and-statics-variables-1)
+
+#### [3. Naming](#3-naming-1)
+###### [3.1 Classes and Enums](#31-classes-and-enums-1)
+###### [3.2 Class Member](#32-class-member-1)
+###### [3.3 Methods, Funcions, Variable, Namespaces](#33-methods-functions-variable-namespaces-1)
+###### [3.4 Constants and Macros](#34-constants-and-macros-1)
+###### [3.5 Structs](#35-structs-1)
+###### [3.6 Typedef](#36-typedef-1)
+###### [3.7 Pointers](#37-pointers-1)
+
+#### [4. Classes](#4-classes-1)
+###### [4.1 Declaration of Order](#41-declaration-of-order-1)
+###### [4.2 Constructors and Destructors](#42-constructors-and-destructors-1)
+###### [4.3 Methods and Functions](#43-methods-and-functions-1)
+###### [4.3.1 Return](#431-return-1)
+
+#### [5. Formatting](#5-formatting-1)
+###### [5.1 Indenting](#51-indenting-1)
+###### [5.2 Line Size Maximum](#52-line-size-maximum-1)
+###### [5.3 Operators](#53-operators-1)
+###### [5.4 Keys](#54-keys-1)
+###### [5.5 Control Structures (if, switch)](#55-control-structures-if-switch-1)
+###### [5.6 Repetition of structures (while, for, do-while)](#56-repetition-of-structures-while-for-do-while-1)
+###### [5.7 Variables and Attributes](#57-variables-and-attributes-1)
+###### [5.8 Structs e Enums](#58-structs-e-enums-1)
+
+#### [6. Comments](#6-comments-1)
+###### [6.1 Line comment](#61-line-comment-1)
+###### [6.2 Comment block](#62-comment-block-1)
+
+#### [7. Others functional features ](#7-others-functional-features-1)
+###### [7.1 JavaDoc](#71-javadoc-1)
+###### [7.2 Assertives](#72-assertives-1)
+###### [7.3 Exceptions](#73-exceptions-1)
+###### [7.4 Casting](#74-casting-1)
+
 ___
 
-##   [3. Naming](#3-naming-1)
-#### [3.1 Classes](#31-classes-1)
-#### [3.2 Methods](#32-methods-1)
-#### [3.3 Class Members](#33-class-members-1)
-#### [3.4 Constants](#34-constants-1)
-#### [3.5 Local Variables](#35-local-variables-1)
-#### [3.6 Parameters](#36-parameters-1)
-___
 
-##   [4. Formatting](#4-formatting)
-#### [4.1 Braces](#41-braces-1)
-#### [4.2 Block Indentation](#42-block-indentation-1)
-#### [4.3 Statements Per Line](#43-statements-per-line-1)
-#### [4.4 Column Limit](#44-column-limit-1)
-#### [4.5 Comma/Operator separation](#45-commaoperator-separation-1)
-#### [4.6 Specific Constructs](#46-specific-constructs-1)
-___
+## 1. Archive Header (.hpp)
 
+All file .cpp must have un .hpp corresponding, with send name. Both must have the name of classe which they implement.
 
-## 1. Source Files
-
-#### 1.1 File Name
-The source file name consists of the case-sensitive name of the top-level class it contains, plus the `.java` extension.
-
-
-#### 1.2 Structure
-  * Header, containing the file name. It may contain the file purpose if needed.
-  * Package statement.
-  * Import statements.
-  * One top-level class/interface.
-
-``` Java
-/*
-*file: State.java
-*purpose: determine the State model
-*/
-
-package com.mdsgpp.eef.model;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-
-
-public class State {
- ...
- }
+Class Names:
+```c++
+class Guard : public Object
+```
+Files Names:
+```c++
+guard.cpp
 ```
 
-#### 1.3 Import Statements
-
-##### 1.3.1 Wildcard Imports
-`import com.mdsgpp.eef.model.*`
-Wildcard imports should not be used.
-
-##### 1.3.2 Line Wrapping
-Import statements should never be line-wrapped. The column limit does not apply to import statements.
-<!-- Exemplo -->
-
-#### 1.4 Class Declaration
-
-##### 1.4.1 Only one top-level class declaration
-Each top-level class resides in its own source file.
-<!-- Exemplo -->
-
-##### 1.4.2 Class Member Order
-  * `private` attributes and methods.
-  * `protected` attributes and methods.
-  * `public` attributes and methods.
-``` Java
-public class News implements Serializable {
-
-	private static final long serialVersionUID = 1L;
-	private String newsTitle;
-	...
-	// protected members
-
-	public News(Feed newsFeed) {
-		this.newsFeed = newsFeed;
-	}
-	...
+```c++
+guard.hpp
 ```
 
-## 2. Programming Practices
+## 2. Escope
+### 2.1 Include
 
-#### 2.1 `@Override`
-`@Override` must be used whenever it is legal. It must be placed on the line before the overridden method.
-``` Java
-	@Override
-	protected void onPreExecute() {
-	...
+	-First the header of source file
+	-after the library engine
+	-after the library specific of the game
+	-after the library standards the c/c++
+	
+
+```c++
+#include "boss.h"
+
+#include "core/level.h"
+#include "core/environment.h"
+#include "core/keyboardevent.h"
+
+#include <core/animation.h>
+
+#include <iostream>
+```
+### 2.2 Namespaces
+
+Namespaces should be used whenever possible
+Namespaces should always be named
+
+```c++
+using namespace std;
+```
+### 2.3 Local Variable
+
+Declare the variables the most locally possible.
+The variables should be declared the most closer to their use
+All the variables shoud be initialised.
+
+
+```c++
+	for(int id = 1; id < quantidade_salas; id++)
+	{
+        Room * aux = room_list.at(rand() % id);
+		CreateRoom(aux, &id, aux->pos_x, aux->pos_y, quantidade_salas, stage_id);
+        aux ++;
 	}
 ```
+### 2.4 Globals and Statics Variables (static)
 
-#### 2.2 Caught Exceptions
-Caught exceptions should never be ignored. The runtime error should be treated into the appropriate scope.
-``` Java
-try {
-		URL url = new URL(urls[0]);
-		FeedParser handler = new FeedParser();
-		InputStream is = url.openStream();
-		feed = handler.parse(is);
+Variables statics should be used only when its necessary due their scratchs of variations and bad over the code, when it don't be utilized as constant(const).
 
-		FeedPersistencia.getInstance(this.context).writeFeedFile(feed);
-		this.updated = true;
-
-		return feed;
-
-	} catch (MalformedURLException e) {
-		e.printStackTrace();
-	} catch (IOException e) {
-		e.printStackTrace();
-	}
-```
-
-#### 2.3 Static Members
-Whenever a reference to a static member have to be called, it should be called directly from the class.
-``` Java
-public static FeedPersistencia getInstance(Context context) {
-	 ...
-	}
-...
-
-FeedPersistencia.getInstance(this.context).writeFeedFile(feed);
+```c++
+static Font_Manager *instance;
 ```
 
 ## 3. Naming
+### 3.1 Classes e Enums
+A Nomenclatura deve seguir o padrão "CamelCase" para Classes e Enums.
+Nomes de classes devem ser compostos por substantivos.
+```c++
+class Guard : public Object
+```
+### 3.2 Class Member
+Para atributos o padrão adotado é o "lowerCamelCase".
 
-#### 3.1 Classes
-UpperCamelCase
-``` Java
- public class FeedPersistencia { //good
+```c++
+static ActionID removeGuardID;
+```
+### 3.3 Methods, Funcions, Variable, Namespaces
+Para metodos, funções, variaves e namespaces o padrão usado deve ser o "snake_case".
+Metodos e Funções devem conter pelo menos um verbo e um substantivo.
+
+```c++
+void update_vision();
+```
+### 3.4 Constants and Macros
+Para constantes e macros deverá ser usado o "SCREAMING_SNAKE_CASE", exceto em parametros que deve ser adotado o estilo "snake_case".
+
+```c++
+#define SPEED 150.5
+```
+Em parametros:
+
+```c++
+void Player::get_weapon(string weapon_id)
+```
+
+### 3.5 Structs
+Em structs será usado "snake_case", o mesmo deverá ser acompanhado de um *typedef*.
+
+```c++
+typedef struct _Area
+{
+    double left, right;
+    double top, bottom;
+} Area;
+```
+### 3.6 Typedef
+Para *typedef* o padrão a ser seguido é o padrão CamelCase em tipos compostos como uma *struct* e *enum*.
+
+```c++
+typedef struct _Area
+{
+    ...
+} Area;
+```
+Para tipos simples como *int* e *double* deve ser usado o padrão *snake_case*.
+
+```c++
+typedef unsigned int natural_numbers;
+```
+
+### 3.7 Ponteiros
+Na declaração de ponteiros deve-se usar o *asterisco* junto ao nome da variavel, e deve seguir o modelo "snake_case" assim como o exemplo.
+
+```c++
+Environment *env = Environment::get_instance();
+```
+
+## 4. Classes
+
+Classes devem possuir metodos e atributos condizentes com o que seu nome especifica.
+### 4.1 Declaration of Order
+As declarações devem vir na ordem do mais aberto (public) para o mais fechado (private) no contexto de encapsulamento.
+*public* antes de *protected*, *protected* antes de *private*.
+As primeiras declarações devem ser de Construtores e Destrutores, logo depois os atributos, seguidos dos metodos.
+
+```c++
+class Player : public Sprite
+{
+public:
+    typedef enum { NONE, IDLE, RUNNING, DUCK } State;
+
+    Player(Object *parent, const string& id);
+    ~Player();
+    int m_sanity_loss;
+
+    Direction direction() const;
+    void set_direction(Direction direction);
+
+    const pair<double, double>& moviment() const;
+    void set_moviment(double xaxis, double yaxis);
+
+    static ActionID hitExitDoorID;
+    static ActionID jumpNextLevelID;
+
+    void set_current(string room, int x, int y);
+
+    int life();
+    double health();
+
+private:
+    class Impl;
+    unique_ptr<Impl> m_impl;
+
+};
+```
+
+### 4.2 Constructors and Destructors
+
+Construtores devem sempre ser definidos em cada classe.
+
+.hpp
+
+```c++
+Animation(const string& image, double x, double y, double w, double h,
+          int frames, unsigned long speed_in_ms, bool loop = false);
+
+    ~Animation();
+```
+
+.cpp
+
+```c++
+Animation::Animation(const string& texture, double x, double y, double w,
+    		     double h, int frames, unsigned long speed_in_ms, bool loop)
+    		     : m_impl(new Animation::Impl(texture, x, y, w, h, frames, speed_in_ms, loop)) {
+}
+```
+
+Apenas destrutores virtuais sao permitidos, quando necessarios.
+### 4.3 Methods and Functions
+
+Os metodos devem possuir as funcionalidades características de sua nomenclatura. Eles devem ser separados de outras declarações da classe por linhas em branco antes e depois, formando paragrafos.
+
+```c++
+...
+
+void show_health()
+{
+		Environment * env = Environment::get_instance();
+		Rect healthbar {(double)env->canvas->w()/15, (double)env->canvas->h()/24, m_player->health() * 2, 12};
+		env->canvas->fill(healthbar, Color::RED);
+		Rect borda {(double)env->canvas->w()/15, (double)env->canvas->h()/24, 100*2, 12};
+		env->canvas->draw(borda, Color::RED);
+}
+
+...
+```
+#### 4.3.1 Return
+
+O tipo de retorno deve ser declarado sempre antes do nome da função na mesma linha.
+
+```c++
+...
+
+void show_health()
+{
+	...
+}
+
+...
+```
+## 5. FFormatting
+### 5.1 Indenting
+
+Para identação sera usado o padrão de tabulação de 4 espaços.
+### 5.2 Line Size Maximum
+
+Deve-se evitar ultrapassar o limite de 80 caracteres por linha.
+Para quebras de linha, em casos de expressões muito grandes, deve-se usar os seguintes principios:
+·Quebrar após virgula;
+
+```c++
+
+Impl(Button *button, const string& idle_image_id,
+	const string& active_image_id)
+	: m_button(button), m_text(nullptr), m_idle(Color::GREEN),
+	m_active(Color::BLUE), m_border(Color::BLACK), m_thickness(1),
+	m_state(IDLE)
+```
+
+·Quebrar antes de operadores;
+
+```c++
+
+Item* pill = new Item(m_player, "icon_pill", path, (double)env->canvas->w()
+* 1/35 + 2, (double)env->canvas->h() * 25/30 + 2, 9999, true);
+m_player->add_child(pill);
+```
+
+·Alinhar a nova linha com o mesmo nivel do inicio da expressão da linha anterior
+### 5.3 Operators
+
+Para operadores deve-se dar um espaço antes e um depois.
+
+```c++
+m_player->set_stamina(m_player->stamina() + 0.05);
+```
+### 5.4 Keys
+
+As chaves devem ser abertas uma linha abaixo do termino da expressão ou declaração e deve ser fechada uma linha abaixo do bloco de instruções:
+
+```c++
+
+if(x + m_player->w() > env->canvas->w())
+{
+	x = env->canvas->w() - m_player->w();
+}
+```
+### 5.5 Control Structures (if, switch)
+
+O padrão a ser seguido é de sem espaços entre a estrutura de controle e o parentese da condição, e entre as operações das condições.
+
+Codigo ruim:
+```c++
+ if(id != Button::clickedID)
+ {
+     return false;
+ }
+```
+
+codigo bom:
+```c++
+ if(id != Button::clickedID)
+ {
+     return false;
+ }
+ else
+ {
+     //nothing to do.
+ }
+```
+
+### 5.6 Repetition of structures (while, for, do-while)
+
+O padrão a ser seguido é sem espaços entre a estrutura de repetição e o parentese, e nas condições de repetição espaços apos os <ponto e virgula>, e entre os sinais de relação e operação espaço antes e depois.
+```c++
+for(int id = 1; id < quantidade_salas; id++)
+{
+    Room * aux = room_list.at(rand() % id);
+    CreateRoom(aux, &id, aux->pos_x, aux->pos_y, quantidade_salas, stage_id);
+    aux ++;
+}
+```
+### 5.7 Variables and Attributes
+
+As variaveis e atributos devem ser usadas no padrão snake_case, as variaveis devem ser por padrão declaradas com o tipo seguido por um espaco o nome da variavel e a mesma deve ser inicializada.
+<tipo>{espaço}<variavel>{espaço}={espaço}<inicialização>;
+
+```c++
+double w = env->canvas->w();
+```
+As funções e metodos devem seguir o seguinte formato:
+<Construtor>(<tipo>{espaço}<variavel>{virgula}{espaço}...);
+
+```c++
+Animation(const string& image, double x, double y, double w, double h,
+          int frames, unsigned long speed_in_ms, bool loop = false);
+```
+### 5.8 Structs e Enums
+
+Structs devem possuir apenas dados primarios e nao podem ser implementadas quaisquer tipo de funcionalidades ou afins.
+
+```c++
+typedef struct _ItemInfo {
+        string name;
+        string type;
+        int variations;
+        int weight;
+        bool walkable;
+        bool unique;
+        double mass;
+        int x, y;
+    } ItemInfo;
+
+```
+A declaração de enum deve ser usada com um typedef seguida por seus parametros entre chaves.
+<typedef>{espaço}<enum>{espaço}<{PARAMETRO1, PARAMETRO2}>{espaço}<NomeType>;
+```c++
+typedef enum { NONE, BLEND } BlendMode;
+```
+
+## 6. Comments
+### 6.1 Line comment
+Para comentários de uma única linha devem ser utilizadas barras duplas
+
+```c++
+// Room Criation
+```
+### 6.2 Comment block
+Para comentários de duas ou mais linhas devem ser utilizadas a barra com o asterisco
+
+```c++
+/*
+string *str;
+str = (string*)(&id);
+*str = "stage1";
+*/
+```
+
+## 7. Others functional features
+### 7.1 JavaDoc
+A documentação no estilo "JavaDoc" deve ser usada para comentarios de classe ou metodos.
+É aconselhavel apenas o uso de @param, @return, @throws e em alguns casos @deprecated.
+Para qualquer comentario ao estilo JavaDoc deve seguir o seguinte padrao para comentarios de classe e metodos:
+```c++
+/**
+ *  
+ */
+```
+Para comentarios de @param, @return, @throws e @deprecated deve ser usado o seguinte padrao.
+```c++
+/**
+ * <descrição>
+ * @deprecated
+ * @param
+ * @throws
+ * @return
+ */
+```
+### 7.2 Assertives
+Assertivas devem ser usadas sempre que houver um comportamento inesperado, condições impossiveis e dados corrompidos que não podem ser tratados.
+Seus parametros devem conter no minimo uma condição e uma mensagem de erro ou com o estado e/ou valor esperado.
+
+```c++
+assert(percent >= 0   && "Must be >= 0")
+```
+
+### 7.3 Exceptions
+Exceções devem ser tratadas no contexto mais adequado usando *catch*, se o contexto não for adequado a exceção deve ser propagada usando *throw*.
+
+Código ruim:
+```c++
+...
+
+try
+{
+	srand(time(NULL));
+	SevenKeys keys;
+	keys.init("7 Keys", 1280, 720, 1, true);
+	keys.run();
+} catch (Exception ex)
+{
+	cerr << ex.message() << endl;
+	return -1;
+}
 ...
 
 ```
 
-#### 3.2 Methods
-lowerCamelCase()
-``` Java
-public int getStatePopulation() {
-	return statePopulation;
+```c++
+try
+{
+	audio_manager = new AudioManagerWrapper();
+
+    if (not audio_manager)
+    {
+        throw AudioManagerSfxAllocationException("Out of memory for a new AudioManagerSfx");
+    }
+
+    audio_manager->init();
+} catch (AudioManagerMusicAllocationException audio_manager_music_allocation_exception)
+{
+	// Do something significant
+	...
 }
-```
 
-#### 3.3 Class Members
-lowerCamelCase
-``` Java
- private String stateName;
-```
-
-#### 3.4 Constants
-SCREAMING_SNAKE_CASE
-``` Java
- public static final String BUILD_TYPE = "debug";
-```
-
-#### 3.5 Local Variables
-lowerCamelCase
-``` Java
-public Grade[] returnEmptyGrade() {
-	Grade emptyGrade[] = { new Grade(0,0) };
-	emptyGrade[0].setGradeYear(0);
-
-	return emptyGrade;
-}
-```
-
-#### 3.6 Parameters
-lowerCamelCase
-``` Java
-public void setStateName(String stateName) {
-	this.stateName = stateName;
-}
-```
-
-## 4. Formatting
-
-#### 4.1 Braces
-
-##### 4.1.1 Braces are always mandatory
-Braces should be used following the K & R Style, even if the block is empty.
-
-##### 4.1.2 Brace spacing
-There must be a space between the method name definition (or arguments) and the opening brace.
-``` Java
-public String getStateName() {	//good
 ...
-public String getStateName(){	//bad
 ```
+A exceção "AudioManagerSfxAllocationException" não tem um catch para trata-la e é propagada para quem chamou o metodo.
 
-#### 4.2 Block indentation
-Each time a new block is opened, the line indent increases by four spaces. At the end of the block, the line indent recedes accordingly. This applies to both code and comments throughout the block.
+### 7.4 Casting
 
-#### 4.3 Statements per line
-There should be only one statement per line, followed by a line break.
-``` Java
-//good
-if (percentageCollaborationWithPIB == null) {
-	double[] empty = {0};
-	return empty;
-}
+Deve-se evitar o *cast* forçado como o seguinte:
 
-//bad
-if (percentageCollaborationWithPIB == null) {
-	double[] empty = {0}; return empty;
-}
+```c++
+m_player->x() + (moviment.first * delta)/1000.0;
 ```
+A maneira correta de se fazer é usando o *cast* da propria linguagem:
 
-#### 4.4 Column limit
-Each line has a maximum character count of 100, except on package and import statements, or where absolutely impossible to do so.
-``` Java
-public void setAgeGradeDistortionRate(HashMap<String, ArrayList<String[]>> information, //break
-	String[] namesOfIndicative) {
-	this.ageGradeDistortionRate = this.setGrade(information, namesOfIndicative);
-	}
+```c++
+m_player->x() + (moviment.first * delta) / (double)1000;
 ```
-
-#### 4.5 Comma/Operator separation
-A comma or operator must always be followed by a whitespace character.
-``` Java
-public State(String stateName, String stateAbbreviation, HashMap<String, ArrayList<String[]>> information){ //space after comma
-	this.stateName = stateName;  // space after operator
-	this.stateAbbreviation=stateAbbreviation; //no space after operator => BAD
-```
-
-#### 4.6 Specific Constructs
-
-##### 4.6.1 Enum Classes
-After each component of an enum declaration, a line break is optional, as long as the declaration does not exceed the column character limit.
-
-##### 4.6.2 Variable declaration
-
-###### 4.6.2.1 Number of variables declared per line
-Each line that contains variable declarations must contain the declaration of a single variable.
-``` Java
-	//good declaration
-	private String stateName;
-	private String stateAbbreviation;
-
-	//bad declaration
-	private string stateName, stateAbbreviation;
-```
-
-###### 4.6.2.2 Variable scope and initialization
-Variables must only be declared when absolutely needed, and initialized as soon as possible.
-
-##### 4.6.3 Arrays
-
-###### 4.6.3.1 Initializers
-Arrays may be initialized following a block style. However, a single-line initialization is recommended on the cases where this does not exceed the line character limit.
-
-###### 4.6.3.2 C-Style array declarations
-Arrays are declared with the brackets being a part of the variable, not the type.
-``` Java
-double empty[] = {0}; //good
-double[] empty = {0}; //bad
-```
-
-##### 4.6.4 Switch statements
-Switch statements follow the formatting guide as described. The only salve is that the `default:` case is always present, even if it is empty.
-<!-- Exemplo -->
-
-###### 4.6.4.1 Empty default case
-An empty default case must indicate that it actually does nothing.
-<!-- Exemplo -->
-
-##### 4.6.5 Comments
-
-###### 4.6.5.1 Single-line Comments
-Must be  written after a `// ` representation, and must start with an uppercase letter.
-
-###### 4.6.5.2 Multi-line Comments
-For multi-line comments, the following structure is recommended: `/* ... */`. Subsequent lines must start with `*` aligned with the `*` on the previous line.
