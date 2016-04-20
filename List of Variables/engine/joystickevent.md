@@ -1,26 +1,32 @@
 #JoyStickEvent
 
+##class JoyStickEvent
+
+###variables
+
+    ·typedef enum State;
+    ·typedef enum Button;
+    ·State m_state;
+    ·Button m_button;
+
     ·static bool joystick_was_init = false;
     ·static map<int, JoyStickEvent::Button> m_joystick_table;
 
-    ·void init_table_joystick()
+###void init_table_joystick()
 
-##JoyStickEvent::JoyStickEvent
-
-##JoyStickEvent::State
+##JoyStickEvent::JoyStickEvent()
+###parameters
+    ·State state
+    ·Button button
 
 ##JoyStickEvent::state() const
 
-##JoyStickEvent::Button
-
 ##JoyStickEvent::button() const
 
-##JoyStickEvent
-
-##JoyStickEvent::from_SDL(const SDL_Event& event)
-
-##JoyStickEvent::State state = (event.type == SDL_CONTROLLERBUTTONDOWN ?
-
-##JoyStickEvent::PRESSED : JoyStickEvent::RELEASED);
-
-##JoyStickEvent::Button button = m_joystick_table[event.cbutton.button];
+##JoyStickEvent::from_SDL()
+###parameters
+    ·const SDL_Event& event
+###variables and methods
+    ·JoyStickEvent::State state = (event.type == SDL_CONTROLLERBUTTONDOWN ?
+        ·event.type == SDL_CONTROLLERBUTTONDOWN ? JoyStickEvent::PRESSED
+    ·JoyStickEvent::Button button
