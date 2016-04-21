@@ -35,7 +35,7 @@ ___
 ###### [5.1 Indenting](#51-indenting-1)
 ###### [5.2 Line Size Maximum](#52-line-size-maximum-1)
 ###### [5.3 Operators](#53-operators-1)
-###### [5.4 Keys](#54-keys-1)
+###### [5.4 Braces](#54-braces-1)
 ###### [5.5 Control Structures (if, switch)](#55-control-structures-if-switch-1)
 ###### [5.6 Repetition of structures (while, for, do-while)](#56-repetition-of-structures-while-for-do-while-1)
 ###### [5.7 Variables and Attributes](#57-variables-and-attributes-1)
@@ -124,38 +124,41 @@ static Font_Manager *instance;
 
 ## 3. Naming
 ### 3.1 Classes e Enums
-A Nomenclatura deve seguir o padrão "CamelCase" para Classes e Enums.
-Nomes de classes devem ser compostos por substantivos.
+
+The nomeclature must follow the standard "CamelCase" for Classes and Enums.
+Names of classes must be composed for nouns.
 ```c++
 class Guard : public Object
 ```
 ### 3.2 Class Member
-Para atributos o padrão adotado é o "lowerCamelCase".
 
+For class members the standard adopted is the "lowerCamelCase"
 ```c++
 static ActionID removeGuardID;
 ```
 ### 3.3 Methods, Funcions, Variable, Namespaces
-Para metodos, funções, variaves e namespaces o padrão usado deve ser o "snake_case".
-Metodos e Funções devem conter pelo menos um verbo e um substantivo.
 
+For methods, functions, variables and namespaces the standard used must be the "snake_case"
+Methods and functions must contain at least a verb and a noun.
 ```c++
 void update_vision();
 ```
 ### 3.4 Constants and Macros
-Para constantes e macros deverá ser usado o "SCREAMING_SNAKE_CASE", exceto em parametros que deve ser adotado o estilo "snake_case".
+
+For constants and macros should be used the "SCREAMING_SNAKE_CASE", except in parameters which shoud be adocted the style "snake_case".
 
 ```c++
 #define SPEED 150.5
 ```
-Em parametros:
+In parameters:
 
 ```c++
 void Player::get_weapon(string weapon_id)
 ```
 
 ### 3.5 Structs
-Em structs será usado "snake_case", o mesmo deverá ser acompanhado de um *typedef*.
+
+In structs it will be used "snake_case", the same shoud be accompained of one *typedef*
 
 ```c++
 typedef struct _Area
@@ -165,7 +168,8 @@ typedef struct _Area
 } Area;
 ```
 ### 3.6 Typedef
-Para *typedef* o padrão a ser seguido é o padrão CamelCase em tipos compostos como uma *struct* e *enum*.
+
+For *typedef* the standard to be followed is the standard "CamelCase" in types compounds as a *struct* and *enum*.
 
 ```c++
 typedef struct _Area
@@ -173,27 +177,28 @@ typedef struct _Area
     ...
 } Area;
 ```
-Para tipos simples como *int* e *double* deve ser usado o padrão *snake_case*.
 
+For simples styles as *int* and *double* shoud be used the standard *snake_case*.
 ```c++
 typedef unsigned int natural_numbers;
 ```
 
 ### 3.7 Ponteiros
-Na declaração de ponteiros deve-se usar o *asterisco* junto ao nome da variavel, e deve seguir o modelo "snake_case" assim como o exemplo.
 
+In declarations the pointers shoud be use the *asterisk* near to name of the variable, and shoud follow the model "snake_case" as the example.
 ```c++
 Environment *env = Environment::get_instance();
 ```
 
 ## 4. Classes
 
-Classes devem possuir metodos e atributos condizentes com o que seu nome especifica.
+Class must have methods and class members consistents with what hes name especifies.
 ### 4.1 Declaration of Order
-As declarações devem vir na ordem do mais aberto (public) para o mais fechado (private) no contexto de encapsulamento.
-*public* antes de *protected*, *protected* antes de *private*.
-As primeiras declarações devem ser de Construtores e Destrutores, logo depois os atributos, seguidos dos metodos.
 
+The declarations make um in orther of the more open (public) for the most closed (private) in context of encapsulation.
+*public* before the *protected*, *protected* before the *private*.
+
+The first declarations shoud be the constructors and destructors, soon after the class members, followed by methods.
 ```c++
 class Player : public Sprite
 {
@@ -227,7 +232,7 @@ private:
 
 ### 4.2 Constructors and Destructors
 
-Construtores devem sempre ser definidos em cada classe.
+Constructor shoud always be defined in each class.
 
 .hpp
 
@@ -247,11 +252,10 @@ Animation::Animation(const string& texture, double x, double y, double w,
 }
 ```
 
-Apenas destrutores virtuais sao permitidos, quando necessarios.
+Only virtuals destructs allowed, when necessary.
 ### 4.3 Methods and Functions
 
-Os metodos devem possuir as funcionalidades características de sua nomenclatura. Eles devem ser separados de outras declarações da classe por linhas em branco antes e depois, formando paragrafos.
-
+The method shoud have the funcionality features of his nomeclatures. They shoud be separeted of the other declarations of the classe for blank lines before and after, forming paragraphs.
 ```c++
 ...
 
@@ -268,8 +272,7 @@ void show_health()
 ```
 #### 4.3.1 Return
 
-O tipo de retorno deve ser declarado sempre antes do nome da função na mesma linha.
-
+The type of return should be declared always before the mane of the function in the same line.
 ```c++
 ...
 
@@ -280,15 +283,16 @@ void show_health()
 
 ...
 ```
-## 5. FFormatting
+## 5. Formatting
 ### 5.1 Indenting
 
-Para identação sera usado o padrão de tabulação de 4 espaços.
+For indenting should used the standard of tab of four spaces.
+
 ### 5.2 Line Size Maximum
 
-Deve-se evitar ultrapassar o limite de 80 caracteres por linha.
-Para quebras de linha, em casos de expressões muito grandes, deve-se usar os seguintes principios:
-·Quebrar após virgula;
+Should avoid surpass the limit of 80 characteres for line.
+For breaks of line, in cases of expressions very large, should use the following principles:
+Break after comma;
 
 ```c++
 
@@ -299,8 +303,7 @@ Impl(Button *button, const string& idle_image_id,
 	m_state(IDLE)
 ```
 
-·Quebrar antes de operadores;
-
+·Break before the operators;
 ```c++
 
 Item* pill = new Item(m_player, "icon_pill", path, (double)env->canvas->w()
@@ -308,17 +311,17 @@ Item* pill = new Item(m_player, "icon_pill", path, (double)env->canvas->w()
 m_player->add_child(pill);
 ```
 
-·Alinhar a nova linha com o mesmo nivel do inicio da expressão da linha anterior
+·Align the new line with the same level the start of expression the previous line.
 ### 5.3 Operators
 
-Para operadores deve-se dar um espaço antes e um depois.
+For operators shoud give a space before and one after.
 
 ```c++
 m_player->set_stamina(m_player->stamina() + 0.05);
 ```
-### 5.4 Keys
+### 5.4 Braces
 
-As chaves devem ser abertas uma linha abaixo do termino da expressão ou declaração e deve ser fechada uma linha abaixo do bloco de instruções:
+The braces shoud be open one line below the end of the expression or declaration and shoud be closed one line below the block instructions:
 
 ```c++
 
@@ -329,9 +332,9 @@ if(x + m_player->w() > env->canvas->w())
 ```
 ### 5.5 Control Structures (if, switch)
 
-O padrão a ser seguido é de sem espaços entre a estrutura de controle e o parentese da condição, e entre as operações das condições.
+The stunderd to be following is without spaces between the control structute and the parentheses of condition, and between the operations of condition.
 
-Codigo ruim:
+Bad code:
 ```c++
  if(id != Button::clickedID)
  {
@@ -339,7 +342,7 @@ Codigo ruim:
  }
 ```
 
-codigo bom:
+Good code:
 ```c++
  if(id != Button::clickedID)
  {
@@ -353,7 +356,8 @@ codigo bom:
 
 ### 5.6 Repetition of structures (while, for, do-while)
 
-O padrão a ser seguido é sem espaços entre a estrutura de repetição e o parentese, e nas condições de repetição espaços apos os <ponto e virgula>, e entre os sinais de relação e operação espaço antes e depois.
+The standard to be following is without spaces between the repetition of structures and parentheses, and in conditions of repetition spaces before the <point and comma>, and between the signals of relation and operarion space before and after.
+
 ```c++
 for(int id = 1; id < quantidade_salas; id++)
 {
@@ -364,14 +368,15 @@ for(int id = 1; id < quantidade_salas; id++)
 ```
 ### 5.7 Variables and Attributes
 
-As variaveis e atributos devem ser usadas no padrão snake_case, as variaveis devem ser por padrão declaradas com o tipo seguido por um espaco o nome da variavel e a mesma deve ser inicializada.
-<tipo>{espaço}<variavel>{espaço}={espaço}<inicialização>;
+The variables and class members shoud be used in standard snake_case, the variables shoud be for standard declared with the type following for a space the name of variable and the same must be initialized.
+<type>{space}<variable>{space} = {space}<inicialized>;
 
 ```c++
 double w = env->canvas->w();
 ```
-As funções e metodos devem seguir o seguinte formato:
-<Construtor>(<tipo>{espaço}<variavel>{virgula}{espaço}...);
+
+The functions and methods shoud following format:
+<Constructor>(<type>{space}<variable>{comma}{space}...);
 
 ```c++
 Animation(const string& image, double x, double y, double w, double h,
@@ -379,9 +384,8 @@ Animation(const string& image, double x, double y, double w, double h,
 ```
 ### 5.8 Structs e Enums
 
-Structs devem possuir apenas dados primarios e nao podem ser implementadas quaisquer tipo de funcionalidades ou afins.
+Structs shoud have only primary data and can not be implemented any funcionality type or related.
 
-```c++
 typedef struct _ItemInfo {
         string name;
         string type;
@@ -394,22 +398,23 @@ typedef struct _ItemInfo {
     } ItemInfo;
 
 ```
-A declaração de enum deve ser usada com um typedef seguida por seus parametros entre chaves.
-<typedef>{espaço}<enum>{espaço}<{PARAMETRO1, PARAMETRO2}>{espaço}<NomeType>;
+
+The declaration of enum shoud be used with on typedef following for his parameters between braces.
+<typedef>{space}<enum>{space}<{PARAMETRO1, PARAMETRO2}>{espaço}<NomeType>;
 ```c++
 typedef enum { NONE, BLEND } BlendMode;
 ```
 
 ## 6. Comments
 ### 6.1 Line comment
-Para comentários de uma única linha devem ser utilizadas barras duplas
 
+For comments the only one line shoud be utilized double bar.
 ```c++
 // Room Criation
 ```
 ### 6.2 Comment block
-Para comentários de duas ou mais linhas devem ser utilizadas a barra com o asterisco
 
+For comments the two or more lines must be utilized the bar with an asterisk.
 ```c++
 /*
 string *str;
@@ -420,15 +425,17 @@ str = (string*)(&id);
 
 ## 7. Others functional features
 ### 7.1 JavaDoc
-A documentação no estilo "JavaDoc" deve ser usada para comentarios de classe ou metodos.
-É aconselhavel apenas o uso de @param, @return, @throws e em alguns casos @deprecated.
-Para qualquer comentario ao estilo JavaDoc deve seguir o seguinte padrao para comentarios de classe e metodos:
+
+The documentation on style "JavaDoc" shoud be used for comments of class and method.
+Is advisable only the use of @param, @return, @throws and in some cases @deprecated.
+For any commentary to style JavaDoc shoud following the next standard for comments of class and methods:
 ```c++
 /**
  *  
  */
 ```
-Para comentarios de @param, @return, @throws e @deprecated deve ser usado o seguinte padrao.
+
+For comments of @param, @return, @throws and @deprecated shoud be used the next standard.
 ```c++
 /**
  * <descrição>
@@ -439,17 +446,19 @@ Para comentarios de @param, @return, @throws e @deprecated deve ser usado o segu
  */
 ```
 ### 7.2 Assertives
-Assertivas devem ser usadas sempre que houver um comportamento inesperado, condições impossiveis e dados corrompidos que não podem ser tratados.
-Seus parametros devem conter no minimo uma condição e uma mensagem de erro ou com o estado e/ou valor esperado.
+
+Assertives must be used whenever one unexpected behavior, conditions impossible and corrupted data which can not be treated.
+His parameters must contain at least one condition and an error message or with the state and/or expected value.
 
 ```c++
 assert(percent >= 0   && "Must be >= 0")
 ```
 
 ### 7.3 Exceptions
-Exceções devem ser tratadas no contexto mais adequado usando *catch*, se o contexto não for adequado a exceção deve ser propagada usando *throw*.
 
-Código ruim:
+Exceptions shoud be treated in context most appropriate using *catch*, if the context is not appropriate an exception must be spread using *throw*.
+
+Bad code:
 ```c++
 ...
 
@@ -487,16 +496,18 @@ try
 
 ...
 ```
-A exceção "AudioManagerSfxAllocationException" não tem um catch para trata-la e é propagada para quem chamou o metodo.
+
+The excetion "AudioManagerSfxAllocationException" there is not one catch for treat it and is spread to the caller method.
 
 ### 7.4 Casting
 
-Deve-se evitar o *cast* forçado como o seguinte:
+should avoid the *cast* forced as follows:
 
 ```c++
 m_player->x() + (moviment.first * delta)/1000.0;
 ```
 A maneira correta de se fazer é usando o *cast* da propria linguagem:
+The right way to make is using the *cast* own language.
 
 ```c++
 m_player->x() + (moviment.first * delta) / (double)1000;
