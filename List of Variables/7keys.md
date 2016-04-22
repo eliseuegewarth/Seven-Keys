@@ -6,6 +6,10 @@
 ####```AudioManagerMusic * music2```
 ---comment---
 ## Private:
+###```int lives```
+---comment---
+###```double sanity```
+---comment---
 ###```Level * load_level(const string& id)```
 ---comment---
 ####Parameters
@@ -35,9 +39,5 @@
 #####```char music_path[256]```
 ---comment---
 #####```Level *lvl```
----comment---
-###```int lives```
----comment---
-###```double sanity```
 ---comment---
 
