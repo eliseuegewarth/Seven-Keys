@@ -1,3 +1,12 @@
+#Extras
+
+##```class Extras : public Level```
+###Class members
+```c++
+bool on_message(Object *sender, MessageID id, Parameters parameters);
+```
+##```Extras::Extras()```
+###Parameters
 ```c++
 	Environment *env = Environment::get_instance();
 ```
@@ -18,7 +27,6 @@ Variable that receives the width of the game environment.
         "res/interface/menuExtras/Scutscenes.png");	
 ```
 
-
 ```c++
 	Button *historia = new Button(this, "historia", "res/interface/menuExtras/historia.png",
         "res/interface/menuExtras/Shistoria.png");
@@ -28,3 +36,11 @@ Variable that receives the width of the game environment.
 	 Button *back = new Button(this, "back", "res/interface/menuExtras/voltar.png",
         "res/interface/menuExtras/Svoltar.png");
 ```
+
+##```void Extras::draw_self()```
+###Parameters
+```c++
+Environment *env = Environment::get_instance();
+```
+
+##```bool Extras::on_message(Object *object, MessageID id, Parameters)```
