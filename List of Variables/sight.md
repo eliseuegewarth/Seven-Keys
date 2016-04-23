@@ -1,18 +1,29 @@
 #Sight
 
-##Sight::Sight(Object *parent, ObjectID id, double x, double y, double w, double h)
+#```class Sight : public Object```
 
-##Sight::~Sight()
+##```Sight::Sight()```
+###Parameters
+```c++
+Object *parent
+```
+```c++
+ObjectID id
+```
+```c++
+double x
+```
+```c++
+double y
+```
+```c++
+double w
+```
+```c++
+double h
+```
+##```Sight::~Sight()```
 
-##void Sight::draw_self()
+##```void Sight::draw_self()```
 
-##void Sight::update_self()
-
-##class Sight : public Object
-
-##Sight(Object *parent, ObjectID id, double x, double y, double w, double h);
-
-##~Sight();
-
-    ·void draw_self();
-    ·void update_self();
+##```void Sight::update_self()```
