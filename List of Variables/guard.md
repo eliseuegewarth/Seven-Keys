@@ -1,9 +1,37 @@
 #Guard
-
+```c++
+```
 ##ActionID Guard::removeGuardID { "removeGuardID()" };
 ##ActionID Guard::walkID { "walkID()" };
 
-#Guard::Guard(Object *parent, ObjectID id, double x, double y, int mass, bool walkable, string t, int dir)
+#Guard::Guard()
+###Parameters
+```c++
+Object *parent
+```
+```c++
+ObjectID id
+```
+```c++
+double x
+```
+```c++
+double y
+```
+```c++
+bool walkable
+```
+```c++
+int mass
+```
+```c++
+string t
+```
+```c++
+int dir
+```
+
+
     ·this->set_mass(mass);
     ·this->set_w(70);
     ·this->set_h(70);
