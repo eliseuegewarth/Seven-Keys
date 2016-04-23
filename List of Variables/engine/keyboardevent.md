@@ -3,7 +3,9 @@
 ##private:
 
 ·State m_state
+
 ·Key m_key
+
 ·Modifier m_modifier
 
 ·static bool wha_init
