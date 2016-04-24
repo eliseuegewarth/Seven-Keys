@@ -14,13 +14,16 @@ It is an object of the class environment. Is a pointer to the current instance o
 ```c++
 double w = env->canvas->w()
 ```
+Variable that receives the width of the game environment.
 ```c++
 double h = env->canvas->h()
 ```
+Variable that receives the height of the game environment.
 ```c++
 Button *set_fullscreen = new Button(this, "fullscreen", "res/interface/menuOpcao/modoJanela.png",
         "res/interface/menuOpcao/SmodoJanela.png")
 ```
+
 ```c++
 Button *windowmode = new Button(this, "windowmode", "res/interface/menuOpcao/comoJogar.png",
         "res/interface/menuOpcao/ScomoJogar.png")
@@ -37,6 +40,7 @@ Button *back = new Button(this, "back", "res/interface/menuOpcao/voltar.png",
 ```c++
 Environment *env = Environment::get_instance()
 ```
+It is an object of the class environment. Is a pointer to the current instance of the game environment.
 ```c++
 env->canvas->clear(Color::WHITE)
 ```
@@ -55,6 +59,8 @@ MessageID id
 ```c++
 Environment *env = Environment::get_instance()
 ```
+It is an object of the class environment. Is a pointer to the current instance of the game environment.
+
 ```c++
 Button *button = dynamic_cast<Button *>(object)
 ```
