@@ -1,60 +1,116 @@
 #Ghost
 
-##Ghost::Ghost(Object *parent, ObjectID id, double x, double y, int mass, bool walkable, string t, int dir)
-    ·this->set_mass(mass);
-    ·this->set_w(70);
-    ·this->set_h(70);
-    ·this->set_walkable(walkable);
-    ·update_vision();
+##```class Ghost : public Object```
+###Class Members
+```c++
+·typedef enum { NONE, IDLE, RUNNING } State;
+```
+```c++
+·typedef enum { MOVED, STOPPED } Event;
+```
+```c++
+·typedef enum { LEFT = 0, UP = 1, RIGHT = 2, DOWN = 3 } Direction;
+```
+```c++
+·string type;
+```
+```c++
+·int player_posx;
+```
+```c++
+·int player_posy;
+```
+```c++
+·double m_damage;
+```
+```c++
+·unique_ptr<Animation> m_animation;
+```
+```c++
+·Direction m_direction;
+```
+```c++
+·unsigned long m_last = 0;
+```
 
-##Ghost::~Ghost()
+##```Ghost::Ghost()```
+###Parameters
+```c++
+Object *parent
+```
+```c++
+ObjectID id
+```
+```c++
+double x
+```
+```c++
+double y
+```
+```c++
+int mass
+```
+```c++
+bool walkable
+```
+```c++
+string t
+```
+```c++
+int dir
+```
 
-##Ghost::Direction
+##```Ghost::~Ghost()```
 
-##Ghost::direction()
+##```Ghost::direction()```
 
-##void Ghost::update_vision()
+##```void Ghost::update_vision()```
 
-##void Ghost::set_direction(Direction direction)
+##```void Ghost::set_direction()```
+###Parameters
+```c++
+Direction direction
+```
+##```void Ghost::draw_self()```
 
-##void Ghost::draw_self()
+##```void Ghost::walk()```
+###Variables
+```c++
+·double speed = 0.6;
+```
 
-##void Ghost::walk()
-    ·double speed = 0.6;
+##```void Ghost::update_direction()```
+###Parameters
+```c++
+unsigned long elapsed
+```
+###Variables
+```c++
+·int random = rand()%100;
+```
 
-##void Ghost::update_direction(unsigned long elapsed)
-    ·int random = rand()%100;
+##```void Ghost::get_playerx()```
+###Parameters
+```c++
+int pos_x
+```
 
-##void Ghost::get_playerx(int pos_x)
+##```void Ghost::get_playery()```
+###Parameters
+```c++
+int pos_y
+```
 
-##void Ghost::get_playery(int pos_y)
+##```double Ghost::damage()```
 
-##double Ghost::damage()
+##```void Ghost::update_self()```
+###Parameters
+```c++
+unsigned long elapsed
+```
 
-##void Ghost::update_self(unsigned long elapsed)
-
-##void Ghost::change_animation(string path)
-
-##class Ghost : public Object
-	·typedef enum { NONE, IDLE, RUNNING } State;
-    ·typedef enum { MOVED, STOPPED } Event;
-    ·typedef enum { LEFT = 0, UP = 1, RIGHT = 2, DOWN = 3 } Direction;
-    ·Ghost(Object *parent, ObjectID id, double x, double y, int mass, bool walkable, string type, int dir)
-    ·Direction direction();
-    ·void get_playerx(int pos_x);
-    ·void get_playery(int pos_y);
-    ·void set_direction(Direction direction);
-    ·void update_vision();
-    ·void walk();
-    ·void update_direction(unsigned long elapsed);
-    ·void change_animation(string path);
-    ·double damage();
-    ·string type;
-    ·int player_posx;
-    ·int player_posy;
-    ·double m_damage;
-    ·void draw_self();
-    ·void update_self(unsigned long elapsed);
-    ·unique_ptr<Animation> m_animation;
-    ·Direction m_direction;
-    ·unsigned long m_last = 0;
+##void Ghost::change_animation()
+###Parameters
+```c++
+string path
+```
