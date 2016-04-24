@@ -112,6 +112,8 @@ const Color& color
 ```c++
 Environment *env = Environment::get_instance(); 
 ```
+It is an object of the class environment. Is a pointer to the current instance of the game environment.
+
 ```c++
 int x = point.x() - env->camera->x();
 ```
