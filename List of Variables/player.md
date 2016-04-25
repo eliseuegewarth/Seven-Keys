@@ -1,3 +1,10 @@
+#Summary
+##[Class Player](#class-player--public-sprite)
+##[Class Duck](player-Duck.md)
+##[Class Idle](player-Idle.md)
+##[Class Running](player-Running.md)
+##[Class Impl](player::Impl.md)
+
 #Class Player : public Sprite
 
 ##Public:
