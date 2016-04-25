@@ -44,4 +44,4 @@ Environment *env = Environment::get_instance();
 ```
 It is an object of the class environment. Is a pointer to the current instance of the game environment.
 
-##```bool Extras::on_message(Object *object, MessageID id, Parameters)```
+##```bool Extras::on_message()```
