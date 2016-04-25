@@ -3,7 +3,7 @@
 ##[Class Duck](player-Duck.md)
 ##[Class Idle](player-Idle.md)
 ##[Class Running](player-Running.md)
-##[Class Impl](player::Impl.md)
+##[Class Impl](player--Impl.mdd)
 
 #Class Player : public Sprite
 
