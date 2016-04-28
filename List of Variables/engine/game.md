@@ -1,30 +1,39 @@
 #Game
-##```class Game```
+##```class Game : public Listener```
 Class that represents a game.
 
 ###Class members
 ```c++
 string m_id;
 ```
+Map identifier file.
+
 ```c++
 Level *m_level;
 ```
-variableariable that stores game levels.
+Stores the game levels.
 
 ```c++
 bool m_done;
 ```
-variable that stores if it was done or not the level.
+Stores if it was create or not the level.
 
 ```c++
 Environment *env;
 ```
 It is an object of the class environment. Is a pointer to the current instance of the game environment.
 
+
+##```Game::Game()```
+
+
+###Parameters
 ```c++
-virtual Level * load_level(const string& id);
+const string& id;
 ```
-##```Game::Game(const string& id)```
+Identifier of stage.
+
+
 ###Parameters
 ```c++
 Environment *env = Environment::get_instance();
@@ -65,3 +74,45 @@ Variable that stores the game audio volume.
 
 ##```Game::run()```
 Method to start the game.
+
+```c++
+unsigned long now;
+```
+Number of milliseconds since the SDL library initialized. 
+
+```c++
+string next;
+```
+
+
+##```unsigned long Game::update_timestep() const```
+
+
+##```bool Game::on_event()```
+
+
+###Parameters
+```c++
+const SystemEvent& event;
+```
+
+
+##```bool Game::on_event()```
+
+
+###Parameters
+```c++
+const KeyboardEvent& event;
+```
+
+##```void Game::update_screen()```
+
+
+##```void Game::delay()```
+###Parameters
+```c++
+unsigned long ms;
+```
+
+##```Level * Game::load_level()```
+
