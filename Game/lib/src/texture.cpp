@@ -38,9 +38,18 @@ public:
         }
     }
 
-    int w() const { return m_w; }
-    int h() const { return m_h; }
-    void * data() const { return m_texture; }
+    int w() const 
+    { 
+        return m_w;
+    }
+    int h() const 
+    { 
+        return m_h;
+    }
+    void * data() const
+    { 
+        return m_texture;
+    }
 
     void scale(double k)
     {
@@ -75,26 +84,22 @@ Texture::~Texture()
 {
 }
 
-void *
-Texture::data() const
+void * Texture::data() const
 {
     return m_impl->data();
 }
 
-int
-Texture::w() const
+int Texture::w() const
 {
     return m_impl->w();
 }
 
-int
-Texture::h() const
+int Texture::h() const
 {
     return m_impl->h();
 }
 
-Texture *
-Texture::from_file(const string& path) throw (Exception)
+Texture * Texture::from_file(const string& path) throw (Exception)
 {
     Environment *env = Environment::get_instance();
     SDL_Renderer *renderer = env->canvas->renderer();
@@ -125,14 +130,12 @@ Texture::from_file(const string& path) throw (Exception)
     return t;
 }
 
-void
-Texture::scale(double k)
+void Texture::scale(double k)
 {
     m_impl->scale(k);
 }
 
-pair<int, int>
-Texture::size() const
+pair<int, int> Texture::size() const
 {
     return m_impl->size();
 }
