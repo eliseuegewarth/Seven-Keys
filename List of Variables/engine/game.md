@@ -1,5 +1,5 @@
 #Game
-##```class Game``
+##```class Game```
 Class that represents a game.
 
 ###Class members

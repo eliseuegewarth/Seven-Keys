@@ -41,26 +41,22 @@ SoundEffect::~SoundEffect()
 {
 }
 
-Mix_Chunk*
-SoundEffect::mix_chunk() const
+Mix_Chunk* SoundEffect::mix_chunk() const
 {
     return m_impl->mix_chunk();
 }
 
-int
-SoundEffect::channel() const
+int SoundEffect::channel() const
 {
     return m_impl->channel();
 }
 
-void
-SoundEffect::set_channel(const int channel)
+void SoundEffect::set_channel(const int channel)
 {
     m_impl->set_channel(channel);
 }
 
-SoundEffect *
-SoundEffect::from_file(const string& path) throw (Exception)
+SoundEffect * SoundEffect::from_file(const string& path) throw (Exception)
 {
     Mix_Chunk *soundeffect = Mix_LoadWAV(path.c_str());
 
