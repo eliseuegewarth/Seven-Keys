@@ -8,8 +8,7 @@
 #include <iostream>
 using namespace std;
 
-Extras::Extras()
-    : Level("extras")
+Extras::Extras() : Level("extras")
 {
     Environment *env = Environment::get_instance();
 
@@ -46,8 +45,7 @@ Extras::~Extras()
 {
 }
 
-void
-Extras::draw_self()
+void Extras::draw_self()
 {
     Environment *env = Environment::get_instance();
     env->canvas->clear(Color::WHITE);
@@ -56,8 +54,7 @@ Extras::draw_self()
     env->canvas->draw(image.get(), 1, 0);
 }
 
-bool
-Extras::on_message(Object *object, MessageID id, Parameters)
+bool Extras::on_message(Object *object, MessageID id, Parameters)
 {
     if (id != Button::clickedID)
     {

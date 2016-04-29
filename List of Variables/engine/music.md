@@ -6,7 +6,7 @@
 
 ###Music::Impl()
 
-·Mix_Music * const music
+·Mix_Music * const music → get the music and turn's to const;
 
 ####private:
 
@@ -18,5 +18,5 @@
 
 #####Music::from_file()
 
-·const string& path
+·const string& path → music's path
 ·Music * m
