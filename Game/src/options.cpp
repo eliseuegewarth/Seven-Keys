@@ -7,26 +7,25 @@
 #include <iostream>
 using namespace std;
 
-Options::Options()
-    : Level("options")
+Options::Options() : Level("options")// Class that represents the option of the main menu of the game.
 {
-    Environment *env = Environment::get_instance();
-    double w = env->canvas->w();
-    double h = env->canvas->h();
+    Environment *env = Environment::get_instance();// It is an object of the class environment. Is a pointer to the current instance of the game environment.
+    double w = env->canvas->w();// Receives the width of the game environment.
+    double h = env->canvas->h();// Receives the height of the game environment.
 
     set_dimensions(w, h);
 
     Button *set_fullscreen = new Button(this, "fullscreen", "res/interface/menuOpcao/modoJanela.png",
-        "res/interface/menuOpcao/SmodoJanela.png");
+        "res/interface/menuOpcao/SmodoJanela.png");// Puts the screen in fullscreen.
     set_fullscreen->align_to(this, Object::RIGHT, Object::MIDDLE);
 
     Button *windowmode = new Button(this, "windowmode", "res/interface/menuOpcao/comoJogar.png",
-        "res/interface/menuOpcao/ScomoJogar.png");
+        "res/interface/menuOpcao/ScomoJogar.png");// Puts the screen in windowed mode.
     windowmode->align_to(this, Object::RIGHT, Object::NONE);
     windowmode->set_y(set_fullscreen->y() + set_fullscreen->h() + 20);
 
     Button *back = new Button(this, "back", "res/interface/menuOpcao/voltar.png",
-        "res/interface/menuOpcao/Svoltar.png");
+        "res/interface/menuOpcao/Svoltar.png");// Directs to the main menu of the game.
     back->align_to(this, Object::RIGHT, Object::NONE);
     back->set_y(windowmode->y() + windowmode->h() + 20);
 
@@ -46,20 +45,18 @@ Options::~Options()
 {
 }
 
-void
-Options::draw_self()
+void Options::draw_self()// Drow options pinctures on the screen.
 {
-    Environment *env = Environment::get_instance();
+    Environment *env = Environment::get_instance();// It is an object of the class environment. Is a pointer to the current instance of the game environment.
     env->canvas->clear(Color::WHITE);
 
     shared_ptr<Texture> image = env->resources_manager->get_texture("res/interface/menuOpcao/menuOpcao.png");
     env->canvas->draw(image.get(), 1, 0);
 }
 
-bool
-Options::on_message(Object *object, MessageID id, Parameters)
+bool Options::on_message(Object *object, MessageID id, Parameters)// Let the dynamic buttons.
 {
-    Environment *env = Environment::get_instance();
+    Environment *env = Environment::get_instance();// It is an object of the class environment. Is a pointer to the current instance of the game environment.
     Button *button = dynamic_cast<Button *>(object);
     env->sfx->play("res/sounds/navegacaomenu.wav", 1);
 
@@ -96,3 +93,5 @@ Options::on_message(Object *object, MessageID id, Parameters)
 
     return true;
 }
+
+
