@@ -1,124 +1,125 @@
 # ```Class Boss : public Object```
----comment---
+This class describes the attributes and behaviors of the enemy boss.
 ##Public:
 ###```typedef enum { LEFT = 0, UP = 1, RIGHT = 2, DOWN = 3 } Direction```
-
----comment---
+Defines the direction in which the boss can move around.
 --
 ###```Boss(Object *parent, ObjectID id, double x, double y, int mass, bool walkable, int dir)```
+Loads the information about the boss on the map.
 ####Parameters
 #####```Object *parent```
----comment---
+The parent is the map Object that will contains the boss.
 #####```ObjectID id```
----comment---
+Identifier of object type. in case of this class, aways have to be "boss".
 #####```double x```
----comment---
+The position in horizontal(x) axis where boss will be placed. 
 #####```double y```
----comment---
+The position in vertival(y) axis where boss will be placed. 
 #####```int mass```
----comment---
+Contains Object Boss mass information.
 #####```bool walkable```
----comment---
+Defines whether the boss is an object able to walk.
 #####```int dir```
----comment---
+Sets the initial movement direction.
 --
 ###```~Boss()```
----comment---
+Destructor of Boss class.
 --
 ###```Direction direction()```
----comment---
+Just returns informations of m_direction.
 --
 ###```void get_playerx(int pos_x)```
----comment---
+Receive the player's horizontal position. This information is used at Boss's artificial intelligence.
 ####Parameters
 #####```int pos_x```
----comment---
+That's the player's horizontal position.
 --
 ###```void get_playery(int pos_y)```
----comment---
+Receive the player's vertical position. This information is used at Boss's artificial intelligence.
 ####Parameters
 #####```int pos_y```
----comment---
+That's the player's vertical position.
 --
 ###```void set_direction(Direction direction)```
----comment---
+Modifies the movement direction
 ####Parameters
 #####```Direction direction```
----comment---
+The value of the direction that will be setted.
 --
 ###```void update_vision()```
----comment---
+Does not implement any behavior.
 --
 ###```void walk()```
----comment---
+Walk to the player's position at a constant speed..
 ####Variables
 #####```double speed```
----comment---
+Define the boss walking speed..
 --
 ###```void update_direction(unsigned long elapsed)```
----comment---
+Updates the sprite of object (boss) based on the boss movement direction.
 ####Parameters
 #####```unsigned long elapsed```
----comment---
+Elapsed time since the game start. This parameter is not used here.
 --
 ###```void set_position(double x, double y)```
----comment---
+This method defines the boss's position in the room.
 ####Parameters
 #####```double x```
----comment---
+The boss horizontal position.
 #####```double y```
----comment---
+The boss vertical position.
 --
 ###```bool summoned()```
----comment---
+Returns true if the boss was summoned at the stage.
 --
 ###```bool created()```
----comment---
+Returns true if the boss was created.
 --
 ###```void set_summoned(bool t)```
----comment---
+Set the m_summoned status with the 't' value.
 ####Paramenters
 #####```bool t```
----comment---
+Contain the summoned state value.
 --
 ###```void set_created(bool t)```
----comment---
+Set the m_created status with the 't' value
 ####Paramenters
 #####```bool t```
----comment---
+Contain the created state value.
 --
 ###```double damage()```
----comment---
+Returns the boss attack damage value.
 --
 ##Private:
 ###```int player_posx```
----comment---
+The player's horizontal position.
 --
 ###```int player_posy```
----comment---
+The player's vertical position.
 --
 ###```double m_damage```
----comment---
+The boss attack damage value.
 --
 ###```bool m_summoned```
----comment---
+Indicates the summon state of the boss.
 --
 ###```bool m_created```
----comment---
+Indicates the creation state of the boss.
 --
 ###```void draw_self()```
----comment---
+Draws the animation of boss on screen.
 --
 ###```void update_self(unsigned long elapsed)```
+Updates the boss's position on the map and walk.
 ####Parameters
 #####```unsigned long elapsed```
----comment---
+Elapsed time since the game start.
 --
 ###```unique_ptr<Animation> m_animation```
----comment---
+It is the animation of the boss that will be loaded on the screen.
 --
 ###```Direction m_direction```
----comment---
+The Boss movement direction.
 --
 ###```unsigned long m_last```
----comment---
+Last game time saved since the start of the game. It's like an old Elapsed time. Is Not used.
