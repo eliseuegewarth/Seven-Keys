@@ -1,5 +1,6 @@
 #Pause
 
+
 ##```class Pause : public Object```
 Class that represents the pause option of the main menu of the game.
 
@@ -52,3 +53,6 @@ Let the dynamic buttons.
 Environment *env = Environment::get_instance();
 ```
 It is an object of the class environment. Is a pointer to the current instance of the game environment.
+
+
+
