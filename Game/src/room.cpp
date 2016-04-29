@@ -249,7 +249,7 @@ void Room::check_entry()
 void
 Room::draw_id(Room * anterior, Room * sala, int x, int y)
 {
-    assert((anterior != NULL) && "Room can't be NULL");
+    //assert((anterior != NULL) && "Room can't be NULL");
 	Environment *env = Environment::get_instance();
 	shared_ptr <Font> font = env->resources_manager->get_font("res/fonts/TakaoExGothic.ttf");
 	env->canvas->set_font(font);

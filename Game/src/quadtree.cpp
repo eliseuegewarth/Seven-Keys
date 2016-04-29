@@ -156,7 +156,7 @@ void Quadtree::insert(Object *pRect) {
   */
 list<Object*> Quadtree::retrieve(list<Object*> returnObjects, Object* pRect) {
 	assert((pRect != NULL) && "pRect can't be NULL");
-	assert(not (returnObjects.empty()) && "list of objects can't be empty");
+	//assert((returnObjects != NULL) && "list of objects can't be empty");
 	int index = getIndex(pRect); //Position of Objects in previous phase
    	if (index != -1 && m_nodes.at(0) != NULL)
    	{
