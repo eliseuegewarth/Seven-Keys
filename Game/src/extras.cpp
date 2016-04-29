@@ -26,18 +26,21 @@ Extras::Extras() : Level("extras")
     // Directs to the cutscene of the game.
     Button *cutscene = new Button(this, "cutscene", "res/interface/menuExtras/cutscenes.png",
                                   "res/interface/menuExtras/Scutscenes.png"); 
+    assert((cutscene != NULL) && "Failed to pick up the instance of button");
     cutscene->align_to(this, Object::MIDDLE, Object::NONE);
     cutscene->set_y(200);
 
     // Directs to the history of the game.
     Button *historia = new Button(this, "historia", "res/interface/menuExtras/historia.png",
                                   "res/interface/menuExtras/Shistoria.png");
+    assert((historia != NULL) && "Failed to pick up the instance of button");
     historia->align_to(this, Object::MIDDLE, Object::NONE);
     historia->set_y(cutscene->y() + cutscene->h()+20);
 
     // Directs to the main menu of the game.
     Button *back = new Button(this, "back", "res/interface/menuExtras/voltar.png",
                               "res/interface/menuExtras/Svoltar.png");
+    assert((back != NULL) && "Failed to pick up the instance of button");
     back->align_to(this, Object::MIDDLE, Object::NONE);
     back->set_y(historia->y() + historia->h()+20);
 

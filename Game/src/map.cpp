@@ -15,7 +15,7 @@ Map::Map(int qnt_salas, int stage_id) : current_room(nullptr), m_boss(NULL)
 	GenerateMap(qnt_salas, stage_id);
 
     Boss *boss = new Boss(this, "boss", 0, 0, 999, true, Boss::LEFT);
-    assert((object != NULL) && "");
+    assert((boss != NULL) && "");
     m_boss = boss;
     
 
