@@ -3,14 +3,13 @@
 
 #include "quadtree.h"
 
-/* The constructor that initialize m_nodes array
-with its four pointers to null and assigns the
-value of pLevel to m_level and pBounds to m_bounds.*/
-//pLevel = Number of stage that will be initialized
-//pBounds = Environmental floor rectangle limit
-
 /**
- *
+ * [Quadtree::Quadtree The constructor that initialize m_nodes array
+ with its four pointers to null and assigns the
+ value of pLevel to m_level and pBounds to m_bounds]
+ * @method Quadtree::getIndex
+ * @param  pLevel             [Number of stage that will be initialized]
+ * @param  pBounds            [Environmental floor rectangle limit]
  */
 Quadtree::Quadtree(int pLevel, Rect * pBounds)
 {
