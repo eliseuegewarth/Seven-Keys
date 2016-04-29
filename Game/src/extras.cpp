@@ -16,6 +16,7 @@ using namespace std;
 Extras::Extras() : Level("extras")
 {
     const Environment *env = Environment::get_instance(); // It is an object of the class environment. Is a pointer to the current instance of the game environment.
+    assert((env != NULL) && "Failed to pick up the instance of environment");
 
     const double w = env->canvas->w(); // Receives the width of the game environment.
     const double h = env->canvas->h(); // Receives the height of the game environment.
@@ -62,6 +63,7 @@ void Extras::draw_self()
 {
     // It is an object of the class environment. Is a pointer to the current instance of the game environment.
     const Environment *env = Environment::get_instance(); 
+    assert((env != NULL) && "Failed to pick up the instance of environment");
     env->canvas->clear(Color::WHITE);
 
     const shared_ptr<Texture> image = env->resources_manager->get_texture("res/interface/menuExtras/menuExtras.png");
@@ -71,6 +73,7 @@ void Extras::draw_self()
 bool Extras::on_message(Object *object, MessageID id, Parameters) // Let the dynamic buttons.
 {
     assert((object != NULL) && "Object needs to be different from NULL");
+    assert((not id.empty()) && "id needs to be different drom the empty");
     if (id != Button::clickedID)
     {
         return false;

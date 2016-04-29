@@ -15,6 +15,7 @@ Map::Map(int qnt_salas, int stage_id) : current_room(nullptr), m_boss(NULL)
 	GenerateMap(qnt_salas, stage_id);
 
     Boss *boss = new Boss(this, "boss", 0, 0, 999, true, Boss::LEFT);
+    assert((object != NULL) && "");
     m_boss = boss;
     
 
@@ -176,6 +177,7 @@ void Map::GenerateMap(int quantidade_salas, int stage_id)
     }
 
 	Room *room = new Room(this, "sala 0", "None", nullptr, nullptr, nullptr, nullptr, stage_id);
+    assert((room != NULL) && "Failed to pick up the instance of environment");
     room_list.push_back(room);
     set_current(room);
     last_room = room;
@@ -199,20 +201,18 @@ void Map::GenerateMap(int quantidade_salas, int stage_id)
     free(matriz);
 }
     
-void
-Map::remove_item(Object *item)
+void Map::remove_item(Object *item)
 {
+    assert((item != NULL) && "Failed to pick up the instance of environment the room");
     current_room->remove_item(item);
 }
 
-Room *
-Map::room()
+Room * Map::room()
 {
 	return current_room;
 }
 
-void
-Map::set_current(Room *nova)
+void Map::set_current(Room *nova)
 {
     if(current_room != NULL)
     {
@@ -235,18 +235,17 @@ Map::set_current(Room *nova)
     }
 }
 
-const list<Object *>&
-Map::items() 
+const list<Object *>& Map::items() 
 {
     return current_room->get_items();
 }
 
-bool
-Map::on_message(Object *, MessageID id, Parameters p)
+bool Map::on_message(Object *, MessageID id, Parameters p)
 {
+    assert((not id.empty()) && "id needs to be different drom the empty");
+
     if(id == Room::guardDeathID)
     {
-        cout << "aqui entou" << endl;
         notify(id,p);
         return true;
     }
@@ -256,6 +255,7 @@ Map::on_message(Object *, MessageID id, Parameters p)
         {
             m_boss->set_created(true);
             Environment *env = Environment::get_instance();
+            assert((env != NULL) && "Failed to pick up the instance of environment");
             env->sfx->play("res/sounds/esposagritando.wav", 1);
         }
     }
@@ -269,8 +269,7 @@ Map::on_message(Object *, MessageID id, Parameters p)
 //         current_room->draw();
 // }
 
-void
-Map::update_self(unsigned long elapsed)
+void Map::update_self(unsigned long elapsed)
 {
     if(m_boss->created())
     {

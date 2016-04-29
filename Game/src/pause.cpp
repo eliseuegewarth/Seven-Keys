@@ -9,27 +9,41 @@
 
 using namespace std;
 
-Pause::Pause() : Level("pause")// Creates the environment of the pause menu.
+/**
+ * @brief Creates the environment of the pause menu.
+ * @details [long description]
+ */
+Pause::Pause() : Level("pause")
 {
-    Environment *env = Environment::get_instance();// It is an object of the class environment. Is a pointer to the current instance of the game environment.
+    // It is an object of the class environment. Is a pointer to the current instance of the game environment.
+    Environment *env = Environment::get_instance();
+    assert((env != NULL) && "Failed to pick up the instance of environment");
 
     double w = env->canvas->w();// Receives the width of the game environment.
     double h = env->canvas->h();// Receives the height of the game environment.
 
     set_dimensions(w, h);
-
+    // Directs the environment where the game was paused.
     Button *backGame = new Button(this, "backGame", "res/interface/menuPausa/voltarJogo.png",
-        "res/interface/menuPausa/SvoltarJogo.png");// Directs the environment where the game was paused.
+                                  "res/interface/menuPausa/SvoltarJogo.png");
+    assert((backGame != NULL) && "Failed to pick up the instance of button");
+
     backGame->align_to(this, Object::RIGHT, Object::NONE);
     backGame->set_y(200);
 
+    // Directs to the main menu of the game.
     Button *backMenu = new Button(this, "backMenu", "res/interface/menuExtras/voltar.png",
-        "res/interface/menuExtras/Svoltar.png");// Directs to the main menu of the game.
+                                  "res/interface/menuExtras/Svoltar.png");
+    assert((backMenu != NULL) && "Failed to pick up the instance of button");
+
     backMenu->align_to(this, Object::RIGHT, Object::NONE);
     backMenu->set_y(backGame->y() + backGame->h()+20);
 
+    // Closes the game.
     Button *exit = new Button(this, "exit", "res/interface/menuExtras/sair.png",
-        "res/interface/menuExtras/Ssair.png");// Closes the game.
+                              "res/interface/menuExtras/Ssair.png");
+    assert((exit != NULL) && "Failed to pick up the instance of button");
+
     exit->align_to(this, Object::RIGHT, Object::NONE);
     exit->set_y(backGame->y() + backGame->h()+20);
 
@@ -49,7 +63,9 @@ Pause::~Pause()
 
 void Pause::draw_self() // Drow pause pinctures on the screen.
 {
-    Environment *env = Environment::get_instance();// It is an object of the class environment. Is a pointer to the current instance of the game environment.
+    // It is an object of the class environment. Is a pointer to the current instance of the game environment.
+    Environment *env = Environment::get_instance();
+    assert((env != NULL) && "Filed to pick up the instance of environment");
     env->canvas->clear(Color::WHITE);
 
     shared_ptr<Texture> image = env->resources_manager->get_texture("res/interface/menuPausa/fundoPausa.png");
@@ -59,6 +75,7 @@ void Pause::draw_self() // Drow pause pinctures on the screen.
 bool Pause::on_message(Object *object, MessageID id, Parameters)// Let the dynamic buttons.
 {
     assert((object != NULL) && "Object needs to be different from NULL");
+    assert((not id.empty()) && "id needs to be different drom the empty");
     // It is an object of the class environment. Is a pointer to the current instance of the game environment.
     //Environment *env = Environment::get_instance(); NOT USED.
 

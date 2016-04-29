@@ -10,7 +10,9 @@ using namespace std;
 Creditos::Creditos()
     : Level("creditos")
 {
+    //// It is an object of the class environment. Is a pointer to the current instance of the game environment.
     Environment *env = Environment::get_instance();
+    assert((env != NULL) && "Failed to pick up the instance of environment");
 
     double w = env->canvas->w();
     double h = env->canvas->h();
@@ -18,7 +20,7 @@ Creditos::Creditos()
     set_dimensions(w, h);
     
     Button *back = new Button(this, "back", "res/interface/menuCreditos/voltar.png",
-        "res/interface/menuCreditos/Svoltar.png");
+                              "res/interface/menuCreditos/Svoltar.png");
     back->align_to(this, Object::RIGHT, Object::RIGHT);
     back->set_y(520);
 
@@ -34,6 +36,7 @@ void
 Creditos::draw_self()
 {
     Environment *env = Environment::get_instance();
+    assert((env != NULL) && "Failed to pick up the instance of environment");
     env->canvas->clear(Color::WHITE);
 
     shared_ptr<Texture> image = env->resources_manager->get_texture("res/interface/menuCreditos/telaCreditos.png");
@@ -45,6 +48,8 @@ Creditos::on_message(Object *object, MessageID id, Parameters)
 {
 
     assert((object != NULL) && "Object needs to be different from NULL");
+    assert((not id.empty()) && "id needs to be different drom the empty");
+
     if (id != Button::clickedID)
     {
         return false;
