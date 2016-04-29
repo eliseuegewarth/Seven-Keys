@@ -324,7 +324,7 @@ if(x + m_player->w() > env->canvas->w())
 ```
 ### 5.5 Control Structures (if, switch)
 
-The stunderd to be following is without spaces between the control structute and the parentheses of condition, and between the operations of condition.
+The stunderd to be following is without spaces between the control structute and the parentheses of condition, and between the operations of condition. It's better using command operations as 'and', 'or', 'not', natives of c++.
 
 Bad code:
 ```c++
@@ -336,7 +336,7 @@ Bad code:
 
 Good code:
 ```c++
- if(id != Button::clickedID)
+ if(id not Button::clickedID)
  {
      return false;
  }

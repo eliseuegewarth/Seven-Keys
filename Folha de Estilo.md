@@ -320,7 +320,7 @@ if(x + m_player->w() > env->canvas->w())
 ```
 ### 5.5 Estruturas de Controle (if, switch)
 
-O padrão a ser seguido é de sem espaços entre a estrutura de controle e o parentese da condição, e entre as operações das condições.
+O padrão a ser seguido é de sem espaços entre a estrutura de controle e o parentese da condição, e entre as operações das condições. É preferível usar operações utilizando os comandos 'and', 'or', 'not', pertencentes à linguagem c++ ao invés de comandos menos intuitivos como '&&', '||', '!='.
 
 Codigo ruim:
 ```c++
@@ -332,7 +332,7 @@ Codigo ruim:
 
 codigo bom:
 ```c++
- if(id != Button::clickedID)
+ if(id not Button::clickedID)
  {
      return false;
  }

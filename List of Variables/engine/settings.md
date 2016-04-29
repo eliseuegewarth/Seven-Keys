@@ -8,8 +8,8 @@
 
 ###Settings::save()
 
-·const string& path
-·map< string, map<string, string> > sections() const
+·const string& path → where the save will be stored
+·map< string, map<string, string> > sections() const →
 ·template<typename T> T
 
 ###Settings::read() const
