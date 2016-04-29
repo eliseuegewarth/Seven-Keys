@@ -18,63 +18,76 @@
 
 #include <cassert> 
 #include <cstring>
-
+/**
+ * 7keys.cpp
+ * @brief [Start the game with default values]
+ */
 SevenKeys::SevenKeys()
     : Game("fone")
 {
     AudioManagerMusic * music2 = new AudioManagerMusic();
+    assert(music2 != NULL && "Could not create instance of AudioManager Music");
     music2 -> play("res/sounds/musicaMenu.wav", -1);
     lives = 5;
     sanity = 100;
 }
 
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param screen_type [description]
+ * @return level_to_be_loaded [Returns the screen that will be loaded.]
+ */
 Level *
-SevenKeys::load_level(const string& id)
+SevenKeys::load_level(const string& screen_type)
 {
-    if (id == "fone")
+    assert(not screen_type.empty() && "screen_type needs to be different empty string");
+
+    // Represents the screen that will be loaded.
+    Level * level_to_be_loaded = nullptr;
+    if (screen_type == "fone")
     {
-        return new FrontEnd("logo", "logo", "res/images/fone.png");
+        level_to_be_loaded = (Level*) new FrontEnd("logo", "logo", "res/images/fone.png");
     }
-    if (id == "logo")
+    if (screen_type == "logo")
     {
-        return new FrontEnd("logo", "tecnologias", "res/images/manateam.png");
+        level_to_be_loaded = (Level*) new FrontEnd("logo", "tecnologias", "res/images/manateam.png");
     }
-    else if (id == "tecnologias")
+    else if (screen_type == "tecnologias")
     {
-        return new FrontEnd("tecnologias", "classificacao", "res/images/tecnologias.png");
+        level_to_be_loaded = (Level*) new FrontEnd("tecnologias", "classificacao", "res/images/tecnologias.png");
     }
-    else if (id == "classificacao")
+    else if (screen_type == "classificacao")
     {
-        return new FrontEnd("classificacao", "title", "res/images/classificacao_indicativa.png");
+        level_to_be_loaded = (Level*) new FrontEnd("classificacao", "title", "res/images/classificacao_indicativa.png");
     }
-    else if (id == "title")
+    else if (screen_type == "title")
     {
-        return new TitleScreen();
+        level_to_be_loaded = (Level*) new TitleScreen();
     }
-    else if (id == "options")
+    else if (screen_type == "options")
     {
-        return new Options();
+        level_to_be_loaded = (Level*) new Options();
     }
-    else if (strstr(id.c_str(), "trans"))
+    else if (strstr(screen_type.c_str(), "trans"))
     {
         Environment *env = Environment::get_instance();
+        assert(env != NULL && "failed to pick up the instance of Environment");
         shared_ptr <Font> font = env->resources_manager->get_font("res/fonts/TakaoExGothic.ttf");
         env->canvas->set_font(font);
 
         double w = env->canvas->w();
         double h = env->canvas->h();
 
-        string ant = id;
+        string ant = screen_type;
 
-        Level *lvl = new Level(id, id);
+        Level *lvl = new Level(screen_type, screen_type);
+        assert(lvl != NULL && "failed to create a Level instance");
         lvl->set_dimensions(w, h);
 
-        /*string *str;
-        str = (string*)(&id);
-        *str = "stage1";*/
-
         char novo[256];
-        sprintf(novo, "%s",id.c_str());
+        sprintf(novo, "%s", screen_type.c_str());
         novo[0] = 's';
         novo[1] = 't';
         novo[2] = 'a';
@@ -82,7 +95,7 @@ SevenKeys::load_level(const string& id)
         novo[4] = 'e';
 
 
-        string num_id = id.substr(5,5);
+        string num_id = screen_type.substr(5,5);
         char num_id2[10];
         sprintf(num_id2, "%s", num_id.c_str());
         int novo_id = atoi(num_id2);
@@ -99,16 +112,17 @@ SevenKeys::load_level(const string& id)
             sprintf(music_path, "res/sounds/Fase5.wav");
         env->music->play(music_path, -1);
 
-        env->canvas->draw(id, w/2, h/2 ,Color::RED);
+        env->canvas->draw(screen_type, w/2, h/2 ,Color::RED);
 
         cout << novo << endl;
 
-        return new FrontEnd(id, novo, path);
+        level_to_be_loaded = (Level*) new FrontEnd(screen_type, novo, path);
     }
 
-    else if(strstr(id.c_str(), "death"))
+    else if(strstr(screen_type.c_str(), "death"))
     {
         Environment *env = Environment::get_instance();
+        assert(env != NULL && "failed to pick up the instance of Environment");
         env->sfx->play("res/sounds/pregameover.wav",1);
         shared_ptr <Font> font = env->resources_manager->get_font("res/fonts/TakaoExGothic.ttf");
         env->canvas->set_font(font);
@@ -116,13 +130,14 @@ SevenKeys::load_level(const string& id)
         double w = env->canvas->w();
         double h = env->canvas->h();
 
-        string ant = id;
+        string ant = screen_type;
 
-        Level *lvl = new Level(id, id);
+        Level *lvl = new Level(screen_type, screen_type);
+        assert(lvl != NULL && "failed to create a Level instance");
         lvl->set_dimensions(w, h);
 
         char novo[256];
-        sprintf(novo, "%s",id.c_str());
+        sprintf(novo, "%s",screen_type.c_str());
         novo[0] = 's';
         novo[1] = 't';
         novo[2] = 'a';
@@ -131,31 +146,37 @@ SevenKeys::load_level(const string& id)
 
         lives -= 1;
 
-        return new FrontEnd(id, novo, "res/images/transition.png");
+        level_to_be_loaded = (Level*) new FrontEnd(screen_type, novo, "res/images/transition.png");
     }
-    else if(id == "gameover")
+    else if(screen_type == "gameover")
     {
         Environment *env = Environment::get_instance();
+        assert(env != NULL && "failed to pick up the instance of Environment");
         env->sfx->play("res/sounds/gameOver.wav",1);
         double w = env->canvas->w();
         double h = env->canvas->h();
 
-        Level *lvl = new Level(id, id);
+        Level *lvl = new Level(screen_type, screen_type);
+        assert(lvl != NULL && "failed to create a Level instance");
         lvl->set_dimensions(w, h);
-        return new FrontEnd(id, "title", "res/interface/transicao/gameOver.png");
+        level_to_be_loaded = (Level*) new FrontEnd(screen_type, "title", "res/interface/transicao/gameOver.png");
     }
-    else if (strstr(id.c_str(), "stage"))
+    else if (strstr(screen_type.c_str(), "stage"))
     {
-        return new Stage(id, lives, &sanity);
+        level_to_be_loaded = (Level*) new Stage(screen_type, lives, &sanity);
     }
-    else if (id == "creditos")
+    else if (screen_type == "creditos")
     {
-        return new Creditos();
+        level_to_be_loaded = (Level*) new Creditos();
     }
-    else if (id == "extras")
+    else if (screen_type == "extras")
     {
-        return new Extras();
+        level_to_be_loaded = (Level*) new Extras();
     }
+    else{
+        // Do nothing
+    }
+    assert(level_to_be_loaded != nullptr && "Could not load a screen.");
 
-    return nullptr;
+    return level_to_be_loaded;
 }
