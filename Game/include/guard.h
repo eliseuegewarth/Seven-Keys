@@ -7,6 +7,11 @@
 
 using namespace std;
 
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ */
 class Guard : public Object
 {
 public:
@@ -15,7 +20,10 @@ public:
     typedef enum { MOVED, STOPPED } Event;
     typedef enum { LEFT = 0, UP = 1, RIGHT = 2, DOWN = 3 } Direction;
 
-    Guard(Object *parent, ObjectID id, double x, double y, int mass, bool walkable, string type, int dir);
+    #define GUARD_SPEED_IN_MILISECONDS 120
+
+    Guard(Object *parent, ObjectID id, const double x, const double y,
+          const unsigned int mass_of_guard, const bool walkable, string type, const unsigned int initial_movement_direction);
     ~Guard();
 
     static ActionID removeGuardID;
@@ -23,9 +31,9 @@ public:
     
 
     Direction direction();
-    void get_playerx(int pos_x);
-    void get_playery(int pos_y);
-    void set_direction(Direction direction);
+    void get_playerx(const unsigned int pos_x);
+    void get_playery(const unsigned int pos_y);
+    void set_direction(Direction direction_of_movement);
     void update_vision();
     void walk(unsigned long elapsed);
     void update_direction(unsigned long elapsed);
@@ -42,18 +50,20 @@ public:
     string m_old_type;
 
 private:
-    string m_type;
+    string guard_type;
 
-    int player_posx;
-    int player_posy;
-    double m_damage;
-    double m_health;
+    int player_horizontal_position;
+    int player_vertical_position;
+    const double GUARD_DAMAGE = 0.7;
+    double guard_health;
+    const double GUARD_SPEED = 1;
+
 
     void draw_self();
     void update_self(unsigned long elapsed);
-    unique_ptr<Animation> m_animation;
-    Direction m_direction;
-    unsigned long m_last;
+    unique_ptr<Animation> guard_animation;
+    Direction direction_of_movement;
+    unsigned long last_game_time_saved;
 };
 
 

@@ -23,7 +23,7 @@ Defines whether the boss is an object able to walk.
 Sets the initial movement direction.
 --
 ###```~Boss()```
-Destructor of Boss class.
+0Destructor of Boss class.
 --
 ###```Direction direction()```
 Just returns informations of m_direction.
@@ -41,7 +41,7 @@ Receive the player's vertical position. This information is used at Boss's artif
 That's the player's vertical position.
 --
 ###```void set_direction(Direction direction)```
-Modifies the movement direction
+Modifies the movement direction.
 ####Parameters
 #####```Direction direction```
 The value of the direction that will be setted.
@@ -50,10 +50,10 @@ The value of the direction that will be setted.
 Does not implement any behavior.
 --
 ###```void walk()```
-Walk to the player's position at a constant speed..
+Walk to the player's position at a constant speed.
 ####Variables
 #####```double speed```
-Define the boss walking speed..
+Define the boss walking speed.
 --
 ###```void update_direction(unsigned long elapsed)```
 Updates the sprite of object (boss) based on the boss movement direction.

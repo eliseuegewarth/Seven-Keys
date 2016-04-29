@@ -1,6 +1,8 @@
 #Map
 
-##```class Boss : public Object```
+##```class Map : public Object```
+
+
 ###Class members
 ```c++
 int qut_salas;
