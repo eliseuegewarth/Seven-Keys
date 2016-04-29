@@ -421,20 +421,15 @@ str = (string*)(&id);
 ### 7.1 JavaDoc
 A documentação no estilo "JavaDoc" deve ser usada para comentarios de classe ou metodos.
 É aconselhavel apenas o uso de @param, @return, @throws e em alguns casos @deprecated.
-Para qualquer comentario ao estilo JavaDoc deve seguir o seguinte padrao para comentarios de classe e metodos:
+Para qualquer comentario ao estilo JavaDoc de classe e metodos deve se usar comentarios de @param, @return, @throws e @deprecated se necessario. O padrão adotado foi o seguinte:
 ```c++
 /**
- *  
- */
-```
-Para comentarios de @param, @return, @throws e @deprecated deve ser usado o seguinte padrao.
-```c++
-/**
- * <descrição>
- * @deprecated
- * @param
- * @throws
- * @return
+ * [Weapon::Weapon Receives the object parent (weapon), your identifier and
+ * all your attributes(resistance, damage and attack speed)]
+ * @param	id              [identifier of object]
+ * @param	resistance      [Resistance of the Weapon, may change depending the weapon]
+ * @param	damage          [Damage of the Weapon, may change depending the weapon]
+ * @param	attack_speed    [Attack speed of the Weapon, may change depending the weapon]
  */
 ```
 ### 7.2 Assertivas
