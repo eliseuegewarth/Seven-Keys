@@ -26,11 +26,16 @@ Boss::Boss(Object *parent, const ObjectID id, const double boss_horizontal_posit
                 const double boss_vertical_position, const int mass_of_boss, const bool walkable, 
                 const int initial_movement_direction)
 {
+    // Preconditions for execution of method.
+    assert((parent != NULL) && "parent needs to be different from NULL");
+    assert(not id.empty() && "id needs to be different empty string");
+    assert((mass_of_boss > 0) && "mass_of_boss needs to be greater than zero");
+
     Object(parent, id, boss_horizontal_position, boss_vertical_position);
 
     this->boss_animation = (unique_ptr<Animation>) (new Animation(
-                                    "res/sprites/boss_running.png", 0, 0, 90, 90, 6, 120, true)
-    );
+                                    "res/sprites/boss_running.png", 0, 0, 90, 90, 
+                                        6, 120, true));
 
     this->direction_of_movement = (Direction) initial_movement_direction; 
     this->last_game_time_saved = 0;
