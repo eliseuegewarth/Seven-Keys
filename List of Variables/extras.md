@@ -12,12 +12,12 @@ Creates the environment of the extras menu.
 It is an object of the class environment. Is a pointer to the current instance of the game environment.
 
 ```c++
-	double w = env->canvas->w();
+	double w;
 ```
 Receives the width of the game environment.
 
 ```c++
-	double h = env->canvas->h();
+	double h;
 ```
 Receives the height of the game environment.
 
@@ -37,7 +37,7 @@ Directs to the history of the game.
 Directs to the main menu of the game.
 
 ##```void Extras::draw_self()```
-drow extras pinctures on the screen.
+Drow extras pinctures on the screen.
 
 ###Parameters
 ```c++

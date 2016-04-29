@@ -1,44 +1,54 @@
 #Pause
 
 ##```class Pause : public Object```
-###Class members
-```c++
- bool on_message(Object *sender, MessageID id, Parameters parameters);
-```
+Class that represents the pause option of the main menu of the game.
 
 ##```Pause::Pause()```
-###Parameters
+Creates the environment of the pause menu.
+
 ```c++
-Environment *env = Environment::get_instance();
+Environment *env;
 ```
+It is an object of the class environment. Is a pointer to the current instance of the game environment.
+
 ```c++
-double w = env->canvas->w();
+double w;
 ``` 
+Receives the width of the game environment.
+
 ```c++
-double h = env->canvas->h();
+double h;
 ```
+Receives the height of the game environment.
+
 ```c++
-Button *backGame = new Button(this, "backGame", "res/interface/menuPausa/voltarJogo.png",
-        "res/interface/menuPausa/SvoltarJogo.png");
+Button *backGame;
 ```
+Directs the environment where the game was paused.
+
 ```c++
-Button *backMenu = new Button(this, "backMenu", "res/interface/menuExtras/voltar.png",
-        "res/interface/menuExtras/Svoltar.png");
+Button *backMenu;
 ```
+Directs to the main menu of the game.
+
 ```c++
-Button *exit = new Button(this, "exit", "res/interface/menuExtras/sair.png",
-        "res/interface/menuExtras/Ssair.png");
+Button *exit;
 ```
+Closes the game.
 
 
 ##```void Pause::draw_self()```
-###Parameters
-```c++
-Environment *env = Environment::get_instance();
-```
+Drow pause pinctures on the screen.
 
-##```bool Pause::on_message(Object *object, MessageID id, Parameters)```
-###Parameters
+```c++
+Environment *env;
+```
+It is an object of the class environment. Is a pointer to the current instance of the game environment.
+
+##```bool Pause::on_message()```
+Let the dynamic buttons.
+
 ```c++
 Environment *env = Environment::get_instance();
 ```
+It is an object of the class environment. Is a pointer to the current instance of the game environment.
