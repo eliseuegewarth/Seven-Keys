@@ -11,12 +11,19 @@
 
 #include "square.h"
 
+#include <cassert>
+
 #define SPEED 150.5
 
 Square::Square(Object *parent, ObjectID id, double size)
-    : Object(parent, id, 0, 0, size, size), m_speed(0), m_last(0)
 {
+    assert((parent != NULL) && "Parent can't be NULL");
+    assert((not id.empty()) && "ID can't be empty");
+    Object(parent, id, 0, 0, size, size)
+    m_speed= 0;
+    m_last=0;
     Environment *env = Environment::get_instance();
+    assert((env != NULL) && "Failed to pick up the instance of environment");
     env->events_manager->register_listener(this);
 
     double y = env->canvas->h()*0.6 - size;
@@ -26,6 +33,7 @@ Square::Square(Object *parent, ObjectID id, double size)
 Square::~Square()
 {
     Environment *env = Environment::get_instance();
+    assert((env != NULL) && "Failed to pick up the instance of environment");
     env->events_manager->unregister_listener(this);
 }
 double
@@ -75,6 +83,7 @@ Square::draw_self()
     const Color color { 80, 180, 205 };
 
     Environment *env = Environment::get_instance();
+    assert((env != NULL) && "Failed to pick up the instance of environment");
     env->canvas->fill(bounding_box(), color);
 }
 
@@ -93,8 +102,9 @@ Square::update_self(unsigned long elapsed)
     }
 
     Environment *env = Environment::get_instance();
+    assert((env != NULL) && "Failed to pick up the instance of environment");
 
-    double x = this->x() + m_speed*((elapsed - m_last)/1000.0);
+    double x = this->x() + m_speed*((elapsed - m_last)/(double)1000);
     m_last = elapsed;
 
     if (x < 0)
