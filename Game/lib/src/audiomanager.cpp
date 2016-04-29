@@ -38,7 +38,7 @@ void
 AudioManager<AudioType::Music>::play(const string& path, const int times)
 {
     assert((times == k_infinite_loop || times >= 1) && "Must be k_infinite_loop or >= 1.");
-
+    assert((not path.empty()) && "Path can't be empty");
     const auto music = Environment::get_instance()->resources_manager->get_music(path);
     assert(music != nullptr && "Shouldn't be playing null music.");
 
@@ -117,8 +117,9 @@ template <>
 void
 AudioManager<AudioType::SoundEffect>::play(const string& path, const int times)
 {
-    assert((times == k_infinite_loop || times >= 1) && "Must be k_infinite_loop or >= 1.");
 
+    assert((times == k_infinite_loop || times >= 1) && "Must be k_infinite_loop or >= 1.");
+    assert((not path.empty()) && "Path can't be empty");
     const auto sound_effect =
         Environment::get_instance()->resources_manager->get_sound_effect(path);
 
@@ -175,9 +176,3 @@ AudioManager<AudioType::SoundEffect>::fade_out(const double seconds)
     const auto k_milliseconds = static_cast<int>(seconds*1000);
     Mix_FadeOutChannel(k_all_channels, k_milliseconds);
 }
-
-// template <>
-// bool AudioManager<AudioType::SoundEffect>::faded_out()
-// {
-//     return false;
-// }

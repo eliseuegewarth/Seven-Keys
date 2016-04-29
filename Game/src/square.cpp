@@ -19,7 +19,7 @@ Square::Square(Object *parent, ObjectID id, double size)
 {
     assert((parent != NULL) && "Parent can't be NULL");
     assert((not id.empty()) && "ID can't be empty");
-    Object(parent, id, 0, 0, size, size)
+    Object(parent, id, 0, 0, size, size);
     m_speed= 0;
     m_last=0;
     Environment *env = Environment::get_instance();

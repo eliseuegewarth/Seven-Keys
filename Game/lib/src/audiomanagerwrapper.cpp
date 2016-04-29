@@ -30,14 +30,14 @@ void
 AudioManagerWrapper::init() throw (Exception)
 {
     sfx_manager = new AudioManagerSfx();
-
+    assert((sfx_manager != NULL) && "Failed to create an instance of the object");
     if (not sfx_manager)
     {
         throw Exception("Out of memory for a new AudioManagerSfx");
     }
 
     music_manager = new AudioManagerMusic();
-
+    assert((music_manager != NULL) && "Failed to create an instance of the object");
 
     if (not music_manager)
     {

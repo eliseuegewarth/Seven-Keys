@@ -35,8 +35,11 @@ void init_table_joystick()
 }
 
 JoyStickEvent::JoyStickEvent(State state, Button button)
-    : m_state(state), m_button(button)
 {
+    assert((button != NULL) && "Button can't be NULL");
+    assert((state != NULL) && "State can't be NULL");
+    m_state = state;
+    m_button = button;
 }
 
 JoyStickEvent::State

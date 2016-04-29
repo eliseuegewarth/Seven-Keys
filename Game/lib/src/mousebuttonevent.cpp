@@ -8,8 +8,14 @@
 #include "core/mousebuttonevent.h"
 
 MouseButtonEvent::MouseButtonEvent(ButtonState state, Button button,
-    double x, double y) : m_state(state), m_button(button), m_x(x), m_y(y)
+                                    double x, double y)
 {
+    assert((state != NULL) && "state can't be NULL");
+    assert((button != NULL) && "button can't be NULL");
+    m_state = state;
+    m_button = button;
+    m_x = x;
+    m_y = y;
 }
 
 MouseButtonEvent::ButtonState

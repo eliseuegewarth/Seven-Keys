@@ -9,9 +9,12 @@
 
 MouseMotionEvent::MouseMotionEvent(int x, int y, int x_rel, int y_rel,
     MotionState left, MotionState right, MotionState middle)
-    : m_x(x), m_y(y), m_x_rel(x_rel), m_y_rel(y_rel),
-      m_buttons { left, right, middle }
 {
+    m_x = x;
+    m_y = y;
+    m_x_rel = x_rel;
+    m_y_rel = y_rel;
+    m_buttons { left, right, middle }
 }
 
 MouseMotionEvent::MotionState
