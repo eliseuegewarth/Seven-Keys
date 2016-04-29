@@ -7,6 +7,8 @@
  */
 #include "core/listener.h"
 
+#include <cassert> 
+
 class Listener::Impl
 {
 public:

@@ -16,6 +16,7 @@
 #include "creditos.h"
 #include "extras.h"
 
+#include <cassert> 
 #include <cstring>
 
 SevenKeys::SevenKeys()

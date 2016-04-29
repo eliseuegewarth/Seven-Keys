@@ -11,6 +11,8 @@
 #include "core/texture.h"
 #include "core/environment.h"
 
+#include <cassert> 
+
 class Animation::Impl
 {
 public:

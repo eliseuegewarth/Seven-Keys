@@ -7,6 +7,8 @@
  */
 #include "core/line.h"
 
+#include <cassert> 
+
 Line::Line(const Point& a, const Point& b)
     : m_a(a), m_b(b)
 {

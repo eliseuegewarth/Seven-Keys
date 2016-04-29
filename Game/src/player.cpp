@@ -11,6 +11,9 @@
 #include "core/environment.h"
 #include "core/keyboardevent.h"
 //#include "pause.h"
+
+
+#include <cassert> 
 #include <string>
 
 ActionID Player::hitExitDoorID { "hitExitDoorID()" };

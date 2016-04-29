@@ -10,6 +10,8 @@
 #include "core/texture.h"
 #include "core/environment.h"
 
+#include <cassert> 
+
 class Image::Impl
 {
 public:

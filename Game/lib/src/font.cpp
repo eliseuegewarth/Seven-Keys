@@ -9,6 +9,8 @@
 #include "core/environment.h"
 #include "core/settings.h"
 
+#include <cassert> 
+
 class Font::Impl
 {
 public:

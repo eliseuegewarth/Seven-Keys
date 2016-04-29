@@ -7,6 +7,8 @@
  */
 #include "core/level.h"
 
+#include <cassert> 
+
 Level::Level(const string& id, const string& next)
     : Object(nullptr, id), m_next(next), m_done(false)
 {
