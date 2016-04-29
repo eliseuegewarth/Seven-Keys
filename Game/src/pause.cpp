@@ -7,28 +7,27 @@
 #include <iostream>
 using namespace std;
 
-Pause::Pause()
-    : Level("pause")
+Pause::Pause() : Level("pause")// Creates the environment of the pause menu.
 {
-    Environment *env = Environment::get_instance();
+    Environment *env = Environment::get_instance();// It is an object of the class environment. Is a pointer to the current instance of the game environment.
 
-    double w = env->canvas->w();
-    double h = env->canvas->h();
+    double w = env->canvas->w();// Receives the width of the game environment.
+    double h = env->canvas->h();// Receives the height of the game environment.
 
     set_dimensions(w, h);
 
     Button *backGame = new Button(this, "backGame", "res/interface/menuPausa/voltarJogo.png",
-        "res/interface/menuPausa/SvoltarJogo.png");
+        "res/interface/menuPausa/SvoltarJogo.png");// Directs the environment where the game was paused.
     backGame->align_to(this, Object::RIGHT, Object::NONE);
     backGame->set_y(200);
 
     Button *backMenu = new Button(this, "backMenu", "res/interface/menuExtras/voltar.png",
-        "res/interface/menuExtras/Svoltar.png");
+        "res/interface/menuExtras/Svoltar.png");// Directs to the main menu of the game.
     backMenu->align_to(this, Object::RIGHT, Object::NONE);
     backMenu->set_y(backGame->y() + backGame->h()+20);
 
     Button *exit = new Button(this, "exit", "res/interface/menuExtras/sair.png",
-        "res/interface/menuExtras/Ssair.png");
+        "res/interface/menuExtras/Ssair.png");// Closes the game.
     exit->align_to(this, Object::RIGHT, Object::NONE);
     exit->set_y(backGame->y() + backGame->h()+20);
 
@@ -46,20 +45,18 @@ Pause::~Pause()
 {
 }
 
-void
-Pause::draw_self()
+void Pause::draw_self() // Drow pause pinctures on the screen.
 {
-    Environment *env = Environment::get_instance();
+    Environment *env = Environment::get_instance();// It is an object of the class environment. Is a pointer to the current instance of the game environment.
     env->canvas->clear(Color::WHITE);
 
     shared_ptr<Texture> image = env->resources_manager->get_texture("res/interface/menuPausa/fundoPausa.png");
     env->canvas->draw(image.get(), 1, 0);
 }
 
-bool
-Pause::on_message(Object *object, MessageID id, Parameters)
+bool Pause::on_message(Object *object, MessageID id, Parameters)// Let the dynamic buttons.
 {
-    Environment *env = Environment::get_instance();
+    Environment *env = Environment::get_instance();// It is an object of the class environment. Is a pointer to the current instance of the game environment.
 
     if (id != Button::clickedID)
     {
@@ -83,4 +80,7 @@ Pause::on_message(Object *object, MessageID id, Parameters)
     finish();
 
     return true;
+    
 }
+
+
