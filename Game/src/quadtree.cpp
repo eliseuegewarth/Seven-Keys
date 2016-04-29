@@ -1,3 +1,4 @@
+#include <cassert>
 #include <iostream>
 
 #include "quadtree.h"
@@ -13,6 +14,7 @@ value of pLevel to m_level and pBounds to m_bounds.*/
  */
 Quadtree::Quadtree(int pLevel, Rect * pBounds)
 {
+	assert((pBounds != NULL) && "pBounds can't be NULL");
 	m_level = pLevel;
 	m_bounds = pBounds;
 
@@ -67,6 +69,7 @@ void Quadtree::split()
  */
 int Quadtree::getIndex(Object * pRect)
 {
+	assert((pRect != NULL) && "pRect can't be NULL");
    	int index = -1; //Position of player in map
 	//Definition of the middle of the quadrant in axis 'x'
    	double verticalMidpoint = m_bounds->x() + (m_bounds->w() / 2);
@@ -108,7 +111,8 @@ int Quadtree::getIndex(Object * pRect)
  * @param  pRect            [description]
  */
 void Quadtree::insert(Object *pRect) {
-   	if (m_nodes[0] != NULL)
+	assert((pRect != NULL) && "pRect can't be NULL");
+	if (m_nodes[0] != NULL)
     {
     	int index = getIndex(pRect); //Position of player in map
 
@@ -152,7 +156,9 @@ void Quadtree::insert(Object *pRect) {
   * @param  returnObjects    [Objects of the previous phase]
   */
 list<Object*> Quadtree::retrieve(list<Object*> returnObjects, Object* pRect) {
-   	int index = getIndex(pRect); //Position of Objects in previous phase
+	assert((pRect != NULL) && "pRect can't be NULL");
+	assert(not (returnObjects.empty()) && "list of objects can't be empty");
+	int index = getIndex(pRect); //Position of Objects in previous phase
    	if (index != -1 && m_nodes.at(0) != NULL)
    	{
      	m_nodes.at(index)->retrieve(returnObjects, pRect);
