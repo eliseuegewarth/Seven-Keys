@@ -23,7 +23,7 @@ Defines whether the boss is an object able to walk.
 Sets the initial movement direction.
 --
 ###```~Boss()```
-0Destructor of Boss class.
+Destructor of Boss class.
 --
 ###```Direction direction()```
 Just returns informations of m_direction.
