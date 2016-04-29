@@ -33,6 +33,11 @@ Ghost::Ghost(Object *parent, ObjectID id,
             const bool walkable, string t,
             const unsigned int initial_movement_direction)
 {
+    //preconditions for execution of method.
+    assert((parent != NULL) && "Parent needs to be different from NULL");
+    assert((not id.empty()) && "ID needs to be different from empty");
+    assert((mass_of_ghost_guard > 0) && "Mass of Ghost Guard needs to be greater than 0");
+    assert((not t.empty()) && "t needs to be different from empty");
     Object(parent, id, ghost_guard_horizontal_position,
            ghost_guard_vertical_position);
     type = t;
@@ -141,7 +146,7 @@ void Ghost::walk()
         set_direction(Ghost::RIGHT);
     }else
     {
-        
+
     }
 }
 /**
