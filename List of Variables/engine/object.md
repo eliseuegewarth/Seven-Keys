@@ -6,25 +6,25 @@
 ·string ActionID
 ·string MessageID
 ·string Parameters
-·const list<Object * >& children() const
+·const list<Object * >& children() const → list of object in a specifc parameter.
 
 ###Object::set_walkable()
 
-·bool walkable = true
+·bool walkable → set if the object is walkable or not
 
 ###Object::set_mass()
 
-·double mass
+·double mass → set the object's mass
 
 ###Object::set_position()
 
-·double x
-·double y
+·double x → size x of object colision box
+·double y → size y of object colision box
 
 ###Object::set_dimensions()
 
-·double w
-·double h
+·double w → object dimensions width
+·double h → object dimensions height
 
 ###Object::set_parent()
 
@@ -68,13 +68,13 @@
 
 ###Object::notify()
 
-·ActionID action
-·Parameters parameters
+·ActionID action → object actions in the game
+·Parameters parameters → object parameters
 
 ###Object::update()
 
 ·unsigned long elapsed
-·auto child
+·auto child → iterator of list of object childrens.
 
 ##private:
 
