@@ -56,7 +56,8 @@ void Pause::draw_self() // Drow pause pinctures on the screen.
 
 bool Pause::on_message(Object *object, MessageID id, Parameters)// Let the dynamic buttons.
 {
-    Environment *env = Environment::get_instance();// It is an object of the class environment. Is a pointer to the current instance of the game environment.
+    // It is an object of the class environment. Is a pointer to the current instance of the game environment.
+    //Environment *env = Environment::get_instance(); NOT USED.
 
     if (id != Button::clickedID)
     {
