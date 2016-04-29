@@ -9,6 +9,7 @@
 #include <list>
 #include <vector>
 #include <utility>
+#include <cassert>
 
 #include "room.h"
 #include "boss.h"

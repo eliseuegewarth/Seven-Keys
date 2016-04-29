@@ -4,6 +4,7 @@
 #include <ijengine/core/rect.h>
 #include <map>
 
+#include <cassert>
 #include "map.h"
 
 

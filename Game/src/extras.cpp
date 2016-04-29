@@ -6,6 +6,7 @@
 //#include <smpeg/smpeg.h>
 
 #include <iostream>
+#include <cassert>
 using namespace std;
 
 /**
@@ -69,6 +70,7 @@ void Extras::draw_self()
 
 bool Extras::on_message(Object *object, MessageID id, Parameters) // Let the dynamic buttons.
 {
+    assert((object != NULL) && "Object needs to be different from NULL");
     if (id != Button::clickedID)
     {
         return false;

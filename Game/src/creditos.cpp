@@ -2,6 +2,7 @@
 #include <ijengine/util/button.h>
 #include <core/font.h>
 #include <core/environment.h>
+#include <cassert>
 
 #include <iostream>
 using namespace std;
@@ -42,6 +43,8 @@ Creditos::draw_self()
 bool
 Creditos::on_message(Object *object, MessageID id, Parameters)
 {
+
+    assert((object != NULL) && "Object needs to be different from NULL");
     if (id != Button::clickedID)
     {
         return false;
