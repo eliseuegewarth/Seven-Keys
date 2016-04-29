@@ -8,7 +8,11 @@
 #include <iostream>
 using namespace std;
 
-Extras::Extras() : Level("extras") // Creates the environment of the extras menu.
+/**
+ * @brief Creates the environment of the extras menu.
+ * @details [long description]
+ */
+Extras::Extras() : Level("extras")
 {
     const Environment *env = Environment::get_instance(); // It is an object of the class environment. Is a pointer to the current instance of the game environment.
 
@@ -49,7 +53,11 @@ Extras::~Extras()
 {
 }
 
-void Extras::draw_self()// Drow extras pinctures on the screen.
+/**
+ * @brief Drow extras pinctures on the screen.
+ * @details [long description]
+ */
+void Extras::draw_self()
 {
     // It is an object of the class environment. Is a pointer to the current instance of the game environment.
     const Environment *env = Environment::get_instance(); 

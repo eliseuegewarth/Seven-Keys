@@ -35,7 +35,10 @@ Guard::Guard(Object *parent, ObjectID id, const double guard_horizontal_position
 
 
 {
+    //preconditions for execution of method.
     assert((parent != NULL) && "Parent needs to be different from NULL");
+    assert((not id.empty()) && "id needs to be different drom the empty");
+    assert((mass_of_guard > 0) && "mass of guard needs to greater than zero");
     Object(parent, id, guard_horizontal_position, guard_vertical_position);
     guard_type = t;
     guard_health = 100; 
