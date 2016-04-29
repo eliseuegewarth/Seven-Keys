@@ -42,6 +42,8 @@ It is an object of the class environment. Is a pointer to the current instance o
 
 ##```Game::init()```
 Method to init the game.
+Initialized the game whith ours 
+"inicializa o jogo com todas as pre configurações."
 
 ###Parameters
 ```c++
@@ -71,6 +73,39 @@ boolean variable that stores the state of the screen.
 int volume;
 ```
 Variable that stores the game audio volume.
+
+##```Game::init()```
+Method to init the game.
+
+###Parameters
+```c++
+const string& path;
+```
+```c++
+int w;
+```
+variable that stores the width of the resolution.
+
+```c++
+int h;
+```
+variable that stores the screen resolution height.
+
+```c++
+double scale;
+```
+variable that stores the display scale.
+
+```c++
+bool fullscreen;
+```
+boolean variable that stores the state of the screen.
+
+```c++
+int volume;
+```
+Variable that stores the game audio volume.
+
 
 ##```Game::run()```
 Method to start the game.
