@@ -20,7 +20,7 @@ Receives the object parent (weapon), your identifier and all your attributes(res
 ```c++
 Object * parent
 ```
-
+The parent is the map object that will contains the weapon.
 ```c++
 ObjectID id
 ```
@@ -28,7 +28,7 @@ identifier of object
 ```c++
 const string& path
 ```
-
+Path settings file
 ```c++
 int resistance
 ```
