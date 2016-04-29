@@ -1,15 +1,14 @@
-/*
- * Classe que representa o jogo 7 Keys.
- *
- * Autor: Edson Alves
- * Data: 20/04/2015
- * Licença: LGPL. Sem copyright.
- */
 #ifndef TEST_H
 #define TEST_H
 
 #include <core/game.h>
- #include "player.h"
+#include "player.h"
+
+/**
+ * 7keys.h
+ * @brief [Class that represents the entire game and manages the main screens.]
+ * Licença: LGPL. Sem copyright.
+ */
 
 class SevenKeys : public Game
 {
@@ -18,7 +17,7 @@ public:
 
 private:
     Level * load_level(const string& id);
-    int lives;
+    unsigned int lives;
     double sanity;
 };
 
