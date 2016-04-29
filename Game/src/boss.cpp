@@ -6,6 +6,7 @@
 
 #include <core/animation.h>
 
+#include <cassert> 
 #include <iostream>
 
 using namespace std;
@@ -15,17 +16,25 @@ using namespace std;
  * 
  * @param parent [The parent is the map Object that will contains the boss.]
  * @param id [Identifier of object type. in case of this class, aways have to be "boss".]
- * @param x [The position in horizontal(x) axis where boss will be placed. ]
- * @param y [The position in vertival(y) axis where boss will be placed. ]
- * @param mass [Contains Object Boss mass information.]
+ * @param boss_horizontal_position [The position in horizontal(x) axis where boss will be placed. ]
+ * @param boss_vertical_position [The position in vertival(y) axis where boss will be placed. ]
+ * @param mass_of_boss [Contains Object Boss mass information.]
  * @param walkable [Defines whether the boss is an object able to walk.]
- * @param dir [Sets the initial movement direction.]
+ * @param initial_movement_direction [Sets the initial movement direction.]
  */
-Boss::Boss(Object *parent, ObjectID id, double x, double y, int mass, bool walkable, int dir)
-    : Object(parent, id, x, y), m_damage(0.9), m_animation (new Animation("res/sprites/boss_running.png",
-    	0, 0, 90, 90, 6, 120, true)), m_direction((Direction) dir), m_last(0)
+Boss::Boss(Object *parent, const ObjectID id, const double boss_horizontal_position, 
+                const double boss_vertical_position, const int mass_of_boss, const bool walkable, 
+                const int initial_movement_direction)
 {
-    this->set_mass(mass);
+    Object(parent, id, boss_horizontal_position, boss_vertical_position);
+
+    this->boss_animation = (unique_ptr<Animation>) (new Animation(
+                                    "res/sprites/boss_running.png", 0, 0, 90, 90, 6, 120, true)
+    );
+
+    this->direction_of_movement = (Direction) initial_movement_direction; 
+    this->last_game_time_saved = 0;
+    this->set_mass(mass_of_boss);
     this->set_w(70);
     this->set_h(70);
     this->set_walkable(walkable);
@@ -42,13 +51,13 @@ Boss::~Boss()
 }
 
 /**
- * @brief [Just returns informations of m_direction.]
- * @return m_direction [The Boss movement direction.]
+ * @brief [Just returns informations of direction_of_movement.]
+ * @return direction_of_movement [The Boss movement direction.]
  */
 Boss::Direction
 Boss::direction()
 {
-    return m_direction;
+    return direction_of_movement;
 }
 
 /**
@@ -62,12 +71,12 @@ Boss::update_vision()
 /**
  * @brief [Modifies the movement direction.]
  * 
- * @param direction [The value of the direction that will be setted.]
+ * @param direction_of_movement [The value of the direction that will be setted.]
  */
 void
-Boss::set_direction(Direction direction)
+Boss::set_direction(const Direction direction_of_movement)
 {
-    m_direction = direction;
+    this->direction_of_movement = direction_of_movement;
 }
 
 /**
@@ -76,7 +85,7 @@ Boss::set_direction(Direction direction)
 void
 Boss::draw_self()
 {
-    m_animation->draw(x(), y());
+    boss_animation->draw(x(), y());
 }
 
 /**
@@ -85,26 +94,40 @@ Boss::draw_self()
 void
 Boss::walk()
 {
-    // Define the boss walking speed.
-    double speed = 1.3;
-    if(player_posx < this->x())
-        set_x(x() - speed);
-    else
-        set_x(x() + speed);
+    //Moves the boss on the horizontal axis towards the player.
+    const bool player_is_to_the_right = (player_horizontal_position > this->x());
+    const bool player_is_to_the_left = (player_horizontal_position < this->x());
+    if(player_is_to_the_left){
+        set_x(x() - BOSS_MOVEMENT_SPEED);
+    }else if(player_is_to_the_right){
+        set_x(x() + BOSS_MOVEMENT_SPEED);
+    }else{
+        set_x(x());
+    }
 
-    if(player_posy < this->y())
-        set_y(y() - speed);
-    else
-        set_y(y() + speed);
+    //Moves the boss on the vertical axis towards the player.
+    const bool player_is_to_the_bottom = (player_vertical_position < this->y());
+    const bool player_is_to_the_top = (player_vertical_position > this->y());
+    if(player_is_to_the_bottom){
+        set_y(y() - BOSS_MOVEMENT_SPEED);
+    }else if(player_is_to_the_top){
+        set_y(y() + BOSS_MOVEMENT_SPEED);
+    }else{
+        set_y(y());
+    }
 
-    if(player_posx > this->x() - 100 && player_posx < this->x() + 100 && player_posy < this->y())
+    // 
+    const bool player_is_aligned_vertically = (not player_is_to_the_right and 
+                                                                    not player_is_to_the_left);
+    if(player_is_aligned_vertically and player_is_to_the_top){
         set_direction(Boss::UP);
-    else if(player_posx > this->x() - 100 && player_posx < this->x() + 100 && player_posy > this->y())
+    }else if(player_is_aligned_vertically and player_is_to_the_bottom){
         set_direction(Boss::DOWN);
-    else if(player_posx < this->x())
+    }else if(player_is_to_the_left){
         set_direction(Boss::LEFT);
-    else
+    }else{
         set_direction(Boss::RIGHT);
+    }
 }
 
 /**
@@ -113,41 +136,41 @@ Boss::walk()
  * @param elapsed [Elapsed time since the game start. This parameter is not used here.]
  */
 void
-Boss::update_direction(unsigned long elapsed)
+Boss::update_direction()
 {
-    m_animation->set_row(this->direction());
+    boss_animation->set_row(this->direction());
 }
 
 /**
  * @brief [Receive the player's horizontal position. This information is used at Boss's artificial intelligence.
  * 
- * @param pos_x [That's the player's horizontal position.]
+ * @param player_horizontal_position [That's the player's horizontal position.]
  */
 void
-Boss::get_playerx(int pos_x)
+Boss::get_playerx(const unsigned int player_horizontal_position)
 {
-    player_posx = pos_x;
+    this->player_horizontal_position = player_horizontal_position;
 }
 
 /**
  * @brief [Receive the player's vertical position. This information is used at Boss's artificial intelligence.
  * 
- * @param pos_y [That's the player's vertical position.]
+ * @param player_vertical_position [That's the player's vertical position.]
  */
 void
-Boss::get_playery(int pos_y)
+Boss::get_playery(const unsigned int player_vertical_position)
 {
-    player_posy = pos_y;
+    this->player_vertical_position = player_vertical_position;
 }
 
 /**
  * @brief [Returns the boss attack damage value.]
- * @return m_damege [The boss attack damage value.]
+ * @return BOSS_DAMAGE [The boss attack damage value.]
  */
 double
 Boss::damage()
 {
-    return m_damage;
+    return BOSS_DAMAGE;
 }
 
 //
@@ -157,48 +180,48 @@ Boss::damage()
  * @param elapsed [Elapsed time since the game start.]
  */
 void
-Boss::update_self(unsigned long elapsed)
+Boss::update_self(const unsigned long elapsed)
 {
 
     set_x(this->x());
     set_y(this->y());
    
-    update_direction(elapsed);
-    m_animation->update(elapsed);
+    update_direction();
+    boss_animation->update(elapsed);
     walk();
 }
 
 /**
  * @brief [This method defines the boss's position in the room.]\
  * 
- * @param x [The boss horizontal position.]
- * @param y [The boss vertical position.]
+ * @param boss_horizontal_position [The boss horizontal position.]
+ * @param boss_vertical_position [The boss vertical position.]
  */
 void
-Boss::set_position(double x, double y)
+Boss::set_position(const double boss_horizontal_position, const double boss_vertical_position)
 {
-    set_x(x);
-    set_y(y);
+    set_x(boss_horizontal_position);
+    set_y(boss_vertical_position);
 }
 
 /**
- * @brief [Set the m_summoned status with the 't' value.]
+ * @brief [Set the summoned_state status with the 'is_summoned' boolean value.]
  * 
- * @param t [Contain the summoned state value.]
+ * @param is_summoned [Contain the summoned state boolean value.]
  */
 void
-Boss::set_summoned(bool t)
+Boss::set_summoned(const bool is_summoned)
 {
-    m_summoned = t;
+    this->summoned_state = is_summoned;
 }
 
 /**
- * @brief [Set the m_created status with the 't' value]
+ * @brief [Set the created_state status with the 'is_created' boolean value]
  * 
- * @param t [Contain the created state value.]
+ * @param is_created [Contain the created state boolean value.]
  */
 void
-Boss::set_created(bool t)
+Boss::set_created(const bool is_created)
 {
-    m_created = t;
+    this->created_state = is_created;
 }
