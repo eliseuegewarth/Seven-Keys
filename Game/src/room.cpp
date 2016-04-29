@@ -1,4 +1,4 @@
-
+#include <cassert>
 #include <string>
 #include <iostream>
 #include <list>
@@ -25,6 +25,10 @@ Room::Room(Object *parent, ObjectID id, string type, Room *left, Room *top, Room
 : Object(parent, id), r_left(left), r_right(right), r_top(top), r_bottom(bottom), type(type), stage_id(s_id),
     m_doors(false)
 {
+    assert((parent != NULL) && "parent can't be NULL");
+    assert((not id.empty()) && "id can't be empty");
+    assert((not type.empty()) && "id can't be empty");
+
     Environment *env = Environment::get_instance();
     quad = new Quadtree(0, new Rect(0, 0, env->canvas->w(), env->canvas->h()));
 
@@ -103,7 +107,7 @@ void Room::add_items(int stage_id)
             {"Pill2", "item", 0, 15, true, false, 0.0, -1, -1},
             {"Garrafa", "item", 0, 70, true, false, 0.0, -1, -1},
             {"Relogio", "tile_sheet", 0, 5, true, false, 20.0, -1, -1},
-        }; 
+        };
 
     }
 
@@ -124,7 +128,7 @@ void Room::add_items(int stage_id)
             {"CaixasEmpilhadas", "tile_sheet", 0, 40, false, false, 25.0, -1, -1},
             {"Caixa", "tile_sheet", 0, 40, false, false, 5.0, -1, -1},
 
-        };           
+        };
     }
 
     int total_weight = 0;
@@ -144,11 +148,11 @@ void Room::add_items(int stage_id)
         else
             sprintf(newpath, "%skey5.png", prepath);
         Item* item = new Item(this, "key", newpath, 300, 300, 1.0, true);
-        
+
         while (not place(item, -1, -1));
 
         add_child(item);
-	}	
+	}
 
     static const int MAX_ITENS = 15;
     int num_items = randint(0, MAX_ITENS);
@@ -202,6 +206,7 @@ void Room::add_items(int stage_id)
 void
 Room::add_list(Object  * item)
 {
+    assert((item != NULL) && "Item should be diferent of NULL");
 	this->items.push_back(item);
 }
 
@@ -244,6 +249,7 @@ void Room::check_entry()
 void
 Room::draw_id(Room * anterior, Room * sala, int x, int y)
 {
+    assert((anterior != NULL) && "Room can't be NULL");
 	Environment *env = Environment::get_instance();
 	shared_ptr <Font> font = env->resources_manager->get_font("res/fonts/TakaoExGothic.ttf");
 	env->canvas->set_font(font);
@@ -283,6 +289,7 @@ Room::draw_self()
 void
 Room::add_door(string type, char direction, int x, int y)
 {
+    assert((not type.empty()) && "type can't be empty");
     char doorID[128];
     char door_sprite[256];
     int stages = 1;
@@ -320,7 +327,7 @@ Room::add_door(string type, char direction, int x, int y)
             if((item->x() > x - item->w() && item->x() < x + item->w()) && item->y() == y)
             {
                 item->set_walkable(true);
-            }           
+            }
         }
     }
 }
@@ -337,7 +344,7 @@ Room::add_final_door()
     }
     else if(this->r_bottom)
     {
-        dir = 't';     
+        dir = 't';
     }
     else if(this->r_left)
     {
@@ -354,12 +361,14 @@ Room::add_final_door()
 void
 Room::remove_item(Object *item)
 {
+    assert((item != NULL) && "item can't be NULL");
 	remove_child(item);
 }
 
 void
 Room::fill_floor(const string& name)
 {
+    assert((not name.empty()) && "name can't be empty");
     char path[512];
     int stages = 1;
     if(stage_id < 3)
@@ -402,6 +411,7 @@ Room::fill_floor(const string& name)
 void
 Room::add_walls(const string& name)
 {
+    assert((not name.empty()) && "name can't be empty");
     Environment *env = Environment::get_instance();
     Canvas *canvas = env->canvas;
 
@@ -416,7 +426,7 @@ Room::add_walls(const string& name)
             stages = 3;
         else
             stages = 4;
-        
+
         sprintf(path, "res/tile_sheets/%s%d%c.png", name.c_str(), stages, pos[i]);
 
         Image *image = new Image(nullptr, name, path);
@@ -438,7 +448,7 @@ Room::add_walls(const string& name)
                 Item *wall = new Item(this, name, path, x, y, INFINITE, false);
                 add_child(wall);
             }
-            
+
         }
         delete image;
     }
@@ -447,6 +457,7 @@ Room::add_walls(const string& name)
 void
 Room::add_corners(const string& name)
 {
+    assert((not name.empty()) && "name can't be empty");
     Environment *env = Environment::get_instance();
     Canvas *canvas = env->canvas;
 
@@ -485,7 +496,7 @@ Room::add_corners(const string& name)
 void
 Room::add_guard(const string& name)
 {
-
+    assert((not name.empty()) && "name can't be empty");
     string type = "easy";
     int random = randint(0,2);
 
@@ -508,7 +519,7 @@ Room::add_guard(const string& name)
 void
 Room::add_ghost(const string& name)
 {
-
+    assert((not name.empty()) && "name can't be empty");
     string type = "easy";
 
     for(int i = 0; i < (stage_id / 3); i++)
@@ -522,6 +533,7 @@ Room::add_ghost(const string& name)
 bool
 Room::place(Object *object, double x, double y)
 {
+    assert((object != NULL) && "Object can't be NULL");
     int w = center_area.w();
     int h = center_area.h();
 
@@ -552,7 +564,7 @@ Room::place(Object *object, double x, double y)
             Rect a { x, y, object->w(), object->h() };
             Rect b = obj->bounding_box();
             Rect c = a.intersection(b);
-            
+
             if (c.w() or c.h())
             {
                 ok = false;
@@ -564,7 +576,7 @@ Room::place(Object *object, double x, double y)
             break;
 
     } while (not ok and randomize);
-        
+
     object->set_position(x, y);
 
     return ok;
@@ -572,7 +584,8 @@ Room::place(Object *object, double x, double y)
 
 void
 Room::notify_creation(const string& position)
-{   
+{
+    assert((not position.empty()) && "position can't be empty");
     //Environment *env = Environment::get_instance();
     //Canvas *canvas = env->canvas;
 
@@ -590,8 +603,8 @@ Room::notify_creation(const string& position)
     }
     else if(position == "bottom")
     {
-       add_door("normal", 'b', 600, 640); 
-    }              
+       add_door("normal", 'b', 600, 640);
+    }
 }
 
 void
@@ -609,7 +622,7 @@ Room::update_self(unsigned long)
     {
         list<Object*> returnObjects;
         returnObjects.erase(returnObjects.begin(), returnObjects.end());
-        
+
         returnObjects = quad->retrieve(returnObjects, npc);
 
         for(auto npc2 : returnObjects)
@@ -678,7 +691,7 @@ Room::update_self(unsigned long)
                         }
                     }
                 }
-            }      
+            }
         }
 
 
