@@ -41,7 +41,7 @@ Drow extras pinctures on the screen.
 
 ###Parameters
 ```c++
-Environment *env = Environment::get_instance();
+Environment *env;
 ```
 It is an object of the class environment. Is a pointer to the current instance of the game environment.
 
