@@ -4,8 +4,8 @@
 
 ###Point::Point();
 
-·double x() const
-·double y() const
+·double x() const → get the position x
+·double y() const → get the position y
 
 Point::set_x()
 
