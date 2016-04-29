@@ -33,8 +33,7 @@ Game::~Game()
     Environment::release_instance();
 }
 
-void
-Game::init(const string& title, int w, int h, double scale, bool fullscreen,
+void Game::init(const string& title, int w, int h, double scale, bool fullscreen,
     int volume) throw (Exception)
 {
     env->video->set_resolution(w, h, scale);
@@ -55,8 +54,7 @@ Game::init(const string& title, int w, int h, double scale, bool fullscreen,
     m_level = load_level(m_id);
 }
 
-void
-Game::init(const string& path) throw (Exception)
+void Game::init(const string& path) throw (Exception)
 {
     env->m_settings_path = path;
 
@@ -72,8 +70,7 @@ Game::init(const string& path) throw (Exception)
     init(title, w, h, scale, fullscreen, volume);
 }
 
-void
-Game::run()
+void Game::run()
 {
     while (m_level and not m_done)
     {
@@ -96,14 +93,12 @@ Game::run()
     }
 }
 
-unsigned long
-Game::update_timestep() const
+unsigned long Game::update_timestep() const
 {
     return SDL_GetTicks();
 }
 
-bool
-Game::on_event(const SystemEvent& event)
+bool Game::on_event(const SystemEvent& event)
 {
     if (event.type() == SystemEvent::QUIT)
     {
@@ -114,8 +109,7 @@ Game::on_event(const SystemEvent& event)
     return false;
 }
 
-bool
-Game::on_event(const KeyboardEvent& event)
+bool Game::on_event(const KeyboardEvent& event)
 {
     if (event.state() == KeyboardEvent::PRESSED
         and event.key() == KeyboardEvent::ESCAPE)
@@ -127,21 +121,18 @@ Game::on_event(const KeyboardEvent& event)
     return false;
 }
 
-void
-Game::update_screen()
+void Game::update_screen()
 {
     Environment *env = Environment::get_instance();
     env->canvas->update();
 }
 
-void
-Game::delay(unsigned long ms)
+void Game::delay(unsigned long ms)
 {
     SDL_Delay(ms);
 }
 
-Level *
-Game::load_level(const string&)
+Level * Game::load_level(const string&)
 {
     return nullptr;
 }

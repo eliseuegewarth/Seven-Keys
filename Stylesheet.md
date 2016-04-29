@@ -78,7 +78,7 @@ guard.hpp
 	-after the library engine
 	-after the library specific of the game
 	-after the library standards the c/c++
-	
+
 
 ```c++
 #include "boss.h"
@@ -200,33 +200,25 @@ The declarations make um in orther of the more open (public) for the most closed
 
 The first declarations shoud be the constructors and destructors, soon after the class members, followed by methods.
 ```c++
-class Player : public Sprite
+class Font_Manager
 {
 public:
-    typedef enum { NONE, IDLE, RUNNING, DUCK } State;
+    static Font_Manager *Instance();
+    static void init() throw (Exception);
+    void load_font(string path, unsigned int font_size) throw (Exception);
+    void close_font();
 
-    Player(Object *parent, const string& id);
-    ~Player();
-    int m_sanity_loss;
+    SDL_Texture* message()const;
+    void make_message(SDL_Renderer *renderer, string message, Color color) throw (Exception);
 
-    Direction direction() const;
-    void set_direction(Direction direction);
-
-    const pair<double, double>& moviment() const;
-    void set_moviment(double xaxis, double yaxis);
-
-    static ActionID hitExitDoorID;
-    static ActionID jumpNextLevelID;
-
-    void set_current(string room, int x, int y);
-
-    int life();
-    double health();
+protected:
+    Font_Manager();
+    ~Font_Manager();
 
 private:
-    class Impl;
-    unique_ptr<Impl> m_impl;
-
+    static Font_Manager *instance;
+    SDL_Texture *m_message;
+    TTF_Font *m_font;
 };
 ```
 
@@ -428,21 +420,15 @@ str = (string*)(&id);
 
 The documentation on style "JavaDoc" shoud be used for comments of class and method.
 Is advisable only the use of @param, @return, @throws and in some cases @deprecated.
-For any commentary to style JavaDoc shoud following the next standard for comments of class and methods:
+For any commentary to style JavaDoc for comments of class and methods, shoud be used comments of @param, @return, @throws and @deprecated if is necessary. The standard adopted was as follows:
 ```c++
 /**
- *  
- */
-```
-
-For comments of @param, @return, @throws and @deprecated shoud be used the next standard.
-```c++
-/**
- * <descrição>
- * @deprecated
- * @param
- * @throws
- * @return
+ * [Weapon::Weapon Receives the object parent (weapon), your identifier and
+ * all your attributes(resistance, damage and attack speed)]
+ * @param	id              [identifier of object]
+ * @param	resistance      [Resistance of the Weapon, may change depending the weapon]
+ * @param	damage          [Damage of the Weapon, may change depending the weapon]
+ * @param	attack_speed    [Attack speed of the Weapon, may change depending the weapon]
  */
 ```
 ### 7.2 Assertives

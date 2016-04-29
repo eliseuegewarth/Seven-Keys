@@ -149,68 +149,57 @@ Sprite::~Sprite()
 {
 }
 
-void
-Sprite::report_event(int event)
+void Sprite::report_event(int event)
 {
     m_impl->report_event(event);
 }
 
-void
-Sprite::change_state(int to, int from)
+void Sprite::change_state(int to, int from)
 {
     m_impl->change_state(to, from);
 }
 
-void
-Sprite::add_state(int id, SpriteState *state)
+void Sprite::add_state(int id, SpriteState *state)
 {
     m_impl->add_state(id, state);
 }
 
-void
-Sprite::add_transition(int event, int from, int to)
+void Sprite::add_transition(int event, int from, int to)
 {
     m_impl->add_transition(event, from, to);
 }
 
-void
-Sprite::update_self(unsigned long elapsed)
+void Sprite::update_self(unsigned long elapsed)
 {
     m_impl->update_self(elapsed);
 }
 
-void
-Sprite::draw_self()
+void Sprite::draw_self()
 {
     m_impl->draw_self();
 }
 
-SpriteState *
-Sprite::state() const
+SpriteState * Sprite::state() const
 {
     return m_impl->state();
 }
 
-bool
-Sprite::on_event(const KeyboardEvent& event)
+bool Sprite::on_event(const KeyboardEvent& event)
 {
     return m_impl->on_event(event);
 }
 
-bool
-Sprite::on_event(const MouseButtonEvent& event)
+bool Sprite::on_event(const MouseButtonEvent& event)
 {
     return m_impl->on_event(event);
 }
 
-bool
-Sprite::on_event(const MouseMotionEvent& event)
+bool Sprite::on_event(const MouseMotionEvent& event)
 {
     return m_impl->on_event(event);
 }
 
-bool
-Sprite::on_event(const JoyStickEvent& event)
+bool Sprite::on_event(const JoyStickEvent& event)
 {
     return m_impl->on_event(event);
 }

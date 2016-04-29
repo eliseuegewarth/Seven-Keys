@@ -13,8 +13,8 @@
 class MouseMotionEvent
 {
 public:
-    typedef enum { DOWN, UP } MotionState;
-    typedef enum { LEFT, RIGHT, MIDDLE } Button;
+    typedef enum { DOWN, UP } MotionState; //Define the Motion states of mouse moviment
+    typedef enum { LEFT, RIGHT, MIDDLE } Button; //Define the states of mouse button
 
     MouseMotionEvent(int x, int y, int x_rel, int y_rel, MotionState left,
         MotionState right, MotionState middle);
@@ -28,7 +28,8 @@ public:
     static MouseMotionEvent from_SDL(const SDL_Event& event);
 
 private:
-    int m_x, m_y;
+    int m_x; //Mouse position in axis x(horizontal)
+    int m_y; //Mouse position in axis y(vertical)
     int m_x_rel, m_y_rel;
     MotionState m_buttons[3];
 };

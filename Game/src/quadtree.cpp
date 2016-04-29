@@ -2,6 +2,15 @@
 
 #include "quadtree.h"
 
+/* The constructor that initialize m_nodes array
+with its four pointers to null and assigns the
+value of pLevel to m_level and pBounds to m_bounds.*/
+//pLevel = Number of stage that will be initialized
+//pBounds = Environmental floor rectangle limit
+
+/**
+ *
+ */
 Quadtree::Quadtree(int pLevel, Rect * pBounds)
 {
 	m_level = pLevel;
@@ -12,9 +21,12 @@ Quadtree::Quadtree(int pLevel, Rect * pBounds)
 		m_nodes.at(i) = NULL;
 	}
 }
-
-void 
-Quadtree::clear()
+/**
+ * [Quadtree::clear Method that assigning m_nodes array
+ * with its four pointers to null and free the memory.]
+ * @method Quadtree::clear
+ */
+void Quadtree::clear()
 {
 	m_objects.clear();
 
@@ -29,32 +41,45 @@ Quadtree::clear()
 	}
 
 }
-void
-Quadtree::split()
+/**
+ * [Quadtree::split Method to divide the room into
+ * four with their respective limits]
+ * @method Quadtree::split
+ */
+void Quadtree::split()
 {
-	int subWidth = (int)(m_bounds->h() / 2);
-   	int subHeight = (int)(m_bounds->h() / 2);
-   	int x = (int)m_bounds->x();
-   	int y = (int)m_bounds->y();
- 
+	int subWidth = (int)(m_bounds->h() / 2); //Limit of Width in map, it should be half the area of the rectangle
+   	int subHeight = (int)(m_bounds->h() / 2); //Limit of Height in map, it should be half the area of the rectangle
+   	int x = (int)m_bounds->x(); //Limit of Axis 'x' in map
+   	int y = (int)m_bounds->y();  //Limit of Axis 'y' in map
+
    	m_nodes[0] = new Quadtree(m_level+1, new Rect(x + subWidth, y, subWidth, subHeight));
    	m_nodes[1] = new Quadtree(m_level+1, new Rect(x, y, subWidth, subHeight));
    	m_nodes[2] = new Quadtree(m_level+1, new Rect(x, y + subHeight, subWidth, subHeight));
    	m_nodes[3] = new Quadtree(m_level+1, new Rect(x + subWidth, y + subHeight, subWidth, subHeight));
 }
-
-int
-Quadtree::getIndex(Object * pRect)
+/**
+ * [Quadtree::getIndex Method to get the
+ * player's position in the room]
+ * @method Quadtree::getIndex
+ * @param  pRect              [description]
+ * @return                    [Position of player in map]
+ */
+int Quadtree::getIndex(Object * pRect)
 {
-   	int index = -1;
+   	int index = -1; //Position of player in map
+	//Definition of the middle of the quadrant in axis 'x'
    	double verticalMidpoint = m_bounds->x() + (m_bounds->w() / 2);
+	//Definition of the middle of the quadrant in axis 'y'
    	double horizontalMidpoint = m_bounds->y() + (m_bounds->h() / 2);
- 
+
    // Object can completely fit within the top quadrants
+   //Define the upper quadrant
    	bool topQuadrant = (pRect->y() < horizontalMidpoint && pRect->y() + pRect->h() < horizontalMidpoint);
-   	// Object can completely fit within the bottom quadrants
+	// Object can completely fit within the bottom quadrants
+	//Define the lower quadrant
    	bool bottomQuadrant = (pRect->y() > horizontalMidpoint);
- 
+
    	// Object can completely fit within the left quadrants
    	if (pRect->x() < verticalMidpoint && pRect->x() + pRect->w() < verticalMidpoint) {
     	if (topQuadrant) {
@@ -73,42 +98,45 @@ Quadtree::getIndex(Object * pRect)
        		index = 3;
      	}
    	}
- 
+
    	return index;
 }
 
-
-void 
-Quadtree::insert(Object *pRect) {
+/**
+ * [Quadtree::insert description]
+ * @method Quadtree::insert
+ * @param  pRect            [description]
+ */
+void Quadtree::insert(Object *pRect) {
    	if (m_nodes[0] != NULL)
-   	{
-    	int index = getIndex(pRect);
- 
-    	if (index != -1) 
+    {
+    	int index = getIndex(pRect); //Position of player in map
+
+    	if (index != -1)
     	{
     		m_nodes[index]->insert(pRect);
        		return;
      	}
    	}
- 
+
    	m_objects.push_back(pRect);
- 
-   	if ((int)m_objects.size() > MAX_OBJECTS && m_level < MAX_LEVELS) 
+
+   	if ((int)m_objects.size() > MAX_OBJECTS && m_level < MAX_LEVELS)
    	{
-    	if (m_nodes[0] == NULL) { 
-         	split(); 
+    	if (m_nodes[0] == NULL) {
+         	split();
       	}
- 
-    	int i = 0;
-     	while (i < (int)m_objects.size()) 
+
+    	int i = 0; //Counter
+     	while (i < (int)m_objects.size())
      	{
        		int index = getIndex(m_objects.at(i));
-       		if (index != -1) 
+       		if (index != -1)
        		{
          		m_nodes[index]->insert(m_objects.at(i));
          		m_objects.erase(m_objects.begin() + i);
        		}
-       	else 
+       	else
        	{
          	i++;
        	}
@@ -116,18 +144,24 @@ Quadtree::insert(Object *pRect) {
    }
  }
 
-list<Object*>
-Quadtree::retrieve(list<Object*> returnObjects, Object* pRect) {
-   	int index = getIndex(pRect);
-   	if (index != -1 && m_nodes.at(0) != NULL) 
+ /**
+  * [Quadtree::retrieve Insert objects of the previous phase
+  * in a list to be loaded later]
+  * @method Quadtree::retrieve
+  * @param  pRect            [description]
+  * @param  returnObjects    [Objects of the previous phase]
+  */
+list<Object*> Quadtree::retrieve(list<Object*> returnObjects, Object* pRect) {
+   	int index = getIndex(pRect); //Position of Objects in previous phase
+   	if (index != -1 && m_nodes.at(0) != NULL)
    	{
      	m_nodes.at(index)->retrieve(returnObjects, pRect);
    	}
- 
+
  	for(size_t i = 0; i < m_objects.size(); i++)
  	{
  		returnObjects.push_back(m_objects.at(i));
  	}
- 
+
    	return returnObjects;
  }

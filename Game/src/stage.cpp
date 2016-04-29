@@ -5,7 +5,7 @@
  */
 #include <core/environment.h>
 #include <core/music.h>
-#include <core/soundeffect.h> 
+#include <core/soundeffect.h>
 #include <core/audiomanager.h>
 #include <core/audiomanagerwrapper.h>
 
@@ -59,8 +59,8 @@ Stage::Stage(ObjectID id, int lives, double * sanity)
         Environment *env = Environment::get_instance();
         env->sfx->play("res/sounds/Alarme1.wav",1);
     }
-    
-    
+
+
 
     add_child(m_player);
 
@@ -101,7 +101,7 @@ Stage::update_self(unsigned long)
                     m_player->set_health(m_player->health() - boss->damage());
                     if(m_player->health() < 0)
                         m_player->set_health(0);
-                }    
+                }
             }
         }
     }
@@ -174,7 +174,7 @@ Stage::update_self(unsigned long)
                     c.y(), c.w(), c.h());
 
                 notify(Stage::colisionID, message);
-                
+
             }
             if(c.w() > 50 and c.h() > 50)
             {
@@ -238,7 +238,7 @@ Stage::update_self(unsigned long)
                             }
                     }
                 }
-                
+
             }
 
             if(guarda->type() == "follow")
@@ -264,7 +264,7 @@ Stage::update_self(unsigned long)
                         m_player->set_health(0);
 
                     m_player->set_sanity(m_player->sanity() - ghost->damage()/2);
-                }    
+                }
             }
         }
     }
@@ -274,7 +274,7 @@ void
 Stage::draw_self()
 {
     Environment *env = Environment::get_instance();
-    env->canvas->clear(Color::BLUE);   
+    env->canvas->clear(Color::BLUE);
 }
 
 bool
@@ -350,7 +350,7 @@ Stage::on_message(Object *, MessageID id, Parameters p)
                             m_map->m_boss->set_position(m_player->x(), m_player->y());
                             notify(Stage::summonBossID, "stage7");
                         }
-                        
+
                         return true;
                     }
 
@@ -424,10 +424,10 @@ Stage::on_message(Object *, MessageID id, Parameters p)
                             {
                                 item->set_x(b.x() - 1);
                                 //m_player->set_x(b.x() + b.w());
-                            } 
+                            }
                         }
                         else
-                        {  
+                        {
                             if(a.y() < b.y())
                             {
                                 item->set_y(b.y() + 1);
@@ -468,7 +468,7 @@ Stage::on_message(Object *, MessageID id, Parameters p)
                             guarda->receive_dmg(dmg);
                             return true;
                         }
-                        
+
                     }
                 }
             }

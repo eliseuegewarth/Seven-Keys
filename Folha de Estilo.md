@@ -194,33 +194,25 @@ As declarações devem vir na ordem do mais aberto (public) para o mais fechado 
 As primeiras declarações devem ser de Construtores e Destrutores, logo depois os atributos, seguidos dos metodos.
 
 ```c++
-class Player : public Sprite
+class Font_Manager
 {
 public:
-    typedef enum { NONE, IDLE, RUNNING, DUCK } State;
+    static Font_Manager *Instance();
+    static void init() throw (Exception);
+    void load_font(string path, unsigned int font_size) throw (Exception);
+    void close_font();
 
-    Player(Object *parent, const string& id);
-    ~Player();
-    int m_sanity_loss;
+    SDL_Texture* message()const;
+    void make_message(SDL_Renderer *renderer, string message, Color color) throw (Exception);
 
-    Direction direction() const;
-    void set_direction(Direction direction);
-
-    const pair<double, double>& moviment() const;
-    void set_moviment(double xaxis, double yaxis);
-
-    static ActionID hitExitDoorID;
-    static ActionID jumpNextLevelID;
-
-    void set_current(string room, int x, int y);
-
-    int life();
-    double health();
+protected:
+    Font_Manager();
+    ~Font_Manager();
 
 private:
-    class Impl;
-    unique_ptr<Impl> m_impl;
-
+    static Font_Manager *instance;
+    SDL_Texture *m_message;
+    TTF_Font *m_font;
 };
 ```
 
@@ -421,20 +413,15 @@ str = (string*)(&id);
 ### 7.1 JavaDoc
 A documentação no estilo "JavaDoc" deve ser usada para comentarios de classe ou metodos.
 É aconselhavel apenas o uso de @param, @return, @throws e em alguns casos @deprecated.
-Para qualquer comentario ao estilo JavaDoc deve seguir o seguinte padrao para comentarios de classe e metodos:
+Para qualquer comentario ao estilo JavaDoc de classe e metodos deve se usar comentarios de @param, @return, @throws e @deprecated se necessario. O padrão adotado foi o seguinte:
 ```c++
 /**
- *  
- */
-```
-Para comentarios de @param, @return, @throws e @deprecated deve ser usado o seguinte padrao.
-```c++
-/**
- * <descrição>
- * @deprecated
- * @param
- * @throws
- * @return
+ * [Weapon::Weapon Receives the object parent (weapon), your identifier and
+ * all your attributes(resistance, damage and attack speed)]
+ * @param	id              [identifier of object]
+ * @param	resistance      [Resistance of the Weapon, may change depending the weapon]
+ * @param	damage          [Damage of the Weapon, may change depending the weapon]
+ * @param	attack_speed    [Attack speed of the Weapon, may change depending the weapon]
  */
 ```
 ### 7.2 Assertivas

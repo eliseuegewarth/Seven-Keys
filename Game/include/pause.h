@@ -5,7 +5,7 @@
 
 class Image;
 
-class Pause : public Level
+class Pause : public Level // Class that represents the pause option of the main menu of the game.
 {
 public:
     Pause();

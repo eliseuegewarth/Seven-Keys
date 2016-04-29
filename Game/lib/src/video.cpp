@@ -53,8 +53,7 @@ Video::~Video()
     }
 }
 
-void
-Video::init() throw (Exception)
+void Video::init() throw (Exception)
 {
     int rc = SDL_Init(SDL_INIT_VIDEO);
 
@@ -92,8 +91,7 @@ Video::init() throw (Exception)
     }
 }
 
-void
-Video::set_resolution(int w, int h, double scale) throw (Exception)
+void Video::set_resolution(int w, int h, double scale) throw (Exception)
 {
     if (m_window and w > 0 and h > 0)
     {
@@ -116,8 +114,7 @@ Video::set_resolution(int w, int h, double scale) throw (Exception)
     }
 }
 
-void
-Video::set_fullscreen(bool fullscreen) throw (Exception)
+void Video::set_fullscreen(bool fullscreen) throw (Exception)
 {
     if (not m_window)
     {
@@ -135,8 +132,7 @@ Video::set_fullscreen(bool fullscreen) throw (Exception)
 
 }
 
-bool
-Video::fullscreen() const
+bool Video::fullscreen() const
 {
     int flag = SDL_GetWindowFlags(m_window);
 
@@ -148,8 +144,7 @@ Video::fullscreen() const
     return false;
 }
 
-void
-Video::set_window_name(const string& name)
+void Video::set_window_name(const string& name)
 {
     if (m_window)
     {
@@ -157,20 +152,17 @@ Video::set_window_name(const string& name)
     }
 }
 
-pair<int, int>
-Video::resolution() const
+pair<int, int> Video::resolution() const
 {
     return make_pair(m_w, m_h);
 }
 
-Canvas *
-Video::canvas() const
+Canvas * Video::canvas() const
 {
     return m_canvas;
 }
 
-Camera *
-Video::camera() const
+Camera * Video::camera() const
 {
     return m_camera;
 }

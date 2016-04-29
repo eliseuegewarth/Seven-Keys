@@ -2,8 +2,8 @@
 
 ##public:
 
-· string message() const
+· string message() const → get the exception message
 
 ##private:
 
-·string m_message
+·string m_message → presents the exception message

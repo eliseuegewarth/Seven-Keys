@@ -58,8 +58,7 @@ Text::~Text()
 {
 }
 
-void
-Text::draw_self()
+void Text::draw_self()
 {
     m_impl->draw_self();
 }
