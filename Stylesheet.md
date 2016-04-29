@@ -78,7 +78,7 @@ guard.hpp
 	-after the library engine
 	-after the library specific of the game
 	-after the library standards the c/c++
-	
+
 
 ```c++
 #include "boss.h"
@@ -428,21 +428,15 @@ str = (string*)(&id);
 
 The documentation on style "JavaDoc" shoud be used for comments of class and method.
 Is advisable only the use of @param, @return, @throws and in some cases @deprecated.
-For any commentary to style JavaDoc shoud following the next standard for comments of class and methods:
+For any commentary to style JavaDoc for comments of class and methods, shoud be used comments of @param, @return, @throws and @deprecated if is necessary. The standard adopted was as follows:
 ```c++
 /**
- *  
- */
-```
-
-For comments of @param, @return, @throws and @deprecated shoud be used the next standard.
-```c++
-/**
- * <descrição>
- * @deprecated
- * @param
- * @throws
- * @return
+ * [Weapon::Weapon Receives the object parent (weapon), your identifier and
+ * all your attributes(resistance, damage and attack speed)]
+ * @param	id              [identifier of object]
+ * @param	resistance      [Resistance of the Weapon, may change depending the weapon]
+ * @param	damage          [Damage of the Weapon, may change depending the weapon]
+ * @param	attack_speed    [Attack speed of the Weapon, may change depending the weapon]
  */
 ```
 ### 7.2 Assertives
