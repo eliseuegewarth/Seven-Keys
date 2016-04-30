@@ -1,15 +1,15 @@
-#ifndef CREDITOS_H
-#define CREDITOS_H
+#ifndef CREDITS_H
+#define CREDITS_H
 
 #include <core/level.h>
 
 class Image;
 
-class Creditos : public Level
+class Credits : public Level
 {
 public:
-    Creditos();
-    virtual ~Creditos();
+    Credits();
+    virtual ~Credits();
 
     bool on_message(Object *sender, MessageID id, Parameters parameters);
 

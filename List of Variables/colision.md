@@ -1,3 +1,0 @@
-#colision.cpp
-
-No Variables

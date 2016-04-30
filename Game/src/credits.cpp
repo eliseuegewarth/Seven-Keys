@@ -1,4 +1,4 @@
-#include "creditos.h"
+#include "credits.h"
 #include <ijengine/util/button.h>
 #include <core/font.h>
 #include <core/environment.h>
@@ -7,11 +7,12 @@
 #include <iostream>
 using namespace std;
 
-const string resume_button_path = "res/interface/menuCreditos/voltar.png";
-const string resume_button_path_alternative = "res/interface/menuCreditos/Svoltar.png";
+const string resume_button_path = "res/interface/menuCredits/resume.png";
+const string resume_button_path_highlight = "res/interface/menuCredits/resumeHighlight.png";
+const string screen_credits_image_path = "res/interface/menuCredits/screenCredits.png";
 
-Creditos::Creditos()
-    : Level("creditos")
+Credits::Credits()
+    : Level("credits")
 {
     //// It is an object of the class environment. Is a pointer to the current instance of the game environment.
     Environment *env = Environment::get_instance();
@@ -24,7 +25,7 @@ Creditos::Creditos()
     set_dimensions(w, h);
 
     Button *back = new Button(this, "back", resume_button_path,
-                              resume_button_path_alternative);
+                              resume_button_path_highlight);
 
     assert(back != NULL && "Failed to create resume button.");
 
@@ -35,24 +36,24 @@ Creditos::Creditos()
     add_child(back);
 
 }
-Creditos::~Creditos()
+Credits::~Credits()
 {
 }
 
 void
-Creditos::draw_self()
+Credits::draw_self()
 {
     Environment *env = Environment::get_instance();
     assert((env != NULL) && "Failed to pick up the instance of environment");
     env->canvas->clear(Color::WHITE);
 
-    shared_ptr<Texture> image = env->resources_manager->get_texture("res/interface/menuCreditos/telaCreditos.png");
-    assert(image != NULL && "Unable to find telaCreditos.png path");
+    shared_ptr<Texture> image = env->resources_manager->get_texture(screen_credits_image_path);
+    assert(image != NULL && "Unable to find screenCredits.png path");
     env->canvas->draw(image.get(), 1, 0);
 }
 
 bool
-Creditos::on_message(Object *object, MessageID id, Parameters)
+Credits::on_message(Object *object, MessageID id, Parameters)
 {
 
     assert((object != NULL) && "Object needs to be different from NULL");

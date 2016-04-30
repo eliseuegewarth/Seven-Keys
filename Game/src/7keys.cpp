@@ -13,10 +13,10 @@
 #include "titlescreen.h"
 #include "stage.h"
 #include "options.h"
-#include "creditos.h"
+#include "credits.h"
 #include "extras.h"
 
-#include <cassert> 
+#include <cassert>
 #include <cstring>
 /**
  * 7keys.cpp
@@ -35,7 +35,7 @@ SevenKeys::SevenKeys()
 /**
  * @brief [brief description]
  * @details [long description]
- * 
+ *
  * @param screen_type [description]
  * @return level_to_be_loaded [Returns the screen that will be loaded.]
  */
@@ -167,7 +167,7 @@ SevenKeys::load_level(const string& screen_type)
     }
     else if (screen_type == "creditos")
     {
-        level_to_be_loaded = (Level*) new Creditos();
+        level_to_be_loaded = (Level*) new Credits();
     }
     else if (screen_type == "extras")
     {
