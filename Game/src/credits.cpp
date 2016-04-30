@@ -8,13 +8,19 @@
 using namespace std;
 
 const string resume_button_path = "res/interface/menuCredits/resume.png";
-const string resume_button_path_highlight = "res/interface/menuCredits/resumeHighlight.png";
-const string screen_credits_image_path = "res/interface/menuCredits/screenCredits.png";
+
+const string resume_button_path_highlight = "res/interface/menuCredits/
+                                                resumeHighlight.png";
+
+const string screen_credits_image_path = "res/interface/menuCredits/
+                                                screenCredits.png";
 
 Credits::Credits()
     : Level("credits")
 {
-    //// It is an object of the class environment. Is a pointer to the current instance of the game environment.
+    /* It is an object of the class environment.
+    Is a pointer to the current instance of the game environment.
+    */
     Environment *env = Environment::get_instance();
 
     assert(env != NULL && "Failed to pick up the instance of environment");
@@ -47,7 +53,9 @@ Credits::draw_self()
     assert((env != NULL) && "Failed to pick up the instance of environment");
     env->canvas->clear(Color::WHITE);
 
-    shared_ptr<Texture> image = env->resources_manager->get_texture(screen_credits_image_path);
+    shared_ptr<Texture> image = env->resources_manager->
+          get_texture(screen_credits_image_path);
+
     assert(image != NULL && "Unable to find screenCredits.png path");
     env->canvas->draw(image.get(), 1, 0);
 }
