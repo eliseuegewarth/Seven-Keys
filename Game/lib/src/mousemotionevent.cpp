@@ -14,7 +14,9 @@ MouseMotionEvent::MouseMotionEvent(int x, int y, int x_rel, int y_rel,
     m_y = y;
     m_x_rel = x_rel;
     m_y_rel = y_rel;
-    m_buttons { left, right, middle }
+    m_buttons[0] = left;
+    m_buttons[1] = right;
+    m_buttons[2] = middle;
 }
 
 MouseMotionEvent::MotionState
