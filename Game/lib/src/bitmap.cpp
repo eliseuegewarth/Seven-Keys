@@ -54,8 +54,8 @@ Bitmap::Bitmap(void *data, int w, int h)
 }
 
 Bitmap::Bitmap(Canvas *canvas)
-    : m_impl(new Impl((void *) SDL_CreateRGBSurface(0, canvas->w(), canvas->h(), 32, 0, 0, 0, 0),
-        canvas->w(), canvas->h()))
+    : m_impl(new Impl((void *) SDL_CreateRGBSurface(0, canvas->width(), canvas->height(), 32, 0, 0, 0, 0),
+        canvas->width(), canvas->height()))
 {
 }
 
