@@ -9,10 +9,10 @@ using namespace std;
 
 const string resume_button_path = "res/interface/menuCredits/resume.png";
 
-const string resume_button_path_highlight = "res/interface/menuCredits/
+const string resume_button_path_highlight = "res/interface/menuCredits/ \
                                                 resumeHighlight.png";
 
-const string screen_credits_image_path = "res/interface/menuCredits/
+const string screen_credits_image_path = "res/interface/menuCredits/ \
                                                 screenCredits.png";
 
 Credits::Credits()
