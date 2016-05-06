@@ -25,10 +25,10 @@ Credits::Credits()
 
     assert(env != NULL && "Failed to pick up the instance of environment");
 
-    double width = env->canvas->width();
-    double height = env->canvas->height();
+    double width = env->canvas->w();
+    double height = env->canvas->h();
 
-    set_dimensions(w, h);
+    set_dimensions(width, height);
 
     Button *back = new Button(this, "back", resume_button_path,
                               resume_button_path_highlight);
