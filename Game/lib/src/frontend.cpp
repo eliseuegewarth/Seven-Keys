@@ -106,7 +106,7 @@ public:
         env->canvas->draw(m_texture.get(), m_x, m_y);
 
         env->canvas->set_blend_mode(Canvas::BLEND);
-        Rect r { 0, 0, (double) env->canvas->w(), (double) env->canvas->h() };
+        Rect r { 0, 0, (double) env->canvas->width(), (double) env->canvas->height() };
         env->canvas->fill(r, m_fad);
         env->canvas->set_blend_mode(Canvas::NONE);
     }
