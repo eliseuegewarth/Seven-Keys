@@ -6,7 +6,7 @@
  * Licença: LGPL. Sem copyright.
  */
 #include "core/joystickevent.h"
-
+#include <cassert>
 #include <SDL2/SDL.h>
 #include <map>
 
@@ -36,8 +36,8 @@ void init_table_joystick()
 
 JoyStickEvent::JoyStickEvent(State state, Button button)
 {
-    assert((button != NULL) && "Button can't be NULL");
-    assert((state != NULL) && "State can't be NULL");
+    assert((button < 0) && "Button can't be less than 0");
+    assert((state < 0) && "State can't be less than 0");
     m_state = state;
     m_button = button;
 }
