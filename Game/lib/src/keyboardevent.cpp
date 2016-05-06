@@ -7,6 +7,7 @@
  */
 #include "core/keyboardevent.h"
 
+#include <cassert>
 #include <SDL2/SDL.h>
 #include <map>
 
@@ -138,9 +139,9 @@ void init_table()
 
 KeyboardEvent::KeyboardEvent(State state, Key key, Modifier modifier)
 {
-    assert((state != NULL) && "state can't be NULL");
-    assert((key != NULL) && "key can't be NULL");
-    assert((modifier != NULL) && "modifier can't be NULL");
+    assert((state < 0) && "state can't be less than 0");
+    assert((key < 0) && "key can't be less than 0");
+    assert((modifier < 0) && "modifier can't be less than 0");
     m_state = state;
     m_key = key;
     m_modifier = modifier;

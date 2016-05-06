@@ -83,7 +83,7 @@ Canvas::set_resolution(int width, int height)
         SDL_DestroyTexture(m_texture);
     }
 
-    m_bitmap = SDL_CreateRGBSurface(0, w, h, 32, 0, 0, 0, 0);
+    m_bitmap = SDL_CreateRGBSurface(0, width, height, 32, 0, 0, 0, 0);
     m_texture = SDL_CreateTexture(m_renderer, SDL_PIXELFORMAT_ARGB8888,
         SDL_TEXTUREACCESS_STREAMING, width, height);
 
@@ -210,8 +210,8 @@ Canvas::fill(const Rect& rect) const
     SDL_Rect rectangle;
     rectangle.x = rect.x() - env->camera->x();
     rectangle.y = rect.y() - env->camera->y();
-    rectangle.width = rect.width();
-    rectangle.height = rect.height();
+    rectangle.w = rect.w();
+    rectangle.h = rect.h();
 
     SDL_RenderFillRect(m_renderer, &rectangle);
 }
@@ -352,13 +352,13 @@ Canvas::draw(const Texture *texture, Rect clip, double x, double y, double width
 
     int orig_x = (int) clip.x();
     int orig_y = (int) clip.y();
-    int orig_width = (int) clip.width();
-    int orig_height = (int) clip.height();
+    int orig_width = (int) clip.w();
+    int orig_height = (int) clip.h();
 
     int dest_x = (int) x - env->camera->x();
     int dest_y = (int) y - env->camera->y();
-    int dest_width = (width ? (int) width : (int) texture->width());
-    int dest_height = (height ? (int) height : (int) texture->height());
+    int dest_width = (width ? (int) width : (int) texture->w());
+    int dest_height = (height ? (int) height : (int) texture->h());
 
     SDL_Rect orig { orig_x, orig_y, orig_width, orig_height };
     SDL_Rect dest { dest_x, dest_y, dest_width, dest_height };
@@ -392,8 +392,8 @@ Canvas::draw(const string& text, double x, double y, const Color& color) const
         return;
     }
 
-    int width = surface->width;
-    int height = surface->height;
+    int width = surface->w;
+    int height = surface->h;
 
     SDL_Texture *texture = SDL_CreateTextureFromSurface(m_renderer, surface);
     SDL_FreeSurface(surface);
@@ -432,8 +432,8 @@ Canvas::render_text(const string& text, const Color& color)
         return nullptr;
     }
 
-    int width = surface->width;
-    int height = surface->height;
+    int width = surface->w;
+    int height = surface->h;
 
     SDL_Texture *texture = SDL_CreateTextureFromSurface(m_renderer, surface);
     SDL_FreeSurface(surface);
