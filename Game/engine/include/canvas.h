@@ -25,14 +25,14 @@ class Image;
 class Canvas
 {
 public:
-    Canvas(SDL_Renderer *renderer, int w, int h);
+    Canvas(SDL_Renderer *renderer, int width, int height);
 
-    int w() const;
-    int h() const;
+    int width() const;
+    int height() const;
     const Color& color() const;
 
     void set_color(const Color& color);
-    void set_resolution(int w, int h);
+    void set_resolution(int width, int height);
 
     void clear(const Color& color = Color::BLACK);
     void update();
@@ -72,7 +72,7 @@ public:
 
 private:
     SDL_Renderer *m_renderer;
-    int m_w, m_h;
+    int m_width, m_height;
     double m_scale;
     Font_Manager *m_font;
     Color m_color;

@@ -16,13 +16,13 @@
 #include "core/bitmap.h"
 #include "core/environment.h"
 
-Canvas::Canvas(SDL_Renderer *renderer, int w, int h)
-    : m_renderer(renderer), m_w(w), m_h(h), m_blend_mode(NONE)
+Canvas::Canvas(SDL_Renderer *renderer, int width, int height)
+    : m_renderer(renderer), m_width(width), m_height(height), m_blend_mode(NONE)
 {
     set_color(Color::WHITE);
-    m_bitmap = SDL_CreateRGBSurface(0, w, h, 32, 0, 0, 0, 0);
+    m_bitmap = SDL_CreateRGBSurface(0, width, height, 32, 0, 0, 0, 0);
     m_texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888,
-        SDL_TEXTUREACCESS_STREAMING, w, h);
+        SDL_TEXTUREACCESS_STREAMING, width, height);
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
     SDL_SetHint(SDL_HINT_RENDER_VSYNC, "1");
 }
@@ -34,15 +34,15 @@ Canvas::~Canvas()
 }
 
 int
-Canvas::w() const
+Canvas::width() const
 {
-    return m_w;
+    return m_width;
 }
 
 int
-Canvas::h() const
+Canvas::height() const
 {
-    return m_h;
+    return m_height;
 }
 
 const Color&
@@ -71,7 +71,7 @@ Canvas::set_color(const Color& color)
 }
 
 void
-Canvas::set_resolution(int w, int h)
+Canvas::set_resolution(int width, int height)
 {
     if (m_bitmap)
     {
@@ -85,10 +85,10 @@ Canvas::set_resolution(int w, int h)
 
     m_bitmap = SDL_CreateRGBSurface(0, w, h, 32, 0, 0, 0, 0);
     m_texture = SDL_CreateTexture(m_renderer, SDL_PIXELFORMAT_ARGB8888,
-        SDL_TEXTUREACCESS_STREAMING, w, h);
+        SDL_TEXTUREACCESS_STREAMING, width, height);
 
-    m_w = w;
-    m_h = h;
+    m_width = width;
+    m_height = height;
 }
 
 void
@@ -182,13 +182,13 @@ Canvas::draw(const Rect& rect) const
     int x = rect.x() - env->camera->x();
     int y = rect.y() - env->camera->y();
 
-    SDL_Rect r;
-    r.x = x;
-    r.y = y;
-    r.w = rect.w();
-    r.h = rect.h();
+    SDL_Rect rectangle;
+    rectangle.x = x;
+    rectangle.y = y;
+    rectangle.w = rect.w();
+    rectangle.h = rect.h();
 
-    SDL_RenderDrawRect(m_renderer, &r);
+    SDL_RenderDrawRect(m_renderer, &rectangle);
 }
 
 void
@@ -207,13 +207,13 @@ Canvas::fill(const Rect& rect) const
 {
     Environment *env = Environment::get_instance();
 
-    SDL_Rect r;
-    r.x = rect.x() - env->camera->x();
-    r.y = rect.y() - env->camera->y();
-    r.w = rect.w();
-    r.h = rect.h();
+    SDL_Rect rectangle;
+    rectangle.x = rect.x() - env->camera->x();
+    rectangle.y = rect.y() - env->camera->y();
+    rectangle.width = rect.width();
+    rectangle.height = rect.height();
 
-    SDL_RenderFillRect(m_renderer, &r);
+    SDL_RenderFillRect(m_renderer, &rectangle);
 }
 
 void
@@ -234,10 +234,10 @@ Canvas::draw(const Circle& circle) const
     int cx = circle.center().x() - env->camera->x();
     int cy = circle.center().y() - env->camera->y();
 
-    int r = circle.radius();
+    int radius = circle.radius();
 
-    int error = 3 - (r << 1);
-    int i = 0, j = r;
+    int error = 3 - (radius << 1);
+    int i = 0, j = radius;
 
     do
     {
@@ -264,10 +264,10 @@ Canvas::fill(const Circle& circle) const
 
     int cx = circle.center().x() - env->camera->x();
     int cy = circle.center().y() - env->camera->y();
-    int r = circle.radius();
+    int radius = circle.radius();
 
-    int error = 3 - (r << 1);
-    int i = 0, j = r;
+    int error = 3 - (radius << 1);
+    int i = 0, j = radius;
 
     do
     {
@@ -346,22 +346,22 @@ Canvas::draw(const Texture *texture, double x, double y) const
 }
 
 void
-Canvas::draw(const Texture *texture, Rect clip, double x, double y, double w, double h) const
+Canvas::draw(const Texture *texture, Rect clip, double x, double y, double width, double height) const
 {
     Environment *env = Environment::get_instance();
 
     int orig_x = (int) clip.x();
     int orig_y = (int) clip.y();
-    int orig_w = (int) clip.w();
-    int orig_h = (int) clip.h();
+    int orig_width = (int) clip.width();
+    int orig_height = (int) clip.height();
 
     int dest_x = (int) x - env->camera->x();
     int dest_y = (int) y - env->camera->y();
-    int dest_w = (w ? (int) w : (int) texture->w());
-    int dest_h = (h ? (int) h : (int) texture->h());
+    int dest_width = (width ? (int) width : (int) texture->width());
+    int dest_height = (height ? (int) height : (int) texture->height());
 
-    SDL_Rect orig { orig_x, orig_y, orig_w, orig_h };
-    SDL_Rect dest { dest_x, dest_y, dest_w, dest_h };
+    SDL_Rect orig { orig_x, orig_y, orig_width, orig_height };
+    SDL_Rect dest { dest_x, dest_y, dest_width, dest_height };
 
     SDL_Texture *image = static_cast<SDL_Texture *>(texture->data());
 
@@ -392,8 +392,8 @@ Canvas::draw(const string& text, double x, double y, const Color& color) const
         return;
     }
 
-    int w = surface->w;
-    int h = surface->h;
+    int width = surface->width;
+    int height = surface->height;
 
     SDL_Texture *texture = SDL_CreateTextureFromSurface(m_renderer, surface);
     SDL_FreeSurface(surface);
@@ -408,7 +408,7 @@ Canvas::draw(const string& text, double x, double y, const Color& color) const
     int dest_x = (int) x - env->camera->x();
     int dest_y = (int) y - env->camera->y();
 
-    SDL_Rect dest { dest_x, dest_y, w, h };
+    SDL_Rect dest { dest_x, dest_y, width, height };
 
     SDL_RenderCopy(m_renderer, texture, NULL, &dest);
 
@@ -432,8 +432,8 @@ Canvas::render_text(const string& text, const Color& color)
         return nullptr;
     }
 
-    int w = surface->w;
-    int h = surface->h;
+    int width = surface->width;
+    int height = surface->height;
 
     SDL_Texture *texture = SDL_CreateTextureFromSurface(m_renderer, surface);
     SDL_FreeSurface(surface);
@@ -448,7 +448,7 @@ Canvas::render_text(const string& text, const Color& color)
         SDL_SetTextureBlendMode(texture, SDL_BLENDMODE_BLEND);
     }
 
-    return new Texture(texture, w, h);
+    return new Texture(texture, width, height);
 }
 
 SDL_Surface *
@@ -460,6 +460,6 @@ Canvas::bitmap() const
 void
 Canvas::draw(const Bitmap *bitmap, double, double) const
 {
-    SDL_UpdateTexture(m_texture, NULL, bitmap->pixels(), m_w * sizeof(Uint32));
+    SDL_UpdateTexture(m_texture, NULL, bitmap->pixels(), m_width * sizeof(Uint32));
     SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);
 }
