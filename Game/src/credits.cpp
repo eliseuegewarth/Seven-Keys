@@ -3,8 +3,14 @@
 #include <core/font.h>
 #include <core/environment.h>
 #include <cassert>
-
 #include <iostream>
+
+/**
+ * credits.cpp
+ * @brief [Class that implements the credits of the game.]
+ * Licença: LGPL. Sem copyright.
+ */
+
 using namespace std;
 
 const string resume_button_path = "res/interface/menuCredits/resume.png";
@@ -15,8 +21,7 @@ const string resume_button_path_highlight = "res/interface/menuCredits/ \
 const string screen_credits_image_path = "res/interface/menuCredits/ \
                                                 screenCredits.png";
 
-Credits::Credits()
-    : Level("credits")
+Credits::Credits() : Level("credits")
 {
     /* It is an object of the class environment.
     Is a pointer to the current instance of the game environment.
@@ -42,12 +47,10 @@ Credits::Credits()
     add_child(back);
 
 }
-Credits::~Credits()
-{
-}
 
-void
-Credits::draw_self()
+Credits::~Credits() {}
+
+void Credits::draw_self()
 {
     Environment *env = Environment::get_instance();
     assert((env != NULL) && "Failed to pick up the instance of environment");
@@ -60,8 +63,7 @@ Credits::draw_self()
     env->canvas->draw(image.get(), 1, 0);
 }
 
-bool
-Credits::on_message(Object *object, MessageID id, Parameters)
+bool Credits::on_message(Object *object, MessageID id, Parameters)
 {
 
     assert((object != NULL) && "Object needs to be different from NULL");

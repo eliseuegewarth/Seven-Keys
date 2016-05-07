@@ -3,6 +3,12 @@
 
 #include <core/level.h>
 
+/**
+ * credits.h
+ * @brief [Class that implements the credits of the game.]
+ * Licença: LGPL. Sem copyright.
+ */
+
 class Image;
 
 class Credits : public Level
