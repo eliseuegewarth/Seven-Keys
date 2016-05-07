@@ -183,7 +183,7 @@ For simples styles as *int* and *double* shoud be used the standard *snake_case*
 typedef unsigned int natural_numbers;
 ```
 
-### 3.7 Ponteiros
+### 3.7 Pointers
 
 In declarations the pointers shoud be use the *asterisk* near to name of the variable, and shoud follow the model "snake_case" as the example.
 ```c++
@@ -203,22 +203,22 @@ The first declarations shoud be the constructors and destructors, soon after the
 class Font_Manager
 {
 public:
-    static Font_Manager *Instance();
+    static Font_Manager* Instance();
     static void init() throw (Exception);
     void load_font(string path, unsigned int font_size) throw (Exception);
     void close_font();
 
     SDL_Texture* message()const;
-    void make_message(SDL_Renderer *renderer, string message, Color color) throw (Exception);
+    void make_message(SDL_Renderer * renderer, string message, Color color) throw (Exception);
 
 protected:
     Font_Manager();
     ~Font_Manager();
 
 private:
-    static Font_Manager *instance;
-    SDL_Texture *m_message;
-    TTF_Font *m_font;
+    static Font_Manager* instance;
+    SDL_Texture* m_message;
+    TTF_Font* m_font;
 };
 ```
 
@@ -253,7 +253,7 @@ The method shoud have the funcionality features of his nomeclatures. They shoud 
 
 void show_health()
 {
-		Environment * env = Environment::get_instance();
+		Environment* env = Environment::get_instance();
 		Rect healthbar {(double)env->canvas->w()/15, (double)env->canvas->h()/24, m_player->health() * 2, 12};
 		env->canvas->fill(healthbar, Color::RED);
 		Rect borda {(double)env->canvas->w()/15, (double)env->canvas->h()/24, 100*2, 12};
@@ -288,7 +288,7 @@ Break after comma;
 
 ```c++
 
-Impl(Button *button, const string& idle_image_id,
+Impl(Button* button, const string& idle_image_id,
 	const string& active_image_id)
 	: m_button(button), m_text(nullptr), m_idle(Color::GREEN),
 	m_active(Color::BLUE), m_border(Color::BLACK), m_thickness(1),
@@ -378,7 +378,7 @@ Animation(const string& image, double x, double y, double w, double h,
 
 Structs shoud have only primary data and can not be implemented any funcionality type or related.
 
-typedef struct _ItemInfo {
+typedef struct _ ItemInfo {
         string name;
         string type;
         int variations;
@@ -388,6 +388,7 @@ typedef struct _ItemInfo {
         double mass;
         int x, y;
     } ItemInfo;
+
 
 ```
 
