@@ -1,8 +1,3 @@
-/*
- * Autor: Edson Alves
- * Data: 20/04/2015
- * Licença: LGPL. Sem copyright.
- */
 #include <core/environment.h>
 #include <core/music.h>
 #include <core/soundeffect.h>
@@ -17,6 +12,11 @@
 #include "map.h"
 #include "player.h"
 
+/**
+ * stage.cpp
+ * @brief [Class that implements the stages of the game.]
+ * Licença: LGPL. Sem copyright.
+ */
 
 ActionID Stage::colisionID = "colisionID()";
 ActionID Stage::summonBossID = "summonBossID()";
@@ -24,26 +24,37 @@ ActionID Stage::summonBossID = "summonBossID()";
 Stage::Stage(ObjectID id, int lives, double * sanity)
     : Level(id)
 {
-    char aux[10];
-    char temp[10];
-    sprintf(temp, "%s", id.c_str());
-    for(int i = 0; temp[i] != '\0'; i++)
+    // Temporary saves the number of the current stage
+    char stage_number[10];
+
+    // Temporary saves the id of the stage
+    char stage_id[10];
+    sprintf(stage_id, "%s", id.c_str());
+
+    // Getting the Id of the stage by it's name
+    for(int i = 0; stage_id[i] != '\0'; i++)
     {
-        aux[i] = temp[i+5];
+        stage_number[i] = stage_id[i+5];
     }
+
     m_sanity = sanity;
 
-    m_num_id = atoi(aux);
-    int quantidade_de_salas = (3 + m_num_id + (m_num_id - 1) * 2) *(1 + (1 - *m_sanity/100)*0.55);
+    m_num_id = atoi(stage_number);
 
-    cout << "Iniciado Stage "<< m_num_id << ", " << quantidade_de_salas << " salas criadas." << endl;
+    // Calculate the total rooms of the current stage {Min: 3 / Max: - }
+    int total_rooms = (3 + m_num_id + (m_num_id - 1) * 2) *(1 + (1 - *m_sanity/100)*0.55);
 
-    m_map = new Map(quantidade_de_salas,m_num_id);
+    cout << "Starting stage "<< m_num_id << ", " << total_rooms << " rooms created." << endl;
+
+    // Instancing the current map
+    m_map = new Map(total_rooms,m_num_id);
     add_child(m_map);
     m_map->add_observer(this);
 
+    // Player's health {Min: 0.0 / Max: 100.0}
     double health = 100.0;
 
+    // Instancing the player
     m_player = new Player(this, "player");
     m_player->set_strength(100.0);
     m_player->set_health(health);
@@ -60,18 +71,7 @@ Stage::Stage(ObjectID id, int lives, double * sanity)
         env->sfx->play("res/sounds/Alarme1.wav",1);
     }
 
-
-
     add_child(m_player);
-
-    // Environment *env = Environment::get_instance();
-    // char music_path[256];
-    // if(m_num_id < 5)
-    //     sprintf(music_path, "res/sounds/Fase%d.wav", m_num_id);
-    // else
-    //     sprintf(music_path, "res/sounds/Fase5.wav");
-    // env->music->play(music_path, -1);
-
     add_observer(m_player);
     add_observer(m_map);
 }
