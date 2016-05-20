@@ -6,6 +6,12 @@
 
 #include "item.h"
 
+/**
+ * item.cpp
+ * @brief [Class that implements item objects from the game]
+ * Licença: LGPL. Sem copyright.
+ */
+
 Item::Item(Object *parent, ObjectID id, const string& path, double x,
  double y, double mass, bool walkable)
     : Image(parent, id, path)
