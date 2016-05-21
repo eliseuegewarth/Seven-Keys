@@ -141,12 +141,10 @@ void init_table()
 
 KeyboardEvent::KeyboardEvent(State state, Key key, Modifier modifier)
 {
-<<<<<<< HEAD
     assert((state >= 0) && "state can't be NULL");
     assert((key >= 0) && "key can't be NULL");
     assert((modifier >= 0) && "modifier can't be NULL");
-=======
->>>>>>> 85623008be19eac48dda5c16137aebaefcac4bd2
+
     m_state = state;
     m_key = key;
     m_modifier = modifier;

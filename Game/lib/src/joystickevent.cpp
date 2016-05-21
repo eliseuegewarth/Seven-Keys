@@ -38,13 +38,8 @@ void init_table_joystick()
 
 JoyStickEvent::JoyStickEvent(State state, Button button)
 {
-<<<<<<< HEAD
     assert((button >= 0) && "Button can't be negative");
     assert((state >= 0) && "State can't be negative");
-=======
-    assert((button < 0) && "Button can't be less than 0");
-    assert((state < 0) && "State can't be less than 0");
->>>>>>> 85623008be19eac48dda5c16137aebaefcac4bd2
     m_state = state;
     m_button = button;
 }

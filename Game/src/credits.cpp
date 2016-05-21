@@ -15,17 +15,11 @@ using namespace std;
 
 const string resume_button_path = "res/interface/menuCredits/resume.png";
 
-<<<<<<< HEAD
-const string resume_button_path_highlight = "res/interface/menuCredits/resumeHighlight.png";
-
-const string screen_credits_image_path = "res/interface/menuCredits/screenCredits.png";
-=======
 const string resume_button_path_highlight = "res/interface/menuCredits/ \
                                                 resumeHighlight.png";
 
 const string screen_credits_image_path = "res/interface/menuCredits/ \
                                                 screenCredits.png";
->>>>>>> 85623008be19eac48dda5c16137aebaefcac4bd2
 
 Credits::Credits() : Level("credits")
 {

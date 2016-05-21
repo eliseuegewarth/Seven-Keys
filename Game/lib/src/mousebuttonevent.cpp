@@ -13,11 +13,9 @@
 MouseButtonEvent::MouseButtonEvent(ButtonState state, Button button,
                                     double x, double y)
 {
-<<<<<<< HEAD
     assert((state >= 0) && "state can't be negative");
     assert((button >= 0) && "button can't be negative");
-=======
->>>>>>> 85623008be19eac48dda5c16137aebaefcac4bd2
+
     m_state = state;
     m_button = button;
     m_x = x;
