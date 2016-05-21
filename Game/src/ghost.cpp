@@ -11,8 +11,8 @@
 
 using namespace std;
 
-const string& GHOST_GUARD_RUNNING_PATH = "res/sprites/ghost_guarda1_running.png";
-const string& GHOST_GUARD_3_RUNNING_PATH = "res/sprites/ghost_guarda3_running.png";
+const string& GHOST_GUARD_RUNNING_PATH = "res/sprites/ghost_guard1_running.png";
+const string& GHOST_GUARD_3_RUNNING_PATH = "res/sprites/ghost_guard3_running.png";
 
 /**
  * [Ghost::Ghost Loads the guard information in the game]

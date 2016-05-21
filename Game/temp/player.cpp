@@ -242,12 +242,12 @@ Player::update_self(unsigned long elapsed)
     }
 
     Environment *env = Environment::get_instance();
-    if (x + w() > env->canvas->w())
+    if (x + w() > env->canvas->width())
     {
-        x = env->canvas->w() - w();
+        x = env->canvas->width() - w();
     }
 
-    if ((x == env->canvas->w() - w() and dx > 0) or 
+    if ((x == env->canvas->width() - w() and dx > 0) or 
         (x == 0 and dx < 0))
     {
         change_state(Player::IDLE, m_state);
@@ -258,12 +258,12 @@ Player::update_self(unsigned long elapsed)
         y = 0;
     }
 
-    if (y + h() > env->canvas->h())
+    if (y + h() > env->canvas->height())
     {
-        y = env->canvas->h() - h();
+        y = env->canvas->height() - h();
     }
 
-    if ((y == env->canvas->h() - h() and dy > 0) or 
+    if ((y == env->canvas->height() - h() and dy > 0) or 
         (y == 0 and dy < 0))
     {
         change_state(Player::IDLE, m_state);

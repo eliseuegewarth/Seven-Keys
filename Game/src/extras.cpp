@@ -18,8 +18,8 @@ Extras::Extras() : Level("extras")
     const Environment *env = Environment::get_instance(); // It is an object of the class environment. Is a pointer to the current instance of the game environment.
     assert((env != NULL) && "Failed to pick up the instance of environment");
 
-    const double w = env->canvas->w(); // Receives the width of the game environment.
-    const double h = env->canvas->h(); // Receives the height of the game environment.
+    const double w = env->canvas->width(); // Receives the width of the game environment.
+    const double h = env->canvas->height(); // Receives the height of the game environment.
 
     set_dimensions(w, h);
 

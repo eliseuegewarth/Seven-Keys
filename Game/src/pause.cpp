@@ -19,8 +19,8 @@ Pause::Pause() : Level("pause")
     Environment *env = Environment::get_instance();
     assert((env != NULL) && "Failed to pick up the instance of environment");
 
-    double w = env->canvas->w();// Receives the width of the game environment.
-    double h = env->canvas->h();// Receives the height of the game environment.
+    double w = env->canvas->width();// Receives the width of the game environment.
+    double h = env->canvas->height();// Receives the height of the game environment.
 
     set_dimensions(w, h);
     // Directs the environment where the game was paused.

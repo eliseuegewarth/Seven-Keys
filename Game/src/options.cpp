@@ -10,8 +10,8 @@ using namespace std;
 Options::Options() : Level("options")// Class that represents the option of the main menu of the game.
 {
     Environment *env = Environment::get_instance();// It is an object of the class environment. Is a pointer to the current instance of the game environment.
-    double w = env->canvas->w();// Receives the width of the game environment.
-    double h = env->canvas->h();// Receives the height of the game environment.
+    double w = env->canvas->width();// Receives the width of the game environment.
+    double h = env->canvas->height();// Receives the height of the game environment.
 
     set_dimensions(w, h);
 

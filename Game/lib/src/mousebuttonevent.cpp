@@ -11,8 +11,6 @@
 MouseButtonEvent::MouseButtonEvent(ButtonState state, Button button,
                                     double x, double y)
 {
-    assert((state < 0) && "state can't be less than 0");
-    assert((button < 0) && "button can't be less than 0");
     m_state = state;
     m_button = button;
     m_x = x;

@@ -12,8 +12,8 @@ ActionID Guard::walkID { "walkID()" };
 
 using namespace std;
 
-const string& GUARD_RUNNING_PATH = "res/sprites/guarda1_running.png";
-const string& GUARD_3_RUNNING_PATH = "res/sprites/guarda3_running.png";
+const string& GUARD_RUNNING_PATH = "res/sprites/guard1_running.png";
+const string& GUARD_3_RUNNING_PATH = "res/sprites/guard3_running.png";
 
 
 /**
@@ -159,9 +159,9 @@ void Guard::walk(unsigned long elapsed)
                 {
                     set_x(80);
                 }
-                else if(x() > env->canvas->w() - this->w() - 80)
+                else if(x() > env->canvas->width() - this->w() - 80)
                 {
-                    set_x(env->canvas->w() - this->w() - 80);
+                    set_x(env->canvas->width() - this->w() - 80);
                 }
             }
             if(direction() == Guard::UP || direction() == Guard::DOWN)
@@ -171,9 +171,9 @@ void Guard::walk(unsigned long elapsed)
                 {
                     set_y(80);
                 }
-                else if(y() > env->canvas->h() - this->h() - 80)
+                else if(y() > env->canvas->height() - this->h() - 80)
                 {
-                    set_y(env->canvas->h() - this->h() - 80);
+                    set_y(env->canvas->height() - this->h() - 80);
                 }
             }
         }

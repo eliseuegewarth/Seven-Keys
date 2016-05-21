@@ -30,8 +30,8 @@ Credits::Credits() : Level("credits")
 
     assert(env != NULL && "Failed to pick up the instance of environment");
 
-    double width = env->canvas->w();
-    double height = env->canvas->h();
+    double width = env->canvas->width();
+    double height = env->canvas->height();
 
     set_dimensions(width, height);
 

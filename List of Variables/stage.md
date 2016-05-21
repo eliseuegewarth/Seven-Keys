@@ -44,7 +44,7 @@
 
 ·char message[512] → receive player's info and convert to a string
 
-·Guard * guarda → guard's object
+·Guard * guard → guard's object
 
 ·const list<Object * > filhos → list of all items of the map
 

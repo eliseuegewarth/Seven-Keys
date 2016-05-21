@@ -65,6 +65,7 @@ Stage::Stage(ObjectID id, int lives, double * sanity)
     m_player->set_key(false);
     m_player->set_position(600, 320);
 
+    // The first stage has a special sound that has to be played
     if(m_num_id == 1)
     {
         Environment *env = Environment::get_instance();
@@ -80,11 +81,19 @@ void
 Stage::update_self(unsigned long)
 {
 
+    // Receive the list of the objects of the current room
     const list<Object*> map_filhos = m_map->children();
+
     for( auto filho : map_filhos)
     {
+        // Bounding box of player
         Rect a = m_player->bounding_box();
+
+        // Bounding box of one of room's object
         Rect b = filho->bounding_box();
+
+        /* Intersection of the bounding boxes of player and room's
+           object*/
         Rect c = a.intersection(b);
 
         if(filho->id() == "boss")
@@ -93,7 +102,7 @@ Stage::update_self(unsigned long)
             boss->get_playerx(m_player->x());
             boss->get_playery(m_player->y());
 
-            //retirar vida do player
+            // Withdraw player's life
             if (c.w() != 0 and c.h() != 0)
             {
                 if(m_player->health() > 0)
@@ -106,18 +115,19 @@ Stage::update_self(unsigned long)
         }
     }
 
-
+    // List of all items of the map
     const list<Object *> items = m_map->items();
+
     for (auto item : items)
     {
         Rect a = m_player->bounding_box();
         Rect b = item->bounding_box();
         Rect c = a.intersection(b);
 
-        //tratando colisoes diretas
+        // Threating direct colisions
         if(item->walkable() == false)
         {
-            if(item->id() == "paredet")
+            if(item->id() == "parede")
             {
                 if (c.w() != 0 and c.h() > 50)
                 {
@@ -180,7 +190,7 @@ Stage::update_self(unsigned long)
             {
                 if(item->id() == "door")
                 {
-                    if(item->x() == 0 && item->y() == 320)//m_map->current_room->r_left
+                    if(item->x() == 0 && item->y() == 320)
                     {
                         m_player->set_current("left", 1120, m_player->y());
                         m_map->m_boss->set_position(1120, m_player->y());
@@ -205,33 +215,38 @@ Stage::update_self(unsigned long)
             }
         }
 
-        //Tratando visoes dos guardas
+        //Threating guard's vision
         if(item->id() == "guard")
         {
-            Guard *guarda = (Guard*) item;
+            // Instance of guard
+            Guard *guard = (Guard*) item;
             const list<Object *> filhos = item->children();
             Environment *env = Environment::get_instance();
             for (auto filho : filhos)
             {
+                // Bounding box of the player
                 Rect a2 = m_player->bounding_box();
+
+                //Bounding box of one of the room's guards
                 Rect b2 = filho->bounding_box();
+
                 Rect c2 = a2.intersection(b2);
 
                 if (c2.w() != 0 and c2.h() != 0)
                 {
                     if(filho->id() == "visao")
                     {
-                        if(guarda->type() != "follow")
+                        if(guard->type() != "follow")
                         {
                             env->sfx->play("res/sounds/alemaogritando.wav",1);
-                            guarda->m_old_type = guarda->type();
-                            guarda->set_type("follow");
+                            guard->m_old_type = guard->type();
+                            guard->set_type("follow");
                         }
                         if ((c2.w() != 0 and c2.h() != 0) && (c.w() != 0 and c.h() != 0))
                             {
                                 if(m_player->health() > 0)
                                 {
-                                    m_player->set_health(m_player->health() - guarda->damage());
+                                    m_player->set_health(m_player->health() - guard->damage());
                                     if(m_player->health() < 0)
                                         m_player->set_health(0);
                                 }
@@ -241,10 +256,10 @@ Stage::update_self(unsigned long)
 
             }
 
-            if(guarda->type() == "follow")
+            if(guard->type() == "follow")
             {
-                guarda->get_playerx(m_player->x());
-                guarda->get_playery(m_player->y());
+                guard->get_playerx(m_player->x());
+                guard->get_playery(m_player->y());
             }
         }
         else if(item->id() == "ghost")
@@ -464,8 +479,8 @@ Stage::on_message(Object *, MessageID id, Parameters p)
                         if(filho->id() == "visao")
                         {
                             double dmg = atof(p.c_str());
-                            Guard * guarda = (Guard*) npc;
-                            guarda->receive_dmg(dmg);
+                            Guard * guard = (Guard*) npc;
+                            guard->receive_dmg(dmg);
                             return true;
                         }
 
