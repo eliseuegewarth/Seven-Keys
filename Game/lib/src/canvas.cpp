@@ -357,8 +357,24 @@ Canvas::draw(const Texture *texture, Rect clip, double x, double y, double width
 
     int dest_x = (int) x - env->camera->x();
     int dest_y = (int) y - env->camera->y();
-    int dest_width = (width ? (int) width : (int) texture->w());
-    int dest_height = (height ? (int) height : (int) texture->h());
+
+    int dest_width = ((int) width );
+    if (width==0)
+    {
+        dest_width = ((int) texture->w());
+    }else
+    {
+        // Do Nothing
+    }
+
+    int dest_height = ((int) height );
+    if (height!=0)
+    {
+        dest_height = ((int) texture->h());
+    }else
+    {
+        // Do Nothing
+    }
 
     SDL_Rect orig { orig_x, orig_y, orig_width, orig_height };
     SDL_Rect dest { dest_x, dest_y, dest_width, dest_height };
