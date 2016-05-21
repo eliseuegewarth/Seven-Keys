@@ -18,11 +18,19 @@ class Animation::Impl
 public:
     Impl(const string& id, double x_, double y_, double w_, double h_, int f,
         unsigned long s, bool l_)
-        : x(x_), y(y_), w(w_), h(h_), frames(f), speed(s), loop(l_),
-        done(false), last(0), frame(0)
     {
+        this->x = (x_);
+        this->y = (y_);
+        this->w = (w_);
+        this->h = (h_);
+        this->frames = (f);
+        this->speed = (s);
+        this->loop = (l_);
+        this->done = (false);
+        this->last = (0);
+        this->frame = (0);
         Environment *env = Environment::get_instance();
-        texture = env->resources_manager->get_texture(id);
+        this->texture = env->resources_manager->get_texture(id);
     }
 
     void reset()
