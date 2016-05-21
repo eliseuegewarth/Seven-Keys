@@ -87,14 +87,14 @@ Stage::update_self(unsigned long)
     for( auto filho : map_filhos)
     {
         // Bounding box of player
-        Rect a = m_player->bounding_box();
+        Rect bounding_box_player = m_player->bounding_box();
 
         // Bounding box of one of room's object
-        Rect b = filho->bounding_box();
+        Rect bounding_box_object = filho->bounding_box();
 
         /* Intersection of the bounding boxes of player and room's
            object*/
-        Rect c = a.intersection(b);
+        Rect intersection = bounding_box_player.intersection(bounding_box_object);
 
         if(filho->id() == "boss")
         {
@@ -103,7 +103,7 @@ Stage::update_self(unsigned long)
             boss->get_playery(m_player->y());
 
             // Withdraw player's life
-            if (c.w() != 0 and c.h() != 0)
+            if (intersection.w() != 0 and intersection.h() != 0)
             {
                 if(m_player->health() > 0)
                 {
@@ -120,56 +120,56 @@ Stage::update_self(unsigned long)
 
     for (auto item : items)
     {
-        Rect a = m_player->bounding_box();
-        Rect b = item->bounding_box();
-        Rect c = a.intersection(b);
+        Rect bounding_box_player = m_player->bounding_box();
+        Rect bounding_box_item = item->bounding_box();
+        Rect intersection = bounding_box_player.intersection(bounding_box_item);
 
         // Threating direct colisions
         if(item->walkable() == false)
         {
-            if(item->id() == "parede")
+            if(item->id() == "paredet")
             {
-                if (c.w() != 0 and c.h() > 50)
+                if (intersection.w() != 0 and intersection.h() > 50)
                 {
                     char message[512];
-                    sprintf(message, "%s,%s,%.2f,%.2f,%.2f,%.2f", m_player->id().c_str(), item->id().c_str(), c.x(),
-                        c.y(), c.w(), c.h());
+                    sprintf(message, "%s,%s,%.2f,%.2f,%.2f,%.2f", m_player->id().c_str(), item->id().c_str(), intersection.x(),
+                        intersection.y(), intersection.w(), intersection.h());
                     notify(Stage::colisionID, message);
 
-                    if(a.y() > b.y())
+                    if(bounding_box_player.y() > bounding_box_item.y())
                     {
-                        m_player->set_y(b.y() + b.h() - 50);
+                        m_player->set_y(bounding_box_item.y() + bounding_box_item.h() - 50);
                     }
                 }
             }
-            else if (c.w() != 0 and c.h() != 0)
+            else if (intersection.w() != 0 and intersection.h() != 0)
             {
                 char message[512];
-                sprintf(message, "%s,%s,%.2f,%.2f,%.2f,%.2f", m_player->id().c_str(), item->id().c_str(), c.x(),
-                    c.y(), c.w(), c.h());
+                sprintf(message, "%s,%s,%.2f,%.2f,%.2f,%.2f", m_player->id().c_str(), item->id().c_str(), intersection.x(),
+                    intersection.y(), intersection.w(), intersection.h());
                 notify(Stage::colisionID, message);
 
                 //eixo x
-                if(abs(a.x() - b.x()) > abs(a.y() - b.y()))
+                if(abs(bounding_box_player.x() - bounding_box_item.x()) > abs(bounding_box_player.y() - bounding_box_item.y()))
                 {
-                    if(a.x() < b.x())
+                    if(bounding_box_player.x() < bounding_box_item.x())
                     {
-                        m_player->set_x(b.x() - a.w() + 1);
+                        m_player->set_x(bounding_box_item.x() - bounding_box_player.w() + 1);
                     }
-                    else if(a.x() > b.x())
+                    else if(bounding_box_player.x() > bounding_box_item.x())
                     {
-                        m_player->set_x(b.x() + b.w() - 1);
+                        m_player->set_x(bounding_box_item.x() + bounding_box_item.w() - 1);
                     }
                 }
                 else
                 {
-                    if(a.y() < b.y())
+                    if(bounding_box_player.y() < bounding_box_item.y())
                     {
-                        m_player->set_y(b.y() - a.h() + 1);
+                        m_player->set_y(bounding_box_item.y() - bounding_box_player.h() + 1);
                     }
-                    else if(a.y() > b.y())
+                    else if(bounding_box_player.y() > bounding_box_item.y())
                     {
-                        m_player->set_y(b.y() + b.h() - 1);
+                        m_player->set_y(bounding_box_item.y() + bounding_box_item.h() - 1);
                     }
                 }
             }
@@ -177,16 +177,16 @@ Stage::update_self(unsigned long)
         else
         {
 
-            if (c.w() != 0 and c.h() != 0)
+            if (intersection.w() != 0 and intersection.h() != 0)
             {
                 char message[512];
-                sprintf(message, "%s,%s,%.2f,%.2f,%.2f,%.2f", m_player->id().c_str(), item->id().c_str(), c.x(),
-                    c.y(), c.w(), c.h());
+                sprintf(message, "%s,%s,%.2f,%.2f,%.2f,%.2f", m_player->id().c_str(), item->id().c_str(), intersection.x(),
+                    intersection.y(), intersection.w(), intersection.h());
 
                 notify(Stage::colisionID, message);
 
             }
-            if(c.w() > 50 and c.h() > 50)
+            if(intersection.w() > 50 and intersection.h() > 50)
             {
                 if(item->id() == "door")
                 {
@@ -225,14 +225,14 @@ Stage::update_self(unsigned long)
             for (auto filho : filhos)
             {
                 // Bounding box of the player
-                Rect a2 = m_player->bounding_box();
+                Rect bounding_box_player2 = m_player->bounding_box();
 
                 //Bounding box of one of the room's guards
-                Rect b2 = filho->bounding_box();
+                Rect bounding_box_guard = filho->bounding_box();
 
-                Rect c2 = a2.intersection(b2);
+                Rect intersection2 = bounding_box_player2.intersection(bounding_box_guard);
 
-                if (c2.w() != 0 and c2.h() != 0)
+                if (intersection2.w() != 0 and intersection2.h() != 0)
                 {
                     if(filho->id() == "visao")
                     {
@@ -242,7 +242,7 @@ Stage::update_self(unsigned long)
                             guard->m_old_type = guard->type();
                             guard->set_type("follow");
                         }
-                        if ((c2.w() != 0 and c2.h() != 0) && (c.w() != 0 and c.h() != 0))
+                        if ((intersection2.w() != 0 and intersection2.h() != 0) && (intersection.w() != 0 and intersection.h() != 0))
                             {
                                 if(m_player->health() > 0)
                                 {
@@ -270,7 +270,7 @@ Stage::update_self(unsigned long)
             const list<Object *> filhos = item->children();
 
             //retirar vida do player
-            if (c.w() != 0 and c.h() != 0)
+            if (intersection.w() != 0 and intersection.h() != 0)
             {
                 if(m_player->health() > 0)
                 {
@@ -288,7 +288,10 @@ Stage::update_self(unsigned long)
 void
 Stage::draw_self()
 {
+    // Instance the environment for a new stage
     Environment *env = Environment::get_instance();
+
+    // Setting the screen background color of the game
     env->canvas->clear(Color::BLUE);
 }
 
@@ -345,14 +348,14 @@ Stage::on_message(Object *, MessageID id, Parameters p)
         const list<Object *> items = m_map->items();
         for (auto item : items)
         {
-            Rect a = m_player->bounding_box();
-            Rect b = item->bounding_box();
-            Rect c = a.intersection(b);
+            Rect bounding_box_player = m_player->bounding_box();
+            Rect bounding_box_item = item->bounding_box();
+            Rect intersection = bounding_box_player.intersection(bounding_box_item);
 
-            //tratando colisoes diretas
+            // Threating direct colisions with items
             if(item->walkable() == true)
             {
-                if (c.w() != 0 and c.h() != 0)
+                if (intersection.w() != 0 and intersection.h() != 0)
                 {
                     if(strstr(item->id().c_str(), "key"))
                     {
@@ -389,15 +392,15 @@ Stage::on_message(Object *, MessageID id, Parameters p)
         const list<Object *> items = m_map->items();
         for (auto item : items)
         {
-            Rect a = m_player->bounding_box();
-            Rect b = item->bounding_box();
-            Rect c = a.intersection(b);
+            Rect bounding_box_player = m_player->bounding_box();
+            Rect bounding_box_item = item->bounding_box();
+            Rect intersection = bounding_box_player.intersection(bounding_box_item);
 
             if(item->walkable() == true)
             {
                 if(item->id() == "finalDoor")
                 {
-                    if (c.w() > 0 and c.h() > 0)
+                    if (intersection.w() > 0 and intersection.h() > 0)
                     {
                         if(m_player->has_key() == true)
                         {
@@ -418,40 +421,36 @@ Stage::on_message(Object *, MessageID id, Parameters p)
         const list<Object *> items = m_map->items();
         for (auto item : items)
         {
-            Rect a = m_player->bounding_box();
-            Rect b = item->bounding_box();
-            Rect c = a.intersection(b);
+            Rect bounding_box_player = m_player->bounding_box();
+            Rect bounding_box_item = item->bounding_box();
+            Rect intersection = bounding_box_player.intersection(bounding_box_item);
 
             if(item->walkable() == false)
             {
-                if (c.w() != 0 and c.h() != 0)
+                if (intersection.w() != 0 and intersection.h() != 0)
                 {
                     if(item->mass() <= m_player->strength())
                     {
-                        if(abs(a.x() - b.x()) > abs(a.y() - b.y()))
+                        if(abs(bounding_box_player.x() - bounding_box_item.x()) > abs(bounding_box_player.y() - bounding_box_item.y()))
                         {
-                            if(a.x() < b.x())
+                            if(bounding_box_player.x() < bounding_box_item.x())
                             {
-                                item->set_x(b.x() + 1);
-                                //m_player->set_x(b.x() - a.w());
+                                item->set_x(bounding_box_item.x() + 1);
                             }
-                            else if(a.x() > b.x())
+                            else if(bounding_box_player.x() > bounding_box_item.x())
                             {
-                                item->set_x(b.x() - 1);
-                                //m_player->set_x(b.x() + b.w());
+                                item->set_x(bounding_box_item.x() - 1);
                             }
                         }
                         else
                         {
-                            if(a.y() < b.y())
+                            if(bounding_box_player.y() < bounding_box_item.y())
                             {
-                                item->set_y(b.y() + 1);
-                                //m_player->set_y(b.y() - a.h());
+                                item->set_y(bounding_box_item.y() + 1);
                             }
-                            else if(a.y() > b.y())
+                            else if(bounding_box_player.y() > bounding_box_item.y())
                             {
-                                item->set_y(b.y() - 1);
-                                //m_player->set_y(b.y() + b.h());
+                                item->set_y(bounding_box_item.y() - 1);
                             }
                         }
                         return true;
@@ -468,13 +467,13 @@ Stage::on_message(Object *, MessageID id, Parameters p)
         {
             for (auto filho : filhos)
             {
-                Rect a = filho->bounding_box();
-                Rect b = npc->bounding_box();
-                Rect c = a.intersection(b);
+                Rect bounding_box_object = filho->bounding_box();
+                Rect bounding_box_npc = npc->bounding_box();
+                Rect intersection = bounding_box_object.intersection(bounding_box_npc);
 
                 if(npc->id() == "guard")
                 {
-                    if (c.w() != 0 and c.h() != 0)
+                    if (intersection.w() != 0 and intersection.h() != 0)
                     {
                         if(filho->id() == "visao")
                         {
