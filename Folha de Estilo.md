@@ -277,7 +277,7 @@ void show_health()
 Para identação sera usado o padrão de tabulação de 4 espaços.
 ### 5.2 Tamanho máximo da linha
 
-Deve-se evitar ultrapassar o limite de 80 caracteres por linha.
+Não se deve fazer muita coisa na mesma linha, para isso não acontecer, deve-se evitar ultrapassar o limite de 80 caracteres por linha.
 Para quebras de linha, em casos de expressões muito grandes, deve-se usar os seguintes principios:
 ·Quebrar após virgula;
 
@@ -309,7 +309,7 @@ m_player->set_stamina(m_player->stamina() + 0.05);
 ```
 ### 5.4 Chaves
 
-As chaves devem ser abertas uma linha abaixo do termino da expressão ou declaração e deve ser fechada uma linha abaixo do bloco de instruções:
+Deve-se usar chaves sempre que possivel, mesmo em situações que a linguagem permite não usar. As chaves devem ser abertas uma linha abaixo do termino da expressão ou declaração e deve ser fechada uma linha abaixo do bloco de instruções:
 
 ```c++
 
@@ -320,7 +320,7 @@ if(x + m_player->w() > env->canvas->w())
 ```
 ### 5.5 Estruturas de Controle (if, switch)
 
-O padrão a ser seguido é de sem espaços entre a estrutura de controle e o parentese da condição, e entre as operações das condições. É preferível usar operações utilizando os comandos 'and', 'or', 'not', pertencentes à linguagem c++ ao invés de comandos menos intuitivos como '&&', '||', '!='.
+Sempre usar 'else' em estruturas de controle do tipo 'if'.Em estruturas do tipo 'switch', os 'cases' que representam o fluxo principal devem vir antes dos cases que representam fluxo alternativo ou mensagens de erro.O padrão a ser seguido é de sem espaços entre a estrutura de controle e o parentese da condição, e entre as operações das condições. É preferível usar operações utilizando os comandos 'and', 'or', 'not', pertencentes à linguagem c++ ao invés de comandos menos intuitivos como '&&', '||', '!='.
 
 Codigo ruim:
 ```c++
