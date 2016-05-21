@@ -10,6 +10,8 @@
 #include <SDL2/SDL.h>
 #include <map>
 
+#include <cassert>
+
 using std::map;
 
 static bool joystick_was_init = false;
@@ -36,8 +38,8 @@ void init_table_joystick()
 
 JoyStickEvent::JoyStickEvent(State state, Button button)
 {
-    assert((button != NULL) && "Button can't be NULL");
-    assert((state != NULL) && "State can't be NULL");
+    assert((button >= 0) && "Button can't be negative");
+    assert((state >= 0) && "State can't be negative");
     m_state = state;
     m_button = button;
 }
