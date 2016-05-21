@@ -19,8 +19,8 @@ TitleScreen::TitleScreen()
 {
     Environment *env = Environment::get_instance();
 
-    double w = env->canvas->w();
-    double h = env->canvas->h();
+    double w = env->canvas->width();
+    double h = env->canvas->height();
 
     set_dimensions(w, h);
 

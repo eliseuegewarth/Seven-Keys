@@ -30,16 +30,16 @@ class Canvas
 public:
     typedef enum { NONE, BLEND } BlendMode;
 
-    Canvas(SDL_Renderer *renderer, int w, int h);
+    Canvas(SDL_Renderer *renderer, int width, int height);
     ~Canvas();
 
-    int w() const;
-    int h() const;
+    int width() const;
+    int height() const;
     const Color& color() const;
     shared_ptr<Font> font() const;
     BlendMode blend_mode() const;
 
-    void set_resolution(int w, int h);
+    void set_resolution(int width, int height);
     void set_color(const Color& color);
     void set_font(shared_ptr<Font>& font);
     void set_blend_mode(BlendMode mode);
@@ -61,7 +61,7 @@ public:
 
     void draw(const Texture *texture, double x = 0, double y = 0) const;
     void draw(const Texture *texture, Rect clip, double x = 0,
-        double y = 0, double w = 0, double h = 0) const;
+        double y = 0, double width = 0, double height = 0) const;
 
     void draw(const string& text, double x = 0, double y = 0,
         const Color& color = Color::WHITE) const;
@@ -82,7 +82,7 @@ public:
 
 private:
     SDL_Renderer *m_renderer;
-    int m_w, m_h;
+    int m_width, m_height;
     Color m_color;
     shared_ptr<Font> m_font;
     BlendMode m_blend_mode;

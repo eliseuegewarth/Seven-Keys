@@ -8,11 +8,11 @@
 
 ·double * sanity → parameter from constructor Item(), it's the quantity of player's sanity (Min: 0 / Max: 100)
 
-·char aux[10] → temporary saves the number of the current room
+·char stage_number[10] → temporary saves the number of the current stage
 
-·char temp[10] → temporary saves the id of the room
+·char stage_id[10] → temporary saves the id of the stage
 
-·int quantidade_de_salas → quantity of rooms (Min: 3 / Max: )
+·int total_rooms → quantity of rooms (Min: 3 / Max: )
 
 ·Player * m_player → instances the player character
 
@@ -44,7 +44,7 @@
 
 ·char message[512] → receive player's info and convert to a string
 
-·Guard * guarda → guard's object
+·Guard * guard → guard's object
 
 ·const list<Object * > filhos → list of all items of the map
 

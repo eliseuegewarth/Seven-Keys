@@ -30,7 +30,7 @@ Room::Room(Object *parent, ObjectID id, string type, Room *left, Room *top, Room
     assert((not type.empty()) && "id can't be empty");
 
     Environment *env = Environment::get_instance();
-    quad = new Quadtree(0, new Rect(0, 0, env->canvas->w(), env->canvas->h()));
+    quad = new Quadtree(0, new Rect(0, 0, env->canvas->width(), env->canvas->height()));
 
     fill_floor("tile");
     add_walls("parede");
@@ -390,11 +390,11 @@ Room::fill_floor(const string& name)
     Environment *env = Environment::get_instance();
     Canvas *canvas = env->canvas;
 
-    int w = canvas->w() / image->w();
-    int h = canvas->h() / image->h();
+    int w = canvas->width() / image->w();
+    int h = canvas->height() / image->h();
 
     center_area.set_position(image->w(), image->h());
-    center_area.set_dimensions(canvas->w() - 2*image->w(), canvas->h() - 2*image->h());
+    center_area.set_dimensions(canvas->width() - 2*image->w(), canvas->height() - 2*image->h());
 
     for(int i = 1; i < w - 1; i++)
 	{
@@ -442,8 +442,8 @@ Room::add_walls(const string& name)
 
             for(int k = 1; k < 8; k++)
             {
-                double x = i % 2 ? image->w()*j : i/2 * (canvas->w() - image->w());
-                double y = i % 2 ? i/2 * (canvas->h() - image->h()) : image->h()*k;
+                double x = i % 2 ? image->w()*j : i/2 * (canvas->width() - image->w());
+                double y = i % 2 ? i/2 * (canvas->height() - image->h()) : image->h()*k;
 
                 Item *wall = new Item(this, name, path, x, y, INFINITE, false);
                 add_child(wall);
@@ -483,8 +483,8 @@ Room::add_corners(const string& name)
         if (not image)
             continue;
 
-        double x = i % 3 ? canvas->w() - image->w() : 0;
-        double y = i/2 ? canvas->h() - image->h() : 0;
+        double x = i % 3 ? canvas->width() - image->w() : 0;
+        double y = i/2 ? canvas->height() - image->h() : 0;
 
         delete image;
 
@@ -633,13 +633,13 @@ Room::update_self(unsigned long)
 
             if(npc2->id()== "guard")
             {
-                Guard * guarda = (Guard*) npc2;
+                Guard * guard = (Guard*) npc2;
 
                 if(npc->walkable() == false)
                 {
                     if (c.w() > 5 and c.h() > 5)
                     {
-                        if(guarda->m_old_type == "hard")
+                        if(guard->m_old_type == "hard")
                         {
                             if(abs(a.x() - b.x()) > abs(a.y() - b.y()))
                             {
@@ -697,12 +697,12 @@ Room::update_self(unsigned long)
 
         if(npc->id() == "guard")
         {
-            Guard * guarda = (Guard*) npc;
-            if (guarda->health() < 1)
+            Guard * guard = (Guard*) npc;
+            if (guard->health() < 1)
             {
-                Ghost *ghost = new Ghost(this, "ghost", 0, 0, 9999, true, guarda->m_old_type, randint(0,3));
+                Ghost *ghost = new Ghost(this, "ghost", 0, 0, 9999, true, guard->m_old_type, randint(0,3));
                 string path;
-                if(guarda->m_old_type != "hard")
+                if(guard->m_old_type != "hard")
                     path = "res/sprites/death_guard1.png";
                 else
                     path = "res/sprites/death_guard2.png";
@@ -713,7 +713,7 @@ Room::update_self(unsigned long)
                 place(ghost, npc->x(), npc->y());
                 add_child(ghost);
 
-                notify(guardDeathID, "guarda");
+                notify(guardDeathID, "guard");
             }
         }
     }

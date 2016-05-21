@@ -3,18 +3,31 @@
 #include <core/font.h>
 #include <core/environment.h>
 #include <cassert>
-
 #include <iostream>
+
+/**
+ * credits.cpp
+ * @brief [Class that implements the credits of the game.]
+ * Licença: LGPL. Sem copyright.
+ */
+
 using namespace std;
 
 const string resume_button_path = "res/interface/menuCredits/resume.png";
 
+<<<<<<< HEAD
 const string resume_button_path_highlight = "res/interface/menuCredits/resumeHighlight.png";
 
 const string screen_credits_image_path = "res/interface/menuCredits/screenCredits.png";
+=======
+const string resume_button_path_highlight = "res/interface/menuCredits/ \
+                                                resumeHighlight.png";
 
-Credits::Credits()
-    : Level("credits")
+const string screen_credits_image_path = "res/interface/menuCredits/ \
+                                                screenCredits.png";
+>>>>>>> 85623008be19eac48dda5c16137aebaefcac4bd2
+
+Credits::Credits() : Level("credits")
 {
     /* It is an object of the class environment.
     Is a pointer to the current instance of the game environment.
@@ -23,11 +36,12 @@ Credits::Credits()
 
     assert(env != NULL && "Failed to pick up the instance of environment");
 
-    double w = env->canvas->w();
-    double h = env->canvas->h();
+    double width = env->canvas->width();
+    double height = env->canvas->height();
 
-    set_dimensions(w, h);
+    set_dimensions(width, height);
 
+    // Button used to return to main menu
     Button *back = new Button(this, "back", resume_button_path,
                               resume_button_path_highlight);
 
@@ -40,17 +54,16 @@ Credits::Credits()
     add_child(back);
 
 }
-Credits::~Credits()
-{
-}
 
-void
-Credits::draw_self()
+Credits::~Credits() {}
+
+void Credits::draw_self()
 {
     Environment *env = Environment::get_instance();
     assert((env != NULL) && "Failed to pick up the instance of environment");
     env->canvas->clear(Color::WHITE);
 
+    // Image background of the credits
     shared_ptr<Texture> image = env->resources_manager->
           get_texture(screen_credits_image_path);
 
@@ -58,8 +71,7 @@ Credits::draw_self()
     env->canvas->draw(image.get(), 1, 0);
 }
 
-bool
-Credits::on_message(Object *object, MessageID id, Parameters)
+bool Credits::on_message(Object *object, MessageID id, Parameters)
 {
 
     assert((object != NULL) && "Object needs to be different from NULL");
@@ -70,6 +82,7 @@ Credits::on_message(Object *object, MessageID id, Parameters)
         return false;
     }
 
+    // Button used to verify if the back button was clicked
     Button *button = dynamic_cast <Button *>(object);
 
     if (not button)

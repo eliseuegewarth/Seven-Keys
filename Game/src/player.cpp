@@ -128,7 +128,7 @@ public:
 
         char path[256];
         sprintf(path, "res/items/thumb.%s.png", id.c_str());
-        Item* pill = new Item(m_player, "icon_pill", path, (double)env->canvas->w() * 1/35 + 2, (double)env->canvas->h() * 25/30 + 2, 9999, true);
+        Item* pill = new Item(m_player, "icon_pill", path, (double)env->canvas->width() * 1/35 + 2, (double)env->canvas->height() * 25/30 + 2, 9999, true);
         m_player->add_child(pill);
     }
 
@@ -138,13 +138,13 @@ public:
             return;
 
         Environment *env = Environment::get_instance();
-        double size = env->canvas->w()/35;
+        double size = env->canvas->width()/35;
 
         m_hweapon = true;
 
         char weapon_path[256];
         sprintf(weapon_path, "res/items/thumb.%s.png", weapon_id.c_str());
-        Item* lWeapon = new Item(m_player, "icon_weapon", weapon_path, (double)env->canvas->w() * 1/35 + 2 + (2*size), (double)env->canvas->h() * 25/30 + 2, 9999, true);
+        Item* lWeapon = new Item(m_player, "icon_weapon", weapon_path, (double)env->canvas->width() * 1/35 + 2 + (2*size), (double)env->canvas->height() * 25/30 + 2, 9999, true);
         m_player->add_child(lWeapon);
 
         if(weapon_id == "Garrafa")
@@ -175,11 +175,11 @@ public:
             return;
 
         Environment *env = Environment::get_instance();
-        double size = env->canvas->w()/35;
+        double size = env->canvas->width()/35;
 
         m_key = true;
 
-        Item* key = new Item(m_player, "icon_key", "res/items/thumb.key.png", (double)env->canvas->w() * 1/35 + size + 2, (double)env->canvas->h() * 25/30 + size + 2, 9999, true);
+        Item* key = new Item(m_player, "icon_key", "res/items/thumb.key.png", (double)env->canvas->width() * 1/35 + size + 2, (double)env->canvas->height() * 25/30 + size + 2, 9999, true);
         m_player->add_child(key);
     }
     void set_key(bool input)
@@ -193,17 +193,17 @@ public:
     void show_health()
     {
         Environment *env = Environment::get_instance();
-        Rect healthbar {(double)env->canvas->w()/15, (double)env->canvas->h()/24, m_player->health()*2, 12};
+        Rect healthbar {(double)env->canvas->width()/15, (double)env->canvas->height()/24, m_player->health()*2, 12};
         env->canvas->fill(healthbar, Color::RED);
-        Rect borda {(double)env->canvas->w()/15, (double)env->canvas->h()/24, 100*2, 12};
+        Rect borda {(double)env->canvas->width()/15, (double)env->canvas->height()/24, 100*2, 12};
         env->canvas->draw(borda, Color::RED);
     }
     void show_sanity()
     {
         Environment *env = Environment::get_instance();
-        Rect sanitybar {(double)env->canvas->w()/15, (double)env->canvas->h()/17, m_player->sanity()*2, 12};
+        Rect sanitybar {(double)env->canvas->width()/15, (double)env->canvas->height()/17, m_player->sanity()*2, 12};
         env->canvas->fill(sanitybar, Color::GREEN);
-        Rect borda {(double)env->canvas->w()/15, (double)env->canvas->h()/17, 100*2, 12};
+        Rect borda {(double)env->canvas->width()/15, (double)env->canvas->height()/17, 100*2, 12};
         env->canvas->draw(borda, Color::GREEN);
     }
     void show_stamina()
@@ -214,22 +214,22 @@ public:
         if(stamina < 0)
             stamina = 0;
 
-        Rect staminabar {(double)env->canvas->w()/15, (double)env->canvas->h()/13, stamina, 12};
+        Rect staminabar {(double)env->canvas->width()/15, (double)env->canvas->height()/13, stamina, 12};
         env->canvas->fill(staminabar, Color::YELLOW);
-        Rect borda {(double)env->canvas->w()/15, (double)env->canvas->h()/13, 100*2, 12};
+        Rect borda {(double)env->canvas->width()/15, (double)env->canvas->height()/13, 100*2, 12};
         env->canvas->draw(borda, Color::YELLOW);
     }
 
     void show_inventory()
     {
         Environment *env = Environment::get_instance();
-        double size = env->canvas->w()/35;
+        double size = env->canvas->width()/35;
 
-        Rect item1 {(double)(env->canvas->w() * 1/35), (double)env->canvas->h() * 25/30, size, size};
-        Rect item2 {(double)env->canvas->w() * 1/35 + size, (double)env->canvas->h() * 25/30 - size, size, size};
-        Rect item3 {(double)env->canvas->w() * 1/35 + 2*size, (double)env->canvas->h() * 25/30, size, size};
-        Rect item4 {(double)env->canvas->w() * 1/35 + size, (double)env->canvas->h() * 25/30 + size, size, size};
-        Rect not_item {(double)env->canvas->w() * 1/35 + size, (double)env->canvas->h() * 25/30, size, size};
+        Rect item1 {(double)(env->canvas->width() * 1/35), (double)env->canvas->height() * 25/30, size, size};
+        Rect item2 {(double)env->canvas->width() * 1/35 + size, (double)env->canvas->height() * 25/30 - size, size, size};
+        Rect item3 {(double)env->canvas->width() * 1/35 + 2*size, (double)env->canvas->height() * 25/30, size, size};
+        Rect item4 {(double)env->canvas->width() * 1/35 + size, (double)env->canvas->height() * 25/30 + size, size, size};
+        Rect not_item {(double)env->canvas->width() * 1/35 + size, (double)env->canvas->height() * 25/30, size, size};
         env->canvas->draw(item1, Color::WHITE);
         env->canvas->draw(item2, Color::WHITE);
         env->canvas->draw(item3, Color::WHITE);
@@ -813,23 +813,23 @@ public:
         /*limite da sala */
         Environment *env = Environment::get_instance();
 
-        if (x + m_player->w() > env->canvas->w())
+        if (x + m_player->w() > env->canvas->width())
         {
-            x = env->canvas->w() - m_player->w();
+            x = env->canvas->width() - m_player->w();
         }
 
-        if ((x >= env->canvas->w() - m_player->w() and moviment.first > 0) or 
+        if ((x >= env->canvas->width() - m_player->w() and moviment.first > 0) or 
             (x <= 0 and moviment.first < 0))
         {
             x -= (moviment.first * delta)/1000.0;
         }
 
-        if (y + m_player->h() > env->canvas->h())
+        if (y + m_player->h() > env->canvas->height())
         {
-            y = env->canvas->h() - m_player->h();
+            y = env->canvas->height() - m_player->h();
         }
 
-        if ((y >= env->canvas->h() - m_player->h() and moviment.second > 0) or 
+        if ((y >= env->canvas->height() - m_player->h() and moviment.second > 0) or 
             (y <= 0 and moviment.second < 0))
         {
             y -= (moviment.second * delta)/1000.0;

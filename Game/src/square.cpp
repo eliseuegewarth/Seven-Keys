@@ -26,7 +26,7 @@ Square::Square(Object *parent, ObjectID id, double size)
     assert((env != NULL) && "Failed to pick up the instance of environment");
     env->events_manager->register_listener(this);
 
-    double y = env->canvas->h()*0.6 - size;
+    double y = env->canvas->height()*0.6 - size;
     set_y(y);
 }
 
@@ -112,9 +112,9 @@ Square::update_self(unsigned long elapsed)
         x = 0;
     }
 
-    if (x + w() > env->canvas->w())
+    if (x + w() > env->canvas->width())
     {
-        x = env->canvas->w() - w();
+        x = env->canvas->width() - w();
     }
 
     set_x(x);

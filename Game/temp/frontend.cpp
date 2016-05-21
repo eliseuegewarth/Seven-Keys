@@ -24,8 +24,8 @@ FrontEnd::FrontEnd(const string& next, const string& image,
 
     m_image = env->resources_manager->get_image(image);
 
-    m_x = (env->canvas->w() - m_image->w())/2;
-    m_y = (env->canvas->h() - m_image->h())/2;
+    m_x = (env->canvas->width() - m_image->w())/2;
+    m_y = (env->canvas->height() - m_image->h())/2;
 }
 
 FrontEnd::~FrontEnd()
