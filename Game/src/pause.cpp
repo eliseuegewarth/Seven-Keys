@@ -11,8 +11,12 @@ using namespace std;
 
 /**
  * @brief Creates the environment of the pause menu.
- * @details [long description]
+ * instantiates the pause page, from the time, the buttons and the background.
  */
+ /**
+  * @brief [Creates the environment of the pause menu.]
+  * @details [Instantiates the pause page, from the time, the buttons and the background.]
+  */
 Pause::Pause() : Level("pause")
 {
     // It is an object of the class environment. Is a pointer to the current instance of the game environment.
@@ -61,7 +65,11 @@ Pause::~Pause()
 {
 }
 
-void Pause::draw_self() // Drow pause pinctures on the screen.
+/**
+ * @brief [Drow pause pinctures on the screen.]
+ * @details [long description]
+ */
+void Pause::draw_self()
 {
     // It is an object of the class environment. Is a pointer to the current instance of the game environment.
     Environment *env = Environment::get_instance();
@@ -72,13 +80,20 @@ void Pause::draw_self() // Drow pause pinctures on the screen.
     env->canvas->draw(image.get(), 1, 0);
 }
 
-bool Pause::on_message(Object *object, MessageID id, Parameters)// Let the dynamic buttons.
+/**
+ * @brief [Let the dynamic buttons]
+ * @details [long description]
+ * 
+ * @param object [description]
+ * @param id [description]
+ * @param s [description]
+ * @return [returns the status of the button, if it was clicked or not]
+ */
+bool Pause::on_message(Object *object, MessageID id, Parameters)
 {
     assert((object != NULL) && "Object needs to be different from NULL");
     assert((not id.empty()) && "id needs to be different drom the empty");
-    // It is an object of the class environment. Is a pointer to the current instance of the game environment.
-    //Environment *env = Environment::get_instance(); NOT USED.
-
+    
     if (id != Button::clickedID)
     {
         return false;
@@ -93,7 +108,9 @@ bool Pause::on_message(Object *object, MessageID id, Parameters)// Let the dynam
     if (button->id() == "backGame")
     {
         return false;
-    } else if (button->id() == "backMenu")
+    } 
+
+    else if (button->id() == "backMenu")
     {
         set_next("title");
     }
