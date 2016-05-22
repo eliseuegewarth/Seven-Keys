@@ -59,6 +59,10 @@ unsigned const int height;
 
 
 ###Parameters
+<<<<<<< HEAD
+=======
+
+>>>>>>> c4a548bd214309fd09a022976c3e5883ff688458
 c```
 void *data;
 ```
@@ -138,8 +142,11 @@ c```
 Uint32 pixel;
 ```
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> c4a548bd214309fd09a022976c3e5883ff688458
     
 ##```void Bitmap::fill()```   
 
