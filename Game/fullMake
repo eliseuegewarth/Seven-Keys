@@ -1,5 +1,5 @@
 #!/bin/bash
-chmod +x fullMake
+sudo chmod +x fullMake
 reset
 echo "STARING TO BUILD THE GAME..."
 echo "ENTERING THE GAME ENGINE DIRECTORY..."
