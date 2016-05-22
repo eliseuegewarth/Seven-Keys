@@ -1,5 +1,5 @@
 #include "options.h"
- 
+
 #include <ijengine/util/button.h>
 #include <core/font.h>
 #include <core/environment.h>
@@ -10,10 +10,10 @@ using namespace std;
 Options::Options() : Level("options")// Class that represents the option of the main menu of the game.
 {
     Environment *env = Environment::get_instance();// It is an object of the class environment. Is a pointer to the current instance of the game environment.
-    double w = env->canvas->width();// Receives the width of the game environment.
-    double h = env->canvas->height();// Receives the height of the game environment.
+    double width = env->canvas->width();// Receives the width of the game environment.
+    double height = env->canvas->height();// Receives the height of the game environment.
 
-    set_dimensions(w, h);
+    set_dimensions(width, height);
 
     Button *set_fullscreen = new Button(this, "fullscreen", "res/interface/menuOpcao/modoJanela.png",
         "res/interface/menuOpcao/SmodoJanela.png");// Puts the screen in fullscreen.
@@ -22,12 +22,12 @@ Options::Options() : Level("options")// Class that represents the option of the 
     Button *windowmode = new Button(this, "windowmode", "res/interface/menuOpcao/comoJogar.png",
         "res/interface/menuOpcao/ScomoJogar.png");// Puts the screen in windowed mode.
     windowmode->align_to(this, Object::RIGHT, Object::NONE);
-    windowmode->set_y(set_fullscreen->y() + set_fullscreen->h() + 20);
+    windowmode->set_y(set_fullscreen->y() + set_fullscreen->height() + 20);
 
     Button *back = new Button(this, "back", "res/interface/menuOpcao/voltar.png",
         "res/interface/menuOpcao/Svoltar.png");// Directs to the main menu of the game.
     back->align_to(this, Object::RIGHT, Object::NONE);
-    back->set_y(windowmode->y() + windowmode->h() + 20);
+    back->set_y(windowmode->y() + windowmode->height() + 20);
 
     set_fullscreen->add_observer(this);
     windowmode->add_observer(this);
@@ -38,7 +38,7 @@ Options::Options() : Level("options")// Class that represents the option of the 
     add_child(back);
 
 
-    
+
 }
 
 Options::~Options()
@@ -61,7 +61,7 @@ bool Options::on_message(Object *object, MessageID id, Parameters)// Let the dyn
     env->sfx->play("res/sounds/navegacaomenu.wav", 1);
 
     if (id != Button::clickedID)
-    {   
+    {
         return false;
     }
 
@@ -69,17 +69,17 @@ bool Options::on_message(Object *object, MessageID id, Parameters)// Let the dyn
     {
         return false;
     }
-    
+
     if(button->id() == "fullscreen" || button->id() == "windowmode" || button->id() == "back")
             env->sfx->play("res/sounds/navegacaomenu.wav",1);
 
     if (button->id() == "fullscreen")
-    {   
+    {
         env->video->set_fullscreen();
         set_next("options");
-    } 
+    }
     else if (button->id() == "windowmode")
-    {   
+    {
         env->video->set_fullscreen(false);
         set_next("options");
     }
@@ -93,5 +93,3 @@ bool Options::on_message(Object *object, MessageID id, Parameters)// Let the dyn
 
     return true;
 }
-
-
