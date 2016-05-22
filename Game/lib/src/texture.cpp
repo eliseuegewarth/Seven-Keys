@@ -18,8 +18,8 @@ using std::make_pair;
 class Texture::Impl
 {
 public:
-    Impl(void *data, int w, int h)
-        : m_w(w), m_h(h)
+    Impl(void *data, int width, int height)
+        : m_width(width), m_height(height)
     {
         m_texture = static_cast<SDL_Texture *>(data);
 
@@ -38,45 +38,45 @@ public:
         }
     }
 
-    int w() const 
-    { 
-        return m_w;
+    int width() const
+    {
+        return m_width;
     }
-    int h() const 
-    { 
-        return m_h;
+    int height() const
+    {
+        return m_height;
     }
     void * data() const
-    { 
+    {
         return m_texture;
     }
 
     void scale(double k)
     {
-        m_w = size().first * k;
-        m_h = size().second * k;
+        m_width = size().first * k;
+        m_height = size().second * k;
     }
 
     pair<int, int> size() const
     {
-        int w, h;
-        int rc = SDL_QueryTexture(m_texture, nullptr, nullptr, &w, &h);
+        int width, height;
+        int rc = SDL_QueryTexture(m_texture, nullptr, nullptr, &width, &height);
 
         if (rc)
         {
             throw Exception(SDL_GetError());
         }
 
-        return make_pair(w, h);
+        return make_pair(width, height);
     }
 
 private:
-    int m_w, m_h;
+    int m_width, m_height;
     SDL_Texture *m_texture;
 };
 
-Texture::Texture(void *data, int w, int h)
-    : m_impl(new Impl(data, w, h))
+Texture::Texture(void *data, int width, int height)
+    : m_impl(new Impl(data, width, height))
 {
 }
 
@@ -89,14 +89,14 @@ void * Texture::data() const
     return m_impl->data();
 }
 
-int Texture::w() const
+int Texture::width() const
 {
-    return m_impl->w();
+    return m_impl->width();
 }
 
-int Texture::h() const
+int Texture::height() const
 {
-    return m_impl->h();
+    return m_impl->height();
 }
 
 Texture * Texture::from_file(const string& path) throw (Exception)
@@ -110,16 +110,16 @@ Texture * Texture::from_file(const string& path) throw (Exception)
         throw Exception(SDL_GetError());
     }
 
-    int w, h;
+    int width, height;
 
-    int rc = SDL_QueryTexture(texture, nullptr, nullptr, &w, &h);
+    int rc = SDL_QueryTexture(texture, nullptr, nullptr, &width, &height);
 
     if (rc)
     {
         throw Exception(SDL_GetError());
     }
 
-    Texture *t = new Texture(texture, w, h);
+    Texture *t = new Texture(texture, width, height);
 
 
     if (not t)

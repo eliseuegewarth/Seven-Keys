@@ -20,12 +20,12 @@ using std::unique_ptr;
 class Bitmap
 {
 public:
-    Bitmap(void *data, int w, int h);
+    Bitmap(void *data, int width, int height);
     Bitmap(Canvas *canvas);
     ~Bitmap();
 
-    int w() const;
-    int h() const;
+    int width() const;
+    int height() const;
     void * data() const;
     void * pixels() const;
     void clear();

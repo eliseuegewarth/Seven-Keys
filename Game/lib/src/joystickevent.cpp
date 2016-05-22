@@ -14,7 +14,7 @@
 
 using std::map;
 
-static bool joystick_was_init = false;
+static bool joystick_widthas_init = false;
 static map<int, JoyStickEvent::Button> m_joystick_table;
 
 void init_table_joystick()
@@ -59,10 +59,10 @@ JoyStickEvent::button() const
 JoyStickEvent
 JoyStickEvent::from_SDL(const SDL_Event& event)
 {
-    if (not joystick_was_init)
+    if (not joystick_widthas_init)
     {
         init_table_joystick();
-        joystick_was_init = true;
+        joystick_widthas_init = true;
     }
 
     JoyStickEvent::State state = (event.type == SDL_CONTROLLERBUTTONDOWN ?

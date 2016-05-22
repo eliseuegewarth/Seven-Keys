@@ -16,8 +16,8 @@
 class Bitmap::Impl
 {
 public:
-    Impl(void *data, int w, int h)
-        : m_w(w), m_h(h)
+    Impl(void *data, int width, int height)
+        : m_width(width), m_height(height)
     {
         m_bitmap = static_cast<SDL_Surface *>(data);
     }
@@ -30,26 +30,26 @@ public:
         }
     }
 
-    int w() const { return m_w; }
-    int h() const { return m_h; }
+    int width() const { return m_width; }
+    int height() const { return m_height; }
     SDL_Surface * data() const { return m_bitmap; }
     void * pixels() const { return m_bitmap->pixels; }
     void clear() { SDL_FillRect(m_bitmap, nullptr, 0); }
 
     void fill(const Rect& r, Uint32 color)
     {
-        SDL_Rect rect { (int) r.x(), (int) r.y(), (int) r.w(), (int) r.h() };
+        SDL_Rect rect { (int) r.x(), (int) r.y(), (int) r.width(), (int) r.height() };
 
         SDL_FillRect(m_bitmap, &rect, color);
     }
 
 private:
-    int m_w, m_h;
+    int m_width, m_height;
     SDL_Surface *m_bitmap;
 };
 
-Bitmap::Bitmap(void *data, int w, int h)
-    : m_impl(new Impl(data, w, h))
+Bitmap::Bitmap(void *data, int width, int height)
+    : m_impl(new Impl(data, width, height))
 {
 }
 
@@ -70,15 +70,15 @@ Bitmap::data() const
 }
 
 int
-Bitmap::w() const
+Bitmap::width() const
 {
-    return m_impl->w();
+    return m_impl->width();
 }
 
 int
-Bitmap::h() const
+Bitmap::height() const
 {
-    return m_impl->h();
+    return m_impl->height();
 }
 
 Bitmap *

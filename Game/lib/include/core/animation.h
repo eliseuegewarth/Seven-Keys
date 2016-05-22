@@ -18,7 +18,7 @@ using std::unique_ptr;
 class Animation
 {
 public:
-    Animation(const string& image, double x, double y, double w, double h,
+    Animation(const string& image, double x, double y, double width, double height,
         int frames, unsigned long speed_in_ms, bool loop = false);
     ~Animation();
 
@@ -27,8 +27,8 @@ public:
     void update(unsigned long elapsed);
     void draw(double x, double y);
 
-    double w() const;
-    double h() const;
+    double width() const;
+    double height() const;
 
     void set_row(int row);
 

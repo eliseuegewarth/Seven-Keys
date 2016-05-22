@@ -24,7 +24,7 @@ public:
 
         if (m_texture)
         {
-            parent->set_dimensions(m_texture->w(), m_texture->h());
+            parent->set_dimensions(m_texture->width(), m_texture->height());
         }
     }
 

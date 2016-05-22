@@ -10,7 +10,7 @@
 #include "core/texture.h"
 #include "core/environment.h"
 
-#include <cassert> 
+#include <cassert>
 
 class Image::Impl
 {
@@ -20,7 +20,7 @@ public:
     {
         Environment *env = Environment::get_instance();
         m_texture = env->resources_manager->get_texture(texture);
-        parent->set_dimensions(m_texture->w(), m_texture->h());
+        parent->set_dimensions(m_texture->width(), m_texture->height());
     }
 
     void draw_self()

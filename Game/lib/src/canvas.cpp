@@ -185,8 +185,8 @@ Canvas::draw(const Rect& rect) const
     SDL_Rect rectangle;
     rectangle.x = x;
     rectangle.y = y;
-    rectangle.w = rect.w();
-    rectangle.h = rect.h();
+    rectangle.w = rect.width();
+    rectangle.h = rect.height();
 
     SDL_RenderDrawRect(m_renderer, &rectangle);
 }
@@ -210,8 +210,8 @@ Canvas::fill(const Rect& rect) const
     SDL_Rect rectangle;
     rectangle.x = rect.x() - env->camera->x();
     rectangle.y = rect.y() - env->camera->y();
-    rectangle.w = rect.w();
-    rectangle.h = rect.h();
+    rectangle.w = rect.width();
+    rectangle.h = rect.height();
 
     SDL_RenderFillRect(m_renderer, &rectangle);
 }
@@ -352,8 +352,8 @@ Canvas::draw(const Texture *texture, Rect clip, double x, double y, double width
 
     int orig_x = (int) clip.x();
     int orig_y = (int) clip.y();
-    int orig_width = (int) clip.w();
-    int orig_height = (int) clip.h();
+    int orig_width = (int) clip.width();
+    int orig_height = (int) clip.height();
 
     int dest_x = (int) x - env->camera->x();
     int dest_y = (int) y - env->camera->y();
@@ -361,7 +361,7 @@ Canvas::draw(const Texture *texture, Rect clip, double x, double y, double width
     int dest_width = ((int) width );
     if (width==0)
     {
-        dest_width = ((int) texture->w());
+        dest_width = ((int) texture->width());
     }else
     {
         // Do Nothing
@@ -370,7 +370,7 @@ Canvas::draw(const Texture *texture, Rect clip, double x, double y, double width
     int dest_height = ((int) height );
     if (height!=0)
     {
-        dest_height = ((int) texture->h());
+        dest_height = ((int) texture->height());
     }else
     {
         // Do Nothing
