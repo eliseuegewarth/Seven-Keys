@@ -39,7 +39,7 @@ Square::~Square()
 double
 Square::size()
 {
-    return w();
+    return width();
 }
 
 bool
@@ -112,9 +112,9 @@ Square::update_self(unsigned long elapsed)
         x = 0;
     }
 
-    if (x + w() > env->canvas->width())
+    if (x + width() > env->canvas->width())
     {
-        x = env->canvas->width() - w();
+        x = env->canvas->width() - width();
     }
 
     set_x(x);
