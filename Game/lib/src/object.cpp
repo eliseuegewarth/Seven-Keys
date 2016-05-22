@@ -68,11 +68,11 @@ public:
             break;
 
         case CENTER:
-            x = (object->w() - m_box.w())/2 + object->x();
+            x = (object->width() - m_box.width())/2 + object->x();
             break;
 
         case RIGHT:
-            x = object->w() - m_box.w() + object->x();
+            x = object->width() - m_box.width() + object->x();
             break;
 
         default:
@@ -88,11 +88,11 @@ public:
             break;
 
         case MIDDLE:
-            y = (object->h() - m_box.h())/2 + object->y();
+            y = (object->height() - m_box.height())/2 + object->y();
             break;
 
         case BOTTOM:
-            y = object->h() - m_box.h() + object->y();
+            y = object->height() - m_box.height() + object->y();
             break;
 
         default:
@@ -191,14 +191,14 @@ public:
         return m_box.y();
     }
 
-    double w() const
+    double width() const
     {
-        return m_box.w();
+        return m_box.width();
     }
 
-    double h() const
+    double height() const
     {
-        return m_box.h();
+        return m_box.height();
     }
 
     void set_x(double x)
@@ -211,14 +211,14 @@ public:
         m_box.set_y(y);
     }
 
-    void set_w(double w)
+    void set_width(double width)
     {
-        m_box.set_w(w);
+        m_box.set_width(width);
     }
 
-    void set_h(double h)
+    void set_height(double height)
     {
-        m_box.set_h(h);
+        m_box.set_height(height);
     }
 
 
@@ -227,9 +227,9 @@ public:
         m_box.set_position(x, y);
     }
 
-    void set_dimensions(double w, double h)
+    void set_dimensions(double width, double height)
     {
-        m_box.set_dimensions(w, h);
+        m_box.set_dimensions(width, height);
     }
 
     void set_parent(Object *parent)
@@ -280,8 +280,8 @@ private:
     list<Object *> m_observers;
 };
 
-Object::Object(Object *parent, ObjectID id, double x, double y, double w,
-    double h) : m_impl(new Object::Impl(this, parent, id, x, y, w, h))
+Object::Object(Object *parent, ObjectID id, double x, double y, double width,
+    double height) : m_impl(new Object::Impl(this, parent, id, x, y, width, height))
 {
 }
 
@@ -314,15 +314,15 @@ Object::y() const
 }
 
 double
-Object::w() const
+Object::width() const
 {
-    return m_impl->w();
+    return m_impl->width();
 }
 
 double
-Object::h() const
+Object::height() const
 {
-    return m_impl->h();
+    return m_impl->height();
 }
 
 const Rect&
@@ -344,15 +344,15 @@ Object::set_y(double y)
 }
 
 void
-Object::set_w(double w)
+Object::set_width(double width)
 {
-    m_impl->set_w(w);
+    m_impl->set_width(width);
 }
 
 void
-Object::set_h(double h)
+Object::set_height(double height)
 {
-    m_impl->set_h(h);
+    m_impl->set_height(height);
 }
 
 void
@@ -362,9 +362,9 @@ Object::set_position(double x, double y)
 }
 
 void
-Object::set_dimensions(double w, double h)
+Object::set_dimensions(double width, double height)
 {
-    m_impl->set_dimensions(w, h);
+    m_impl->set_dimensions(width, height);
 }
 
 void

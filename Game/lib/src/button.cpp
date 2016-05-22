@@ -35,12 +35,12 @@ public:
         m_state(IDLE)
     {
         Environment *env = Environment::get_instance();
-        
+
         m_idle_texture = env->resources_manager->get_texture(idle_image_id);
         m_active_texture = env->resources_manager->get_texture(active_image_id);
 
         m_button->set_position(0.0, 0.0);
-        m_button->set_dimensions(m_idle_texture->w(), m_idle_texture->h());
+        m_button->set_dimensions(m_idle_texture->width(), m_idle_texture->height());
     }
 
 
@@ -94,7 +94,7 @@ public:
 
             if (m_active_texture.get())
             {
-                m_button->set_dimensions(m_active_texture->w(), m_active_texture->h());
+                m_button->set_dimensions(m_active_texture->width(), m_active_texture->height());
             }
 
             return true;
@@ -104,7 +104,7 @@ public:
 
             if (m_idle_texture.get())
             {
-                m_button->set_dimensions(m_idle_texture->w(), m_idle_texture->h());
+                m_button->set_dimensions(m_idle_texture->width(), m_idle_texture->height());
             }
         }
 
@@ -145,7 +145,7 @@ public:
                 env->canvas->draw(r, m_border);
 
                 r.set_position(r.x() + 1, r.y() + 1);
-                r.set_dimensions(r.w() - 2, r.h() - 2);
+                r.set_dimensions(r.width() - 2, r.height() - 2);
             }
 
             env->canvas->fill(r, color);
@@ -170,8 +170,8 @@ private:
 
 ActionID Button::clickedID = "clicked()";
 
-Button::Button(Object *parent, ObjectID id, double w, double h)
-    : Object(parent, id, 0, 0, w, h), m_impl(new Impl(this))
+Button::Button(Object *parent, ObjectID id, double width, double height)
+    : Object(parent, id, 0, 0, width, height), m_impl(new Impl(this))
 {
     Environment *env = Environment::get_instance();
     env->events_manager->register_listener(this);

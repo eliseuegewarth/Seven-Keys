@@ -49,8 +49,8 @@ void Quadtree::clear()
  */
 void Quadtree::split()
 {
-	int subWidth = (int)(m_bounds->h() / 2); //Limit of Width in map, it should be half the area of the rectangle
-   	int subHeight = (int)(m_bounds->h() / 2); //Limit of Height in map, it should be half the area of the rectangle
+	int subWidth = (int)(m_bounds->height() / 2); //Limit of Width in map, it should be half the area of the rectangle
+   	int subHeight = (int)(m_bounds->height() / 2); //Limit of Height in map, it should be half the area of the rectangle
    	int x = (int)m_bounds->x(); //Limit of Axis 'x' in map
    	int y = (int)m_bounds->y();  //Limit of Axis 'y' in map
 
@@ -71,19 +71,19 @@ int Quadtree::getIndex(Object * pRect)
 	assert((pRect != NULL) && "pRect can't be NULL");
    	int index = -1; //Position of player in map
 	//Definition of the middle of the quadrant in axis 'x'
-   	double verticalMidpoint = m_bounds->x() + (m_bounds->w() / 2);
+   	double verticalMidpoint = m_bounds->x() + (m_bounds->width() / 2);
 	//Definition of the middle of the quadrant in axis 'y'
-   	double horizontalMidpoint = m_bounds->y() + (m_bounds->h() / 2);
+   	double horizontalMidpoint = m_bounds->y() + (m_bounds->height() / 2);
 
    // Object can completely fit within the top quadrants
    //Define the upper quadrant
-   	bool topQuadrant = (pRect->y() < horizontalMidpoint && pRect->y() + pRect->h() < horizontalMidpoint);
+   	bool topQuadrant = (pRect->y() < horizontalMidpoint && pRect->y() + pRect->height() < horizontalMidpoint);
 	// Object can completely fit within the bottom quadrants
 	//Define the lower quadrant
    	bool bottomQuadrant = (pRect->y() > horizontalMidpoint);
 
    	// Object can completely fit within the left quadrants
-   	if (pRect->x() < verticalMidpoint && pRect->x() + pRect->w() < verticalMidpoint) {
+   	if (pRect->x() < verticalMidpoint && pRect->x() + pRect->width() < verticalMidpoint) {
     	if (topQuadrant) {
         	index = 1;
       	}

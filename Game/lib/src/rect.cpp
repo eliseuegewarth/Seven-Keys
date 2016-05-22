@@ -12,8 +12,8 @@
 using std::min;
 using std::max;
 
-Rect::Rect(double x, double y, double w, double h)
-    : m_x(x), m_y(y), m_w(w), m_h(h)
+Rect::Rect(double x, double y, double width, double height)
+    : m_x(x), m_y(y), m_width(width), m_height(height)
 {
 }
 
@@ -30,15 +30,15 @@ Rect::y() const
 }
 
 double
-Rect::w() const
+Rect::width() const
 {
-    return m_w;
+    return m_width;
 }
 
 double
-Rect::h() const
+Rect::height() const
 {
-    return m_h;
+    return m_height;
 }
 
 void
@@ -54,15 +54,15 @@ Rect::set_y(double y)
 }
 
 void
-Rect::set_w(double w)
+Rect::set_width(double width)
 {
-    m_w = w;
+    m_width = width;
 }
 
 void
-Rect::set_h(double h)
+Rect::set_height(double height)
 {
-    m_h = h;
+    m_height = height;
 }
 
 void
@@ -73,16 +73,16 @@ Rect::set_position(double x, double y)
 }
 
 void
-Rect::set_dimensions(double w, double h)
+Rect::set_dimensions(double width, double height)
 {
-    m_w = w;
-    m_h = h;
+    m_width = width;
+    m_height = height;
 }
 
 bool
 Rect::contains(double x, double y) const
 {
-    return x >= m_x and x <= m_x + m_w and y >= m_y and y <= m_y + m_h;
+    return x >= m_x and x <= m_x + m_width and y >= m_y and y <= m_y + m_height;
 }
 
 Rect
@@ -94,8 +94,8 @@ Rect::intersection(const Rect& r) const
         double top, bottom;
     } Area;
 
-    Area a { x(), x() + w(), y(), y() + h() };
-    Area b { r.x(), r.x() + r.w(), r.y(), r.y() + r.h() };
+    Area a { x(), x() + width(), y(), y() + height() };
+    Area b { r.x(), r.x() + r.width(), r.y(), r.y() + r.height() };
 
     if (b.right < a.left or b.left > a.right or b.top > a.bottom
         or b.bottom < a.top)

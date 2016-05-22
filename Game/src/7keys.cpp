@@ -77,8 +77,8 @@ SevenKeys::load_level(const string& screen_type)
         shared_ptr <Font> font = env->resources_manager->get_font("res/fonts/TakaoExGothic.ttf");
         env->canvas->set_font(font);
 
-        double w = env->canvas->w();
-        double h = env->canvas->h();
+        double w = env->canvas->width();
+        double h = env->canvas->height();
 
         string ant = screen_type;
 
@@ -127,8 +127,8 @@ SevenKeys::load_level(const string& screen_type)
         shared_ptr <Font> font = env->resources_manager->get_font("res/fonts/TakaoExGothic.ttf");
         env->canvas->set_font(font);
 
-        double w = env->canvas->w();
-        double h = env->canvas->h();
+        double w = env->canvas->width();
+        double h = env->canvas->height();
 
         string ant = screen_type;
 
@@ -153,8 +153,8 @@ SevenKeys::load_level(const string& screen_type)
         Environment *env = Environment::get_instance();
         assert(env != NULL && "failed to pick up the instance of Environment");
         env->sfx->play("res/sounds/gameOver.wav",1);
-        double w = env->canvas->w();
-        double h = env->canvas->h();
+        double w = env->canvas->width();
+        double h = env->canvas->height();
 
         Level *lvl = new Level(screen_type, screen_type);
         assert(lvl != NULL && "failed to create a Level instance");

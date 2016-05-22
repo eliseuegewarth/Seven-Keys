@@ -483,10 +483,10 @@ Environment * env = Environment::get_instance();
 ·Rect c
 ```
 ```c++
-·Guard * guarda
+·Guard * guard
 ```
 ```c++
-·Guard * guarda
+·Guard * guard
 ```
 ```c++
 ·Ghost *ghost

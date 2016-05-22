@@ -11,6 +11,8 @@
 #include <SDL2/SDL.h>
 #include <map>
 
+#include <cassert>
+
 using std::map;
 
 static bool was_init = false;
@@ -139,9 +141,10 @@ void init_table()
 
 KeyboardEvent::KeyboardEvent(State state, Key key, Modifier modifier)
 {
-    assert((state < 0) && "state can't be less than 0");
-    assert((key < 0) && "key can't be less than 0");
-    assert((modifier < 0) && "modifier can't be less than 0");
+    assert((state >= 0) && "state can't be NULL");
+    assert((key >= 0) && "key can't be NULL");
+    assert((modifier >= 0) && "modifier can't be NULL");
+
     m_state = state;
     m_key = key;
     m_modifier = modifier;

@@ -6,7 +6,7 @@
  * Licença: LGPL. Sem copyright.
  */
 #include "titlescreen.h"
- 
+
 #include <ijengine/util/button.h>
 #include <core/font.h>
 #include <core/environment.h>
@@ -19,8 +19,8 @@ TitleScreen::TitleScreen()
 {
     Environment *env = Environment::get_instance();
 
-    double w = env->canvas->w();
-    double h = env->canvas->h();
+    double w = env->canvas->width();
+    double h = env->canvas->height();
 
     set_dimensions(w, h);
 
@@ -31,22 +31,22 @@ TitleScreen::TitleScreen()
     Button *options = new Button(this, "options", "res/interface/menuInicial/opcao.png",
         "res/interface/menuInicial/Sopcao.png");
     options->align_to(this, Object::RIGHT, Object::NONE);
-    options->set_y(jogar->y() + jogar->h() + 15);
+    options->set_y(jogar->y() + jogar->height() + 15);
 
     Button *creditos = new Button(this, "creditos", "res/interface/menuInicial/creditos.png",
         "res/interface/menuInicial/Screditos.png");
     creditos->align_to(this, Object::RIGHT, Object::NONE);
-    creditos->set_y(options->y() + options->h()+15);
+    creditos->set_y(options->y() + options->height()+15);
 
     Button *exit = new Button(this, "exit", "res/interface/menuInicial/sair.png",
         "res/interface/menuInicial/Ssair.png");
     exit->align_to(this, Object::RIGHT, Object::NONE);
-    exit->set_y(creditos->y() + creditos->h() + 15);
+    exit->set_y(creditos->y() + creditos->height() + 15);
 
     Button *extras = new Button (this, "extras", "res/interface/menuInicial/extras.png",
         "res/interface/menuInicial/Sextras.png");
     creditos->align_to(this, Object::MIDDLE, Object::NONE);
-    extras->set_y(creditos->y() +creditos->h() + 15);
+    extras->set_y(creditos->y() +creditos->height() + 15);
 
     jogar->add_observer(this);
     options->add_observer(this);

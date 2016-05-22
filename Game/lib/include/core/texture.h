@@ -20,11 +20,11 @@ using std::unique_ptr;
 class Texture
 {
 public:
-    Texture(void *data, int w, int h);
+    Texture(void *data, int width, int height);
     ~Texture();
 
-    int w() const;
-    int h() const;
+    int width() const;
+    int height() const;
     void * data() const;
 
     static Texture * from_file(const string& path) throw (Exception);

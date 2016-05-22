@@ -1,0 +1,16 @@
+#!/bin/bash
+sudo chmod +x fullMake
+reset
+echo "STARING TO BUILD THE GAME..."
+echo "ENTERING THE GAME ENGINE DIRECTORY..."
+cd lib/
+echo "REMOVING .o AND .d FILES..."
+sudo make clean
+echo "COMPILING THE GAME ENGINE..."
+sudo make install
+echo "RETURNING to THE GAME DIRECTORY..."
+cd ..
+echo "REMOVING .o AND .d FILES..."
+sudo make clean
+echo "COMPILING THE GAME..."
+sudo make -j8

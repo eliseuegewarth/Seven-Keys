@@ -30,11 +30,12 @@ Credits::Credits() : Level("credits")
 
     assert(env != NULL && "Failed to pick up the instance of environment");
 
-    double width = env->canvas->w();
-    double height = env->canvas->h();
+    double width = env->canvas->width();
+    double height = env->canvas->height();
 
     set_dimensions(width, height);
 
+    // Button used to return to main menu
     Button *back = new Button(this, "back", resume_button_path,
                               resume_button_path_highlight);
 
@@ -56,6 +57,7 @@ void Credits::draw_self()
     assert((env != NULL) && "Failed to pick up the instance of environment");
     env->canvas->clear(Color::WHITE);
 
+    // Image background of the credits
     shared_ptr<Texture> image = env->resources_manager->
           get_texture(screen_credits_image_path);
 
@@ -74,6 +76,7 @@ bool Credits::on_message(Object *object, MessageID id, Parameters)
         return false;
     }
 
+    // Button used to verify if the back button was clicked
     Button *button = dynamic_cast <Button *>(object);
 
     if (not button)

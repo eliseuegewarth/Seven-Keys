@@ -94,8 +94,8 @@ public:
 
         Environment *env = Environment::get_instance();
 
-        m_x = (env->camera->w() - m_texture->w())/2 + env->camera->x();
-        m_y = (env->camera->h() - m_texture->h())/2 + env->camera->y();
+        m_x = (env->camera->width() - m_texture->width())/2 + env->camera->x();
+        m_y = (env->camera->height() - m_texture->height())/2 + env->camera->y();
     }
 
     void draw_self()

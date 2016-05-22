@@ -27,7 +27,7 @@ class Object
 {
 public:
     Object(Object *parent = nullptr, ObjectID id = "", double x = 0,
-        double y = 0, double w = 1, double h = 1);
+        double y = 0, double width = 1, double height = 1);
     virtual ~Object();
 
     Object * parent() const;
@@ -36,8 +36,8 @@ public:
 
     double x() const;
     double y() const;
-    double w() const;
-    double h() const;
+    double width() const;
+    double height() const;
 
     const Rect& bounding_box() const;
 
@@ -45,8 +45,8 @@ public:
 
     void set_x(double x);
     void set_y(double y);
-    void set_w(double w);
-    void set_h(double h);
+    void set_width(double width);
+    void set_height(double height);
 
     void set_visible(bool visible = true);
 
@@ -57,7 +57,7 @@ public:
     void set_mass(double mass);
 
     void set_position(double x, double y);
-    void set_dimensions(double w, double h);
+    void set_dimensions(double width, double height);
     void set_parent(Object *parent);
 
     typedef enum { NONE, LEFT, CENTER, RIGHT, TOP, MIDDLE, BOTTOM }

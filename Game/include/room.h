@@ -23,7 +23,7 @@ public:
 	Room(Object *parent, ObjectID id, string type = "None", Room *left = nullptr, Room *top = nullptr, Room *right = nullptr, Room *bottom = nullptr, int stage_id = 1);
 
 	~Room();
-	
+
 	Room *r_left;
 	Room *r_right;
 	Room *r_top;
@@ -60,7 +60,7 @@ private:
     void update_self(unsigned long);
 
     void add_door(string type, char direction, int x, int y);
-    void pre_drawing(const string item_name, string item_type, int percentage, 
+    void pre_drawing(const string item_name, string item_type, int percentage,
     	int pos_x, int pos_y, int width, int height, bool walkable);
 
     void fill_floor(const string& name);

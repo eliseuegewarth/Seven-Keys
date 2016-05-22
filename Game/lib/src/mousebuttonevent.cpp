@@ -8,11 +8,14 @@
 #include <cassert>
 #include "core/mousebuttonevent.h"
 
+#include <cassert>
+
 MouseButtonEvent::MouseButtonEvent(ButtonState state, Button button,
                                     double x, double y)
 {
-    assert((state < 0) && "state can't be less than 0");
-    assert((button < 0) && "button can't be less than 0");
+    assert((state >= 0) && "state can't be negative");
+    assert((button >= 0) && "button can't be negative");
+
     m_state = state;
     m_button = button;
     m_x = x;

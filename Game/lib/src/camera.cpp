@@ -27,17 +27,17 @@ public:
     {
         if (m_mode == Camera::FOLLOWING and m_target)
         {
-            double x = m_target->x() + (m_target->w() - m_camera->w())/2;
-            double y = m_target->y() + (m_target->h() - m_camera->h())/2;
+            double x = m_target->x() + (m_target->width() - m_camera->width())/2;
+            double y = m_target->y() + (m_target->height() - m_camera->height())/2;
 
             if (x < m_limits.x())
             {
                 x = m_limits.x();
             }
 
-            if (x + m_camera->w() > m_limits.x() + m_limits.w())
+            if (x + m_camera->width() > m_limits.x() + m_limits.width())
             {
-                x = m_limits.x() + m_limits.w() - m_camera->w();
+                x = m_limits.x() + m_limits.width() - m_camera->width();
             }
 
             if (y < m_limits.y())
@@ -45,9 +45,9 @@ public:
                 y = m_limits.y();
             }
 
-            if (y + m_camera->h() > m_limits.y() + m_limits.h())
+            if (y + m_camera->height() > m_limits.y() + m_limits.height())
             {
-                y = m_limits.y() + m_limits.h() - m_camera->h();
+                y = m_limits.y() + m_limits.height() - m_camera->height();
             }
 
             m_camera->set_position(x, y);
@@ -68,8 +68,8 @@ private:
     Rect m_limits;
 };
 
-Camera::Camera(double x, double y, double w, double h, Mode mode)
-    : Object(nullptr, "", x, y, w, h), m_impl(new Camera::Impl(this, mode))
+Camera::Camera(double x, double y, double width, double height, Mode mode)
+    : Object(nullptr, "", x, y, width, height), m_impl(new Camera::Impl(this, mode))
 {
 }
 

@@ -18,14 +18,14 @@ Extras::Extras() : Level("extras")
     const Environment *env = Environment::get_instance(); // It is an object of the class environment. Is a pointer to the current instance of the game environment.
     assert((env != NULL) && "Failed to pick up the instance of environment");
 
-    const double w = env->canvas->w(); // Receives the width of the game environment.
-    const double h = env->canvas->h(); // Receives the height of the game environment.
+    const double width = env->canvas->width(); // Receives the width of the game environment.
+    const double height = env->canvas->height(); // Receives the height of the game environment.
 
-    set_dimensions(w, h);
+    set_dimensions(width, height);
 
     // Directs to the cutscene of the game.
     Button *cutscene = new Button(this, "cutscene", "res/interface/menuExtras/cutscenes.png",
-                                  "res/interface/menuExtras/Scutscenes.png"); 
+                                  "res/interface/menuExtras/Scutscenes.png");
     assert((cutscene != NULL) && "Failed to pick up the instance of button");
     cutscene->align_to(this, Object::MIDDLE, Object::NONE);
     cutscene->set_y(200);
@@ -35,14 +35,14 @@ Extras::Extras() : Level("extras")
                                   "res/interface/menuExtras/Shistoria.png");
     assert((historia != NULL) && "Failed to pick up the instance of button");
     historia->align_to(this, Object::MIDDLE, Object::NONE);
-    historia->set_y(cutscene->y() + cutscene->h()+20);
+    historia->set_y(cutscene->y() + cutscene->height()+20);
 
     // Directs to the main menu of the game.
     Button *back = new Button(this, "back", "res/interface/menuExtras/voltar.png",
                               "res/interface/menuExtras/Svoltar.png");
     assert((back != NULL) && "Failed to pick up the instance of button");
     back->align_to(this, Object::MIDDLE, Object::NONE);
-    back->set_y(historia->y() + historia->h()+20);
+    back->set_y(historia->y() + historia->height()+20);
 
     cutscene->add_observer(this);
     historia->add_observer(this);
@@ -65,7 +65,7 @@ Extras::~Extras()
 void Extras::draw_self()
 {
     // It is an object of the class environment. Is a pointer to the current instance of the game environment.
-    const Environment *env = Environment::get_instance(); 
+    const Environment *env = Environment::get_instance();
     assert((env != NULL) && "Failed to pick up the instance of environment");
     env->canvas->clear(Color::WHITE);
 

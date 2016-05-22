@@ -11,8 +11,8 @@
 
 using namespace std;
 
-const string& GHOST_GUARD_RUNNING_PATH = "res/sprites/ghost_guarda1_running.png";
-const string& GHOST_GUARD_3_RUNNING_PATH = "res/sprites/ghost_guarda3_running.png";
+const string& GHOST_GUARD_RUNNING_PATH = "res/sprites/ghost_guard1_running.png";
+const string& GHOST_GUARD_3_RUNNING_PATH = "res/sprites/ghost_guard3_running.png";
 
 /**
  * [Ghost::Ghost Loads the guard information in the game]
@@ -56,8 +56,8 @@ Ghost::Ghost(Object *parent, ObjectID id,
        //do nothing
     }
     this->set_mass(mass_of_ghost_guard);
-    this->set_w(70);
-    this->set_h(70);
+    set_width(70);
+    set_height(70);
     this->set_walkable(walkable);
     update_vision();
 }

@@ -19,10 +19,10 @@ Pause::Pause() : Level("pause")
     Environment *env = Environment::get_instance();
     assert((env != NULL) && "Failed to pick up the instance of environment");
 
-    double w = env->canvas->w();// Receives the width of the game environment.
-    double h = env->canvas->h();// Receives the height of the game environment.
+    double width = env->canvas->width();// Receives the width of the game environment.
+    double height = env->canvas->height();// Receives the height of the game environment.
 
-    set_dimensions(w, h);
+    set_dimensions(width, height);
     // Directs the environment where the game was paused.
     Button *backGame = new Button(this, "backGame", "res/interface/menuPausa/voltarJogo.png",
                                   "res/interface/menuPausa/SvoltarJogo.png");
@@ -37,7 +37,7 @@ Pause::Pause() : Level("pause")
     assert((backMenu != NULL) && "Failed to pick up the instance of button");
 
     backMenu->align_to(this, Object::RIGHT, Object::NONE);
-    backMenu->set_y(backGame->y() + backGame->h()+20);
+    backMenu->set_y(backGame->y() + backGame->height()+20);
 
     // Closes the game.
     Button *exit = new Button(this, "exit", "res/interface/menuExtras/sair.png",
@@ -45,7 +45,7 @@ Pause::Pause() : Level("pause")
     assert((exit != NULL) && "Failed to pick up the instance of button");
 
     exit->align_to(this, Object::RIGHT, Object::NONE);
-    exit->set_y(backGame->y() + backGame->h()+20);
+    exit->set_y(backGame->y() + backGame->height()+20);
 
     backGame->add_observer(this);
     backMenu->add_observer(this);
@@ -101,7 +101,5 @@ bool Pause::on_message(Object *object, MessageID id, Parameters)// Let the dynam
     finish();
 
     return true;
-    
+
 }
-
-
