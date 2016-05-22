@@ -4,6 +4,10 @@ reset
 echo "STARING TO BUILD THE GAME..."
 echo "ENTERING THE GAME ENGINE DIRECTORY..."
 cd lib/
+echo "Creating lib directory if it does not exist."
+mkdir "lib"
+echo "Creating obj directory if it does not exist."
+mkdir "obj"
 echo "REMOVING .o AND .d FILES..."
 sudo make clean
 echo "COMPILING THE GAME ENGINE..."
