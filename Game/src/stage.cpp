@@ -308,13 +308,13 @@ Stage::on_message(Object *, MessageID id, Parameters p)
     if (id == Player::changeRoomID)
     {
         if(p == "left")
-            m_map->set_current(m_map->current_room->r_left);
+            m_map->set_current(m_map->current_room->room_in_left);
         else if(p == "top")
-            m_map->set_current(m_map->current_room->r_top);
+            m_map->set_current(m_map->current_room->room_in_top);
         else if(p == "right")
-            m_map->set_current(m_map->current_room->r_right);
+            m_map->set_current(m_map->current_room->room_in_right);
         else if(p == "bottom")
-            m_map->set_current(m_map->current_room->r_bottom);
+            m_map->set_current(m_map->current_room->room_in_bottom);
 
         return true;
     }
