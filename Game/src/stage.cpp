@@ -111,9 +111,173 @@ void Stage::threat_colision_boss(list<Object*> map_objects)
     }
 }
 
-void Stage::update_self(unsigned long)
+void Stage::threat_colision_not_walkable_objects(Object * item,
+    Rect bounding_box_player, Rect bounding_box_item, Rect intersection)
 {
+    if(item->id() == "paredet")
+    {
+        if (intersection.width() != 0 and intersection.height() > 50)
+        {
+            char message[512];
+            sprintf(message, "%s,%s,%.2f,%.2f,%.2f,%.2f",
+                m_player->id().c_str(), item->id().c_str(), intersection.x(),
+                intersection.y(), intersection.width(), intersection.height());
 
+            notify(Stage::colisionID, message);
+
+            if(bounding_box_player.y() > bounding_box_item.y())
+            {
+                m_player->set_y(bounding_box_item.y() +
+                bounding_box_item.height() - 50);
+            }
+        }
+    }
+    else if (intersection.width() != 0 and intersection.height() != 0)
+    {
+        char message[512];
+        sprintf(message, "%s,%s,%.2f,%.2f,%.2f,%.2f", m_player->id().c_str(),
+            item->id().c_str(), intersection.x(), intersection.y(),
+            intersection.width(), intersection.height());
+
+        notify(Stage::colisionID, message);
+
+        //eixo x
+        if(abs(bounding_box_player.x() - bounding_box_item.x()) >
+            abs(bounding_box_player.y() - bounding_box_item.y()))
+        {
+            if(bounding_box_player.x() < bounding_box_item.x())
+            {
+                m_player->set_x(bounding_box_item.x() - bounding_box_player.width() + 1);
+            }
+            else if(bounding_box_player.x() > bounding_box_item.x())
+            {
+                m_player->set_x(bounding_box_item.x() + bounding_box_item.width() - 1);
+            }
+        }
+        else
+        {
+            if(bounding_box_player.y() < bounding_box_item.y())
+            {
+                m_player->set_y(bounding_box_item.y() - bounding_box_player.height() + 1);
+            }
+            else if(bounding_box_player.y() > bounding_box_item.y())
+            {
+                m_player->set_y(bounding_box_item.y() + bounding_box_item.height() - 1);
+            }
+        }
+    }
+}
+
+void Stage::threat_colision_walkable_objects(Object * item, Rect intersection)
+{
+    if (intersection.width() != 0 and intersection.height() != 0)
+    {
+        char message[512];
+        sprintf(message, "%s,%s,%.2f,%.2f,%.2f,%.2f", m_player->id().c_str(), item->id().c_str(), intersection.x(),
+            intersection.y(), intersection.width(), intersection.height());
+
+        notify(Stage::colisionID, message);
+
+    }
+    if(intersection.width() > 50 and intersection.height() > 50)
+    {
+        if(item->id() == "door")
+        {
+            if(item->x() == 0 && item->y() == 320)
+            {
+                m_player->set_current("left", 1120, m_player->y());
+                m_map->m_boss->set_position(1120, m_player->y());
+            }
+            else if(item->x() == 1200 && item->y() == 320)
+            {
+                m_player->set_current("right", 80, m_player->y());
+                m_map->m_boss->set_position(80, m_player->y());
+            }
+            else if(item->x() == 600 && item->y() == 0)
+            {
+                m_player->set_current("top", m_player->x(), 560);
+                m_map->m_boss->set_position(m_player->x(), 560);
+            }
+            else if(item->x() == 600 && item->y() == 640)
+            {
+                m_player->set_current("bottom", m_player->x(), 80);
+                m_map->m_boss->set_position(m_player->x(), 80);
+            }
+        }
+
+    }
+}
+
+void Stage::threat_colision_guard(Object *item, Rect intersection)
+{
+    // Instance of guard
+    Guard *guard = (Guard*) item;
+    const list<Object *> objects = item->children();
+    Environment *env = Environment::get_instance();
+    for (auto object : objects)
+    {
+        // Bounding box of the player
+        Rect bounding_box_player2 = m_player->bounding_box();
+
+        //Bounding box of one of the room's guards
+        Rect bounding_box_guard = object->bounding_box();
+
+        Rect intersection2 = bounding_box_player2.intersection(bounding_box_guard);
+
+        if (intersection2.width() != 0 and intersection2.height() != 0)
+        {
+            if(object->id() == "visao")
+            {
+                if(guard->type() != "follow")
+                {
+                    env->sfx->play("res/sounds/alemaogritando.wav",1);
+                    guard->m_old_type = guard->type();
+                    guard->set_type("follow");
+                }
+                if ((intersection2.width() != 0 and intersection2.height() != 0) && (intersection.width() != 0 and intersection.height() != 0))
+                {
+                    if(m_player->health() > 0)
+                    {
+                        m_player->set_health(m_player->health() - guard->damage());
+                        if(m_player->health() < 0)
+                            m_player->set_health(0);
+                    }
+                }
+            }
+        }
+
+    }
+
+    if(guard->type() == "follow")
+    {
+        guard->get_playerx(m_player->x());
+        guard->get_playery(m_player->y());
+    }
+}
+
+void Stage::threat_colision_ghost(Object *item, Rect intersection)
+{
+    Ghost *ghost = (Ghost*) item;
+    ghost->get_playerx(m_player->x());
+    ghost->get_playery(m_player->y());
+    const list<Object *> objects = item->children();
+
+    //Withdraw player's life
+    if (intersection.width() != 0 and intersection.height() != 0)
+    {
+        if(m_player->health() > 0)
+        {
+            m_player->set_health(m_player->health() - ghost->damage());
+            if(m_player->health() < 0)
+                m_player->set_health(0);
+
+            m_player->set_sanity(m_player->sanity() - ghost->damage()/2);
+        }
+    }
+}
+
+void Stage::threat_colision()
+{
     // Receive the list of the objects of the current room
     const list<Object*> map_objects = m_map->children();
 
@@ -124,168 +288,38 @@ void Stage::update_self(unsigned long)
 
     for (auto item : items)
     {
-        Rect bounding_box_player = m_player->bounding_box();
-        Rect bounding_box_item = item->bounding_box();
-        Rect intersection = bounding_box_player.intersection(bounding_box_item);
+          Rect bounding_box_player = m_player->bounding_box();
+          Rect bounding_box_item = item->bounding_box();
+          Rect intersection = bounding_box_player.intersection(bounding_box_item);
 
-        // Threating direct colisions
-        if(item->walkable() == false)
-        {
-            if(item->id() == "paredet")
-            {
-                if (intersection.width() != 0 and intersection.height() > 50)
-                {
-                    char message[512];
-                    sprintf(message, "%s,%s,%.2f,%.2f,%.2f,%.2f", m_player->id().c_str(), item->id().c_str(), intersection.x(),
-                        intersection.y(), intersection.width(), intersection.height());
-                    notify(Stage::colisionID, message);
+          if(item->walkable() == false)
+          {
+              threat_colision_not_walkable_objects(item, bounding_box_player,
+                bounding_box_item, intersection);
+          }
+          else
+          {
+              threat_colision_walkable_objects(item, intersection);
+          }
 
-                    if(bounding_box_player.y() > bounding_box_item.y())
-                    {
-                        m_player->set_y(bounding_box_item.y() + bounding_box_item.height() - 50);
-                    }
-                }
-            }
-            else if (intersection.width() != 0 and intersection.height() != 0)
-            {
-                char message[512];
-                sprintf(message, "%s,%s,%.2f,%.2f,%.2f,%.2f", m_player->id().c_str(), item->id().c_str(), intersection.x(),
-                    intersection.y(), intersection.width(), intersection.height());
-                notify(Stage::colisionID, message);
+          if(item->id() == "guard")
+          {
+              threat_colision_guard(item, intersection);
+          }
+          else if(item->id() == "ghost")
+          {
+              threat_colision_ghost(item, intersection);
+          }
+          else
+          {
+              // Do nothing
+          }
+      }
+}
 
-                //eixo x
-                if(abs(bounding_box_player.x() - bounding_box_item.x()) > abs(bounding_box_player.y() - bounding_box_item.y()))
-                {
-                    if(bounding_box_player.x() < bounding_box_item.x())
-                    {
-                        m_player->set_x(bounding_box_item.x() - bounding_box_player.width() + 1);
-                    }
-                    else if(bounding_box_player.x() > bounding_box_item.x())
-                    {
-                        m_player->set_x(bounding_box_item.x() + bounding_box_item.width() - 1);
-                    }
-                }
-                else
-                {
-                    if(bounding_box_player.y() < bounding_box_item.y())
-                    {
-                        m_player->set_y(bounding_box_item.y() - bounding_box_player.height() + 1);
-                    }
-                    else if(bounding_box_player.y() > bounding_box_item.y())
-                    {
-                        m_player->set_y(bounding_box_item.y() + bounding_box_item.height() - 1);
-                    }
-                }
-            }
-        }
-        else
-        {
-            if (intersection.width() != 0 and intersection.height() != 0)
-            {
-                char message[512];
-                sprintf(message, "%s,%s,%.2f,%.2f,%.2f,%.2f", m_player->id().c_str(), item->id().c_str(), intersection.x(),
-                    intersection.y(), intersection.width(), intersection.height());
-
-                notify(Stage::colisionID, message);
-
-            }
-            if(intersection.width() > 50 and intersection.height() > 50)
-            {
-                if(item->id() == "door")
-                {
-                    if(item->x() == 0 && item->y() == 320)
-                    {
-                        m_player->set_current("left", 1120, m_player->y());
-                        m_map->m_boss->set_position(1120, m_player->y());
-                    }
-                    else if(item->x() == 1200 && item->y() == 320)
-                    {
-                        m_player->set_current("right", 80, m_player->y());
-                        m_map->m_boss->set_position(80, m_player->y());
-                    }
-                    else if(item->x() == 600 && item->y() == 0)
-                    {
-                        m_player->set_current("top", m_player->x(), 560);
-                        m_map->m_boss->set_position(m_player->x(), 560);
-                    }
-                    else if(item->x() == 600 && item->y() == 640)
-                    {
-                        m_player->set_current("bottom", m_player->x(), 80);
-                        m_map->m_boss->set_position(m_player->x(), 80);
-                    }
-                }
-
-            }
-        }
-
-        //Threating guard's vision
-        if(item->id() == "guard")
-        {
-            // Instance of guard
-            Guard *guard = (Guard*) item;
-            const list<Object *> objects = item->children();
-            Environment *env = Environment::get_instance();
-            for (auto object : objects)
-            {
-                // Bounding box of the player
-                Rect bounding_box_player2 = m_player->bounding_box();
-
-                //Bounding box of one of the room's guards
-                Rect bounding_box_guard = object->bounding_box();
-
-                Rect intersection2 = bounding_box_player2.intersection(bounding_box_guard);
-
-                if (intersection2.width() != 0 and intersection2.height() != 0)
-                {
-                    if(object->id() == "visao")
-                    {
-                        if(guard->type() != "follow")
-                        {
-                            env->sfx->play("res/sounds/alemaogritando.wav",1);
-                            guard->m_old_type = guard->type();
-                            guard->set_type("follow");
-                        }
-                        if ((intersection2.width() != 0 and intersection2.height() != 0) && (intersection.width() != 0 and intersection.height() != 0))
-                            {
-                                if(m_player->health() > 0)
-                                {
-                                    m_player->set_health(m_player->health() - guard->damage());
-                                    if(m_player->health() < 0)
-                                        m_player->set_health(0);
-                                }
-                            }
-                    }
-                }
-
-            }
-
-            if(guard->type() == "follow")
-            {
-                guard->get_playerx(m_player->x());
-                guard->get_playery(m_player->y());
-            }
-        }
-        else if(item->id() == "ghost")
-        {
-            Ghost *ghost = (Ghost*) item;
-            ghost->get_playerx(m_player->x());
-            ghost->get_playery(m_player->y());
-            const list<Object *> objects = item->children();
-
-            //retirar vida do player
-            if (intersection.width() != 0 and intersection.height() != 0)
-            {
-                if(m_player->health() > 0)
-                {
-                    m_player->set_health(m_player->health() - ghost->damage());
-                    if(m_player->health() < 0)
-                        m_player->set_health(0);
-
-                    m_player->set_sanity(m_player->sanity() - ghost->damage()/2);
-                }
-            }
-        }
-    }
+void Stage::update_self(unsigned long)
+{
+    threat_colision();
 }
 
 void Stage::draw_self()
