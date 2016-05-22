@@ -1,10 +1,8 @@
 /*
- * Implementação da classe que representa a área da janela a ser desenhada.
- *
- * Autor: Edson Alves
- * Data: 13/04/2015
+ * Implementation of the class that represents the area of the window to be drawn.
  * Licença: LGPL. Sem copyright.
  */
+
 #include "core/canvas.h"
 
 #include "core/point.h"
@@ -16,62 +14,89 @@
 #include "core/bitmap.h"
 #include "core/environment.h"
 
-Canvas::Canvas(SDL_Renderer *renderer, int width, int height)
+#include <cassert>
+
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param renderer [description]
+ * @param width [description]
+ * @param height [description]
+ * @param h [description]
+ * @param t [description]
+ * @param e [description]
+ */
+Canvas::Canvas(SDL_Renderer *renderer, const int width, const int height)
     : m_renderer(renderer), m_width(width), m_height(height), m_blend_mode(NONE)
 {
     set_color(Color::WHITE);
+
     m_bitmap = SDL_CreateRGBSurface(0, width, height, 32, 0, 0, 0, 0);
     m_texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888,
-        SDL_TEXTUREACCESS_STREAMING, width, height);
+                                  SDL_TEXTUREACCESS_STREAMING, width, height);
     SDL_SetHint(SDL_HINT_RENDER_SCALE_QUALITY, "linear");
     SDL_SetHint(SDL_HINT_RENDER_VSYNC, "1");
 }
 
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param e [description]
+ * @return [description]
+ */
 Canvas::~Canvas()
 {
     SDL_FreeSurface(m_bitmap);
     SDL_DestroyTexture(m_texture);
 }
 
-int
-Canvas::width() const
+int Canvas::width() const
 {
     return m_width;
 }
 
-int
-Canvas::height() const
+int Canvas::height() const
 {
     return m_height;
 }
 
-const Color&
-Canvas::color() const
+const Color& Canvas::color() const
 {
     return m_color;
 }
 
-shared_ptr<Font>
-Canvas::font() const
+shared_ptr<Font> Canvas::font() const
 {
     return m_font;
 }
 
-Canvas::BlendMode
-Canvas::blend_mode() const
+Canvas::BlendMode Canvas::blend_mode() const
 {
     return m_blend_mode;
 }
 
-void
-Canvas::set_color(const Color& color)
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param color [description]
+ */
+void Canvas::set_color(const Color& color)
 {
     m_color = color;
     SDL_SetRenderDrawColor(m_renderer, color.r(), color.g(), color.b(), color.a());
 }
 
-void
-Canvas::set_resolution(int width, int height)
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param width [description]
+ * @param height [description]
+ */
+void Canvas::set_resolution(int width, int height)
 {
     if (m_bitmap)
     {
@@ -85,20 +110,30 @@ Canvas::set_resolution(int width, int height)
 
     m_bitmap = SDL_CreateRGBSurface(0, width, height, 32, 0, 0, 0, 0);
     m_texture = SDL_CreateTexture(m_renderer, SDL_PIXELFORMAT_ARGB8888,
-        SDL_TEXTUREACCESS_STREAMING, width, height);
+                                  SDL_TEXTUREACCESS_STREAMING, width, height);
 
     m_width = width;
     m_height = height;
 }
 
-void
-Canvas::set_font(shared_ptr<Font>& font)
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param font [description]
+ */
+void Canvas::set_font(shared_ptr<Font>& font)
 {
     m_font = font;
 }
 
-void
-Canvas::set_blend_mode(BlendMode mode)
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param mode [description]
+ */
+void Canvas::set_blend_mode(BlendMode mode)
 {
     switch (mode)
     {
@@ -114,8 +149,13 @@ Canvas::set_blend_mode(BlendMode mode)
     m_blend_mode = mode;
 }
 
-void
-Canvas::clear(const Color& color)
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param color [description]
+ */
+void Canvas::clear(const Color& color)
 {
     if (color != m_color)
     {
@@ -125,24 +165,43 @@ Canvas::clear(const Color& color)
     SDL_RenderClear(m_renderer);
 }
 
-void
-Canvas::update()
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param t [description]
+ */
+void Canvas::update()
 {
     SDL_RenderPresent(m_renderer);
 }
 
-void
-Canvas::draw(const Point& point) const
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param point [description]
+ */
+void Canvas::draw(const Point& point) const
 {
+    //It is an object of the class environment. Is a pointer to the current instance of the game environment.
     Environment *env = Environment::get_instance();
+    assert((env != NULL) && "env to pick up the instance of environment");
+
     int x = point.x() - env->camera->x();
     int y = point.y() - env->camera->y();
 
     SDL_RenderDrawPoint(m_renderer, x, y);
 }
 
-void
-Canvas::draw(const Point& point, const Color& color)
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param point [description]
+ * @param color [description]
+ */
+void Canvas::draw(const Point& point, const Color& color)
 {
     if (color != m_color)
     {
@@ -152,10 +211,18 @@ Canvas::draw(const Point& point, const Color& color)
     draw(point);
 }
 
-void
-Canvas::draw(const Line& line) const
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param line [description]
+ */
+void Canvas::draw(const Line& line) const
 {
+    //It is an object of the class environment. Is a pointer to the current instance of the game environment.
     Environment *env = Environment::get_instance();
+    assert((env != NULL) && "env to pick up the instance of environment");
+
     int xa = line.a().x() - env->camera->x();
     int ya = line.a().y() - env->camera->y();
     int xb = line.b().x() - env->camera->x();
@@ -164,8 +231,14 @@ Canvas::draw(const Line& line) const
     SDL_RenderDrawLine(m_renderer, xa, ya, xb, yb);
 }
 
-void
-Canvas::draw(const Line& line, const Color& color)
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param line [description]
+ * @param color [description]
+ */
+void Canvas::draw(const Line& line, const Color& color)
 {
     if (color != m_color)
     {
@@ -175,10 +248,18 @@ Canvas::draw(const Line& line, const Color& color)
     draw(line);
 }
 
-void
-Canvas::draw(const Rect& rect) const
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param rect [description]
+ */
+void Canvas::draw(const Rect& rect) const
 {
+    //It is an object of the class environment. Is a pointer to the current instance of the game environment.
     Environment *env = Environment::get_instance();
+    assert((env != NULL) && "env to pick up the instance of environment");
+
     int x = rect.x() - env->camera->x();
     int y = rect.y() - env->camera->y();
 
@@ -191,8 +272,14 @@ Canvas::draw(const Rect& rect) const
     SDL_RenderDrawRect(m_renderer, &rectangle);
 }
 
-void
-Canvas::draw(const Rect& rect, const Color& color)
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param rect [description]
+ * @param color [description]
+ */
+void Canvas::draw(const Rect& rect, const Color& color)
 {
     if (color != m_color)
     {
@@ -202,10 +289,17 @@ Canvas::draw(const Rect& rect, const Color& color)
     draw(rect);
 }
 
-void
-Canvas::fill(const Rect& rect) const
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param rect [description]
+ */
+void Canvas::fill(const Rect& rect) const
 {
+    //It is an object of the class environment. Is a pointer to the current instance of the game environment.
     Environment *env = Environment::get_instance();
+    assert((env != NULL) && "env to pick up the instance of environment");
 
     SDL_Rect rectangle;
     rectangle.x = rect.x() - env->camera->x();
@@ -216,8 +310,14 @@ Canvas::fill(const Rect& rect) const
     SDL_RenderFillRect(m_renderer, &rectangle);
 }
 
-void
-Canvas::fill(const Rect& rect, const Color& color)
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param rect [description]
+ * @param color [description]
+ */
+void Canvas::fill(const Rect& rect, const Color& color)
 {
     if (color != m_color)
     {
@@ -227,17 +327,26 @@ Canvas::fill(const Rect& rect, const Color& color)
     fill(rect);
 }
 
-void
-Canvas::draw(const Circle& circle) const
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param circle [description]
+ */
+void Canvas::draw(const Circle& circle) const
 {
+    //It is an object of the class environment. Is a pointer to the current instance of the game environment.
     Environment *env = Environment::get_instance();
+    assert((env != NULL) && "object to pick up the instance of environment");
+
     int cx = circle.center().x() - env->camera->x();
     int cy = circle.center().y() - env->camera->y();
 
     int radius = circle.radius();
 
     int error = 3 - (radius << 1);
-    int i = 0, j = radius;
+    int i = 0;
+    int j = radius;
 
     do
     {
@@ -257,10 +366,17 @@ Canvas::draw(const Circle& circle) const
     } while (i <= j);
 }
 
-void
-Canvas::fill(const Circle& circle) const
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param circle [description]
+ */
+void Canvas::fill(const Circle& circle) const
 {
+     //It is an object of the class environment. Is a pointer to the current instance of the game environment.
     Environment *env = Environment::get_instance();
+    assert((env != NULL) && "env to pick up the instance of environment");
 
     int cx = circle.center().x() - env->camera->x();
     int cy = circle.center().y() - env->camera->y();
@@ -287,8 +403,14 @@ Canvas::fill(const Circle& circle) const
     } while (i <= j);
 }
 
-void
-Canvas::fill(const Circle& circle, const Color& color)
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param circle [description]
+ * @param color [description]
+ */
+void Canvas::fill(const Circle& circle, const Color& color)
 {
     if (color != m_color)
     {
@@ -299,8 +421,7 @@ Canvas::fill(const Circle& circle, const Color& color)
 }
 
 
-void
-Canvas::draw(const Circle& circle, const Color& color)
+void Canvas::draw(const Circle& circle, const Color& color)
 {
     if (color != m_color)
     {
@@ -310,9 +431,16 @@ Canvas::draw(const Circle& circle, const Color& color)
     draw(circle);
 }
 
-
-void
-Canvas::draw_circle_points(int cx, int cy, int x, int y) const
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param cx [description]
+ * @param cy [description]
+ * @param x [description]
+ * @param y [description]
+ */
+void Canvas::draw_circle_points(int cx, int cy, int x, int y) const
 {
     SDL_Point points[]
     {
@@ -323,8 +451,16 @@ Canvas::draw_circle_points(int cx, int cy, int x, int y) const
     SDL_RenderDrawPoints(m_renderer, points, 8);
 }
 
-void
-Canvas::fill_circle_points(int cx, int cy, int x, int y) const
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param cx [description]
+ * @param cy [description]
+ * @param x [description]
+ * @param y [description]
+ */
+void Canvas::fill_circle_points(int cx, int cy, int x, int y) const
 {
     draw(Line(Point(cx + x, cy + y), Point(cx + x, cy - y)));
     draw(Line(Point(cx - x, cy + y), Point(cx - x, cy - y)));
@@ -332,8 +468,15 @@ Canvas::fill_circle_points(int cx, int cy, int x, int y) const
     draw(Line(Point(cx - y, cy + x), Point(cx - y, cy - x)));
 }
 
-void
-Canvas::draw(const Texture *texture, double x, double y) const
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param texture [description]
+ * @param x [description]
+ * @param y [description]
+ */
+void Canvas::draw(const Texture *texture, double x, double y) const
 {
     if (not texture)
     {
@@ -345,10 +488,23 @@ Canvas::draw(const Texture *texture, double x, double y) const
     draw(texture, clip, x, y);
 }
 
-void
-Canvas::draw(const Texture *texture, Rect clip, double x, double y, double width, double height) const
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param texture [description]
+ * @param clip [description]
+ * @param x [description]
+ * @param y [description]
+ * @param width [description]
+ * @param height [description]
+ */
+void Canvas::draw(const Texture *texture, Rect clip, double x, double y, double width, double height) const
 {
+    //It is an object of the class environment. Is a pointer to the current instance of the game environment.
     Environment *env = Environment::get_instance();
+    assert((env != NULL) && "env to pick up the instance of environment");
+
 
     int orig_x = (int) clip.x();
     int orig_y = (int) clip.y();
@@ -359,12 +515,13 @@ Canvas::draw(const Texture *texture, Rect clip, double x, double y, double width
     int dest_y = (int) y - env->camera->y();
 
     int dest_width = ((int) width );
+
     if (width==0)
     {
         dest_width = ((int) texture->width());
     }else
     {
-        // Do Nothing
+        // Nothing to do.
     }
 
     int dest_height = ((int) height );
@@ -373,25 +530,33 @@ Canvas::draw(const Texture *texture, Rect clip, double x, double y, double width
         dest_height = ((int) texture->height());
     }else
     {
-        // Do Nothing
+        // Nothing to do.
     }
 
     SDL_Rect orig { orig_x, orig_y, orig_width, orig_height };
     SDL_Rect dest { dest_x, dest_y, dest_width, dest_height };
 
     SDL_Texture *image = static_cast<SDL_Texture *>(texture->data());
+    assert((image != NULL) && "image to pick up the instance of environment");
 
     SDL_RenderCopy(m_renderer, image, &orig, &dest);
 }
 
-SDL_Renderer *
-Canvas::renderer() const
+SDL_Renderer * Canvas::renderer() const
 {
     return m_renderer;
 }
 
-void
-Canvas::draw(const string& text, double x, double y, const Color& color) const
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param text [description]
+ * @param x [description]
+ * @param y [description]
+ * @param color [description]
+ */
+void Canvas::draw(const string& text, double x, double y, const Color& color) const
 {
     if (not m_font.get())
     {
@@ -401,7 +566,7 @@ Canvas::draw(const string& text, double x, double y, const Color& color) const
     SDL_Color text_color { color.r(), color.g(), color.b(), color.a() };
 
     SDL_Surface *surface = TTF_RenderUTF8_Blended(m_font->font(), text.c_str(),
-        text_color);
+                                                  text_color);
 
     if (not surface)
     {
@@ -412,6 +577,8 @@ Canvas::draw(const string& text, double x, double y, const Color& color) const
     int height = surface->h;
 
     SDL_Texture *texture = SDL_CreateTextureFromSurface(m_renderer, surface);
+    assert((texture != NULL) && "texture to pick up the instance of environment");
+
     SDL_FreeSurface(surface);
 
     if (not texture)
@@ -419,7 +586,9 @@ Canvas::draw(const string& text, double x, double y, const Color& color) const
         return;
     }
 
+
     Environment *env = Environment::get_instance();
+    assert((env != NULL) && "env to pick up the instance of environment");
 
     int dest_x = (int) x - env->camera->x();
     int dest_y = (int) y - env->camera->y();
@@ -431,8 +600,16 @@ Canvas::draw(const string& text, double x, double y, const Color& color) const
     SDL_DestroyTexture(texture);
 }
 
-Texture *
-Canvas::render_text(const string& text, const Color& color)
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param text [description]
+ * @param color [description]
+ * 
+ * @return [description]
+ */
+Texture * Canvas::render_text(const string& text, const Color& color)
 {
     if (not m_font.get())
     {
@@ -452,6 +629,8 @@ Canvas::render_text(const string& text, const Color& color)
     int height = surface->h;
 
     SDL_Texture *texture = SDL_CreateTextureFromSurface(m_renderer, surface);
+    assert((texture != NULL) && "texture to pick up the instance of environment");
+
     SDL_FreeSurface(surface);
 
     if (not texture)
@@ -467,14 +646,19 @@ Canvas::render_text(const string& text, const Color& color)
     return new Texture(texture, width, height);
 }
 
-SDL_Surface *
-Canvas::bitmap() const
+SDL_Surface * Canvas::bitmap() const
 {
     return m_bitmap;
 }
-
-void
-Canvas::draw(const Bitmap *bitmap, double, double) const
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param bitmap [description]
+ * @param e [description]
+ * @param e [description]
+ */
+void Canvas::draw(const Bitmap *bitmap, double, double) const
 {
     SDL_UpdateTexture(m_texture, NULL, bitmap->pixels(), m_width * sizeof(Uint32));
     SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);

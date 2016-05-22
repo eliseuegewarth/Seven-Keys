@@ -1,10 +1,8 @@
 /*
- * Implementação da classe que representa um mapa de bits.
- *
- * Autor: Rodrigo Gonçalves
- * Data: 13/05/2015
+ * Implementation of the class that represents a bitmap.
  * Licença: LGPL. Sem copyright.
  */
+ 
 #include "core/bitmap.h"
 #include "core/rect.h"
 #include "core/exception.h"
