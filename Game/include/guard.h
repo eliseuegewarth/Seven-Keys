@@ -10,7 +10,7 @@ using namespace std;
 /**
  * @brief [brief description]
  * @details [long description]
- * 
+ *
  */
 class Guard : public Object
 {
@@ -28,7 +28,7 @@ public:
 
     static ActionID removeGuardID;
     static ActionID walkID;
-    
+
 
     Direction direction();
     void get_playerx(const unsigned int pos_x);
@@ -38,7 +38,7 @@ public:
     void walk(unsigned long elapsed);
     void update_direction(unsigned long elapsed);
     void change_animation(string path);
-    
+
     string type();
     string old_type();
     void set_type(string t);

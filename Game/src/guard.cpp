@@ -19,7 +19,7 @@ const string& GUARD_3_RUNNING_PATH = "res/sprites/guard3_running.png";
 /**
  * @brief [brief description]
  * @details [long description]
- * 
+ *
  * @param parent [description]
  * @param id [description]
  * @param guard_horizontal_position [description]
@@ -29,7 +29,7 @@ const string& GUARD_3_RUNNING_PATH = "res/sprites/guard3_running.png";
  * @param t [description]
  * @param initial_movement_direction [description]
  */
-Guard::Guard(Object *parent, ObjectID id, const double guard_horizontal_position, 
+Guard::Guard(Object *parent, ObjectID id, const double guard_horizontal_position,
             const double guard_vertical_position, const unsigned int mass_of_guard,
             const bool walkable, string t, const unsigned int initial_movement_direction)
 
@@ -41,15 +41,15 @@ Guard::Guard(Object *parent, ObjectID id, const double guard_horizontal_position
     assert((mass_of_guard > 0) && "mass of guard needs to greater than zero");
     Object(parent, id, guard_horizontal_position, guard_vertical_position);
     guard_type = t;
-    guard_health = 100; 
+    guard_health = 100;
     guard_animation  = (unique_ptr<Animation>)new Animation
     (GUARD_RUNNING_PATH, 0, 0, 70, 70, 8, GUARD_SPEED_IN_MILISECONDS, true);
     direction_of_movement = (Direction) initial_movement_direction;
     last_game_time_saved = 0;
 
     this->set_mass(mass_of_guard);
-    this->set_w(70);
-    this->set_h(70);
+    set_width(70);
+    set_height(70);
     this->set_walkable(walkable);
     this->set_old_type(t);
     update_vision();
@@ -116,7 +116,7 @@ void Guard::update_vision()
 /**
  * @brief [brief description]
  * @details [long description]
- * 
+ *
  * @param direction_of_moviment [description]
  */
 void Guard::set_direction(Direction direction_of_moviment)
@@ -136,7 +136,7 @@ void Guard::draw_self()
 /**
  * @brief [brief description]
  * @details [long description]
- * 
+ *
  * @param elapsed [description]
  */
 void Guard::walk(unsigned long elapsed)
@@ -159,9 +159,9 @@ void Guard::walk(unsigned long elapsed)
                 {
                     set_x(80);
                 }
-                else if(x() > env->canvas->width() - this->w() - 80)
+                else if(x() > env->canvas->width() - this->width() - 80)
                 {
-                    set_x(env->canvas->width() - this->w() - 80);
+                    set_x(env->canvas->width() - this->width() - 80);
                 }
             }
             if(direction() == Guard::UP || direction() == Guard::DOWN)
@@ -171,9 +171,9 @@ void Guard::walk(unsigned long elapsed)
                 {
                     set_y(80);
                 }
-                else if(y() > env->canvas->height() - this->h() - 80)
+                else if(y() > env->canvas->height() - this->height() - 80)
                 {
-                    set_y(env->canvas->height() - this->h() - 80);
+                    set_y(env->canvas->height() - this->height() - 80);
                 }
             }
         }
@@ -228,7 +228,7 @@ void Guard::walk(unsigned long elapsed)
 /**
  * @brief [brief description]
  * @details [long description]
- * 
+ *
  * @param long [description]
  */
 void Guard::update_direction(unsigned long elapsed)
@@ -295,7 +295,7 @@ void Guard::update_direction(unsigned long elapsed)
 /**
  * @brief [brief description]
  * @details [long description]
- * 
+ *
  * @param player_horizontal_position [description]
  */
 void Guard::get_playerx(const unsigned int player_horizontal_position)
@@ -306,7 +306,7 @@ void Guard::get_playerx(const unsigned int player_horizontal_position)
 /**
  * @brief [brief description]
  * @details [long description]
- * 
+ *
  * @param player_vertical_position [description]
  */
 void Guard::get_playery(const unsigned int player_vertical_position)
@@ -327,14 +327,14 @@ double Guard::damage()
 /**
  * @brief [brief description]
  * @details [long description]
- * 
+ *
  * @param elapsed [description]
  */
 void Guard::update_self(unsigned long elapsed)
 {
     set_x(this->x());
     set_y(this->y());
-   
+
     update_direction(elapsed);
     guard_animation->update(elapsed);
     walk(elapsed);
@@ -344,7 +344,7 @@ void Guard::update_self(unsigned long elapsed)
 /**
  * @brief [brief description]
  * @details [long description]
- * 
+ *
  * @param path [description]
  */
 void Guard::change_animation(string path)
@@ -385,7 +385,7 @@ string Guard::old_type()
 /**
  * @brief [brief description]
  * @details [long description]
- * 
+ *
  * @param t [description]
  */
 void Guard::set_type(string t)
@@ -396,7 +396,7 @@ void Guard::set_type(string t)
 /**
  * @brief [brief description]
  * @details [long description]
- * 
+ *
  * @param t [description]
  */
 void Guard::set_old_type(string t)
@@ -407,7 +407,7 @@ void Guard::set_old_type(string t)
 /**
  * @brief [brief description]
  * @details [long description]
- * 
+ *
  * @param dmg [description]
  */
 void Guard::receive_dmg(double dmg)
