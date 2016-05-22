@@ -368,7 +368,7 @@ Canvas::draw(const Texture *texture, Rect clip, double x, double y, double width
     }
 
     int dest_height = ((int) height );
-    if (height!=0)
+    if (height==0)
     {
         dest_height = ((int) texture->height());
     }else
