@@ -1,19 +1,27 @@
 /*
- * Classe que representa uma cor.
- *
- * Autor: Edson Alves
- * Data: 13/04/2015
+ * Class that represents a color.
  * Licença: LGPL. Sem copyright.
  */
+
 #ifndef COLOR_H
 #define COLOR_H
 
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param char [description]
+ * @param char [description]
+ * @param char [description]
+ * @param char [description]
+ * @return [description]
+ */
 class Color
 {
 public:
     Color(unsigned char r = 0, unsigned char g = 0, unsigned char b = 0, unsigned char a = 255);
 
-    bool operator!=(const Color& color) const;
+    bool operator != (const Color& color) const;
 
     unsigned char r() const;
     unsigned char g() const;
@@ -37,7 +45,10 @@ public:
     static Color TRANSPARENT;
 
 private:
-    unsigned char m_r, m_g, m_b, m_a;
+    unsigned char m_r;
+    unsigned char m_g;
+    unsigned char m_b;
+    unsigned char m_a;
 };
 
 #endif
