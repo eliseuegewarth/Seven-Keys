@@ -13,10 +13,12 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
+ #include <cassert>
+
 class Bitmap::Impl
 {
 public:
-    Impl(void *data, int width, int height)
+    Impl(void *data,unsigned const int width,unsigned const int height)
         : m_width(width), m_height(height)
     {
         m_bitmap = static_cast<SDL_Surface *>(data);
@@ -30,11 +32,30 @@ public:
         }
     }
 
-    int width() const { return m_width; }
-    int height() const { return m_height; }
-    SDL_Surface * data() const { return m_bitmap; }
-    void * pixels() const { return m_bitmap->pixels; }
-    void clear() { SDL_FillRect(m_bitmap, nullptr, 0); }
+    int width() const 
+    {
+        return m_width;
+    }
+
+    int height() const
+    {
+        return m_height;
+    }
+    
+    SDL_Surface * data() const
+    {
+        return m_bitmap;
+    }
+    
+    void * pixels() const
+    {
+        return m_bitmap->pixels;
+    }
+    
+    void clear()
+    {
+        SDL_FillRect(m_bitmap, nullptr, 0);
+    }
 
     void fill(const Rect& r, Uint32 color)
     {
@@ -44,11 +65,12 @@ public:
     }
 
 private:
-    int m_width, m_height;
+    const int m_width;
+    const int m_height;
     SDL_Surface *m_bitmap;
 };
 
-Bitmap::Bitmap(void *data, int width, int height)
+Bitmap::Bitmap(void *data, const int width, const int height)
     : m_impl(new Impl(data, width, height))
 {
 }
@@ -63,26 +85,22 @@ Bitmap::~Bitmap()
 {
 }
 
-void *
-Bitmap::data() const
+void * Bitmap::data() const
 {
     return m_impl->data();
 }
 
-int
-Bitmap::width() const
+int Bitmap::width() const
 {
     return m_impl->width();
 }
 
-int
-Bitmap::height() const
+int Bitmap::height() const
 {
     return m_impl->height();
 }
 
-Bitmap *
-Bitmap::from_file(const string& path) throw (Exception)
+Bitmap * Bitmap::from_file(const string& path) throw (Exception)
 {
     SDL_Surface *bitmap = IMG_Load(path.c_str());
 
@@ -101,21 +119,20 @@ Bitmap::from_file(const string& path) throw (Exception)
     return b;
 }
 
-void *
-Bitmap::pixels() const
+void * Bitmap::pixels() const
 {
     return m_impl->pixels();
 }
 
-void
-Bitmap::clear()
+void Bitmap::clear()
 {
     m_impl->clear();
 }
 
-Uint32
-Bitmap::getpixel(SDL_Surface *surface, int x, int y)
+Uint32 Bitmap::getpixel(SDL_Surface *surface, const int x, const int y)
 {
+    assert((surface != NULL) && "surface needs to be different from NULL");
+    
     int bpp = surface->format->BytesPerPixel;
     Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
 
@@ -149,8 +166,7 @@ Bitmap::getpixel(SDL_Surface *surface, int x, int y)
     }
 }
 
-void
-Bitmap::putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
+void Bitmap::putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
 {
     int bpp = surface->format->BytesPerPixel;
     Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
@@ -186,8 +202,7 @@ Bitmap::putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
     }
 }
 
-void
-Bitmap::fill(const Rect& r, Uint32 color)
+void Bitmap::fill(const Rect& r, Uint32 color)
 {
     m_impl->fill(r, color);
 }
