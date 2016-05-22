@@ -103,7 +103,7 @@ Stage::update_self(unsigned long)
             boss->get_playery(m_player->y());
 
             // Withdraw player's life
-            if (intersection.w() != 0 and intersection.h() != 0)
+            if (intersection.width() != 0 and intersection.height() != 0)
             {
                 if(m_player->health() > 0)
                 {
@@ -129,24 +129,24 @@ Stage::update_self(unsigned long)
         {
             if(item->id() == "paredet")
             {
-                if (intersection.w() != 0 and intersection.h() > 50)
+                if (intersection.width() != 0 and intersection.height() > 50)
                 {
                     char message[512];
                     sprintf(message, "%s,%s,%.2f,%.2f,%.2f,%.2f", m_player->id().c_str(), item->id().c_str(), intersection.x(),
-                        intersection.y(), intersection.w(), intersection.h());
+                        intersection.y(), intersection.width(), intersection.height());
                     notify(Stage::colisionID, message);
 
                     if(bounding_box_player.y() > bounding_box_item.y())
                     {
-                        m_player->set_y(bounding_box_item.y() + bounding_box_item.h() - 50);
+                        m_player->set_y(bounding_box_item.y() + bounding_box_item.height() - 50);
                     }
                 }
             }
-            else if (intersection.w() != 0 and intersection.h() != 0)
+            else if (intersection.width() != 0 and intersection.height() != 0)
             {
                 char message[512];
                 sprintf(message, "%s,%s,%.2f,%.2f,%.2f,%.2f", m_player->id().c_str(), item->id().c_str(), intersection.x(),
-                    intersection.y(), intersection.w(), intersection.h());
+                    intersection.y(), intersection.width(), intersection.height());
                 notify(Stage::colisionID, message);
 
                 //eixo x
@@ -154,22 +154,22 @@ Stage::update_self(unsigned long)
                 {
                     if(bounding_box_player.x() < bounding_box_item.x())
                     {
-                        m_player->set_x(bounding_box_item.x() - bounding_box_player.w() + 1);
+                        m_player->set_x(bounding_box_item.x() - bounding_box_player.width() + 1);
                     }
                     else if(bounding_box_player.x() > bounding_box_item.x())
                     {
-                        m_player->set_x(bounding_box_item.x() + bounding_box_item.w() - 1);
+                        m_player->set_x(bounding_box_item.x() + bounding_box_item.width() - 1);
                     }
                 }
                 else
                 {
                     if(bounding_box_player.y() < bounding_box_item.y())
                     {
-                        m_player->set_y(bounding_box_item.y() - bounding_box_player.h() + 1);
+                        m_player->set_y(bounding_box_item.y() - bounding_box_player.height() + 1);
                     }
                     else if(bounding_box_player.y() > bounding_box_item.y())
                     {
-                        m_player->set_y(bounding_box_item.y() + bounding_box_item.h() - 1);
+                        m_player->set_y(bounding_box_item.y() + bounding_box_item.height() - 1);
                     }
                 }
             }
@@ -177,16 +177,16 @@ Stage::update_self(unsigned long)
         else
         {
 
-            if (intersection.w() != 0 and intersection.h() != 0)
+            if (intersection.width() != 0 and intersection.height() != 0)
             {
                 char message[512];
                 sprintf(message, "%s,%s,%.2f,%.2f,%.2f,%.2f", m_player->id().c_str(), item->id().c_str(), intersection.x(),
-                    intersection.y(), intersection.w(), intersection.h());
+                    intersection.y(), intersection.width(), intersection.height());
 
                 notify(Stage::colisionID, message);
 
             }
-            if(intersection.w() > 50 and intersection.h() > 50)
+            if(intersection.width() > 50 and intersection.height() > 50)
             {
                 if(item->id() == "door")
                 {
@@ -232,7 +232,7 @@ Stage::update_self(unsigned long)
 
                 Rect intersection2 = bounding_box_player2.intersection(bounding_box_guard);
 
-                if (intersection2.w() != 0 and intersection2.h() != 0)
+                if (intersection2.width() != 0 and intersection2.height() != 0)
                 {
                     if(filho->id() == "visao")
                     {
@@ -242,7 +242,7 @@ Stage::update_self(unsigned long)
                             guard->m_old_type = guard->type();
                             guard->set_type("follow");
                         }
-                        if ((intersection2.w() != 0 and intersection2.h() != 0) && (intersection.w() != 0 and intersection.h() != 0))
+                        if ((intersection2.width() != 0 and intersection2.height() != 0) && (intersection.width() != 0 and intersection.height() != 0))
                             {
                                 if(m_player->health() > 0)
                                 {
@@ -270,7 +270,7 @@ Stage::update_self(unsigned long)
             const list<Object *> filhos = item->children();
 
             //retirar vida do player
-            if (intersection.w() != 0 and intersection.h() != 0)
+            if (intersection.width() != 0 and intersection.height() != 0)
             {
                 if(m_player->health() > 0)
                 {
@@ -355,7 +355,7 @@ Stage::on_message(Object *, MessageID id, Parameters p)
             // Threating direct colisions with items
             if(item->walkable() == true)
             {
-                if (intersection.w() != 0 and intersection.h() != 0)
+                if (intersection.width() != 0 and intersection.height() != 0)
                 {
                     if(strstr(item->id().c_str(), "key"))
                     {
@@ -400,7 +400,7 @@ Stage::on_message(Object *, MessageID id, Parameters p)
             {
                 if(item->id() == "finalDoor")
                 {
-                    if (intersection.w() > 0 and intersection.h() > 0)
+                    if (intersection.width() > 0 and intersection.height() > 0)
                     {
                         if(m_player->has_key() == true)
                         {
@@ -427,7 +427,7 @@ Stage::on_message(Object *, MessageID id, Parameters p)
 
             if(item->walkable() == false)
             {
-                if (intersection.w() != 0 and intersection.h() != 0)
+                if (intersection.width() != 0 and intersection.height() != 0)
                 {
                     if(item->mass() <= m_player->strength())
                     {
@@ -473,7 +473,7 @@ Stage::on_message(Object *, MessageID id, Parameters p)
 
                 if(npc->id() == "guard")
                 {
-                    if (intersection.w() != 0 and intersection.h() != 0)
+                    if (intersection.width() != 0 and intersection.height() != 0)
                     {
                         if(filho->id() == "visao")
                         {

@@ -131,11 +131,11 @@ void Room::add_items(int stage_id)
         };
     }
 
-    int total_weight = 0;
+    int total_widtheight = 0;
 
     for (auto item : items)
     {
-        total_weight += item.weight;
+        total_widtheight += item.weight;
     }
 
 	if (room_type() == "KeyRoom")
@@ -159,7 +159,7 @@ void Room::add_items(int stage_id)
 
     for (int i = 0; i < num_items and (not items.empty()); ++i)
     {
-        int p = randint(1, total_weight);
+        int p = randint(1, total_widtheight);
         auto it = items.begin();
         int total = it->weight;
 
@@ -197,7 +197,7 @@ void Room::add_items(int stage_id)
 
         if (it->unique)
         {
-            total_weight -= it->weight;
+            total_widtheight -= it->weight;
             items.erase(it);
         }
     }
@@ -324,7 +324,7 @@ Room::add_door(string type, char direction, int x, int y)
         sprintf(buffer, "parede");
         if(strcmp(item->id().c_str(), buffer) == 0)
         {
-            if((item->x() > x - item->w() && item->x() < x + item->w()) && item->y() == y)
+            if((item->x() > x - item->width() && item->x() < x + item->width()) && item->y() == y)
             {
                 item->set_walkable(true);
             }
@@ -390,17 +390,17 @@ Room::fill_floor(const string& name)
     Environment *env = Environment::get_instance();
     Canvas *canvas = env->canvas;
 
-    int w = canvas->width() / image->w();
-    int h = canvas->height() / image->h();
+    int width = canvas->width() / image->width();
+    int height = canvas->height() / image->height();
 
-    center_area.set_position(image->w(), image->h());
-    center_area.set_dimensions(canvas->width() - 2*image->w(), canvas->height() - 2*image->h());
+    center_area.set_position(image->width(), image->height());
+    center_area.set_dimensions(canvas->width() - 2*image->width(), canvas->height() - 2*image->height());
 
-    for(int i = 1; i < w - 1; i++)
+    for(int i = 1; i < width - 1; i++)
 	{
-		for(int j = 1; j < h - 1; j++)
+		for(int j = 1; j < height - 1; j++)
 		{
-			Item *floor = new Item(this, name, path, i*image->w(), j*image->h(), INFINITE, true);
+			Item *floor = new Item(this, name, path, i*image->width(), j*image->height(), INFINITE, true);
 	 		add_child(floor);
 		}
 	}
@@ -442,8 +442,8 @@ Room::add_walls(const string& name)
 
             for(int k = 1; k < 8; k++)
             {
-                double x = i % 2 ? image->w()*j : i/2 * (canvas->width() - image->w());
-                double y = i % 2 ? i/2 * (canvas->height() - image->h()) : image->h()*k;
+                double x = i % 2 ? image->width()*j : i/2 * (canvas->width() - image->width());
+                double y = i % 2 ? i/2 * (canvas->height() - image->height()) : image->height()*k;
 
                 Item *wall = new Item(this, name, path, x, y, INFINITE, false);
                 add_child(wall);
@@ -483,8 +483,8 @@ Room::add_corners(const string& name)
         if (not image)
             continue;
 
-        double x = i % 3 ? canvas->width() - image->w() : 0;
-        double y = i/2 ? canvas->height() - image->h() : 0;
+        double x = i % 3 ? canvas->width() - image->width() : 0;
+        double y = i/2 ? canvas->height() - image->height() : 0;
 
         delete image;
 
@@ -534,8 +534,8 @@ bool
 Room::place(Object *object, double x, double y)
 {
     assert((object != NULL) && "Object can't be NULL");
-    int w = center_area.w();
-    int h = center_area.h();
+    int width = center_area.width();
+    int height = center_area.height();
 
     int tries = 0;
     bool ok, randomize = x < 0 and y < 0;
@@ -546,26 +546,26 @@ Room::place(Object *object, double x, double y)
 
         if (randomize)
         {
-            x = (rand() % w) + center_area.x();
-            y = (rand() % h) + center_area.y();
+            x = (rand() % width) + center_area.x();
+            y = (rand() % height) + center_area.y();
         }
 
-        if (x + object->w() > w + center_area.x())
-            x = w + center_area.x() - object->w();
+        if (x + object->width() > width + center_area.x())
+            x = width + center_area.x() - object->width();
 
-        if (y + object->h() > h + center_area.y())
-            y = h + center_area.y() - object->h();
+        if (y + object->height() > height + center_area.y())
+            y = height + center_area.y() - object->height();
 
         for (auto obj : children())
         {
             if (obj->walkable())
                 continue;
 
-            Rect a { x, y, object->w(), object->h() };
+            Rect a { x, y, object->width(), object->height() };
             Rect b = obj->bounding_box();
             Rect c = a.intersection(b);
 
-            if (c.w() or c.h())
+            if (c.width() or c.height())
             {
                 ok = false;
                 break;
@@ -637,7 +637,7 @@ Room::update_self(unsigned long)
 
                 if(npc->walkable() == false)
                 {
-                    if (c.w() > 5 and c.h() > 5)
+                    if (c.width() > 5 and c.height() > 5)
                     {
                         if(guard->m_old_type == "hard")
                         {
@@ -645,22 +645,22 @@ Room::update_self(unsigned long)
                             {
                                 if(a.x() > b.x())
                                 {
-                                    npc->set_x(a.x() - b.w() + 1);
+                                    npc->set_x(a.x() - b.width() + 1);
                                 }
                                 else if(a.x() < b.x())
                                 {
-                                    npc->set_x(a.x() + a.w() - 1);
+                                    npc->set_x(a.x() + a.width() - 1);
                                 }
                             }
                             else
                             {
                                 if(a.y() > b.y())
                                 {
-                                    npc->set_y(a.y() - b.h() + 1);
+                                    npc->set_y(a.y() - b.height() + 1);
                                 }
                                 else if(a.y() < b.y())
                                 {
-                                    npc->set_y(a.y() + a.h() - 1);
+                                    npc->set_y(a.y() + a.height() - 1);
                                 }
                             }
                         }
@@ -670,22 +670,22 @@ Room::update_self(unsigned long)
                             {
                                 if(a.x() < b.x())
                                 {
-                                    npc2->set_x(b.x() - a.w() + 1);
+                                    npc2->set_x(b.x() - a.width() + 1);
                                 }
                                 else if(a.x() > b.x())
                                 {
-                                    npc2->set_x(b.x() + b.w() - 1);
+                                    npc2->set_x(b.x() + b.width() - 1);
                                 }
                             }
                             else
                             {
                                 if(a.y() < b.y())
                                 {
-                                    npc2->set_y(b.y() - a.h() + 1);
+                                    npc2->set_y(b.y() - a.height() + 1);
                                 }
                                 else if(a.y() > b.y())
                                 {
-                                    npc2->set_y(b.y() + b.h() - 1);
+                                    npc2->set_y(b.y() + b.height() - 1);
                                 }
                             }
                         }

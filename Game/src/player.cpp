@@ -13,7 +13,7 @@
 //#include "pause.h"
 
 
-#include <cassert> 
+#include <cassert>
 #include <string>
 
 ActionID Player::hitExitDoorID { "hitExitDoorID()" };
@@ -31,7 +31,7 @@ class Player::Impl
 public:
     Impl(Player *player, bool key)
         : m_sanity_loss(0), m_player(player), m_direction(Player::LEFT),
-        m_moviment(make_pair(0.0, 0.0)), 
+        m_moviment(make_pair(0.0, 0.0)),
         m_key(key), m_strength(0.0), m_health(100.0), m_sanity(100.0), m_stamina(100.0),
         m_pill(0), m_hweapon(false), m_weapon(nullptr), m_secondary(false), m_damage(50),
         m_life(5)
@@ -120,7 +120,7 @@ public:
         {
             m_pill = 1;
         }
-            
+
         else if (id == "Pill2")
         {
             m_pill = 2;
@@ -248,7 +248,7 @@ public:
                 m_player->set_health(100);
 
             cout << "usou uma pilula! Recuperou " << recover << " de vida." << endl;
-            
+
             const list<Object *> items = m_player->children();
             for (auto item : items)
             {
@@ -258,7 +258,7 @@ public:
                     m_player->remove_child(item);
                 }
             }
-        }  
+        }
         else if(m_pill == 2)
         {
             double recover = 35;
@@ -267,7 +267,7 @@ public:
                 m_player->set_sanity(100);
 
             cout << "usou uma pilula! Recuperou " << recover << " de sanidade." << endl;
-            
+
             const list<Object *> items = m_player->children();
             for (auto item : items)
             {
@@ -285,8 +285,8 @@ public:
         if(m_weapon)
         {
             cout << "Usou a arma!" << endl;
-            
-            
+
+
         }
     }
 
@@ -315,7 +315,7 @@ public:
         char message[256];
         double dmg_total;
 
-        if(m_hweapon != false)    
+        if(m_hweapon != false)
             dmg_total = m_weapon->m_damage;
         else
             dmg_total = m_player->damage();
@@ -334,22 +334,22 @@ public:
 
         if(direction() == Player::RIGHT)
         {
-            Sight *visao = new Sight(m_player, "visao", m_player->x()+40, m_player->y() + m_player->h()/4, 100, 40);
+            Sight *visao = new Sight(m_player, "visao", m_player->x()+40, m_player->y() + m_player->height()/4, 100, 40);
             m_player->add_child(visao);
         }
         else if(direction() == Player::LEFT)
         {
-            Sight *visao = new Sight(m_player, "visao", m_player->x() - 70, m_player->y() + m_player->h()/4, 100, 40);
+            Sight *visao = new Sight(m_player, "visao", m_player->x() - 70, m_player->y() + m_player->height()/4, 100, 40);
             m_player->add_child(visao);
         }
         else if(direction() == Player::UP)
         {
-            Sight *visao = new Sight(m_player, "visao", m_player->x() + m_player->w()/4, m_player->y() - 70, 40, 100);
+            Sight *visao = new Sight(m_player, "visao", m_player->x() + m_player->width()/4, m_player->y() - 70, 40, 100);
             m_player->add_child(visao);
         }
         else if(direction() == Player::DOWN)
         {
-            Sight *visao = new Sight(m_player, "visao", m_player->x()+ m_player->w()/4, m_player->y() + 40, 40, 100);
+            Sight *visao = new Sight(m_player, "visao", m_player->x()+ m_player->width()/4, m_player->y() + 40, 40, 100);
             m_player->add_child(visao);
         }
     }
@@ -390,7 +390,7 @@ class Idle : public SpriteState
 public:
     Idle(Player *player)
         : m_player(player), m_animation(new Animation("res/sprites/idle.png",
-            0, 0, 70, 70, 2, 1000, true)), m_left(0), m_right(0), m_top(0), 
+            0, 0, 70, 70, 2, 1000, true)), m_left(0), m_right(0), m_top(0),
         m_down(0), m_running(false)
     {
     }
@@ -399,7 +399,7 @@ public:
 
     void enter(int)
     {
-        m_player->set_dimensions(m_animation->w(), m_animation->h());
+        m_player->set_dimensions(m_animation->width(), m_animation->height());
         m_right = m_left = m_down = m_top = 0;
     }
 
@@ -413,7 +413,7 @@ public:
         {
         case KeyboardEvent::PRESSED:
             switch (event.key())
-            {    
+            {
             case KeyboardEvent::LEFT:
             case KeyboardEvent::A:
                 m_left = 1;
@@ -581,7 +581,7 @@ public:
     Running(Player *player, bool key)
         : m_player(player), m_animation(
         new Animation("res/sprites/running.png", 0, 0, 70, 70, 8, 60, true)),
-        m_left(0), m_right(0), m_top(0), m_down(0), m_last(0), 
+        m_left(0), m_right(0), m_top(0), m_down(0), m_last(0),
         m_key(key), m_running(false), m_pushing(false)
     {
     }
@@ -592,7 +592,7 @@ public:
 
     void enter(int from)
     {
-        m_player->set_dimensions(m_animation->w(), m_animation->h());
+        m_player->set_dimensions(m_animation->width(), m_animation->height());
 
         Player::Direction dir = m_player->direction();
 
@@ -735,7 +735,7 @@ public:
             if(m_player->stamina() > 100)
                 m_player->set_stamina(100);
         }
-        
+
         if(m_running)
         {
             if(m_player->stamina() > 1)
@@ -794,7 +794,7 @@ public:
             m_player->set_moviment(speed*(m_right - m_left), speed*(m_down - m_top));
         }
 
-        
+
 
         Player::Direction dir = m_player->direction();
         int row = dir;
@@ -813,23 +813,23 @@ public:
         /*limite da sala */
         Environment *env = Environment::get_instance();
 
-        if (x + m_player->w() > env->canvas->width())
+        if (x + m_player->width() > env->canvas->width())
         {
-            x = env->canvas->width() - m_player->w();
+            x = env->canvas->width() - m_player->width();
         }
 
-        if ((x >= env->canvas->width() - m_player->w() and moviment.first > 0) or 
+        if ((x >= env->canvas->width() - m_player->width() and moviment.first > 0) or
             (x <= 0 and moviment.first < 0))
         {
             x -= (moviment.first * delta)/1000.0;
         }
 
-        if (y + m_player->h() > env->canvas->height())
+        if (y + m_player->height() > env->canvas->height())
         {
-            y = env->canvas->height() - m_player->h();
+            y = env->canvas->height() - m_player->height();
         }
 
-        if ((y >= env->canvas->height() - m_player->h() and moviment.second > 0) or 
+        if ((y >= env->canvas->height() - m_player->height() and moviment.second > 0) or
             (y <= 0 and moviment.second < 0))
         {
             y -= (moviment.second * delta)/1000.0;
@@ -856,7 +856,7 @@ class Duck : public SpriteState
 public:
     Duck(Player *player)
         : m_player(player), m_animation(new Animation("res/sprites/duck.png",
-            0, 0, 70, 70, 2, 1000, true)), m_left(0), m_right(0), m_top(0), 
+            0, 0, 70, 70, 2, 1000, true)), m_left(0), m_right(0), m_top(0),
         m_down(0)
     {
     }
@@ -865,7 +865,7 @@ public:
 
     void enter(int)
     {
-        m_player->set_dimensions(m_animation->w(), m_animation->h());
+        m_player->set_dimensions(m_animation->width(), m_animation->height());
         m_right = m_left = m_down = m_top = 0;
     }
 
@@ -879,7 +879,7 @@ public:
         {
         case KeyboardEvent::PRESSED:
             switch (event.key())
-            {    
+            {
             case KeyboardEvent::LEFT:
             case KeyboardEvent::A:
                 m_left = 1;
@@ -1204,7 +1204,7 @@ Player::push_item()
 void
 Player::get_weapon(string weapon_id)
 {
-    m_impl->get_weapon(weapon_id);   
+    m_impl->get_weapon(weapon_id);
 }
 
 void
@@ -1218,7 +1218,7 @@ Player::get_pill(string id)
 {
     m_impl->get_pill(id);
 }
-void 
+void
 Player::you_died()
 {
     m_impl->you_died();
