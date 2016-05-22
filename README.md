@@ -2,10 +2,10 @@
   
 
 # Instalação
-Usando o terminal, acesse a pasta /Seven-Keys/Game/lib:
+Usando o terminal, acesse a pasta /Game/lib:
 
 ```sh
-$ cd /Seven-Keys/Game/lib
+$ cd Game/lib
 ```
 
 Após isso, extraia a engine necessária para rodar o jogo:
@@ -20,14 +20,19 @@ Certifique-se que as seguintes bibliotecas estejam instaladas no seu computador:
 *libsdl2-mixer-dev* e
 *libsdl2-ttf-dev*
 
-Se não estiverem, execute os seguintes comandos:
+Para instalar essas bibliotecas, execute os seguintes comandos:
 
+*libsdl2-image-dev*
 ```sh
 $ sudo apt install libsdl2-image-dev
 ```
+
+*libsdl2-mixer-dev*
 ```sh
 $ sudo apt install libsdl2-mixer-dev
 ```
+
+*libsdl2-ttf-dev*
 ```sh
 $ sudo apt install libsdl2-ttf-dev
 ```
@@ -44,7 +49,7 @@ Realize a instalação da engine através do MakeFile:
 ```sh
 $ sudo make install
 ```
-Após realizada a instalação da engine, volte a pasta Manteam/Game e realize a instalação do jogo, também utilizando seu MakeFile:
+Após realizada a instalação da engine, volte a pasta SevenKeys/Game e realize a instalação do jogo, também utilizando seu MakeFile:
 
 ```sh
 $ cd ..
