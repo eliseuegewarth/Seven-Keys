@@ -18,16 +18,11 @@ class Animation::Impl
 public:
     Impl(const string& id, double x_, double y_, double width_, double height_, int f,
         unsigned long s, bool l_)
-<<<<<<< HEAD
-        : x(x_), y(y_), width(width_), height(height_), frames(f), speed(s), loop(l_),
-        done(false), last(0), frame(0)
-=======
->>>>>>> b0361104417b72a73c7812968d96b21182460b03
     {
         this->x = (x_);
         this->y = (y_);
-        this->w = (w_);
-        this->h = (h_);
+        this->width = (width_);
+        this->height = (height_);
         this->frames = (f);
         this->speed = (s);
         this->loop = (l_);
