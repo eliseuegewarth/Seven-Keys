@@ -132,9 +132,10 @@ void Bitmap::clear()
 Uint32 Bitmap::getpixel(SDL_Surface *surface, const int x, const int y)
 {
     assert((surface != NULL) && "surface needs to be different from NULL");
-    
+
     int bpp = surface->format->BytesPerPixel;
     Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
+    assert((p != NULL) && "p needs to be different from NULL");
 
     switch (bpp)
     {
