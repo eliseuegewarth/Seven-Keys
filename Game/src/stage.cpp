@@ -77,28 +77,23 @@ Stage::Stage(ObjectID id, int lives, double * sanity)
     add_observer(m_map);
 }
 
-void
-Stage::update_self(unsigned long)
+void Stage::threat_colision_boss(list<Object*> map_objects)
 {
-
-    // Receive the list of the objects of the current room
-    const list<Object*> map_filhos = m_map->children();
-
-    for( auto filho : map_filhos)
+    for( auto object : map_objects)
     {
         // Bounding box of player
         Rect bounding_box_player = m_player->bounding_box();
 
         // Bounding box of one of room's object
-        Rect bounding_box_object = filho->bounding_box();
+        Rect bounding_box_object = object->bounding_box();
 
         /* Intersection of the bounding boxes of player and room's
            object*/
         Rect intersection = bounding_box_player.intersection(bounding_box_object);
 
-        if(filho->id() == "boss")
+        if(object->id() == "boss")
         {
-            Boss *boss = (Boss*) filho;
+            Boss *boss = (Boss*) object;
             boss->get_playerx(m_player->x());
             boss->get_playery(m_player->y());
 
@@ -114,6 +109,15 @@ Stage::update_self(unsigned long)
             }
         }
     }
+}
+
+void Stage::update_self(unsigned long)
+{
+
+    // Receive the list of the objects of the current room
+    const list<Object*> map_objects = m_map->children();
+
+    threat_colision_boss(map_objects);
 
     // List of all items of the map
     const list<Object *> items = m_map->items();
@@ -176,7 +180,6 @@ Stage::update_self(unsigned long)
         }
         else
         {
-
             if (intersection.width() != 0 and intersection.height() != 0)
             {
                 char message[512];
@@ -220,21 +223,21 @@ Stage::update_self(unsigned long)
         {
             // Instance of guard
             Guard *guard = (Guard*) item;
-            const list<Object *> filhos = item->children();
+            const list<Object *> objects = item->children();
             Environment *env = Environment::get_instance();
-            for (auto filho : filhos)
+            for (auto object : objects)
             {
                 // Bounding box of the player
                 Rect bounding_box_player2 = m_player->bounding_box();
 
                 //Bounding box of one of the room's guards
-                Rect bounding_box_guard = filho->bounding_box();
+                Rect bounding_box_guard = object->bounding_box();
 
                 Rect intersection2 = bounding_box_player2.intersection(bounding_box_guard);
 
                 if (intersection2.width() != 0 and intersection2.height() != 0)
                 {
-                    if(filho->id() == "visao")
+                    if(object->id() == "visao")
                     {
                         if(guard->type() != "follow")
                         {
@@ -267,7 +270,7 @@ Stage::update_self(unsigned long)
             Ghost *ghost = (Ghost*) item;
             ghost->get_playerx(m_player->x());
             ghost->get_playery(m_player->y());
-            const list<Object *> filhos = item->children();
+            const list<Object *> objects = item->children();
 
             //retirar vida do player
             if (intersection.width() != 0 and intersection.height() != 0)
@@ -285,8 +288,7 @@ Stage::update_self(unsigned long)
     }
 }
 
-void
-Stage::draw_self()
+void Stage::draw_self()
 {
     // Instance the environment for a new stage
     Environment *env = Environment::get_instance();
@@ -295,8 +297,7 @@ Stage::draw_self()
     env->canvas->clear(Color::BLUE);
 }
 
-bool
-Stage::on_message(Object *, MessageID id, Parameters p)
+bool Stage::on_message(Object *, MessageID id, Parameters p)
 {
     if (id == Player::hitExitDoorID)
     {
@@ -462,12 +463,12 @@ Stage::on_message(Object *, MessageID id, Parameters p)
     else if(id == Player::getHitID)
     {
         const list<Object *> npcs = m_map->current_room->children();
-        const list<Object *> filhos = m_player->children();
+        const list<Object *> objects = m_player->children();
         for (auto npc : npcs)
         {
-            for (auto filho : filhos)
+            for (auto object : objects)
             {
-                Rect bounding_box_object = filho->bounding_box();
+                Rect bounding_box_object = object->bounding_box();
                 Rect bounding_box_npc = npc->bounding_box();
                 Rect intersection = bounding_box_object.intersection(bounding_box_npc);
 
@@ -475,7 +476,7 @@ Stage::on_message(Object *, MessageID id, Parameters p)
                 {
                     if (intersection.width() != 0 and intersection.height() != 0)
                     {
-                        if(filho->id() == "visao")
+                        if(object->id() == "visao")
                         {
                             double dmg = atof(p.c_str());
                             Guard * guard = (Guard*) npc;
