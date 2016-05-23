@@ -19,6 +19,7 @@ public:
     Impl(void *data,unsigned const int width,unsigned const int height)
         : m_width(width), m_height(height)
     {
+
         m_bitmap = static_cast<SDL_Surface *>(data);
     }
 
