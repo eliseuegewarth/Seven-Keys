@@ -12,10 +12,23 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 
+#include <cassert>
+
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param id Map identifier file.
+ */
 Game::Game(const string& id)
-    : m_id(id), m_level(nullptr), m_done(false)
 {
+    m_id = id; //Map identifier file.
+    m_level = nullptr; //Stores the game levels.
+    m_done = false; //Stores if it was create or not the level.
+
+    //It is an object of the class environment. Is a pointer to the current instance of the game environment.
     env = Environment::get_instance();
+    assert((env != NULL) && "Failed to pick up the instance of environment");
 
 }
 
@@ -31,15 +44,13 @@ Game::~Game()
 }
 
 /**
- * @brief [brief description]
- * @details [long description]
+ * @brief initializes the game with all the preconditions
  * 
- * @param title [description]
- * @param int [description]
- * @param int [description]
- * @param scale [description]
- * @param fullscreen [description]
- * @param int [description]
+ * @param whdth variable that stores the width of the resolution.
+ * @param height variable that stores the screen resolution height.
+ * @param scale variable that stores the display scale.
+ * @param fullscreen boolean variable that stores the state of the screen.
+ * @param volume Variable that stores the game audio volume.
  */
 void Game::init(const string& title, unsigned const int width, unsigned const int height,
                 const double scale, bool fullscreen, unsigned int volume) throw (Exception)
@@ -63,8 +74,7 @@ void Game::init(const string& title, unsigned const int width, unsigned const in
 }
 
 /**
- * @brief [brief description]
- * @details [long description]
+ * @brief Method to init the game.
  * 
  * @param path [description]
  */
@@ -75,26 +85,24 @@ void Game::init(const string& path) throw (Exception)
     shared_ptr<Settings> settings = env->resources_manager->get_settings(path);
 
     string title = settings->read<string>("Game", "title", "Test Game");
-    int width = settings->read<int>("Game", "w", 800);
-    int height = settings->read<int>("Game", "h", 600);
-    double scale = settings->read<double>("Game", "scale", 1);
-    bool fullscreen = settings->read<bool>("Game", "fullscreen", false);
-    int volume = settings->read<int>("Game", "volume", 50);
+    int width = settings->read<int>("Game", "w", 800); //variable that stores the width of the resolution.
+    int height = settings->read<int>("Game", "h", 600); //variable that stores the screen resolution height.
+    double scale = settings->read<double>("Game", "scale", 1); //variable that stores the display scale.
+    bool fullscreen = settings->read<bool>("Game", "fullscreen", false); //boolean variable that stores the state of the screen.
+    int volume = settings->read<int>("Game", "volume", 50); //Variable that stores the game audio volume.
 
     init(title, width, height, scale, fullscreen, volume);
 }
 
 /**
- * @brief [brief description]
- * @details [long description]
+ * @brief Method to start the game.
  * 
- * @param e [description]
  */
 void Game::run()
 {
     while (m_level and not m_done)
     {
-        unsigned long now = update_timestep();
+        unsigned long now = update_timestep(); //Number of milliseconds since the SDL library initialized. 
         env->events_manager->dispatch_pending_events();
 
         m_level->update(now);
