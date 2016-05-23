@@ -282,9 +282,9 @@ For indenting should used the standard of tab of four spaces.
 
 ### 5.2 Line Size Maximum
 
-Should avoid surpass the limit of 80 characteres for line.
+Not do much thing on the same line. To this does not happen, you should prevent exceeding the limit of 80 characters per line.
 For breaks of line, in cases of expressions very large, should use the following principles:
-Break after comma;
+* Break after comma;
 
 ```c++
 
@@ -295,7 +295,8 @@ Impl(Button* button, const string& idle_image_id,
 	m_state(IDLE)
 ```
 
-·Break before the operators;
+* Break before the operators;
+
 ```c++
 
 Item* pill = new Item(m_player, "icon_pill", path, (double)env->canvas->w()
@@ -303,7 +304,8 @@ Item* pill = new Item(m_player, "icon_pill", path, (double)env->canvas->w()
 m_player->add_child(pill);
 ```
 
-·Align the new line with the same level the start of expression the previous line.
+* Align the new line with the same level the start of expression the previous line.
+
 ### 5.3 Operators
 
 For operators shoud give a space before and one after.
@@ -313,6 +315,7 @@ m_player->set_stamina(m_player->stamina() + 0.05);
 ```
 ### 5.4 Braces
 
+Braces should be used whenever possible, even in situations where language allows not be used.
 The braces shoud be open one line below the end of the expression or declaration and shoud be closed one line below the block instructions:
 
 ```c++
@@ -324,7 +327,8 @@ if(x + m_player->w() > env->canvas->w())
 ```
 ### 5.5 Control Structures (if, switch)
 
-The stunderd to be following is without spaces between the control structute and the parentheses of condition, and between the operations of condition. It's better using command operations as 'and', 'or', 'not', natives of c++.
+Always use 'else' in kind 'if' control structures. In type 'switch' structures, 'cases' that represent the main flow must come before the cases that represent alternative flow or error messages.
+The standard to be following is without spaces between the control structute and the parentheses of condition, and between the operations of condition. It's better using command operations as 'and', 'or', 'not', natives of c++.
 
 Bad code:
 ```c++
