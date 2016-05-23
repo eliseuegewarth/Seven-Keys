@@ -37,7 +37,7 @@ ___
 ###### [5.3 Operators](#53-operators-1)
 ###### [5.4 Braces](#54-braces-1)
 ###### [5.5 Control Structures (if, switch)](#55-control-structures-if-switch-1)
-###### [5.6 Repetition of structures (while, for, do-while)](#56-repetition-of-structures-while-for-do-while-1)
+###### [5.6 Loop Structures (while, for, do-while)](#56-Loop-Structures-while-for-do-while-1)
 ###### [5.7 Variables and Attributes](#57-variables-and-attributes-1)
 ###### [5.8 Structs e Enums](#58-structs-e-enums-1)
 
@@ -346,7 +346,7 @@ Good code:
  }
 ```
 
-### 5.6 Repetition of structures (while, for, do-while)
+### 5.6 Loop Structures (while, for, do-while)
 
 The standard to be following is without spaces between the repetition of structures and parentheses, and in conditions of repetition spaces before the <point and comma>, and between the signals of relation and operarion space before and after.
 
