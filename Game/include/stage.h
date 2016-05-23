@@ -1,10 +1,9 @@
-/*
- * Exemplo de um nível: a tela de uma fase.
- *
- * Autor: Edson Alves
- * Data: 29/04/2015
+/**
+ * stage.h
+ * @brief [Class that implements the stages of the game.]
  * Licença: LGPL. Sem copyright.
  */
+
 #ifndef STAGE_H
 #define STAGE_H
 
@@ -31,6 +30,13 @@ private:
     int m_num_id;
     void draw_self();
     void update_self(unsigned long);
+    void threat_colision();
+    void threat_colision_boss(list<Object*> map_objects);
+    void threat_colision_not_walkable_objects(Object *item,
+        Rect bounding_box_player, Rect bounding_box_item, Rect intersection);
+    void threat_colision_walkable_objects(Object * item, Rect intersection);
+    void threat_colision_guard(Object *item, Rect intersection);
+    void threat_colision_ghost(Object *item, Rect intersection);
     double *m_sanity;
 
     bool on_message(Object *object, MessageID id, Parameters p);
