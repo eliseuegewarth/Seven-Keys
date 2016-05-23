@@ -596,10 +596,38 @@ public:
 
         Player::Direction dir = m_player->direction();
 
-        m_right = dir == Player::RIGHT ? 1 : 0;
-        m_left = dir == Player::LEFT ? 1 : 0;
-        m_top = dir == Player::UP ? 1 : 0;
-        m_down = dir == Player::DOWN ? 1 : 0;
+        if(dir == Player::RIGHT)
+        {
+            m_right = 1;
+        }else
+        {
+            m_right = 0;
+        }
+
+        if (dir == Player::LEFT)
+        {
+            m_left = 1;
+        }else
+        {
+            m_left = 0;
+        }
+
+        if (dir == Player::UP)
+        {
+            m_top = 1;
+        }else
+        {
+            m_top = 0;
+        }
+        
+        if (dir == Player::DOWN)
+        {
+            m_down = 1;
+        }else
+        {
+            m_down = 0;
+        }
+        
         m_last = 0;
         m_running = 0;
 
