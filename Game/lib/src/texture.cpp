@@ -1,8 +1,5 @@
 /*
- * Implementação da classe que representa uma textura.
- *
- * Autor: Edson Alves
- * Data: 13/05/2015
+ * Implementation of a class that represents a texture.
  * Licença: LGPL. Sem copyright.
  */
 #include "core/texture.h"
@@ -15,6 +12,16 @@
 
 using std::make_pair;
 
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param data [description]
+ * @param width [description]
+ * @param height [description]
+ * @param t [description]
+ * @return [description]
+ */
 class Texture::Impl
 {
 public:
@@ -75,6 +82,16 @@ private:
     SDL_Texture *m_texture;
 };
 
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param data [description]
+ * @param width [description]
+ * @param height [description]
+ * @param h [description]
+ * @param t [description]
+ */
 Texture::Texture(void *data, int width, int height)
     : m_impl(new Impl(data, width, height))
 {
@@ -84,30 +101,60 @@ Texture::~Texture()
 {
 }
 
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * @return [description]
+ */
 void * Texture::data() const
 {
     return m_impl->data();
 }
 
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * @return [description]
+ */
 int Texture::width() const
 {
     return m_impl->width();
 }
 
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * @return [description]
+ */
 int Texture::height() const
 {
     return m_impl->height();
 }
 
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param path [description]
+ * @return [description]
+ */
 Texture * Texture::from_file(const string& path) throw (Exception)
 {
+    /* It is an object of the class environment. 
+    Is a pointer to the current instance of the game environment.*/
     Environment *env = Environment::get_instance();
+    assert((env != NULL) && "Failed to pick up the instance of environment");
+
     SDL_Renderer *renderer = env->canvas->renderer();
     SDL_Texture *texture = IMG_LoadTexture(renderer, path.c_str());
 
     if (texture == nullptr)
     {
         throw Exception(SDL_GetError());
+    }
+    else
+    {
+        //nothing to do.
     }
 
     int width, height;
@@ -118,6 +165,10 @@ Texture * Texture::from_file(const string& path) throw (Exception)
     {
         throw Exception(SDL_GetError());
     }
+    else
+    {
+        //nothing to do.
+    }
 
     Texture *t = new Texture(texture, width, height);
 
@@ -126,15 +177,30 @@ Texture * Texture::from_file(const string& path) throw (Exception)
     {
         throw Exception("Out of memory for a new Texture");
     }
+    else
+    {
+        //nothing to do.
+    }
 
     return t;
 }
 
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param k [description]
+ */
 void Texture::scale(double k)
 {
     m_impl->scale(k);
 }
 
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * @return [description]
+ */
 pair<int, int> Texture::size() const
 {
     return m_impl->size();
