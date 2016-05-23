@@ -3,10 +3,10 @@
 #include <ijengine/util/button.h>
 #include <core/font.h>
 #include <core/environment.h>
-//#include <smpeg/smpeg.h>
 
 #include <iostream>
 #include <cassert>
+
 using namespace std;
 
 /**
@@ -44,15 +44,16 @@ Extras::Extras() : Level("extras")
 
     assert((historia != NULL) && "Failed to pick up the instance of button");
     historia->align_to(this, Object::MIDDLE, Object::NONE);
-    historia->set_y(cutscene->y() + cutscene->height()+20);
+    historia->set_y(cutscene->y() + cutscene->height() + 20);
 
     // Directs to the main menu of the game.
-    Button *back = new Button(this, "back", "res/interface/menuExtras/voltar.png",
+    Button *back = new Button(this, "back", 
+                              "res/interface/menuExtras/voltar.png",
                               "res/interface/menuExtras/Svoltar.png");
 
     assert((back != NULL) && "Failed to pick up the instance of button");
     back->align_to(this, Object::MIDDLE, Object::NONE);
-    back->set_y(historia->y() + historia->height()+20);
+    back->set_y(historia->y() + historia->height() + 20);
 
     cutscene->add_observer(this);
     historia->add_observer(this);
@@ -70,7 +71,6 @@ Extras::~Extras()
 
 /**
  * @brief Drow extras pinctures on the screen.
- * @details [long description]
  */
 void Extras::draw_self()
 {
@@ -80,7 +80,8 @@ void Extras::draw_self()
     assert((env != NULL) && "Failed to pick up the instance of environment");
     env->canvas->clear(Color::WHITE);
 
-    const shared_ptr<Texture> image = env->resources_manager->get_texture("res/interface/menuExtras/menuExtras.png");
+    const shared_ptr<Texture> image = env->resources_manager->
+                        get_texture("res/interface/menuExtras/menuExtras.png");
     assert((image != NULL) && "image to pick up the instance of environment");
     env->canvas->draw(image.get(), 1, 0);
 }

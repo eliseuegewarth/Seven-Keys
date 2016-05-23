@@ -1,8 +1,5 @@
 /*
- * Classe que representa um arquivo de efeito sonoro.
- *
- * Autor: Caio Nardelli
- * Data: 17/05/2015
+ * Class which represents a sound effect file.
  * Licença: LGPL. Sem copyright.
  */
 #ifndef SOUNDEFFECT_H

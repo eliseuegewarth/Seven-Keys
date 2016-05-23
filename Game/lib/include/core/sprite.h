@@ -1,8 +1,5 @@
 /*
- * Classe que representa um sprite do jogo.
- *
- * Autor: Edson Alves
- * Data: 05/05/2015
+ * Class that represents a sprite game.
  * Licença: LGPL. Sem copyright.
  */
 #ifndef SPRITE_H
@@ -31,10 +28,25 @@ public:
     virtual void enter(int from) = 0;
     virtual void leave(int to) = 0;
 
-    virtual bool on_event(const KeyboardEvent&) { return false; }
-    virtual bool on_event(const MouseButtonEvent&) { return false; }
-    virtual bool on_event(const MouseMotionEvent&) { return false; }
-    virtual bool on_event(const JoyStickEvent&) { return false; }
+    virtual bool on_event(const KeyboardEvent&)
+    {
+        return false;
+    }
+
+    virtual bool on_event(const MouseButtonEvent&)
+    {
+        return false;
+    }
+
+    virtual bool on_event(const MouseMotionEvent&)
+    {
+        return false;
+    }
+    
+    virtual bool on_event(const JoyStickEvent&)
+    {
+        return false;
+    }
 };
 
 class Sprite : public Object, public Listener
