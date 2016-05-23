@@ -83,8 +83,14 @@ double MouseButtonEvent::y() const
  */
 MouseButtonEvent MouseButtonEvent::from_SDL(const SDL_Event& event)
 {
-    MouseButtonEvent::ButtonState state = (event.type == SDL_MOUSEBUTTONDOWN ?
-        MouseButtonEvent::PRESSED : MouseButtonEvent::RELEASED);
+    MouseButtonEvent::ButtonState state = MouseButtonEvent::PRESSED;
+    if (event.type == SDL_MOUSEBUTTONDOWN)
+    {
+        state = MouseButtonEvent::PRESSED;
+    }else
+    {
+        state = MouseButtonEvent::RELEASED;
+    }
 
     MouseButtonEvent::Button button;
 
