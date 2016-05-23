@@ -4,16 +4,34 @@
  */
 #include "core/systemevent.h"
 
-SystemEvent::SystemEvent(SystemEvent::Type type)
-    : m_type(type)
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param type [description]
+ */
+SystemEvent::SystemEvent(SystemEvent::Type type)   
 {
+	m_type = type;
 }
 
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * @return [description]
+ */
 SystemEvent::Type SystemEvent::type() const
 {
     return m_type;
 }
 
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param event [description]
+ * @return [description]
+ */
 SystemEvent SystemEvent::from_SDL(const SDL_Event& event)
 {
     if (event.type == SDL_QUIT)
