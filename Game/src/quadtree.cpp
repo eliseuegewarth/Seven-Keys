@@ -22,6 +22,7 @@ Quadtree::Quadtree(int pLevel, Rect * pBounds)
 		m_nodes.at(i) = NULL;
 	}
 }
+
 /**
  * [Quadtree::clear Method that assigning m_nodes array
  * with its four pointers to null and free the memory.]
@@ -40,8 +41,8 @@ void Quadtree::clear()
 			m_nodes.at(i) = NULL;
 		}
 	}
-
 }
+
 /**
  * [Quadtree::split Method to divide the room into
  * four with their respective limits]
@@ -54,11 +55,16 @@ void Quadtree::split()
    	int x = (int)m_bounds->x(); //Limit of Axis 'x' in map
    	int y = (int)m_bounds->y();  //Limit of Axis 'y' in map
 
-   	m_nodes[0] = new Quadtree(m_level+1, new Rect(x + subWidth, y, subWidth, subHeight));
-   	m_nodes[1] = new Quadtree(m_level+1, new Rect(x, y, subWidth, subHeight));
-   	m_nodes[2] = new Quadtree(m_level+1, new Rect(x, y + subHeight, subWidth, subHeight));
-   	m_nodes[3] = new Quadtree(m_level+1, new Rect(x + subWidth, y + subHeight, subWidth, subHeight));
+   	m_nodes[0] = new Quadtree(m_level+1, new Rect(x + subWidth, y,
+							  subWidth, subHeight));
+   	m_nodes[1] = new Quadtree(m_level+1, new Rect(x, y,
+							  subWidth, subHeight));
+   	m_nodes[2] = new Quadtree(m_level+1, new Rect(x, y + subHeight,
+							  subWidth, subHeight));
+   	m_nodes[3] = new Quadtree(m_level+1, new Rect(x + subWidth, y + subHeight,
+							  subWidth, subHeight));
 }
+
 /**
  * [Quadtree::getIndex Method to get the
  * player's position in the room]
@@ -77,39 +83,47 @@ int Quadtree::getIndex(Object * pRect)
 
    // Object can completely fit within the top quadrants
    //Define the upper quadrant
-   	bool topQuadrant = (pRect->y() < horizontalMidpoint && pRect->y() + pRect->height() < horizontalMidpoint);
+   	bool topQuadrant = (pRect->y() < horizontalMidpoint && pRect->y()
+					 + pRect->height() < horizontalMidpoint);
 	// Object can completely fit within the bottom quadrants
 	//Define the lower quadrant
    	bool bottomQuadrant = (pRect->y() > horizontalMidpoint);
 
    	// Object can completely fit within the left quadrants
-   	if (pRect->x() < verticalMidpoint && pRect->x() + pRect->width() < verticalMidpoint) {
-    	if (topQuadrant) {
-        	index = 1;
-      	}
-      	else if (bottomQuadrant) {
-	        index = 2;
-	      }
+   	if (pRect->x() < verticalMidpoint && pRect->x()
+		+ pRect->width() < verticalMidpoint)
+		{
+	    	if (topQuadrant)
+			{
+	        	index = 1;
+	      	}
+	      	else if (bottomQuadrant)
+			{
+		        index = 2;
+		    }
 	    }
     // Object can completely fit within the right quadrants
-    else if (pRect->x() > verticalMidpoint) {
-	    if (topQuadrant) {
+    else if (pRect->x() > verticalMidpoint)
+	{
+	    if (topQuadrant)
+		{
        		index = 0;
      	}
-     	else if (bottomQuadrant) {
+     	else if (bottomQuadrant)
+		{
        		index = 3;
      	}
    	}
-
    	return index;
 }
 
 /**
- * [Quadtree::insert description]
+ * [Quadtree::insert Inserts the stage object on the floor again]
  * @method Quadtree::insert
- * @param  pRect            [description]
+ * @param  pRect            []
  */
-void Quadtree::insert(Object *pRect) {
+void Quadtree::insert(Object *pRect)
+{
 	assert((pRect != NULL) && "pRect can't be NULL");
 	if (m_nodes[0] != NULL)
     {
@@ -126,7 +140,8 @@ void Quadtree::insert(Object *pRect) {
 
    	if ((int)m_objects.size() > MAX_OBJECTS && m_level < MAX_LEVELS)
    	{
-    	if (m_nodes[0] == NULL) {
+    	if (m_nodes[0] == NULL)
+		{
          	split();
       	}
 
@@ -154,9 +169,10 @@ void Quadtree::insert(Object *pRect) {
   * @param  pRect            [description]
   * @param  returnObjects    [Objects of the previous phase]
   */
-list<Object*> Quadtree::retrieve(list<Object*> returnObjects, Object* pRect) {
+list<Object*> Quadtree::retrieve(list<Object*> returnObjects, Object* pRect)
+{
 	assert((pRect != NULL) && "pRect can't be NULL");
-	//assert((returnObjects != NULL) && "list of objects can't be empty");
+	//assert((not returnObjects.empty()) && "list of objects can't be empty");
 	int index = getIndex(pRect); //Position of Objects in previous phase
    	if (index != -1 && m_nodes.at(0) != NULL)
    	{

@@ -69,7 +69,7 @@ Ghost::~Ghost()
 /**
  * [Ghost::direction Just returns informations of m_direction.]
  * @method Ghost::direction
- * @return [description]
+ * @return [returns the direction of ghost guard movement]
  */
 Ghost::Direction Ghost::direction()
 {
