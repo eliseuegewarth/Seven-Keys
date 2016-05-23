@@ -1,10 +1,8 @@
 /*
- * Classe que representa a área da janela a ser desenhada.
- *
- * Autor: Edson Alves
- * Data: 13/04/2015
+ * Class which represents the area of the window to be drawn.
  * Licença: LGPL. Sem copyright.
  */
+ 
 #ifndef CANVAS_H
 #define CANVAS_H
 
@@ -61,10 +59,10 @@ public:
 
     void draw(const Texture *texture, double x = 0, double y = 0) const;
     void draw(const Texture *texture, Rect clip, double x = 0,
-        double y = 0, double width = 0, double height = 0) const;
+              double y = 0, double width = 0, double height = 0) const;
 
     void draw(const string& text, double x = 0, double y = 0,
-        const Color& color = Color::WHITE) const;
+              const Color& color = Color::WHITE) const;
 
     void draw(const Bitmap *bitmap, double x = 0, double y = 0) const;
 

@@ -18,18 +18,19 @@
 
 /**
  * @brief [brief description]
- * @details [long description]
  * 
- * @param renderer [description]
- * @param width [description]
- * @param height [description]
- * @param h [description]
- * @param t [description]
- * @param e [description]
+ * @param renderer 
+ * @param width variable that stores the width of the resolution.
+ * @param height variable that stores the height of the resolution.
  */
 Canvas::Canvas(SDL_Renderer *renderer, const int width, const int height)
-    : m_renderer(renderer), m_width(width), m_height(height), m_blend_mode(NONE)
+    
 {
+    m_renderer = renderer;
+    m_width = width;
+    m_height = height;
+    m_blend_mode = NONE;
+
     set_color(Color::WHITE);
 
     m_bitmap = SDL_CreateRGBSurface(0, width, height, 32, 0, 0, 0, 0);
