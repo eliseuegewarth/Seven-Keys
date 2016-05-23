@@ -105,9 +105,9 @@ int Quadtree::getIndex(Object * pRect)
 }
 
 /**
- * [Quadtree::insert description]
+ * [Quadtree::insert Inserts the stage object on the floor again]
  * @method Quadtree::insert
- * @param  pRect            [description]
+ * @param  pRect            []
  */
 void Quadtree::insert(Object *pRect) {
 	assert((pRect != NULL) && "pRect can't be NULL");
@@ -156,7 +156,7 @@ void Quadtree::insert(Object *pRect) {
   */
 list<Object*> Quadtree::retrieve(list<Object*> returnObjects, Object* pRect) {
 	assert((pRect != NULL) && "pRect can't be NULL");
-	//assert((returnObjects != NULL) && "list of objects can't be empty");
+	//assert((not returnObjects.empty()) && "list of objects can't be empty");
 	int index = getIndex(pRect); //Position of Objects in previous phase
    	if (index != -1 && m_nodes.at(0) != NULL)
    	{
