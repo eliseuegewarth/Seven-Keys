@@ -53,8 +53,9 @@ Game::~Game()
  * @param fullscreen boolean variable that stores the state of the screen.
  * @param volume Variable that stores the game audio volume.
  */
-void Game::init(const string& title, unsigned const int width, unsigned const int height,
-                const double scale, bool fullscreen, unsigned int volume) throw (Exception)
+void Game::init(const string& title, unsigned const int width, 
+                unsigned const int height,const double scale,
+                bool fullscreen, unsigned int volume) throw (Exception)
 {
     env->video->set_resolution(width, height, scale);
     env->video->set_window_name(title);
@@ -86,11 +87,21 @@ void Game::init(const string& path) throw (Exception)
     shared_ptr<Settings> settings = env->resources_manager->get_settings(path);
 
     string title = settings->read<string>("Game", "title", "Test Game");
-    int width = settings->read<int>("Game", "w", 800); //variable that stores the width of the resolution.
-    int height = settings->read<int>("Game", "h", 600); //variable that stores the screen resolution height.
-    double scale = settings->read<double>("Game", "scale", 1); //variable that stores the display scale.
-    bool fullscreen = settings->read<bool>("Game", "fullscreen", false); //boolean variable that stores the state of the screen.
-    int volume = settings->read<int>("Game", "volume", 50); //Variable that stores the game audio volume.
+
+    //variable that stores the width of the resolution.
+    int width = settings->read<int>("Game", "w", 800); 
+
+    //variable that stores the screen resolution height.
+    int height = settings->read<int>("Game", "h", 600); 
+
+    //variable that stores the display scale.
+    double scale = settings->read<double>("Game", "scale", 1); 
+
+    //boolean variable that stores the state of the screen.
+    bool fullscreen = settings->read<bool>("Game", "fullscreen", false); 
+
+    //Variable that stores the game audio volume.
+    int volume = settings->read<int>("Game", "volume", 50); 
 
     init(title, width, height, scale, fullscreen, volume);
 }
@@ -103,7 +114,8 @@ void Game::run()
 {
     while (m_level and not m_done)
     {
-        unsigned long now = update_timestep(); //Number of milliseconds since the SDL library initialized. 
+        //Number of milliseconds since the SDL library initialized. 
+        unsigned long now = update_timestep(); 
         env->events_manager->dispatch_pending_events();
 
         m_level->update(now);
@@ -152,7 +164,8 @@ bool Game::on_event(const KeyboardEvent& event)
 
 void Game::update_screen()
 {
-    // It is an object of the class environment. Is a pointer to the current instance of the game environment.
+    /* It is an object of the class environment. 
+    Is a pointer to the current instance of the game environment.*/
     Environment *env = Environment::get_instance();
     assert((env != NULL) && "Failed to pick up the instance of environment");
 
