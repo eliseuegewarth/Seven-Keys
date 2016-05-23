@@ -15,20 +15,18 @@ using namespace std;
 const string& GUARD_RUNNING_PATH = "res/sprites/guard1_running.png";
 const string& GUARD_3_RUNNING_PATH = "res/sprites/guard3_running.png";
 
-
-/**
- * @brief [brief description]
- * @details [long description]
- *
- * @param parent [description]
- * @param id [description]
- * @param guard_horizontal_position [description]
- * @param guard_vertical_position [description]
- * @param mass_of_guard [description]
- * @param walkable [description]
- * @param t [description]
- * @param initial_movement_direction [description]
- */
+ /**
+  * [Guard::Guard Loads the guard information in the game]
+  * @param  parent                           [The parent is the map object that
+  *                                          will contains the guard.]
+  * @param  id                               [identifier of object]
+  * @param  guard_horizontal_position        [Guard position on the map in the axis x]
+  * @param  guard_vertical_position          [Guard position on the map in the axis y]
+  * @param  mass_of_guard                    [Contains mass information of the guard object]
+  * @param  walkable                         [Defines if the ghost guard is an object able to walk]
+  * @param  t                                [description]
+  * @param  initial_movement_direction       [Defines the initial direction of moviment]
+  */
 Guard::Guard(Object *parent, ObjectID id, const double guard_horizontal_position,
             const double guard_vertical_position, const unsigned int mass_of_guard,
             const bool walkable, string t, const unsigned int initial_movement_direction)
@@ -65,9 +63,9 @@ Guard::~Guard()
 }
 
 /**
- * @brief [brief description]
- * @details [long description]
- * @return direction_of_movement[description]
+ * [Guard::direction Just returns informations of m_direction.]
+ * @method Guard::direction
+ * @return [returns the direction of guard movement]
  */
 Guard::Direction Guard::direction()
 {
@@ -75,8 +73,8 @@ Guard::Direction Guard::direction()
 }
 
 /**
- * @brief [brief description]
- * @details [long description]
+ * [Guard::update_vision updated sprite guard depending on your direction]
+ * @method Guard::update_vision
  */
 void Guard::update_vision()
 {
@@ -114,10 +112,9 @@ void Guard::update_vision()
 }
 
 /**
- * @brief [brief description]
- * @details [long description]
- *
- * @param direction_of_moviment [description]
+ * [Guard::set_direction Modifies the movement direction]
+ * @method Guard::set_direction
+ * @param  direction_of_movement [The value of the direction that will be setted.]
  */
 void Guard::set_direction(Direction direction_of_moviment)
 {
@@ -125,8 +122,8 @@ void Guard::set_direction(Direction direction_of_moviment)
 }
 
 /**
- * @brief [brief description]
- * @details [long description]
+ * [Ghost::draw_self Draws the animation of guard on screen.]
+ * @method Guard::draw_self
  */
 void Guard::draw_self()
 {
@@ -134,10 +131,8 @@ void Guard::draw_self()
 }
 
 /**
- * @brief [brief description]
- * @details [long description]
- *
- * @param elapsed [description]
+ * [Guard::walk Walk to the player's position at a constant speed.]
+ * @method Guard::walk
  */
 void Guard::walk(unsigned long elapsed)
 {
@@ -226,10 +221,9 @@ void Guard::walk(unsigned long elapsed)
 }
 
 /**
- * @brief [brief description]
- * @details [long description]
- *
- * @param long [description]
+ * [Guard::update_direction Updates the sprite of object (guard) based on the guard movement direction.]
+ * @method Guard::update_direction
+ * @param  elapsed                 [Elapsed time since the game start. This parameter is not used here.]
  */
 void Guard::update_direction(unsigned long elapsed)
 {
@@ -293,10 +287,10 @@ void Guard::update_direction(unsigned long elapsed)
 }
 
 /**
- * @brief [brief description]
- * @details [long description]
- *
- * @param player_horizontal_position [description]
+ * [Ghost::get_playerx Receive the player's horizontal position.
+ * This information is used at Guard artificial intelligence.]
+ * @method Guard::get_playerx
+ * @param  player_horizontal_position [That's the player's horizontal position.]
  */
 void Guard::get_playerx(const unsigned int player_horizontal_position)
 {
@@ -304,10 +298,10 @@ void Guard::get_playerx(const unsigned int player_horizontal_position)
 }
 
 /**
- * @brief [brief description]
- * @details [long description]
- *
- * @param player_vertical_position [description]
+ * [Ghost::get_playery Receive the player's vertical position.
+ * This information is used at Guard artificial intelligence.]
+ * @method Guard::get_playery
+ * @param  player_vertical_position [That's the player's vertical position.]
  */
 void Guard::get_playery(const unsigned int player_vertical_position)
 {
@@ -315,9 +309,9 @@ void Guard::get_playery(const unsigned int player_vertical_position)
 }
 
 /**
- * @brief [brief description]
- * @details [long description]
- * @return [description]
+ * [Guard::damage Returns the guard attack damage value.]
+ * @method Guard::damage
+ * @return [Returns the guard attack damage value]
  */
 double Guard::damage()
 {
@@ -325,10 +319,9 @@ double Guard::damage()
 }
 
 /**
- * @brief [brief description]
- * @details [long description]
- *
- * @param elapsed [description]
+ * [Guard::update_self Updates the guard position on the map and walk.]
+ * @method Guard::update_self
+ * @param  elapsed            [Elapsed time since the game start.]
  */
 void Guard::update_self(unsigned long elapsed)
 {
@@ -342,10 +335,9 @@ void Guard::update_self(unsigned long elapsed)
 }
 
 /**
- * @brief [brief description]
- * @details [long description]
- *
- * @param path [description]
+ * [Guard::change_animation It is the animation of the guard
+ * that will be loaded on the screen.]
+ * @method Guard::change_animation
  */
 void Guard::change_animation(string path)
 {
@@ -353,9 +345,9 @@ void Guard::change_animation(string path)
 }
 
 /**
- * @brief [brief description]
- * @details [long description]
- * @return [description]
+ * [Guard::health Returns the guard health value.]
+ * @method Guard::health
+ * @return [Returns the guard health value]
  */
 double Guard::health()
 {
@@ -363,30 +355,24 @@ double Guard::health()
 }
 
 /**
- * @brief [brief description]
- * @details [long description]
- * @return [description]
+ * [Guard::type return the guard type]
+ * @method Guard::type
+ * @return [return the guard type]
  */
 string Guard::type()
 {
     return guard_type;
 }
 
-/**
- * @brief [brief description]
- * @details [long description]
- * @return [description]
- */
 string Guard::old_type()
 {
     return m_old_type;
 }
 
 /**
- * @brief [brief description]
- * @details [long description]
- *
- * @param t [description]
+ * [Guard::set_type set the guard type as t]
+ * @method Guard::set_type
+ * @param  t               [string that defines the type of guard]
  */
 void Guard::set_type(string t)
 {
@@ -394,21 +380,18 @@ void Guard::set_type(string t)
 }
 
 /**
- * @brief [brief description]
- * @details [long description]
- *
- * @param t [description]
- */
-void Guard::set_old_type(string t)
+ * [Guard::set_old_type set the guard old type as t]
+ * @method Guard::set_type
+ * @param  t               [string that defines the old type of guard]
+ */void Guard::set_old_type(string t)
 {
     m_old_type = t;
 }
 
 /**
- * @brief [brief description]
- * @details [long description]
- *
- * @param dmg [description]
+ * [Guard::receive_dmg receives the player damage]
+ * @method Guard::receive_dmg
+ * @param  dmg                [player damage]
  */
 void Guard::receive_dmg(double dmg)
 {
