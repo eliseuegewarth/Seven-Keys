@@ -1,44 +1,44 @@
 #```Class Circle```
----commets---
+Class that represents a circle in bidimensional space.
 ##Public:
-###```Circle(const Point& center = Point(), double radius = 0)```
----commets---
+###```Circle(const Point& center_point_of_circle = Point(), double circle_radius = 0)```
+Circle class constructor that has the radius and the reference center as parameters.
 ####Parameters
-#####```const Point& center```
----commets---
-#####```double radius```
----commets---
+#####```const Point& center_point_of_circle```
+Parameter that contains information of the circle's Reference Center that will be instantiated.
+#####```double circle_radius```
+Parameter that contains the information of the circle radius that will be instantiated.
 --
 ###```Point center() const```
----commets---
+This method returns the information of the circle's Reference Center.
 --
 ###```double radius() const```
----commets---
+This method returns the information of the circle radius.
 --
-###```void set_center(const Point& center)```
----commets---
+###```void set_center(const Point& center_point_of_circle)```
+Changes circle reference center.
 ####Parameters
-#####```const Point& center```
----commets---
+#####```const Point& center_point_of_circle```
+Parameter that contains information of the circle's Reference Center that will be instantiated.
 --
-###```void set_radius(double radius)```
----commets---
+###```void set_radius(double circle_radius)```
+Changes circle radius.
 ####Parameters
-#####```double radius```
----commets---
+#####```double circle_radius```
+Parameter that contains the information of the circle radius that will be instantiated.
 --
-###```void set(const Point& center, double radius)```
----commets---
+###```void set(const Point& center_point_of_circle, double circle_radius)```
+Changes the circle features.
 ####Parameters
-#####```const Point& center```
----commets---
-#####```double radius```
----commets---
+#####```const Point& center_point_of_circle```
+Parameter that contains information of the circle's Reference Center that will be instantiated.
+#####```double circle_radius```
+Parameter that contains the information of the circle radius that will be instantiated.
 --
 ##Private:
-###```Point m_center```
----commets---
+###```Point center_point_of_circle```
+Point type attribute that is the reference center of the circle object.
 --
-###```double m_r```
----commets---
+###```double circle_radius```
+Attribute of double type that represents the circumference radius of the circle object. 
 --

@@ -106,7 +106,7 @@ double m_h;
 
 ##```Rect Rect::intersection()```
 
-###Parameters
+
 ```c++
 double left;
 ```
