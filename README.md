@@ -1,5 +1,5 @@
 # Seven Keys
-  
+
 
 # Instalação
 Usando o terminal, acesse a pasta /Game/lib:
@@ -44,18 +44,10 @@ Se não estiver, execute o seguinte comando:
 sudo apt-get install g++
 ```
 
-Realize a instalação da engine através do MakeFile:
+Realize a instalação da engine e do jogo através do script:
 
 ```sh
-$ sudo make install
-```
-Após realizada a instalação da engine, volte a pasta SevenKeys/Game e realize a instalação do jogo, também utilizando seu MakeFile:
-
-```sh
-$ cd ..
-```
-```sh
-$ sudo make -j8
+$ ./fullMake
 ```
 
 Para rodar o jogo execute o arquivo binário com o seguinte comando:
