@@ -1,10 +1,3 @@
-/*
- * Implementação da classe Button.
- *
- * Autor: Edson Alves
- * Data: 29/04/2015
- * Licença: LGPL. Sem copyright.
- */
 #include "core/color.h"
 #include "core/rect.h"
 #include "core/text.h"
@@ -175,16 +168,16 @@ public:
 ActionID Button::clickedID = "clicked()";
 
 Button::Button(Object *parent, ObjectID id, double width, double height)
+              : Object(parent, id, 0, 0, width, height), m_impl(new Impl(this))
 {
-    Object(parent, id, 0, 0, width, height), m_impl(new Impl(this));
     Environment *env = Environment::get_instance();
     env->events_manager->register_listener(this);
 }
 
 Button::Button(Object *parent, ObjectID id, const string& idle_image_id,
                const string& active_image_id)
+               : Object(parent, id), m_impl(new Impl(this, idle_image_id, active_image_id))
 {
-    Object(parent, id), m_impl(new Impl(this, idle_image_id, active_image_id));
     Environment *env = Environment::get_instance();
     env->events_manager->register_listener(this);
 }
