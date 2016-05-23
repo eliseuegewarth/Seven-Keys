@@ -28,8 +28,6 @@ SevenKeys::SevenKeys()
     AudioManagerMusic * music2 = new AudioManagerMusic();
     assert(music2 != NULL && "Could not create instance of AudioManager Music");
     music2 -> play("res/sounds/musicaMenu.wav", -1);
-    lives = 5;
-    sanity = 100;
 }
 
 /**
@@ -64,6 +62,8 @@ SevenKeys::load_level(const string& screen_type)
     }
     else if (screen_type == "title")
     {
+        lives = INITIAL_NUMBER_OF_LIVES_OF_THE_CHARACTER;
+        sanity = INITIAL_SANITY_OF_THE_CHARACTER;
         level_to_be_loaded = (Level*) new TitleScreen();
     }
     else if (screen_type == "options")
