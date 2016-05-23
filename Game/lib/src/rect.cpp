@@ -12,81 +12,153 @@
 using std::min;
 using std::max;
 
-Rect::Rect(double x, double y, double width, double height)
-    : m_x(x), m_y(y), m_width(width), m_height(height)
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param x [description]
+ * @param y [description]
+ * @param width [description]
+ * @param height [description]
+ */
+Rect::Rect(double x, double y, double width, double height)  
 {
+    m_x = x;
+    m_y = y;
+    m_width = width;
+    m_height = height;
 }
 
-double
-Rect::x() const
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * @return [description]
+ */
+double Rect::x() const
 {
     return m_x;
 }
 
-double
-Rect::y() const
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * @return [description]
+ */
+double Rect::y() const
 {
     return m_y;
 }
 
-double
-Rect::width() const
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * @return [description]
+ */
+double Rect::width() const
 {
     return m_width;
 }
-
-double
-Rect::height() const
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * @return [description]
+ */
+double Rect::height() const
 {
     return m_height;
 }
-
-void
-Rect::set_x(double x)
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param x [description]
+ */
+void Rect::set_x(double x)
 {
     m_x = x;
 }
 
-void
-Rect::set_y(double y)
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param y [description]
+ */
+void Rect::set_y(double y)
 {
     m_y = y;
 }
 
-void
-Rect::set_width(double width)
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param width [description]
+ */
+void Rect::set_width(double width)
 {
     m_width = width;
 }
 
-void
-Rect::set_height(double height)
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param height [description]
+ */
+void Rect::set_height(double height)
 {
     m_height = height;
 }
 
-void
-Rect::set_position(double x, double y)
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param x [description]
+ * @param y [description]
+ */
+void Rect::set_position(double x, double y)
 {
     m_x = x;
     m_y = y;
 }
 
-void
-Rect::set_dimensions(double width, double height)
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param width [description]
+ * @param height [description]
+ */
+void Rect::set_dimensions(double width, double height)
 {
     m_width = width;
     m_height = height;
 }
 
-bool
-Rect::contains(double x, double y) const
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param x [description]
+ * @param y [description]
+ * 
+ * @return [description]
+ */
+bool Rect::contains(double x, double y) const
 {
     return x >= m_x and x <= m_x + m_width and y >= m_y and y <= m_y + m_height;
 }
 
-Rect
-Rect::intersection(const Rect& r) const
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param r [description]
+ * @return [description]
+ */
+Rect Rect::intersection(const Rect& r) const
 {
     typedef struct _Area
     {
