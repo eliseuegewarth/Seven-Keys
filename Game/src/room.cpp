@@ -77,7 +77,11 @@ Room::Room(Object *parent, ObjectID id, string type, Room *left, Room *top,
 Room::~Room()
 {
 }
-
+/**
+ * [Room::room_type returns the type of the room in which the player is]
+ * @method Room::room_type
+ * @return [returns "cell" if the player is in a cell or other]
+ */
 string Room::room_type()
 {
 	if (this->type == "CelaH" || this->type == "CelaV")
@@ -86,6 +90,7 @@ string Room::room_type()
 	return this->type;
 }
 
+//Add_items add the items in the room as the bench, bottles, chairs, etc.]
 void Room::add_items(int stage_id)
 {
     typedef struct _ItemInfo {
@@ -209,15 +214,19 @@ void Room::add_items(int stage_id)
     }
 }
 
-void
-Room::add_list(Object  * item)
+//Adds the previous state of the items the room when the player returns to her
+void Room::add_list(Object  * item)
 {
     assert((item != NULL) && "Item should be diferent of NULL");
 	this->items.push_back(item);
 }
 
-const list<Object *>&
-Room::get_items()
+/**
+ * [Room::get_items Gets the state of the items the room when the player leaves]
+ * @method Room::get_items
+ * @return []
+ */
+const list<Object *>& Room::get_items()
 {
 	return children();
 }
@@ -588,8 +597,7 @@ Room::place(Object *object, double x, double y)
     return ok;
 }
 
-void
-Room::notify_creation(const string& position)
+void Room::notify_creation(const string& position)
 {
     assert((not position.empty()) && "position can't be empty");
     //Environment *env = Environment::get_instance();
