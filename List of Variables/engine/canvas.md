@@ -2,14 +2,14 @@
 ##```class Canvas```
 Class that creates the environments of the game.
 
-###Class members
+
 ```c++
 typedef enum { NONE, BLEND } BlendMode;
 ```
+
 ```c++
 int w() const;
 ```
-
 
 ```c++
 int h() const;
@@ -18,74 +18,94 @@ int h() const;
 
 ```c++
 const Color& color() const;
-```
-Variable 
+``` 
 
 ```c++
 shared_ptr<Font> font() const;
 ```
+
 ```c++
 BlendMode blend_mode() const;
 ```
+
 ```c++
 SDL_Renderer *m_renderer;
 ```
+
 ```c++
 int m_w;
 ```
+
 ```c++
 int m_h;
 ```
+
 ```c++
 Color m_color;
 ```
+
 ```c++
 shared_ptr<Font> m_font;
 ```
+
 ```c++
 BlendMode m_blend_mode;
 ```
+
 ```c++
 SDL_Surface *m_bitmap;
 ```
+
 ```c++
 SDL_Texture *m_texture;
 ```
    
 ##```Canvas::Canvas()```
+
 ###Parameters
 ```c++
 SDL_Renderer *renderer
 ```
+
 ```c++
 int w
 ```
+
 ```c++
 int h
 ```
+
 ```c++
 
 ```
  ##```Canvas::~Canvas()```
 
+
 ##```int Canvas::w()```
+
 
 ##```int Canvas::h()```
 
+
 ##```const Color& Canvas::color()```
+
 
 ##```shared_ptr<Font> Canvas::font()```
 
+
 ##```Canvas::BlendMode Canvas::blend_mode()```
 
+
 ##```void Canvas::set_color()```
+
+
 ###Parameters
 ```c++
 const Color& color
 ```
 
-##```void
-Canvas::set_resolution()```
+##```void Canvas::set_resolution()```
+
 ###Parameters
 ```c++
 int w;

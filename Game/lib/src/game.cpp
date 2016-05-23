@@ -1,8 +1,5 @@
 /*
- * Implementação da classe que representa um jogo utilizando a SDL.
- *
- * Autor: Edson Alves
- * Data: 26/03/2015
+ * Implementation of the class that represents a game using SDL.
  * Licença: LGPL. Sem copyright.
  */
 #include "core/game.h"
@@ -33,10 +30,21 @@ Game::~Game()
     Environment::release_instance();
 }
 
-void Game::init(const string& title, int w, int h, double scale, bool fullscreen,
-    int volume) throw (Exception)
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param title [description]
+ * @param int [description]
+ * @param int [description]
+ * @param scale [description]
+ * @param fullscreen [description]
+ * @param int [description]
+ */
+void Game::init(const string& title, unsigned const int width, unsigned const int height,
+                const double scale, bool fullscreen, unsigned int volume) throw (Exception)
 {
-    env->video->set_resolution(w, h, scale);
+    env->video->set_resolution(width, height, scale);
     env->video->set_window_name(title);
     env->video->set_fullscreen(fullscreen);
     env->music->set_volume(volume);
@@ -54,6 +62,12 @@ void Game::init(const string& title, int w, int h, double scale, bool fullscreen
     m_level = load_level(m_id);
 }
 
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param path [description]
+ */
 void Game::init(const string& path) throw (Exception)
 {
     env->m_settings_path = path;
@@ -61,15 +75,21 @@ void Game::init(const string& path) throw (Exception)
     shared_ptr<Settings> settings = env->resources_manager->get_settings(path);
 
     string title = settings->read<string>("Game", "title", "Test Game");
-    int w = settings->read<int>("Game", "w", 800);
-    int h = settings->read<int>("Game", "h", 600);
+    int width = settings->read<int>("Game", "w", 800);
+    int height = settings->read<int>("Game", "h", 600);
     double scale = settings->read<double>("Game", "scale", 1);
     bool fullscreen = settings->read<bool>("Game", "fullscreen", false);
     int volume = settings->read<int>("Game", "volume", 50);
 
-    init(title, w, h, scale, fullscreen, volume);
+    init(title, width, height, scale, fullscreen, volume);
 }
 
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param e [description]
+ */
 void Game::run()
 {
     while (m_level and not m_done)
@@ -123,7 +143,10 @@ bool Game::on_event(const KeyboardEvent& event)
 
 void Game::update_screen()
 {
+    // It is an object of the class environment. Is a pointer to the current instance of the game environment.
     Environment *env = Environment::get_instance();
+    assert((env != NULL) && "Failed to pick up the instance of environment");
+
     env->canvas->update();
 }
 
