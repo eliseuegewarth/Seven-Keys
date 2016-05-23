@@ -26,7 +26,8 @@ Game::Game(const string& id)
     m_level = nullptr; //Stores the game levels.
     m_done = false; //Stores if it was create or not the level.
 
-    //It is an object of the class environment. Is a pointer to the current instance of the game environment.
+    /*It is an object of the class environment. 
+    Is a pointer to the current instance of the game environment.*/
     env = Environment::get_instance();
     assert((env != NULL) && "Failed to pick up the instance of environment");
 
