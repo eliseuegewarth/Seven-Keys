@@ -3,23 +3,23 @@
 ##```class Bitmap```
 
 
-c```
+```c++
 int width() const;
 ```
 
-c```
+```c++
 int height() const;
 ```
 
-c```
+```c++
 void * data() const;
 ```
 
-c```
+```c++
 void * pixels() const;
 ```
 
-c```
+```c++
 void clear();
 ```
 
@@ -28,15 +28,15 @@ void clear();
 
 
 ###Parameters
-c```
+```c++
 void *data;
 ```
 
-c```
+```c++
 unsigned const int width;
 ```
     
-c```
+```c++
 unsigned const int height;
 ```
 
@@ -63,15 +63,15 @@ unsigned const int height;
 =======
 
 >>>>>>> c4a548bd214309fd09a022976c3e5883ff688458
-c```
+```c++
 void *data;
 ```
 
-c```
+```c++
 const int width;
 ```
 
-c```
+```c++
 const int height;
 ```   
 
@@ -79,7 +79,7 @@ const int height;
 
 
 ###Parameters 
-c```
+```c++
 Canvas *canvas
 ```
 
@@ -96,7 +96,7 @@ Canvas *canvas
 
 
 ###Parameters
-c```
+```c++
 const string& path
 ```
 
@@ -110,15 +110,15 @@ const string& path
 
 
 ###Parameters 
-c```
+```c++
 SDL_Surface *surface;
 ```
 
-c```
+```c++
 const int x;
 ```
 
-c```
+```c++
 const int y;
 ```
 
@@ -126,19 +126,19 @@ const int y;
 
     
 ###Parameters 
-c```
+```c++
 SDL_Surface *surface;
 ```
 
-c```
+```c++
 int x;
 ```
 
-c```
+```c++
 int y;
 ```
 
-c```
+```c++
 Uint32 pixel;
 ```
 
@@ -151,12 +151,12 @@ Uint32 pixel;
 ##```void Bitmap::fill()```   
 
 ###Parameters  
-c```
+```c++
 const Rect& r;
 ```
 
 
-c```
+```c++
 Uint32 color
 ```
 

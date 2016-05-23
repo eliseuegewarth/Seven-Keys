@@ -4,10 +4,6 @@ Class that creates the environments of the game.
 
 
 ```c++
-typedef enum { NONE, BLEND } BlendMode;
-```
-
-```c++
 int w() const;
 ```
 
