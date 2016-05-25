@@ -9,7 +9,10 @@
 #define JOYSTICK_EVENT_LISTENER_H
 
 class JoyStickEvent;
-
+/*
+Detects if any event is occurring in the
+joystick buttons [UP, DOWN, LEFT, RIGHT or any other button]
+*/
 class JoyStickEventListener
 {
 public:
