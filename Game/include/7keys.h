@@ -12,14 +12,7 @@
 class SevenKeys : public Game
 {
 public:
-    typedef enum
-    {
-        FONE,
-        LOGO,
-        TECNOLOGIAS,
-        CLASSIFICACAO,
-        
-    }Screen;
+    
     SevenKeys();
 
 private:

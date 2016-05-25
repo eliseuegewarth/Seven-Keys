@@ -62,7 +62,7 @@ SevenKeys::load_level(const string& screen_type)
     }
     else if (screen_type == "title")
     {
-        lives = INITIAL_NUMBER_OF_LIVES_OF_THE_CHARACTER;
+        this->lives = INITIAL_NUMBER_OF_LIVES_OF_THE_CHARACTER;
         sanity = INITIAL_SANITY_OF_THE_CHARACTER;
         level_to_be_loaded = (Level*) new TitleScreen();
     }
@@ -144,7 +144,7 @@ SevenKeys::load_level(const string& screen_type)
         novo[3] = 'g';
         novo[4] = 'e';
 
-        lives -= 1;
+        this->lives -= 1;
 
         level_to_be_loaded = (Level*) new FrontEnd(screen_type, novo, "res/images/transition.png");
     }
