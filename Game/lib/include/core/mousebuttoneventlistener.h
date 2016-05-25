@@ -10,6 +10,7 @@
 
 class MouseButtonEvent;
 
+// Detects if any event is occurring in the mouse buttons.
 class MouseButtonEventListener
 {
 public:
