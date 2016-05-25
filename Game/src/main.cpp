@@ -16,9 +16,9 @@ int main(int, char *[])
     try
     {
         srand(time(NULL));
-        SevenKeys keys;
-        keys.init("7 Keys", 1280, 720, 1, true);
-        keys.run();
+        SevenKeys game;
+        game.init("7 Keys", 1280, 720, 1, true);
+        game.run();
     } catch (Exception ex)
     {
         cerr << ex.message() << endl;
