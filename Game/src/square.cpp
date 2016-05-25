@@ -10,9 +10,10 @@
 
 /**
  * [Square::Square description]
- * @param  parent [The parent is the map object that will contains the ghost guard.]
- * @param  id     [identifier of object]
- * @param size    [Square size that will be created, height and width]
+ * @param  parent                   [The parent is the map object that
+ *                                  will contains the ghost guard.]
+ * @param  id                  [identifier of object]
+ * @param size            [Square size that will be created, height and width]
  */
 Square::Square(Object *parent, ObjectID id, double size)
 {
@@ -45,9 +46,9 @@ double Square::size()
     return width();
 }
 /**
- * [Square::on_event description]
+ * [Square::on_event            return if the square is on an event]
  * @method Square::on_event
- * @param  event            [keyboard action]
+ * @param  event                [keyboard action]
  * @return      [true when the keyboard is in any event or false if it is not]
  */
 bool Square::on_event(const KeyboardEvent& event)

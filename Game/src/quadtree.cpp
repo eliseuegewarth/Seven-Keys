@@ -24,8 +24,9 @@ Quadtree::Quadtree(int pLevel, Rect * pBounds)
 }
 
 /**
- * [Quadtree::clear Method that assigning m_nodes array
- * with its four pointers to null and free the memory.]
+ * [Quadtree::clear 				Method that assigning m_nodes array
+ * 									with its four pointers to null
+ * 									and free the memory.]
  * @method Quadtree::clear
  */
 void Quadtree::clear()
@@ -44,8 +45,8 @@ void Quadtree::clear()
 }
 
 /**
- * [Quadtree::split Method to divide the room into
- * four with their respective limits]
+ * [Quadtree::split 						Method to divide the room into
+ * 											four with their respective limits]
  * @method Quadtree::split
  */
 void Quadtree::split()
