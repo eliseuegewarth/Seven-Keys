@@ -457,8 +457,20 @@ Room::add_walls(const string& name)
 
             for(int k = 1; k < 8; k++)
             {
-                double x = i % 2 ? image->width()*j : i/2 * (canvas->width() - image->width());
-                double y = i % 2 ? i/2 * (canvas->height() - image->height()) : image->height()*k;
+                double x = i % 2;
+                if(i % 2 != 0){
+                    x = image->width()*j;
+                }else
+                {
+                    x = i/2 * (canvas->width() - image->width());
+                }
+                double y = i % 2;
+                if(i % 2 != 0){
+                    y = i/2 * (canvas->height() - image->height());
+                }else
+                {
+                    y = image->height()*k;
+                }
 
                 Item *wall = new Item(this, name, path, x, y, INFINITE, false);
                 add_child(wall);
@@ -498,9 +510,18 @@ Room::add_corners(const string& name)
         if (not image)
             continue;
 
-        double x = i % 3 ? canvas->width() - image->width() : 0;
-        double y = i/2 ? canvas->height() - image->height() : 0;
-
+        double x = 0;
+        if(i % 3 != 0){
+            x = canvas->width() - image->width();
+        }else{
+             x = 0;
+        }
+        double y = 0;
+        if(i/2 != 0){
+            y = canvas->height() - image->height();
+        }else{
+            y = 0;
+        }
         delete image;
 
 	    Item *corner = new Item(this, name, path, x, y, INFINITE, false);
