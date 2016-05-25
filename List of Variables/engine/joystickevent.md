@@ -1,32 +1,60 @@
 #JoyStickEvent
 
-##class JoyStickEvent
+##```class JoyStickEvent```
 
 ###variables
+```c++
+typedef enum State;
+```
+Define the states of joystick buttons [Button Pressed or Button Released]
+```c++
+typedef enum Button;
+```
+Define the states of mouse button
+[X, CIRCLE, SQUARE, TRIANGLE, SHARE, HOME,
+START, L3, R3, L1, R1, UP, DOWN, LEFT, RIGHT]
+```c++
+State m_state;
+```
 
-    ·typedef enum State;
-    ·typedef enum Button;
-    ·State m_state;
-    ·Button m_button;
+```c++
+Button m_button;
+```
 
-    ·static bool joystick_was_init = false;
-    ·static map<int, JoyStickEvent::Button> m_joystick_table;
+```c++
+static bool joystick_was_init = false;
+```
 
-###void init_table_joystick()
+```c++
+static map<int
+```
 
-##JoyStickEvent::JoyStickEvent()
+```c++
+JoyStickEvent::Button> m_joystick_table;
+```
+
+###```void init_table_joystick()```
+
+##```JoyStickEvent::JoyStickEvent()```
 ###parameters
-    ·State state
-    ·Button button
+```c++
+State state
+```
+State of the joystick
+```c++
+Button button
+```
+Button that are pressed in the joystick
 
-##JoyStickEvent::state() const
+##```JoyStickEvent::state() const```
+method that returns the state of the joystick, like a "get"
 
-##JoyStickEvent::button() const
+##```JoyStickEvent::button() const```
+method that returns the button that are pressed in the joystick, like a "get"
 
-##JoyStickEvent::from_SDL()
+##```JoyStickEvent::from_SDL()```
 ###parameters
-    ·const SDL_Event& event
-###variables and methods
-    ·JoyStickEvent::State state = (event.type == SDL_CONTROLLERBUTTONDOWN ?
-        ·event.type == SDL_CONTROLLERBUTTONDOWN ? JoyStickEvent::PRESSED
-    ·JoyStickEvent::Button button
+```c++
+const SDL_Event& event
+```
+Joystick event detected by the SDL library

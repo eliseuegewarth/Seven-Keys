@@ -1,10 +1,3 @@
-/*
- * Implementação da classe que representa um evento de controle.
- *
- * Autor: Simiao Carvalho
- * Data: 26/04/2015
- * Licença: LGPL. Sem copyright.
- */
 #include "core/joystickevent.h"
 #include <cassert>
 #include <SDL2/SDL.h>
@@ -14,7 +7,7 @@
 
 using std::map;
 
-static bool joystick_widthas_init = false;
+static bool joystick_was_init = false;
 static map<int, JoyStickEvent::Button> m_joystick_table;
 
 void init_table_joystick()
@@ -36,6 +29,9 @@ void init_table_joystick()
     m_joystick_table[SDL_CONTROLLER_BUTTON_RIGHTSTICK ] = JoyStickEvent::R3;
 }
 
+/**
+ *
+ */
 JoyStickEvent::JoyStickEvent(State state, Button button)
 {
     assert((button >= 0) && "Button can't be negative");
@@ -44,25 +40,43 @@ JoyStickEvent::JoyStickEvent(State state, Button button)
     m_button = button;
 }
 
-JoyStickEvent::State
-JoyStickEvent::state() const
+/**
+ * [JoyStickEvent::state            method that returns the state of
+ * 									the joystick, like a "get"]
+ * @method JoyStickEvent::state
+ * @return [returns the state of the joystick, PRESSED or RELEASED]
+ */
+JoyStickEvent::State JoyStickEvent::state() const
 {
     return m_state;
 }
 
-JoyStickEvent::Button
-JoyStickEvent::button() const
+/**
+ * [JoyStickEvent::button description]
+ * @method JoyStickEvent::button
+ * @return [returns the button that are pressed in the joystick
+ *         X, CIRCLE, SQUARE, TRIANGLE, SHARE, HOME,
+ *         START, L3, R3, L1, R1, UP, DOWN, LEFT, RIGHT]
+ */
+JoyStickEvent::Button JoyStickEvent::button() const
 {
     return m_button;
 }
 
-JoyStickEvent
-JoyStickEvent::from_SDL(const SDL_Event& event)
+/**
+ * [JoyStickEvent::from_SDL     method that returns the button that
+ * 								are pressed in the joystick, like a "get"]
+ * @method JoyStickEvent::from_SDL
+ * @param  event                   [Joystick event detected by the SDL library]
+ * @return                         [returns the complete state of the joystick
+ *                                 if it pressed and which button is pressed]
+ */
+JoyStickEvent JoyStickEvent::from_SDL(const SDL_Event& event)
 {
-    if (not joystick_widthas_init)
+    if (not joystick_was_init)
     {
         init_table_joystick();
-        joystick_widthas_init = true;
+        joystick_was_init = true;
     }
 
     JoyStickEvent::State state = JoyStickEvent::PRESSED;
