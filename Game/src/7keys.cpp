@@ -1,9 +1,7 @@
 /*
+ * 7keys.cpp
  * Implementação da classe SevenKeys.
- *
- * Autor: Edson Alves
- * Data: 20/04/2015
- * Licença: LGPL. Sem copyright.
+ * Class that represents the entire game and manages the main screens.
  */
 #include <ijengine/core/environment.h>
 #include <ijengine/core/level.h>
@@ -18,10 +16,7 @@
 
 #include <cassert>
 #include <cstring>
-/**
- * 7keys.cpp
- * @brief [Start the game with default values]
- */
+
 SevenKeys::SevenKeys()
     : Game("fone")
 {

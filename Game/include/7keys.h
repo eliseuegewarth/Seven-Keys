@@ -1,13 +1,13 @@
+/**
+ * 7keys.h
+ * Class that represents the entire game and manages the main screens.
+ */
+
 #ifndef TEST_H
 #define TEST_H
 
 #include <core/game.h>
 #include "player.h"
-
-/**
- * 7keys.h
- * @brief [Class that represents the entire game and manages the main screens.]
- */
 
 class SevenKeys : public Game
 {
