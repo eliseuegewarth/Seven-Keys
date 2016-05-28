@@ -21,14 +21,20 @@ static int randint(int a, int b)
     return a + r;
 }
 
-Room::Room(Object *parent, ObjectID id, string type, Room *left, Room *top, Room *right, Room *bottom, int s_id)
-: Object(parent, id), r_left(left), r_right(right), r_top(top), r_bottom(bottom), type(type), stage_id(s_id),
-    m_doors(false)
+Room::Room(Object *parent, ObjectID id, string type, Room *left, Room *top,
+           Room *right, Room *bottom, int s_id)
 {
     assert((parent != NULL) && "parent can't be NULL");
     assert((not id.empty()) && "id can't be empty");
     assert((not type.empty()) && "id can't be empty");
-
+    Object(parent, id);
+    room_in_left = left;
+    room_in_right = right;
+    room_in_top = top;
+    room_in_bottom = bottom;
+    type = type;
+    stage_id = s_id;
+    m_doors = false;
     Environment *env = Environment::get_instance();
     quad = new Quadtree(0, new Rect(0, 0, env->canvas->width(), env->canvas->height()));
 
@@ -39,24 +45,24 @@ Room::Room(Object *parent, ObjectID id, string type, Room *left, Room *top, Room
     add_guard("guard");
     add_ghost("ghost");
 
-    if(r_left)
+    if(room_in_left)
     {
-        r_left->notify_creation("right");
+        room_in_left->notify_creation("right");
         this->add_door("normal", 'l', 0, 320);
     }
-    if(r_top)
+    if(room_in_top)
     {
-        r_top->notify_creation("bottom");
+        room_in_top->notify_creation("bottom");
         this->add_door("normal",'t', 600, 0);
     }
-    if(r_right)
+    if(room_in_right)
     {
-        r_right->notify_creation("left");
+        room_in_right->notify_creation("left");
         this->add_door("normal",'r', 1200, 320);
     }
-    if(r_bottom)
+    if(room_in_bottom)
     {
-        r_bottom->notify_creation("top");
+        room_in_bottom->notify_creation("top");
         this->add_door("normal",'b', 600, 640);
     }
 
@@ -71,7 +77,11 @@ Room::Room(Object *parent, ObjectID id, string type, Room *left, Room *top, Room
 Room::~Room()
 {
 }
-
+/**
+ * [Room::room_type returns the type of the room in which the player is]
+ * @method Room::room_type
+ * @return [returns "cell" if the player is in a cell or other]
+ */
 string Room::room_type()
 {
 	if (this->type == "CelaH" || this->type == "CelaV")
@@ -80,6 +90,7 @@ string Room::room_type()
 	return this->type;
 }
 
+//Add_items add the items in the room as the bench, bottles, chairs, etc.]
 void Room::add_items(int stage_id)
 {
     typedef struct _ItemInfo {
@@ -203,15 +214,19 @@ void Room::add_items(int stage_id)
     }
 }
 
-void
-Room::add_list(Object  * item)
+//Adds the previous state of the items the room when the player returns to her
+void Room::add_list(Object  * item)
 {
     assert((item != NULL) && "Item should be diferent of NULL");
 	this->items.push_back(item);
 }
 
-const list<Object *>&
-Room::get_items()
+/**
+ * [Room::get_items Gets the state of the items the room when the player leaves]
+ * @method Room::get_items
+ * @return []
+ */
+const list<Object *>& Room::get_items()
 {
 	return children();
 }
@@ -220,25 +235,25 @@ Room::get_items()
 void Room::check_entry()
 {
 	Environment *env = Environment::get_instance();
-	if(this->r_left)
+	if(this->room_in_left)
 	{
 		Rect l_door {0, 340, 80, 80};
 		env->canvas->draw(l_door, Color::WHITE);
 
 	}
-	if(this->r_top)
+	if(this->room_in_top)
 	{
 		Rect t_door {600, 0, 80, 80};
 		env->canvas->draw(t_door, Color::WHITE);
 
 	}
-	if(this->r_right)
+	if(this->room_in_right)
 	{
-		Rect r_door {1200, 340, 80, 80};
-		env->canvas->draw(r_door, Color::WHITE);
+		Rect room_in_door {1200, 340, 80, 80};
+		env->canvas->draw(room_in_door, Color::WHITE);
 
 	}
-	if(this->r_bottom)
+	if(this->room_in_bottom)
 	{
 		Rect b_door {600, 640, 80, 80};
 		env->canvas->draw(b_door, Color::WHITE);
@@ -255,25 +270,25 @@ Room::draw_id(Room * anterior, Room * sala, int x, int y)
 	env->canvas->set_font(font);
 	env->canvas->draw(sala->id(),x,y,Color::RED);
 
-	if(sala->r_left && sala->r_left != anterior)
+	if(sala->room_in_left && sala->room_in_left != anterior)
 	{
 		env->canvas->draw("-", x - 20, y,Color::RED);
-		draw_id(sala, sala->r_left, x - 100, y);
+		draw_id(sala, sala->room_in_left, x - 100, y);
 	}
-	if(sala->r_top && sala->r_top != anterior)
+	if(sala->room_in_top && sala->room_in_top != anterior)
 	{
 		env->canvas->draw("|", x + 20, y - 30,Color::RED);
-		draw_id(sala, sala->r_top, x, y - 60);
+		draw_id(sala, sala->room_in_top, x, y - 60);
 	}
-	if(sala->r_right && sala->r_right != anterior)
+	if(sala->room_in_right && sala->room_in_right != anterior)
 	{
 		env->canvas->draw("-", x + 80, y,Color::RED);
-		draw_id(sala, sala->r_right, x + 100, y);
+		draw_id(sala, sala->room_in_right, x + 100, y);
 	}
-	if(sala->r_bottom && sala->r_bottom != anterior)
+	if(sala->room_in_bottom && sala->room_in_bottom != anterior)
 	{
 		env->canvas->draw("|", x + 20, y + 25,Color::RED);
-		draw_id(sala, sala->r_bottom, x, y + 60);
+		draw_id(sala, sala->room_in_bottom, x, y + 60);
 	}
 }
 
@@ -291,7 +306,7 @@ Room::add_door(string type, char direction, int x, int y)
 {
     assert((not type.empty()) && "type can't be empty");
     char doorID[128];
-    char door_sprite[256];
+    char dooroom_in_sprite[256];
     int stages = 1;
     if(stage_id < 3)
         stages = 1;
@@ -302,17 +317,17 @@ Room::add_door(string type, char direction, int x, int y)
 
     if(type == "normal")
     {
-        sprintf(door_sprite, "res/tile_sheets/porta%d%c.png", stages, direction);
+        sprintf(dooroom_in_sprite, "res/tile_sheets/porta%d%c.png", stages, direction);
         sprintf(doorID, "porta%c%s", direction, id().c_str());
-        Item *porta = new Item(this, "door", door_sprite, x, y, INFINITE, true);
+        Item *porta = new Item(this, "door", dooroom_in_sprite, x, y, INFINITE, true);
 
         add_child(porta);
     }
     else if (type == "finalDoor")
     {
         sprintf(doorID, "stage");
-        sprintf(door_sprite, "res/door/porta%c.png", direction);
-        Item *porta = new Item(this, "finalDoor", door_sprite, x, y, INFINITE, true);
+        sprintf(dooroom_in_sprite, "res/door/porta%c.png", direction);
+        Item *porta = new Item(this, "finalDoor", dooroom_in_sprite, x, y, INFINITE, true);
 
         add_child(porta);
     }
@@ -335,22 +350,22 @@ Room::add_door(string type, char direction, int x, int y)
 void
 Room::add_final_door()
 {
-    double x = 0 + (r_top || r_bottom)*600 + (bool)r_left*1200;
-    double y = 0 + (r_left || r_right)*320 + (bool)r_top*640;
+    double x = 0 + (room_in_top || room_in_bottom)*600 + (bool)room_in_left*1200;
+    double y = 0 + (room_in_left || room_in_right)*320 + (bool)room_in_top*640;
     char dir;
-    if(this->r_right)
+    if(this->room_in_right)
     {
         dir = 'l';
     }
-    else if(this->r_bottom)
+    else if(this->room_in_bottom)
     {
         dir = 't';
     }
-    else if(this->r_left)
+    else if(this->room_in_left)
     {
         dir = 'r';
     }
-    if(this->r_top)
+    if(this->room_in_top)
     {
         dir = 'b';
     }
@@ -582,8 +597,7 @@ Room::place(Object *object, double x, double y)
     return ok;
 }
 
-void
-Room::notify_creation(const string& position)
+void Room::notify_creation(const string& position)
 {
     assert((not position.empty()) && "position can't be empty");
     //Environment *env = Environment::get_instance();

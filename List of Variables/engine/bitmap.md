@@ -1,60 +1,162 @@
-#bitmap.cpp
+#Bitmap
 
-##class Bitmap::Impl
-
-####public:    
-    m_bitmap = static_cast<SDL_Surface *>(data)
-    int w() const { return m_w; }
-    int h() const { return m_h; }
-    SDL_Surface * data() const { return m_bitmap; }
-    void * pixels() const { return m_bitmap->pixels; }
-    void clear() { SDL_FillRect(m_bitmap, nullptr, 0); }
-
-    void fill(const Rect& r, Uint32 color)
-    {
-        SDL_Rect rect { (int) r.x(), (int) r.y(), (int) r.w(), (int) r.h() };
-
-        SDL_FillRect(m_bitmap, &rect, color);
-    }
-
-####private:
-    int m_w, m_h;
-    SDL_Surface *m_bitmap;
+##```class Bitmap```
 
 
-###Bitmap::Bitmap()
-    void *data
-    int w
-    int h
+```c++
+int width() const;
+```
 
-###Bitmap::Bitmap()
-    Canvas *canvas
+```c++
+int height() const;
+```
 
-###Bitmap::~Bitmap()
+```c++
+void * data() const;
+```
 
-###void * Bitmap::data()
+```c++
+void * pixels() const;
+```
 
-###int Bitmap::w() const
-
-###int Bitmap::h() const
-
-###Bitmap * Bitmap::from_file()
-    SDL_Surface *bitmap = IMG_Load(path.c_str());
+```c++
+void clear();
+```
 
 
-###void * Bitmap::pixels() const
+##```class Bitmap::Impl```
 
-###void Bitmap::clear()
 
-###Uint32 Bitmap::getpixel(SDL_Surface *surface, int x, int y)
+###Parameters
+```c++
+void *data;
+```
 
-    int bpp = surface->format->BytesPerPixel;
-    Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
+```c++
+unsigned const int width;
+```
+    
+```c++
+unsigned const int height;
+```
 
-void
-Bitmap::putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
-{
-    int bpp = surface->format->BytesPerPixel;
-    Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
 
-###void Bitmap::fill(const Rect& r, Uint32 color)
+##```int width() const```
+
+
+
+##```int height() const```
+
+
+
+##```SDL_Surface * data() const```
+
+
+##```void * pixels() const```
+
+
+##```Bitmap::Bitmap()```
+
+
+###Parameters
+<<<<<<< HEAD
+=======
+
+>>>>>>> c4a548bd214309fd09a022976c3e5883ff688458
+```c++
+void *data;
+```
+
+```c++
+const int width;
+```
+
+```c++
+const int height;
+```   
+
+##```Bitmap::Bitmap()```
+
+
+###Parameters 
+```c++
+Canvas *canvas
+```
+
+##```void * Bitmap::data() const```
+
+
+##```int Bitmap::width() const```  
+
+
+##```int Bitmap::height() const```  
+
+
+##```Bitmap * Bitmap::from_file()```  
+
+
+###Parameters
+```c++
+const string& path
+```
+
+##```void * Bitmap::pixels() const```  
+
+
+##```void Bitmap::clear()```  
+
+
+##```Uint32 Bitmap::getpixel()```    
+
+
+###Parameters 
+```c++
+SDL_Surface *surface;
+```
+
+```c++
+const int x;
+```
+
+```c++
+const int y;
+```
+
+##```void Bitmap::putpixel()```    
+
+    
+###Parameters 
+```c++
+SDL_Surface *surface;
+```
+
+```c++
+int x;
+```
+
+```c++
+int y;
+```
+
+```c++
+Uint32 pixel;
+```
+
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> c4a548bd214309fd09a022976c3e5883ff688458
+    
+##```void Bitmap::fill()```   
+
+###Parameters  
+```c++
+const Rect& r;
+```
+
+
+```c++
+Uint32 color
+```
+

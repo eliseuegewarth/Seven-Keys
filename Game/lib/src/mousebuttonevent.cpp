@@ -10,6 +10,14 @@
 
 #include <cassert>
 
+/**
+ * [MouseButtonEvent::MouseButtonEvent description]
+ * @method MouseButtonEvent::MouseButtonEvent
+ * @param  x                    [Mouse position in axis x(horizontal)]
+ * @param  y                    [Mouse position in axis y(vertical)]
+ * @param  state                 [State of the button (if are pressed or not)]
+ * @param  button                [Button that are pressed]
+ */
 MouseButtonEvent::MouseButtonEvent(ButtonState state, Button button,
                                     double x, double y)
 {
@@ -22,32 +30,58 @@ MouseButtonEvent::MouseButtonEvent(ButtonState state, Button button,
     m_y = y;
 }
 
+/**
+ * [MouseButtonEvent::state State of the buttons, if it is pressed or not]
+ * @method MouseMotionEvent::state
+ * @return                         [Return the state of button]
+ */
 MouseButtonEvent::ButtonState
 MouseButtonEvent::state() const
 {
     return m_state;
 }
 
+/**
+ * [MouseButtonEvent::button Button that are pressed]
+ * @method MouseButtonEvent::button
+ * @return [Return the button that is pressed]
+ */
 MouseButtonEvent::Button
 MouseButtonEvent::button() const
 {
     return m_button;
 }
 
-double
-MouseButtonEvent::x() const
+/**
+ * [MouseButtonEvent::x position where the mouse button was
+ * 					 pressed on the screen in axis x(horizontal)]
+ * @method MouseButtonEvent::x
+ * @return [[Returns the mouse position in axis x(horizontal)]
+ */
+double MouseButtonEvent::x() const
 {
     return m_x;
 }
 
-double
-MouseButtonEvent::y() const
+/**
+ * [MouseButtonEvent::x position where the mouse button was
+ * 					 pressed on the screen in axis y(vertical)]
+ * @method MouseButtonEvent::x
+ * @return [[Returns the mouse position in axis y(vertical)]
+ */
+double MouseButtonEvent::y() const
 {
     return m_y;
 }
 
-MouseButtonEvent
-MouseButtonEvent::from_SDL(const SDL_Event& event)
+/**
+ * [MouseButtonEvent::from_SDL Reads the state of the buttons from the
+ * 							   SDL library and returns the states for class]
+ * @method MouseButtonEvent::from_SDL
+ * @param  event                      [mouse event detected by the SDL library]
+ * @return                            [mouse buttons event]
+ */
+MouseButtonEvent MouseButtonEvent::from_SDL(const SDL_Event& event)
 {
     MouseButtonEvent::ButtonState state = (event.type == SDL_MOUSEBUTTONDOWN ?
         MouseButtonEvent::PRESSED : MouseButtonEvent::RELEASED);

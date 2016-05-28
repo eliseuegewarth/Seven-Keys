@@ -1,8 +1,6 @@
 /*
- * Classe que representa um ouvinte de eventos do sistema operacional.
+ * Class which represents an operating system event listener.
  *
- * Autor: Edson Alves
- * Data: 22/04/2015
  * Licença: LGPL. Sem copyright.
  */
 #ifndef SYSTEM_EVENT_LISTENER_H
@@ -12,8 +10,8 @@ class SystemEvent;
 
 class SystemEventListener
 {
-public:
-    virtual bool onSystemEvent(const SystemEvent& event) = 0;
+	public:
+	    virtual bool onSystemEvent(const SystemEvent& event) = 0;
 };
 
 #endif

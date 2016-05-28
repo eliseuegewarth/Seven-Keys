@@ -20,14 +20,16 @@ class Environment;
 class SystemEvent;
 class KeyboardEvent;
 
+
 class Game : public Listener
 {
 public:
     Game(const string& id);
     virtual ~Game();
 
-    void init(const string& title, int w, int h, double scale = 1.0, bool fullscreen = false,
-        int volume = 50) throw (Exception);
+    void init(const string& title, unsigned const int w = 0, unsigned const int h = 0,
+              double scale = 1.0, bool fullscreen = false, 
+              unsigned int volume = 50) throw (Exception);
 
     void init(const string& settings) throw (Exception);
     void run();
@@ -36,10 +38,11 @@ public:
     bool on_event(const KeyboardEvent& event);
 
 protected:
-    string m_id;
-    Level *m_level;
-    bool m_done;
-    Environment *env;
+    string m_id; //Map identifier file.
+    Level *m_level; //Stores the game levels.
+    bool m_done; //Stores if it was create or not the level.
+    Environment *env; //It is an object of the class environment. 
+                      //Is a pointer to the current instance of the game environment.
 
     virtual Level * load_level(const string& id);
 

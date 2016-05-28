@@ -1,73 +1,72 @@
 /*
- * Implementação da classe que representa uma cor.
- *
- * Autor: Edson Alves
- * Data: 13/04/2015
+ * implementation of a class that represents a color.
  * Licença: LGPL. Sem copyright.
  */
+
 #include "core/color.h"
 
+#include <cassert>
+
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param r [description]
+ * @param g [description]
+ * @param b [description]
+ * @param a [description]
+ */
 Color::Color(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
     : m_r(r), m_g(g), m_b(b), m_a(a)
 {
 }
 
-bool
-Color::operator!=(const Color& color) const
+bool Color::operator != (const Color& color) const
 {
     return m_r != color.m_r or m_b != color.m_b or m_g != color.m_g or m_a != color.m_a;
 }
 
-unsigned char
-Color::r() const
+unsigned char Color::r() const
 {
     return m_r;
 }
 
-unsigned char
-Color::g() const
+unsigned char Color::g() const
 {
     return m_g;
 }
 
-unsigned char
-Color::b() const
+unsigned char Color::b() const
 {
     return m_b;
 }
 
-unsigned char
-Color::a() const
+unsigned char Color::a() const
 {
     return m_a;
 }
 
-void
-Color::set_r(unsigned char r)
+void Color::set_r(unsigned char r)
 {
     m_r = r;
 }
 
-void
-Color::set_g(unsigned char g)
+void Color::set_g(unsigned char g)
 {
     m_g = g;
 }
 
-void
-Color::set_b(unsigned char b)
+void Color::set_b(unsigned char b)
 {
     m_b = b;
 }
 
-void
-Color::set_a(unsigned char a)
+void Color::set_a(unsigned char a)
 {
     m_a = a;
 }
 
-void
-Color::set(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
+void Color::set(unsigned char r, unsigned char g, unsigned char b, unsigned char a)
 {
     m_r = r;
     m_b = b;

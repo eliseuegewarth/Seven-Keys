@@ -20,7 +20,7 @@ using std::unique_ptr;
 class Bitmap
 {
 public:
-    Bitmap(void *data, int width, int height);
+    Bitmap(void *data,const int width,const int height);
     Bitmap(Canvas *canvas);
     ~Bitmap();
 

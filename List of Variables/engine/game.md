@@ -50,12 +50,12 @@ Initialized the game whith ours
 const string& title;
 ```
 ```c++
-int w;
+int width;
 ```
 variable that stores the width of the resolution.
 
 ```c++
-int h;
+int height;
 ```
 variable that stores the screen resolution height.
 
@@ -82,12 +82,12 @@ Method to init the game.
 const string& path;
 ```
 ```c++
-int w;
+int wight;
 ```
 variable that stores the width of the resolution.
 
 ```c++
-int h;
+int height;
 ```
 variable that stores the screen resolution height.
 

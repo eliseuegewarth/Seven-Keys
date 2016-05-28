@@ -1,8 +1,5 @@
 /*
- * Classe que representa um evento do sistema operacional.
- *
- * Autor: Edson Alves
- * Data: 22/04/2015
+ * Class which represents an operating system event.
  * Licença: LGPL. Sem copyright.
  */
 #ifndef SYSTEM_EVENT_H

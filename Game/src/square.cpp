@@ -1,10 +1,3 @@
-/*
- * Implementação da classe Square.
- *
- * Autor: Edson Alves
- * Data: 29/04/2015
- * Licença: LGPL. Sem copyright.
- */
 #include <core/rect.h>
 #include <core/keyboardevent.h>
 #include <core/environment.h>
@@ -15,10 +8,17 @@
 
 #define SPEED 150.5
 
+/**
+ * [Square::Square description]
+ * @param  parent [The parent is the map object that will contains the ghost guard.]
+ * @param  id     [identifier of object]
+ * @param size    [Square size that will be created, height and width]
+ */
 Square::Square(Object *parent, ObjectID id, double size)
 {
     assert((parent != NULL) && "Parent can't be NULL");
     assert((not id.empty()) && "ID can't be empty");
+    assert((size >= 0) && "Size can't be negative");
     Object(parent, id, 0, 0, size, size);
     m_speed= 0;
     m_last=0;
@@ -29,21 +29,28 @@ Square::Square(Object *parent, ObjectID id, double size)
     double y = env->canvas->height()*0.6 - size;
     set_y(y);
 }
-
 Square::~Square()
 {
     Environment *env = Environment::get_instance();
     assert((env != NULL) && "Failed to pick up the instance of environment");
     env->events_manager->unregister_listener(this);
 }
-double
-Square::size()
+/**
+ * [Square::size returns one of the sides of the square, width or height]
+ * @method Square::size
+ * @return [square width]
+ */
+double Square::size()
 {
     return width();
 }
-
-bool
-Square::on_event(const KeyboardEvent& event)
+/**
+ * [Square::on_event description]
+ * @method Square::on_event
+ * @param  event            [keyboard action]
+ * @return      [true when the keyboard is in any event or false if it is not]
+ */
+bool Square::on_event(const KeyboardEvent& event)
 {
     switch (event.state())
     {
@@ -76,9 +83,11 @@ Square::on_event(const KeyboardEvent& event)
 
     return false;
 }
-
-void
-Square::draw_self()
+/**
+ * [Square::draw_self Draws the animation of the environment on screen.]
+ * @method Square::draw_self
+ */
+void Square::draw_self()
 {
     const Color color { 80, 180, 205 };
 
@@ -87,8 +96,12 @@ Square::draw_self()
     env->canvas->fill(bounding_box(), color);
 }
 
-void
-Square::update_self(unsigned long elapsed)
+/**
+ * [Square::update_self Updates the environment on the screen.]
+ * @method Square::update_self
+ * @param  elapsed             [Elapsed time since the game start.]
+ */
+void Square::update_self(unsigned long elapsed)
 {
     if (m_speed == 0)
     {
