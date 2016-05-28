@@ -1,10 +1,9 @@
 /*
- * Classe que representa o módulo de vídeo.
+ * Class that represents the video module.
  *
- * Autor: Edson Alves
- * Data: 06/04/2015
  * Licença: LGPL. Sem copyright.
  */
+
 #ifndef VIDEO_H
 #define VIDEO_H
 

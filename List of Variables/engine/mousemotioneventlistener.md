@@ -1,6 +1,9 @@
 #MouseMotionEventListener
 
-##class MouseMotionEvent;
+##```class MouseMotionEvent```
 
-##class MouseMotionEventListener
-    ·virtual bool onMouseMotionEvent(const MouseMotionEvent& event) = 0;
+##```class MouseMotionEventListener```
+```c++
+virtual bool onMouseMotionEvent(const MouseMotionEvent& event) = 0;
+```
+Return true if any event is occurring or false if not occurring

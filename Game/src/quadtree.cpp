@@ -24,8 +24,9 @@ Quadtree::Quadtree(int pLevel, Rect * pBounds)
 }
 
 /**
- * [Quadtree::clear Method that assigning m_nodes array
- * with its four pointers to null and free the memory.]
+ * [Quadtree::clear 				Method that assigning m_nodes array
+ * 									with its four pointers to null
+ * 									and free the memory.]
  * @method Quadtree::clear
  */
 void Quadtree::clear()
@@ -44,14 +45,16 @@ void Quadtree::clear()
 }
 
 /**
- * [Quadtree::split Method to divide the room into
- * four with their respective limits]
+ * [Quadtree::split 						Method to divide the room into
+ * 											four with their respective limits]
  * @method Quadtree::split
  */
 void Quadtree::split()
 {
-	int subWidth = (int)(m_bounds->height() / 2); //Limit of Width in map, it should be half the area of the rectangle
-   	int subHeight = (int)(m_bounds->height() / 2); //Limit of Height in map, it should be half the area of the rectangle
+	//Limit of Width in map, it should be half the area of the rectangle
+	int subWidth = (int)(m_bounds->height() / 2);
+	//Limit of Height in map, it should be half the area of the rectangle
+   	int subHeight = (int)(m_bounds->height() / 2);
    	int x = (int)m_bounds->x(); //Limit of Axis 'x' in map
    	int y = (int)m_bounds->y();  //Limit of Axis 'y' in map
 

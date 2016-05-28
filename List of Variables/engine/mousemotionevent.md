@@ -80,7 +80,7 @@ Reads the movements from the SDL library and returns the states for class
 ```c++
 const SDL_Event& event
 ```
-
+Mouse event detected by the SDL library
 ###variables
 ```c++
 int x

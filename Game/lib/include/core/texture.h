@@ -1,8 +1,5 @@
 /*
- * Classe que representa uma textura.
- *
- * Autor: Edson Alves
- * Data: 13/05/2015
+ * Class that represents a texture.
  * Licença: LGPL. Sem copyright.
  */
 #ifndef TEXTURE_H

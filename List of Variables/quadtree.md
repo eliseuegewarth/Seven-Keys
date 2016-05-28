@@ -1,6 +1,5 @@
 #Quadtree
 
-
 ##```class Quadtree```
 ###Class Members
 ```c++
@@ -19,8 +18,10 @@ Maximum number of levels
 ·int m_level;
 ```
 Level to be initialize
+
 ##```Quadtree::Quadtree()```
-The constructor that initialize m_nodes array with its four pointers to null and assigns the value of pLevel to m_level and pBounds to m_bounds.
+The constructor that initialize m_nodes array with its four pointers
+to null and assigns the value of pLevel to m_level and pBounds to m_bounds.
 
 ###Parameters
 ```c++

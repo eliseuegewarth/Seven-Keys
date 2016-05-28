@@ -10,6 +10,7 @@
 
 class MouseMotionEvent;
 
+// Detects if any event is occurring in the mouse moviment.
 class MouseMotionEventListener
 {
 public:
