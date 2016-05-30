@@ -1,0 +1,1 @@
+g++ -o test/7keysTest src/7keys.cpp test/7keysTest.cpp  -lcppunit -Iinclude `sdl2-config --cflags` -I/usr/local/include/ijengine -W -Wall -pedantic -std=c++11 -MMD -g3
