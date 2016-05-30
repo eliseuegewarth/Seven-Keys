@@ -175,6 +175,8 @@ void Ghost::update_direction(unsigned long elapsed)
         }
 
         last_game_time_saved = elapsed;
+    }else{
+        //do nothing
     }
     ghost_guard_animation->set_row(this->direction());
 }
