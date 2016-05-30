@@ -19,7 +19,6 @@ public:
     Impl(void *data,unsigned const int width,unsigned const int height)
         : m_width(width), m_height(height)
     {
-
         m_bitmap = static_cast<SDL_Surface *>(data);
     }
 
@@ -75,8 +74,8 @@ Bitmap::Bitmap(void *data, const int width, const int height)
 }
 
 Bitmap::Bitmap(Canvas *canvas)
-    : m_impl(new Impl((void *) SDL_CreateRGBSurface(0, canvas->width(), canvas->height(), 32, 0, 0, 0, 0),
-        canvas->width(), canvas->height()))
+    : m_impl(new Impl((void *) SDL_CreateRGBSurface(0, canvas->width(), 
+             canvas->height(), 32, 0, 0, 0, 0),canvas->width(), canvas->height()))
 {
 }
 

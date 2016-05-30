@@ -13,11 +13,8 @@ using namespace std;
  * @brief Creates the environment of the pause menu.
  * instantiates the pause page, from the time, the buttons and the background.
  */
- /**
-  * @brief [Creates the environment of the pause menu.]
-  * @details [Instantiates the pause page, from the time, the buttons and the background.
-  */
-Pause::Pause() : Level("pause")
+Pause::Pause()
+    : Level("pause")
 {
     /* It is an object of the class environment. 
     Is a pointer to the current instance of the game environment.*/
@@ -46,6 +43,7 @@ Pause::Pause() : Level("pause")
     Button *backMenu = new Button(this, "backMenu", 
                                   "res/interface/menuExtras/voltar.png",
                                   "res/interface/menuExtras/Svoltar.png");
+
     assert((backMenu != NULL) && "Failed to pick up the instance of button");
 
     backMenu->align_to(this, Object::RIGHT, Object::NONE);
@@ -55,6 +53,7 @@ Pause::Pause() : Level("pause")
     Button *exit = new Button(this, "exit", 
                               "res/interface/menuExtras/sair.png",
                               "res/interface/menuExtras/Ssair.png");
+
     assert((exit != NULL) && "Failed to pick up the instance of button");
 
     exit->align_to(this, Object::RIGHT, Object::NONE);
@@ -93,18 +92,19 @@ void Pause::draw_self()
 /**
  * @brief [Let the dynamic buttons]
  * 
- * @param object [description]
- * @param id [description]
  * @return [returns the status of the button, if it was clicked or not]
  */
+ 
 bool Pause::on_message(Object *object, MessageID id, Parameters)
 {
     assert((object != NULL) && "Object needs to be different from NULL");
     assert((not id.empty()) && "id needs to be different drom the empty");
+
+    bool status_button;
     
     if (id != Button::clickedID)
     {
-        return false;
+        status_button = false;
     }
 
     Button *button = dynamic_cast <Button *>(object);
@@ -113,11 +113,12 @@ bool Pause::on_message(Object *object, MessageID id, Parameters)
 
     if (not button)
     {
-        return false;
+        status_button = false;
     }
+
     if (button->id() == "backGame")
     {
-        return false;
+        status_button = false;
     } 
 
     else if (button->id() == "backMenu")
@@ -127,6 +128,7 @@ bool Pause::on_message(Object *object, MessageID id, Parameters)
 
     finish();
 
-    return true;
+    status_button = true;
+    return status_button;
 
 }
