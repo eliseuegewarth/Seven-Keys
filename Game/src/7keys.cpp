@@ -16,20 +16,22 @@
 
 #include <cassert>
 #include <cstring>
-
+/**
+ * @brief [This is the class constructor method. He starts the game in "headset" and plays a song.]
+ */
 SevenKeys::SevenKeys()
     : Game("fone")
 {
+    // Instance of the audio manager that is responsible for playing the game music.
     AudioManagerMusic * music2 = new AudioManagerMusic();
     assert(music2 != NULL && "Could not create instance of AudioManager Music");
     music2 -> play("res/sounds/musicaMenu.wav", -1);
 }
 
 /**
- * @brief [brief description]
- * @details [long description]
+ * @brief [Returns the pointer to a screen that will be loaded.]
  *
- * @param screen_type [description]
+ * @param screen_type [String that contains the type of screen that will be loaded.]
  * @return level_to_be_loaded [Returns the screen that will be loaded.]
  */
 Level *
@@ -39,6 +41,7 @@ SevenKeys::load_level(const string& screen_type)
 
     // Represents the screen that will be loaded.
     Level * level_to_be_loaded = nullptr;
+
     if (screen_type == "fone")
     {
         level_to_be_loaded = (Level*) new FrontEnd("logo", "logo", "res/images/fone.png");
@@ -57,8 +60,8 @@ SevenKeys::load_level(const string& screen_type)
     }
     else if (screen_type == "title")
     {
-        this->lives = INITIAL_NUMBER_OF_LIVES_OF_THE_CHARACTER;
-        sanity = INITIAL_SANITY_OF_THE_CHARACTER;
+        this->number_of_players_lives = INITIAL_NUMBER_OF_LIVES_OF_THE_PLAYER;
+        this->player_sanity = INITIAL_SANITY_OF_THE_PLAYER;
         level_to_be_loaded = (Level*) new TitleScreen();
     }
     else if (screen_type == "options")
@@ -67,19 +70,29 @@ SevenKeys::load_level(const string& screen_type)
     }
     else if (strstr(screen_type.c_str(), "trans"))
     {
+
+        /* It is an object of the class environment. 
+        Is a pointer to the current instance of the game environment.*/
         Environment *env = Environment::get_instance();
+
         assert(env != NULL && "failed to pick up the instance of Environment");
+
+        // Comment This 
         shared_ptr <Font> font = env->resources_manager->get_font("res/fonts/TakaoExGothic.ttf");
         env->canvas->set_font(font);
 
-        double w = env->canvas->width();
-        double h = env->canvas->height();
+        // Width of screen in pixels.
+        double width = env->canvas->width();
+        // Height of screen in pixels.
+        double height = env->canvas->height();
 
+        // String that contains the old type of screen.
         string ant = screen_type;
 
+        // The screen to be loaded.
         Level *lvl = new Level(screen_type, screen_type);
         assert(lvl != NULL && "failed to create a Level instance");
-        lvl->set_dimensions(w, h);
+        lvl->set_dimensions(width, height);
 
         char novo[256];
         sprintf(novo, "%s", screen_type.c_str());
@@ -107,7 +120,7 @@ SevenKeys::load_level(const string& screen_type)
             sprintf(music_path, "res/sounds/Fase5.wav");
         env->music->play(music_path, -1);
 
-        env->canvas->draw(screen_type, w/2, h/2 ,Color::RED);
+        env->canvas->draw(screen_type, width/2, height/2 ,Color::RED);
 
         cout << novo << endl;
 
@@ -122,14 +135,18 @@ SevenKeys::load_level(const string& screen_type)
         shared_ptr <Font> font = env->resources_manager->get_font("res/fonts/TakaoExGothic.ttf");
         env->canvas->set_font(font);
 
-        double w = env->canvas->width();
-        double h = env->canvas->height();
+        // Width of screen in pixels.
+        double width = env->canvas->width();
+        // Height of screen in pixels.
+        double height = env->canvas->height();
 
+        // String that contains the old type of screen.
         string ant = screen_type;
 
+        // The screen to be loaded.
         Level *lvl = new Level(screen_type, screen_type);
         assert(lvl != NULL && "failed to create a Level instance");
-        lvl->set_dimensions(w, h);
+        lvl->set_dimensions(width, height);
 
         char novo[256];
         sprintf(novo, "%s",screen_type.c_str());
@@ -139,7 +156,7 @@ SevenKeys::load_level(const string& screen_type)
         novo[3] = 'g';
         novo[4] = 'e';
 
-        this->lives -= 1;
+        this->number_of_players_lives -= 1;
 
         level_to_be_loaded = (Level*) new FrontEnd(screen_type, novo, "res/images/transition.png");
     }
@@ -148,17 +165,21 @@ SevenKeys::load_level(const string& screen_type)
         Environment *env = Environment::get_instance();
         assert(env != NULL && "failed to pick up the instance of Environment");
         env->sfx->play("res/sounds/gameOver.wav",1);
-        double w = env->canvas->width();
-        double h = env->canvas->height();
 
+        // Width of screen in pixels.
+        double width = env->canvas->width();
+        // Height of screen in pixels.
+        double height = env->canvas->height();
+
+        // The screen to be loaded.
         Level *lvl = new Level(screen_type, screen_type);
         assert(lvl != NULL && "failed to create a Level instance");
-        lvl->set_dimensions(w, h);
+        lvl->set_dimensions(width, height);
         level_to_be_loaded = (Level*) new FrontEnd(screen_type, "title", "res/interface/transicao/gameOver.png");
     }
     else if (strstr(screen_type.c_str(), "stage"))
     {
-        level_to_be_loaded = (Level*) new Stage(screen_type, lives, &sanity);
+        level_to_be_loaded = (Level*) new Stage(screen_type, this->number_of_players_lives, &(this->player_sanity));
     }
     else if (screen_type == "creditos")
     {
