@@ -172,16 +172,11 @@ void Quadtree::insert(Object *pRect)
   * @param  pRect            [description]
   * @param  returnObjects    [Objects of the previous phase]
   */
-<<<<<<< HEAD
-list<Object*> Quadtree::retrieve(list<Object*> returnObjects, Object* pRect) {
-	//assert((pRect != NULL) && "pRect can't be NULL");
-	//assert((returnObjects != NULL) && "list of objects can't be empty");
-=======
+
 list<Object*> Quadtree::retrieve(list<Object*> returnObjects, Object* pRect)
 {
 	assert((pRect != NULL) && "pRect can't be NULL");
 	//assert((not returnObjects.empty()) && "list of objects can't be empty");
->>>>>>> refs/remotes/origin/TecProg
 	int index = getIndex(pRect); //Position of Objects in previous phase
    	if (index != -1 && m_nodes.at(0) != NULL)
    	{
