@@ -32,14 +32,15 @@ Ghost::Ghost(Object *parent, ObjectID id,
             const unsigned int mass_of_ghost_guard,
             const bool walkable, string t,
             const unsigned int initial_movement_direction)
+            : Object (parent, id, ghost_guard_horizontal_position,
+                      ghost_guard_vertical_position)
 {
     //preconditions for execution of method.
     assert((parent != NULL) && "Parent needs to be different from NULL");
     assert((not id.empty()) && "ID needs to be different from empty");
     assert((mass_of_ghost_guard > 0) && "Mass of Ghost Guard needs to be greater than 0");
     assert((not t.empty()) && "t needs to be different from empty");
-    Object(parent, id, ghost_guard_horizontal_position,
-           ghost_guard_vertical_position);
+
     type = t;
 
     ghost_guard_animation = (unique_ptr<Animation>)new Animation
@@ -104,22 +105,25 @@ void Ghost::draw_self()
  */
 void Ghost::walk()
 {
-    //
-    const bool player_is_to_the_right = (player_horizontal_position > this->x());
-    const bool player_is_to_the_left = (player_horizontal_position < this->x());
+    const bool player_is_to_the_right = (player_horizontal_position
+                                        > this->x());
+    const bool player_is_to_the_left = (player_horizontal_position
+                                        < this->x());
     if(player_is_to_the_right)
     {
-        set_x(x() - GHOST_GUARD_SPEED);
+        set_x(x() + GHOST_GUARD_SPEED);
     }else if(player_is_to_the_left)
     {
-        set_x(x() + GHOST_GUARD_SPEED);
+        set_x(x() - GHOST_GUARD_SPEED);
     }else
     {
-        set_x(x());
+        set_x(x() + GHOST_GUARD_SPEED);
     }
     //
-    const bool player_is_to_the_buttom = (player_vertical_position < this->y());
-    const bool player_is_to_the_top = (player_vertical_position > this->y());
+    const bool player_is_to_the_buttom = (player_vertical_position
+                                         < this->y());
+    const bool player_is_to_the_top = (player_vertical_position
+                                      > this->y());
     if(player_is_to_the_buttom)
     {
         set_y(y() - GHOST_GUARD_SPEED);
@@ -128,14 +132,24 @@ void Ghost::walk()
         set_y(y() + GHOST_GUARD_SPEED);
     }else
     {
-        set_y(y());
+        set_y(y() + GHOST_GUARD_SPEED);
     }
-    //
-    const bool player_is_aligned_vertically = (not player_is_to_the_right and not player_is_to_the_left);
-    if(player_is_aligned_vertically and player_is_to_the_top)
+
+    const bool player_is_to_the_right_to_walk = (player_horizontal_position
+                                                > this->x() - 100);
+    const bool player_is_to_the_left_to_walk = (player_horizontal_position
+                                                < this->x() + 100);
+    const bool player_is_to_the_buttom_to_walk = (player_vertical_position
+                                                 < this->y() + 100);
+    const bool player_is_to_the_top_to_walk = (player_vertical_position
+                                              > this->y() - 100);
+    const bool player_is_aligned_vertically = (player_is_to_the_right_to_walk
+                                              and player_is_to_the_left_to_walk);
+
+    if(player_is_aligned_vertically and player_is_to_the_buttom)
     {
         set_direction(Ghost::UP);
-    }else if(player_is_aligned_vertically and player_is_to_the_buttom)
+    }else if(player_is_aligned_vertically and player_is_to_the_top)
     {
         set_direction(Ghost::DOWN);
     }else if(player_is_to_the_left)
