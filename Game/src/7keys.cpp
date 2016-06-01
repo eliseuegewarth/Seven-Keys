@@ -109,15 +109,23 @@ SevenKeys::load_level(const string& screen_type)
         int novo_id = atoi(num_id2);
         char path[256];
         if(novo_id < 6)
+        {
             sprintf(path, "res/interface/transicao/Fase%d.png", novo_id);
+        }
         else
+        {
             sprintf(path, "res/interface/transicao/Bonus.png");
+        }
 
         char music_path[256];
         if(novo_id < 5)
+        {
             sprintf(music_path, "res/sounds/Fase%d.wav", novo_id);
+        }
         else
+        {
             sprintf(music_path, "res/sounds/Fase5.wav");
+        }
         env->music->play(music_path, -1);
 
         env->canvas->draw(screen_type, width/2, height/2 ,Color::RED);

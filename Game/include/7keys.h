@@ -9,10 +9,26 @@
 #include <core/game.h>
 #include "player.h"
 
+
 class SevenKeys : public Game
 {
 public:
     
+    /*static namespace screen_type
+    {
+      const string& FONE = "fone";
+      const string& LOGO = "logo";
+      const string& TECNOLOGIAS = "tecnologias";
+      const string& CLASSIFICACAO = "classificacao";
+      const string& TITLE = "title";
+      const string& OPTIONS = "options";
+      const string& TRANSITION = "trans";
+      const string& DEATH = "death";
+      const string& GAMEOVER = "gameover";
+      const string& STAGE = "stage";
+      const string& CREDITOS = "creditos";
+      const string& EXTRAS = "extras";
+    }Screen_type;*/
     SevenKeys();
 
 private:
@@ -22,11 +38,6 @@ private:
     #define INITIAL_NUMBER_OF_LIVES_OF_THE_PLAYER 5;
 
     Level * load_level(const string& id);
-
-    /*namespace Screen_type
-    {
-      const string& FONE = "fone";
-    };*/
 
     // Is the number of the player's lives.
     unsigned int number_of_players_lives;

@@ -50,3 +50,8 @@
 # IJE
 /IJE_Manateam/*
 bin
+
+# Project Directory
+.cproject
+.project
+nbproject/*
