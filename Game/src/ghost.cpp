@@ -40,7 +40,6 @@ Ghost::Ghost(Object *parent, ObjectID id,
     assert((not id.empty()) && "ID needs to be different from empty");
     assert((mass_of_ghost_guard > 0) && "Mass of Ghost Guard needs to be greater than 0");
     assert((not t.empty()) && "t needs to be different from empty");
-
     type = t;
 
     ghost_guard_animation = (unique_ptr<Animation>)new Animation

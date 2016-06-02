@@ -28,16 +28,18 @@ const string& GUARD_3_RUNNING_PATH = "res/sprites/guard3_running.png";
   * @param  initial_movement_direction       [Defines the initial direction of moviment]
   */
 Guard::Guard(Object *parent, ObjectID id, const double guard_horizontal_position,
-            const double guard_vertical_position, const unsigned int mass_of_guard,
-            const bool walkable, string t, const unsigned int initial_movement_direction)
-
-
+            const double guard_vertical_position,
+            const unsigned int mass_of_guard,
+            const bool walkable, string t,
+            const unsigned int initial_movement_direction)
+            : Object (parent, id, guard_horizontal_position,
+                    guard_vertical_position)
 {
     //preconditions for execution of method.
     assert((parent != NULL) && "Parent needs to be different from NULL");
     assert((not id.empty()) && "id needs to be different drom the empty");
     assert((mass_of_guard > 0) && "mass of guard needs to greater than zero");
-    Object(parent, id, guard_horizontal_position, guard_vertical_position);
+
     guard_type = t;
     guard_health = 100;
     guard_animation  = (unique_ptr<Animation>)new Animation
@@ -175,49 +177,70 @@ void Guard::walk(unsigned long elapsed)
     }
     else if(guard_type == "follow")
     {
-
-        if(player_horizontal_position + 70 < this->x())
+        const bool player_is_to_the_right = (player_horizontal_position
+                                            > this->x() + 70);
+        const bool player_is_to_the_left = (player_horizontal_position
+                                            < this->x() - 70);
+        if(player_is_to_the_left)
         {
             set_x(x() - GUARD_SPEED);
         }
-        else if(player_horizontal_position > this->x() + 70)
+        else if(player_is_to_the_right)
         {
             set_x(x() + GUARD_SPEED);
         }
 
-        if(player_vertical_position + 70 < this->y())
+        const bool player_is_to_the_buttom = (player_vertical_position
+                                             < this->y() - 70);
+        const bool player_is_to_the_top = (player_vertical_position
+                                          > this->y() + 70);
+        if(player_is_to_the_buttom)
         {
             set_y(y() - GUARD_SPEED);
         }
-        else if(player_vertical_position > this->y() + 70)
+        else if(player_is_to_the_top)
         {
             set_y(y() + GUARD_SPEED);
         }
 
-        const bool player_is_to_the_right = (player_horizontal_position > this->x());
-        const bool player_is_to_the_left = (player_horizontal_position < this->x());
-        const bool player_is_to_the_top = (player_vertical_position < this->y());
-        const bool player_is_to_the_buttom = (player_vertical_position > this->y());
-        const bool player_is_aligned_vertically = (not player_is_to_the_right and not player_is_to_the_left);
-        if(player_is_aligned_vertically and player_is_to_the_top)
+        /*
+
+         */
+        const bool player_is_to_the_right_to_walk = (player_horizontal_position
+                                                    > this->x() - 100);
+        const bool player_is_to_the_left_to_walk = (player_horizontal_position
+                                                    < this->x() + 100);
+        const bool player_is_aligned_vertically = (player_is_to_the_right_to_walk
+                                                  and player_is_to_the_left_to_walk);
+        const bool player_is_to_the_left_to_set_direction = (player_horizontal_position
+         < this->x());
+        const bool player_is_to_the_right_to_set_direction = (player_horizontal_position
+         > this->x());
+        const bool player_is_to_the_buttom_to_walk = (player_vertical_position
+         > this->y());
+        const bool player_is_to_the_top_to_walk = (player_vertical_position
+                                                  < this->y());
+
+        if (player_is_aligned_vertically and player_is_to_the_top_to_walk)
         {
             set_direction(Guard::UP);
         }
-        else if(player_is_aligned_vertically and player_is_to_the_buttom)
+
+        else if (player_is_aligned_vertically and player_is_to_the_buttom_to_walk)
         {
             set_direction(Guard::DOWN);
         }
-        else if(player_is_to_the_left)
+
+        else if(player_is_to_the_left_to_set_direction)
         {
             set_direction(Guard::LEFT);
         }
-        else if(player_is_to_the_right)
+
+        else if(player_is_to_the_right_to_set_direction)
         {
             set_direction(Guard::RIGHT);
         }
-
     }
-        return;
 }
 
 /**
