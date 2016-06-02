@@ -50,3 +50,11 @@
 # IJE
 /IJE_Manateam/*
 bin
+
+nbproject/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+.nb-gradle
