@@ -34,6 +34,7 @@
 *.cpp~
 *.txt~
 *.gitignore~
+*.gitignore
 
 # Anjuta files
 *.db
@@ -51,6 +52,9 @@
 /IJE_Manateam/*
 bin
 
+# Project Directory
+.cproject
+.project
 nbproject/
 build/
 nbbuild/
