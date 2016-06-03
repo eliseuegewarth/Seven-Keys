@@ -35,9 +35,8 @@ SevenKeys::SevenKeys()
  * @return level_to_be_loaded [Returns the screen that will be loaded.]
  */
 Level *
-SevenKeys::load_level(const string& screen_type)
-{
-    assert(not screen_type.empty() && "screen_type needs to be different empty string");
+SevenKeys::load_level(const string& screen_type) {
+    assert(((not (screen_type.empty())) && "screen_type needs to be different empty string"));
 
     // Represents the screen that will be loaded.
     Level * level_to_be_loaded = nullptr;
@@ -46,7 +45,7 @@ SevenKeys::load_level(const string& screen_type)
     {
         level_to_be_loaded = (Level*) new FrontEnd("logo", "logo", "res/images/fone.png");
     }
-    if (screen_type == "logo")
+    else if (screen_type == "logo")
     {
         level_to_be_loaded = (Level*) new FrontEnd("logo", "tecnologias", "res/images/manateam.png");
     }
@@ -94,33 +93,34 @@ SevenKeys::load_level(const string& screen_type)
         assert(lvl != NULL && "failed to create a Level instance");
         lvl->set_dimensions(width, height);
 
-        char novo[256];
-        sprintf(novo, "%s", screen_type.c_str());
-        novo[0] = 's';
-        novo[1] = 't';
-        novo[2] = 'a';
-        novo[3] = 'g';
-        novo[4] = 'e';
+        char stage_screen_type[NEW_STRING_MAX_SIZE];
+        snprintf(stage_screen_type, NEW_STRING_MAX_SIZE, "%s", screen_type.c_str());
+
+        stage_screen_type[0] = 's';
+        stage_screen_type[1] = 't';
+        stage_screen_type[2] = 'a';
+        stage_screen_type[3] = 'g';
+        stage_screen_type[4] = 'e';
 
 
-        string num_id = screen_type.substr(5,5);
-        char num_id2[10];
-        sprintf(num_id2, "%s", num_id.c_str());
-        int novo_id = atoi(num_id2);
-        char path[256];
-        if(novo_id < 6)
+        string string_of_stage_number = screen_type.substr(5,5);
+        char stage_number_array_of_characters[ STAGE_NUMBER_ARRAY_SIZE] = "";
+        sprintf(stage_number_array_of_characters, "%s", string_of_stage_number.c_str());
+        int new_stage_number = atoi(stage_number_array_of_characters);
+        char path[PATH_STRING_MAX_SIZE] = "";
+        if(new_stage_number < 6)
         {
-            sprintf(path, "res/interface/transicao/Fase%d.png", novo_id);
+            sprintf(path, "res/interface/transicao/Fase%d.png", new_stage_number);
         }
         else
         {
             sprintf(path, "res/interface/transicao/Bonus.png");
         }
 
-        char music_path[256];
-        if(novo_id < 5)
+        char music_path[MUSIC_PATH_STRING_MAX_SIZE];
+        if(new_stage_number < 5)
         {
-            sprintf(music_path, "res/sounds/Fase%d.wav", novo_id);
+            sprintf(music_path, "res/sounds/Fase%d.wav", new_stage_number);
         }
         else
         {
@@ -130,9 +130,9 @@ SevenKeys::load_level(const string& screen_type)
 
         env->canvas->draw(screen_type, width/2, height/2 ,Color::RED);
 
-        cout << novo << endl;
+        cout << stage_screen_type << endl;
 
-        level_to_be_loaded = (Level*) new FrontEnd(screen_type, novo, path);
+        level_to_be_loaded = (Level*) new FrontEnd(screen_type, stage_screen_type, path);
     }
 
     else if(strstr(screen_type.c_str(), "death"))
@@ -156,17 +156,17 @@ SevenKeys::load_level(const string& screen_type)
         assert(lvl != NULL && "failed to create a Level instance");
         lvl->set_dimensions(width, height);
 
-        char novo[256];
-        sprintf(novo, "%s",screen_type.c_str());
-        novo[0] = 's';
-        novo[1] = 't';
-        novo[2] = 'a';
-        novo[3] = 'g';
-        novo[4] = 'e';
+        char stage_screen_type[NEW_STRING_MAX_SIZE];
+        sprintf(stage_screen_type, "%s",screen_type.c_str());
+        stage_screen_type[0] = 's';
+        stage_screen_type[1] = 't';
+        stage_screen_type[2] = 'a';
+        stage_screen_type[3] = 'g';
+        stage_screen_type[4] = 'e';
 
-        this->number_of_players_lives -= 1;
+        this->number_of_players_lives--;
 
-        level_to_be_loaded = (Level*) new FrontEnd(screen_type, novo, "res/images/transition.png");
+        level_to_be_loaded = (Level*) new FrontEnd(screen_type, stage_screen_type, "res/images/transition.png");
     }
     else if(screen_type == "gameover")
     {
