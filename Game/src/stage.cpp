@@ -106,7 +106,19 @@ void Stage::threat_colision_boss(list<Object*> map_objects)
                     if(m_player->health() < 0)
                         m_player->set_health(0);
                 }
+                else
+                {
+                  // Do nothing
+                }
             }
+            else
+            {
+              // Do nothing
+            }
+        }
+        else
+        {
+          // Do nothing
         }
     }
 }
@@ -130,6 +142,14 @@ void Stage::threat_colision_not_walkable_objects(Object * item,
                 m_player->set_y(bounding_box_item.y() +
                 bounding_box_item.height() - 50);
             }
+            else
+            {
+              // Do nothing
+            }
+        }
+        else
+        {
+          // Do nothing
         }
     }
     else if (intersection.width() != 0 and intersection.height() != 0)
@@ -153,6 +173,10 @@ void Stage::threat_colision_not_walkable_objects(Object * item,
             {
                 m_player->set_x(bounding_box_item.x() + bounding_box_item.width() - 1);
             }
+            else
+            {
+              // Do nothing
+            }
         }
         else
         {
@@ -164,7 +188,15 @@ void Stage::threat_colision_not_walkable_objects(Object * item,
             {
                 m_player->set_y(bounding_box_item.y() + bounding_box_item.height() - 1);
             }
+            else
+            {
+              // Do nothing
+            }
         }
+    }
+    else
+    {
+      // Do nothing
     }
 }
 
@@ -203,8 +235,20 @@ void Stage::threat_colision_walkable_objects(Object * item, Rect intersection)
                 m_player->set_current("bottom", m_player->x(), 80);
                 m_map->m_boss->set_position(m_player->x(), 80);
             }
+            else
+            {
+              // Do nothing
+            }
+        }
+        else
+        {
+          // Do nothing
         }
 
+    }
+    else
+    {
+      // Do nothing
     }
 }
 
@@ -240,10 +284,33 @@ void Stage::threat_colision_guard(Object *item, Rect intersection)
                     {
                         m_player->set_health(m_player->health() - guard->damage());
                         if(m_player->health() < 0)
+                        {
                             m_player->set_health(0);
+                        }
+                        else
+                        {
+                          // Do nothing
+                        }
+
+                    }
+                    else
+                    {
+                      // Do nothing
                     }
                 }
+                else
+                {
+                  // Do nothing
+                }
             }
+            else
+            {
+              // Do nothing
+            }
+        }
+        else
+        {
+          // Do nothing
         }
 
     }
@@ -252,6 +319,10 @@ void Stage::threat_colision_guard(Object *item, Rect intersection)
     {
         guard->get_playerx(m_player->x());
         guard->get_playery(m_player->y());
+    }
+    else
+    {
+      // Do nothing
     }
 }
 
@@ -270,9 +341,19 @@ void Stage::threat_colision_ghost(Object *item, Rect intersection)
             m_player->set_health(m_player->health() - ghost->damage());
             if(m_player->health() < 0)
                 m_player->set_health(0);
+            else
+              // Do nothing
 
             m_player->set_sanity(m_player->sanity() - ghost->damage()/2);
         }
+        else
+        {
+          // Do nothing
+        }
+    }
+    else
+    {
+      // Do nothing
     }
 }
 
@@ -350,6 +431,8 @@ bool Stage::on_message(Object *, MessageID id, Parameters p)
             m_map->set_current(m_map->current_room->room_in_right);
         else if(p == "bottom")
             m_map->set_current(m_map->current_room->room_in_bottom);
+        else
+            // Do nothing
 
         return true;
     }
@@ -403,8 +486,16 @@ bool Stage::on_message(Object *, MessageID id, Parameters p)
                             m_map->m_boss->set_position(m_player->x(), m_player->y());
                             notify(Stage::summonBossID, "stage7");
                         }
+                        else
+                        {
+                          // Do nothing
+                        }
 
                         return true;
+                    }
+                    else
+                    {
+                      // Do nothing
                     }
 
                     if(strstr(item->id().c_str(), "Pill"))
@@ -412,13 +503,29 @@ bool Stage::on_message(Object *, MessageID id, Parameters p)
                         m_player->get_pill(item->id());
                         m_map->remove_item(item);
                     }
+                    else
+                    {
+                      // Do nothing
+                    }
 
                     if(item->id() == "Garrafa" || item->id() == "Faca" || item->id() == "Cacetete")
                     {
                         m_player->get_weapon(item->id());
                         m_map->remove_item(item);
                     }
+                    else
+                    {
+                      // Do nothing
+                    }
                 }
+                else
+                {
+                  // Do nothing
+                }
+            }
+            else
+            {
+              // Do nothing
             }
         }
     }
@@ -446,8 +553,24 @@ bool Stage::on_message(Object *, MessageID id, Parameters p)
                             m_player->notify(Player::hitExitDoorID, new_stage);
                             return true;
                         }
+                        else
+                        {
+                          // Do nothing
+                        }
+                    }
+                    else
+                    {
+                      // Do nothing
                     }
                 }
+                else
+                {
+                  // Do nothing
+                }
+            }
+            else
+            {
+              // Do nothing
             }
         }
     }
@@ -476,6 +599,10 @@ bool Stage::on_message(Object *, MessageID id, Parameters p)
                             {
                                 item->set_x(bounding_box_item.x() - 1);
                             }
+                            else
+                            {
+                              // Do nothing
+                            }
                         }
                         else
                         {
@@ -487,10 +614,26 @@ bool Stage::on_message(Object *, MessageID id, Parameters p)
                             {
                                 item->set_y(bounding_box_item.y() - 1);
                             }
+                            else
+                            {
+                              // Do nothing
+                            }
                         }
                         return true;
                     }
+                    else
+                    {
+                      // Do nothing
+                    }
                 }
+                else
+                {
+                  // Do nothing
+                }
+            }
+            else
+            {
+              // Do nothing
             }
         }
     }
@@ -517,8 +660,19 @@ bool Stage::on_message(Object *, MessageID id, Parameters p)
                             guard->receive_dmg(dmg);
                             return true;
                         }
-
+                        else
+                        {
+                          // Do nothing
+                        }
                     }
+                    else
+                    {
+                      // Do nothing
+                    }
+                }
+                else
+                {
+                  // Do nothing
                 }
             }
         }
@@ -527,6 +681,10 @@ bool Stage::on_message(Object *, MessageID id, Parameters p)
     {
         cout << "entrou" << endl;
         m_player->set_sanity(m_player->sanity() - 30);
+    }
+    else
+    {
+      // Do nothing
     }
     return false;
 }
