@@ -1,11 +1,11 @@
 #include "../include/ghost.h"
 
-#include "cassert.h"
+#include <cassert>
 
 using namespace std;
 //using namespace Ghost;
 
-class GhostTest : public Ghost {
+/*class GhostTest : public Ghost {
 public:
     GhostTest(){
 
@@ -56,3 +56,4 @@ public:
         assert(ghost_dagame == this->GHOST_GUARD_DAMAGE);
     }
 }
+*/

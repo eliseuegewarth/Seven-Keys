@@ -1,10 +1,10 @@
-#include "../include/guard.h"
+#include "guard.h"
 
-#include "cassert.h"
+#include <cassert>
 
 using namespace std;
 //using namespace Guard;
-
+/*
 class GuardTest : public Guard {
 public:
     GuardTest(){
@@ -63,3 +63,4 @@ public:
         assert(guard_health_to_test == this->guard_health);
     }
 }
+*/
