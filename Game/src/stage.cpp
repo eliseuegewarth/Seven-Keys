@@ -6,7 +6,7 @@
 
 #include <cmath>
 
-#include "guard.h"
+#include "guard.hpp"
 #include "stage.h"
 #include "item.h"
 #include "map.h"

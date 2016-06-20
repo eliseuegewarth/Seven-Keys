@@ -6,8 +6,8 @@
 #include <list>
 
 #include "item.h"
-#include "guard.h"
-#include "ghost.h"
+#include "guard.hpp"
+#include "ghost.hpp"
 #include "quadtree.h"
 #include <cmath>
 

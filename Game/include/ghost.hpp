@@ -1,3 +1,6 @@
+/**
+ * ghost.hpp file
+ */
 #ifndef GHOST_H
 #define GHOST_H
 

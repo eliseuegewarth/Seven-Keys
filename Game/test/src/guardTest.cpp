@@ -1,4 +1,4 @@
-#include "guard.h"
+#include "guard.hpp"
 
 #include <cassert>
 
