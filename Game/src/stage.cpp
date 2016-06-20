@@ -10,7 +10,7 @@
 #include "stage.h"
 #include "item.hpp"
 #include "map.hpp"
-#include "player.h"
+#include "player.hpp"
 
 /**
  * stage.cpp

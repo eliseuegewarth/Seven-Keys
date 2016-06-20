@@ -7,7 +7,7 @@
 #define TEST_H
 
 #include <core/game.h>
-#include "player.h"
+#include "player.hpp"
 
 
 class SevenKeys : public Game

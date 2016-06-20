@@ -10,7 +10,7 @@
 #include <ijengine/util/frontend.h>
 #include "titlescreen.h"
 #include "stage.h"
-#include "options.h"
+#include "options.hpp"
 #include "credits.hpp"
 #include "extras.hpp"
 

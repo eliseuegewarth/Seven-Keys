@@ -9,7 +9,7 @@
 #include "item.hpp"
 #include "map.hpp"
 #include "room.h"
-#include "player.h"
+#include "player.hpp"
 #include "stage.h"
 
 using namespace std;
