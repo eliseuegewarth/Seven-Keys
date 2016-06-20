@@ -49,26 +49,36 @@ Room::Room(Object *parent, ObjectID id, string type, Room *left, Room *top,
     {
         room_in_left->notify_creation("right");
         this->add_door("normal", 'l', 0, 320);
+    }else{
+        //do nothing
     }
     if(room_in_top)
     {
         room_in_top->notify_creation("bottom");
         this->add_door("normal",'t', 600, 0);
+    }else{
+        //do nothing
     }
     if(room_in_right)
     {
         room_in_right->notify_creation("left");
         this->add_door("normal",'r', 1200, 320);
+    }else{
+        //do nothing
     }
     if(room_in_bottom)
     {
         room_in_bottom->notify_creation("top");
         this->add_door("normal",'b', 600, 640);
+    }else{
+        //do nothing
     }
 
     if(type == "Final")
     {
         add_final_door();
+    }else{
+        //do nothing
     }
 
     add_observer(this);
@@ -85,8 +95,11 @@ Room::~Room()
 string Room::room_type()
 {
 	if (this->type == "CelaH" || this->type == "CelaV")
+    {
 		return "Cela";
-
+    }else{
+        //do nothing
+    }
 	return this->type;
 }
 
@@ -163,7 +176,9 @@ void Room::add_items(int stage_id)
         while (not place(item, -1, -1));
 
         add_child(item);
-	}
+	}else{
+        //do nothing
+    }
 
     static const int MAX_ITENS = 15;
     int num_items = randint(0, MAX_ITENS);
@@ -183,15 +198,18 @@ void Room::add_items(int stage_id)
         char path[512];
         char prepath[256];
         if(it->type == "item")
+        {
             sprintf(prepath,"res/items/");
-        else
+        }else
+        {
             sprintf(prepath,"res/tile_sheets/");
+        }
 
-        if (it->variations)
+        if(it->variations)
         {
             int variation = randint(1, it->variations);
             sprintf(path, "%s%s%d.png", prepath, it->name.c_str(), variation);
-        } else
+        }else
         {
             sprintf(path, "%s%s.png", prepath, it->name.c_str());
         }
@@ -202,14 +220,17 @@ void Room::add_items(int stage_id)
         Item* item = new Item(this, it->name, path, x, y, it->mass, it->walkable);
 
         if (place(item, x, y))
-            add_child(item);
-        else
+            {add_child(item);
+        }else
+        {
             delete item;
-
-        if (it->unique)
+        }
+        if(it->unique)
         {
             total_widtheight -= it->weight;
             items.erase(it);
+        }else{
+            //do nothing
         }
     }
 }
@@ -240,25 +261,33 @@ void Room::check_entry()
 		Rect l_door {0, 340, 80, 80};
 		env->canvas->draw(l_door, Color::WHITE);
 
-	}
+	}else{
+        //do nothing
+    }
 	if(this->room_in_top)
 	{
 		Rect t_door {600, 0, 80, 80};
 		env->canvas->draw(t_door, Color::WHITE);
 
-	}
+	}else{
+        //do nothing
+    }
 	if(this->room_in_right)
 	{
 		Rect room_in_door {1200, 340, 80, 80};
 		env->canvas->draw(room_in_door, Color::WHITE);
 
-	}
+	}else{
+        //do nothing
+    }
 	if(this->room_in_bottom)
 	{
 		Rect b_door {600, 640, 80, 80};
 		env->canvas->draw(b_door, Color::WHITE);
 
-	}
+	}else{
+        //do nothing
+    }
 }
 
 void
@@ -274,22 +303,30 @@ Room::draw_id(Room * anterior, Room * sala, int x, int y)
 	{
 		env->canvas->draw("-", x - 20, y,Color::RED);
 		draw_id(sala, sala->room_in_left, x - 100, y);
-	}
+	}else{
+        //do nothing
+    }
 	if(sala->room_in_top && sala->room_in_top != anterior)
 	{
 		env->canvas->draw("|", x + 20, y - 30,Color::RED);
 		draw_id(sala, sala->room_in_top, x, y - 60);
-	}
+	}else{
+        //do nothing
+    }
 	if(sala->room_in_right && sala->room_in_right != anterior)
 	{
 		env->canvas->draw("-", x + 80, y,Color::RED);
 		draw_id(sala, sala->room_in_right, x + 100, y);
-	}
+	}else{
+        //do nothing
+    }
 	if(sala->room_in_bottom && sala->room_in_bottom != anterior)
 	{
 		env->canvas->draw("|", x + 20, y + 25,Color::RED);
 		draw_id(sala, sala->room_in_bottom, x, y + 60);
-	}
+	}else{
+        //do nothing
+    }
 }
 
 void
@@ -309,12 +346,17 @@ Room::add_door(string type, char direction, int x, int y)
     char dooroom_in_sprite[256];
     int stages = 1;
     if(stage_id < 3)
+    {
         stages = 1;
+    }
     else if(stage_id < 4)
+    {
         stages = 3;
+    }
     else
+    {
         stages = 4;
-
+    }
     if(type == "normal")
     {
         sprintf(dooroom_in_sprite, "res/tile_sheets/porta%d%c.png", stages, direction);
@@ -330,6 +372,8 @@ Room::add_door(string type, char direction, int x, int y)
         Item *porta = new Item(this, "finalDoor", dooroom_in_sprite, x, y, INFINITE, true);
 
         add_child(porta);
+    }else{
+        //do nothing
     }
 
     const list<Object *> items = this->children();
@@ -342,7 +386,11 @@ Room::add_door(string type, char direction, int x, int y)
             if((item->x() > x - item->width() && item->x() < x + item->width()) && item->y() == y)
             {
                 item->set_walkable(true);
+            }else{
+                //do nothing
             }
+        }else{
+            //do nothing
         }
     }
 }
@@ -368,6 +416,8 @@ Room::add_final_door()
     if(this->room_in_top)
     {
         dir = 'b';
+    }else{
+        //do nothing
     }
 
     add_door("finalDoor", dir, x, y);
@@ -387,11 +437,17 @@ Room::fill_floor(const string& name)
     char path[512];
     int stages = 1;
     if(stage_id < 3)
+    {
         stages = 1;
+    }
     else if(stage_id < 4)
+    {
         stages = 3;
+    }
     else
+    {
         stages = 4;
+    }
 
     sprintf(path, "res/tile_sheets/%s%d.png", name.c_str(), stages);
 
@@ -400,6 +456,8 @@ Room::fill_floor(const string& name)
     if (not image)
     {
         return;
+    }else{
+        //do nothing
     }
 
     Environment *env = Environment::get_instance();
@@ -436,11 +494,17 @@ Room::add_walls(const string& name)
         char path[512];
         int stages = 1;
         if(stage_id < 3)
-        stages = 1;
+        {
+            stages = 1;
+        }
         else if(stage_id < 4)
+        {
             stages = 3;
+        }
         else
+        {
             stages = 4;
+        }
 
         sprintf(path, "res/tile_sheets/%s%d%c.png", name.c_str(), stages, pos[i]);
 
@@ -450,6 +514,8 @@ Room::add_walls(const string& name)
         {
             cout << path << " nao existe" << endl;
             continue;
+        }else{
+            //do nothing
         }
 
         for(int j = 1; j < 15; j++)
@@ -459,14 +525,18 @@ Room::add_walls(const string& name)
             {
                 double x = i % 2;
                 if(i % 2 != 0){
+                {
                     x = image->width()*j;
+                }
                 }else
                 {
                     x = i/2 * (canvas->width() - image->width());
                 }
                 double y = i % 2;
                 if(i % 2 != 0){
+                {
                     y = i/2 * (canvas->height() - image->height());
+                }
                 }else
                 {
                     y = image->height()*k;
@@ -492,33 +562,47 @@ Room::add_corners(const string& name)
     {
         char path[512];
         if(stage_id < 3)
+        {
             sprintf(path, "res/tile_sheets/%s%d.png", name.c_str(), i + 1);
+        }
         else
         {
             int stages = 1;
             if(stage_id < 3)
+            {
                 stages = 1;
+            }
             else if(stage_id < 4)
+            {
                 stages = 3;
+            }
             else
+            {
                 stages = 4;
+            }
             sprintf(path, "res/tile_sheets/%s%d%d.png", name.c_str(),stages, i + 1);
         }
 
         Image *image = new Image(nullptr, name, path);
 
         if (not image)
+        {
             continue;
+        }
 
         double x = 0;
         if(i % 3 != 0){
+        {
             x = canvas->width() - image->width();
+        }
         }else{
              x = 0;
         }
         double y = 0;
         if(i/2 != 0){
+        {
             y = canvas->height() - image->height();
+        }
         }else{
             y = 0;
         }
@@ -537,12 +621,17 @@ Room::add_guard(const string& name)
     int random = randint(0,2);
 
     if(random < 1)
+    {
         type = "easy";
+    }
     if(random < 2)
+    {
         type = "normal";
+    }
     else
+    {
         type = "hard";
-
+    }
 
     for(int i = 0; i < (stage_id / 3) + 1; i++)
     {
@@ -587,15 +676,21 @@ Room::place(Object *object, double x, double y)
         }
 
         if (x + object->width() > width + center_area.x())
+        {
             x = width + center_area.x() - object->width();
+        }
 
         if (y + object->height() > height + center_area.y())
+        {
             y = height + center_area.y() - object->height();
+        }
 
         for (auto obj : children())
         {
             if (obj->walkable())
+            {
                 continue;
+            }
 
             Rect a { x, y, object->width(), object->height() };
             Rect b = obj->bounding_box();
@@ -609,7 +704,9 @@ Room::place(Object *object, double x, double y)
         }
 
         if (tries > 10)
+        {
             break;
+        }
 
     } while (not ok and randomize);
 
@@ -639,6 +736,8 @@ void Room::notify_creation(const string& position)
     else if(position == "bottom")
     {
        add_door("normal", 'b', 600, 640);
+    }else{
+        //do nothing
     }
 }
 
@@ -650,7 +749,9 @@ Room::update_self(unsigned long)
     for (auto npc : npcs)
     {
         if(npc->id() == "guard")
+        {
             quad->insert(npc);
+        }
     }
 
     for(auto npc: npcs)
@@ -685,9 +786,10 @@ Room::update_self(unsigned long)
                                 else if(a.x() < b.x())
                                 {
                                     npc->set_x(a.x() + a.width() - 1);
+                                }else{
+                                    //do nothing
                                 }
-                            }
-                            else
+                            }else
                             {
                                 if(a.y() > b.y())
                                 {
@@ -696,6 +798,8 @@ Room::update_self(unsigned long)
                                 else if(a.y() < b.y())
                                 {
                                     npc->set_y(a.y() + a.height() - 1);
+                                }else{
+                                    //do nothing
                                 }
                             }
                         }
@@ -710,6 +814,8 @@ Room::update_self(unsigned long)
                                 else if(a.x() > b.x())
                                 {
                                     npc2->set_x(b.x() + b.width() - 1);
+                                }else{
+                                    //do nothing
                                 }
                             }
                             else
@@ -721,11 +827,19 @@ Room::update_self(unsigned long)
                                 else if(a.y() > b.y())
                                 {
                                     npc2->set_y(b.y() + b.height() - 1);
+                                }else{
+                                    //do nothing
                                 }
                             }
                         }
+                    }else{
+                        //do nothing
                     }
+                }else{
+                    //do nothing
                 }
+            }else{
+                //do nothing
             }
         }
 
@@ -738,9 +852,13 @@ Room::update_self(unsigned long)
                 Ghost *ghost = new Ghost(this, "ghost", 0, 0, 9999, true, guard->m_old_type, randint(0,3));
                 string path;
                 if(guard->m_old_type != "hard")
+                {
                     path = "res/sprites/death_guard1.png";
+                }
                 else
+                {
                     path = "res/sprites/death_guard2.png";
+                }
                 Item *body = new Item(this, "body", path, 0, 0, 9999, true);
                 place(body, npc->x(), npc->y());
                 remove_child(npc);
@@ -749,7 +867,11 @@ Room::update_self(unsigned long)
                 add_child(ghost);
 
                 notify(guardDeathID, "guard");
+            }else{
+                //do nothing
             }
+        }else{
+            //do nothing
         }
     }
 }
