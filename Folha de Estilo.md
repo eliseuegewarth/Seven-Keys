@@ -80,7 +80,7 @@ guard.hpp
 	-depois as bibliotecas padroes do c/c++
 
 ```c++
-#include "boss.h"
+#include "boss.hpp"
 
 #include "core/level.h"
 #include "core/environment.h"

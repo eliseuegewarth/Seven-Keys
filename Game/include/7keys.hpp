@@ -1,5 +1,5 @@
 /**
- * 7keys.h
+ * 7keys.hpp
  * Class that represents the entire game and manages the main screens.
  */
 

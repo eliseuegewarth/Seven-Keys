@@ -14,7 +14,7 @@
 #include <cppunit/XmlOutputter.h>
 #include <netinet/in.h>
 
-#include "7keys.h"
+#include "7keys.hpp"
 
 using namespace CppUnit;
 using namespace std;

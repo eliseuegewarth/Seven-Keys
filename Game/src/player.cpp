@@ -1,9 +1,5 @@
 /*
  * Implementação da classe Player.
- *
- * Autor: Edson Alves
- * Data: 15/05/2015
- * Licença: LGPL. Sem copyright.
  */
 #include "player.h"
 #include "core/rect.h"

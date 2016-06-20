@@ -47,9 +47,9 @@ public:
     shared_ptr<Texture> texture;
 };
 
-Animation::Animation(const string& texture, double x, double y, double width,
+Animation::Animation(const string& texture, double horizontal_animation_positon, double vertical_animation_position, double width,
     double height, int frames, unsigned long speed_in_ms, bool loop)
-    : m_impl(new Animation::Impl(texture, x, y, width, height, frames, speed_in_ms, loop))
+    : m_impl(new Animation::Impl(texture, horizontal_animation_positon, vertical_animation_position, width, height, frames, speed_in_ms, loop))
 {
 }
 

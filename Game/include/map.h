@@ -12,7 +12,7 @@
 #include <cassert>
 
 #include "room.h"
-#include "boss.h"
+#include "boss.hpp"
 #include "stage.h"
 
 
