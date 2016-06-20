@@ -1,7 +1,7 @@
 #ifndef GUARD_H
 #define GUARD_H
 
-#include "core/sprite.h"
+#include "core/sprite.hpp"
 #include "room.hpp"
 #include "sight.hpp"
 

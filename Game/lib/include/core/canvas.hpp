@@ -9,8 +9,8 @@
 #include <SDL2/SDL.h>
 #include <memory>
 
-#include "exception.h"
-#include "color.h"
+#include "exception.hpp"
+#include "color.hpp"
 
 using std::string;
 using std::shared_ptr;

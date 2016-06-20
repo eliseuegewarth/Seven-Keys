@@ -6,7 +6,7 @@
  * Licença: LGPL. Sem copyright.
  */
 #include <cassert>
-#include "core/mousebuttonevent.h"
+#include "core/mousebuttonevent.hpp"
 
 #include <cassert>
 

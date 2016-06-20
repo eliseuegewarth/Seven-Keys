@@ -1,11 +1,11 @@
-#include "core/color.h"
-#include "core/rect.h"
-#include "core/text.h"
-#include "core/texture.h"
-#include "util/button.h"
-#include "core/environment.h"
-#include "core/mousebuttonevent.h"
-#include "core/mousemotionevent.h"
+#include "core/color.hpp"
+#include "core/rect.hpp"
+#include "core/text.hpp"
+#include "core/texture.hpp"
+#include "util/button.hpp"
+#include "core/environment.hpp"
+#include "core/mousebuttonevent.hpp"
+#include "core/mousemotionevent.hpp"
 
 #include <cstdio>
 

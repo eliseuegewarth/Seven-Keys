@@ -7,8 +7,8 @@
 #ifndef TEXT_H
 #define TEXT_H
 
-#include "core/object.h"
-#include "core/color.h"
+#include "core/object.hpp"
+#include "core/color.hpp"
 
 #include <memory>
 

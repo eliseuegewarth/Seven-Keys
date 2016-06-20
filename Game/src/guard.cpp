@@ -1,8 +1,8 @@
 #include "guard.hpp"
 
-#include "core/level.h"
-#include "core/environment.h"
-#include "core/keyboardevent.h"
+#include "core/level.hpp"
+#include "core/environment.hpp"
+#include "core/keyboardevent.hpp"
 
 #include <cassert>
 #include <iostream>

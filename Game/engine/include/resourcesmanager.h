@@ -11,7 +11,7 @@
 #include <map>
 #include <memory>
 
-#include "exception.h"
+#include "exception.hpp"
 
 using std::map;
 using std::shared_ptr;

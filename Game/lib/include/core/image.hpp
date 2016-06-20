@@ -8,7 +8,7 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-#include "core/object.h"
+#include "core/object.hpp"
 
 #include <memory>
 

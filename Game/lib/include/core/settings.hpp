@@ -10,7 +10,7 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-#include "core/exception.h"
+#include "core/exception.hpp"
 
 #include <sstream>
 #include <map>

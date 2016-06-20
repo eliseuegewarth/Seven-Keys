@@ -5,9 +5,9 @@
 #ifndef SPRITE_H
 #define SPRITE_H
 
-#include "core/object.h"
-#include "core/animation.h"
-#include "core/listener.h"
+#include "core/object.hpp"
+#include "core/animation.hpp"
+#include "core/listener.hpp"
 
 #include <memory>
 #include <map>

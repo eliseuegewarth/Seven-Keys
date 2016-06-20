@@ -4,7 +4,7 @@
 #ifndef CIRCLE_H
 #define CIRCLE_H
 
-#include "point.h"
+#include "point.hpp"
 
 class Circle
 {

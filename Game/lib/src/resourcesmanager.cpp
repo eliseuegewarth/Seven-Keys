@@ -6,14 +6,14 @@
  * Data: 20/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "core/resourcesmanager.h"
+#include "core/resourcesmanager.hpp"
 
-#include "core/texture.h"
-#include "core/font.h"
-#include "core/music.h"
-#include "core/soundeffect.h"
-#include "core/bitmap.h"
-#include "core/settings.h"
+#include "core/texture.hpp"
+#include "core/font.hpp"
+#include "core/music.hpp"
+#include "core/soundeffect.hpp"
+#include "core/bitmap.hpp"
+#include "core/settings.hpp"
 
 shared_ptr<Texture>
 ResourcesManager::get_texture(const string& id) throw (Exception)

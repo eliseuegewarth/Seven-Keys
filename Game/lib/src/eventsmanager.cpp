@@ -5,13 +5,13 @@
  * Data: 17/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "core/eventsmanager.h"
-#include "core/systemevent.h"
-#include "core/keyboardevent.h"
-#include "core/mousebuttonevent.h"
-#include "core/mousemotionevent.h"
-#include "core/joystickevent.h"
-#include "core/listener.h"
+#include "core/eventsmanager.hpp"
+#include "core/systemevent.hpp"
+#include "core/keyboardevent.hpp"
+#include "core/mousebuttonevent.hpp"
+#include "core/mousemotionevent.hpp"
+#include "core/joystickevent.hpp"
+#include "core/listener.hpp"
 
 #include <list>
 using std::list;

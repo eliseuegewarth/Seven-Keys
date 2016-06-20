@@ -5,7 +5,7 @@
  * Data: 20/05/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "core/settings.h"
+#include "core/settings.hpp"
 
 #include <fstream>
 

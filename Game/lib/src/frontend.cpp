@@ -5,15 +5,15 @@
  * Data: 20/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "util/frontend.h"
+#include "util/frontend.hpp"
 
-#include "core/rect.h"
-#include "core/texture.h"
-#include "core/environment.h"
+#include "core/rect.hpp"
+#include "core/texture.hpp"
+#include "core/environment.hpp"
 
-#include "core/joystickevent.h"
-#include "core/keyboardevent.h"
-#include "core/mousebuttonevent.h"
+#include "core/joystickevent.hpp"
+#include "core/keyboardevent.hpp"
+#include "core/mousebuttonevent.hpp"
 
 class FrontEnd::Impl
 {

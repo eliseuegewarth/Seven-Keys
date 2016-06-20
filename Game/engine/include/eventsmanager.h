@@ -10,7 +10,7 @@
 
 #include <SDL2/SDL.h>
 #include <list>
-#include "mousemotioneventlistener.h"
+#include "mousemotioneventlistener.hpp"
 
 using std::list;
 

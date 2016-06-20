@@ -8,7 +8,7 @@
 #ifndef CAMERA_H
 #define CAMERA_H
 
-#include "core/object.h"
+#include "core/object.hpp"
 
 #include <memory>
 

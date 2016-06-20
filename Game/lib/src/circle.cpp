@@ -1,7 +1,7 @@
 /*
  * Implementation of class that represents a circle in bidimensional space.
  */
-#include "core/circle.h"
+#include "core/circle.hpp"
 
 #include <cassert> 
 
