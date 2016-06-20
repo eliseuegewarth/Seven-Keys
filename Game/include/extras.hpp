@@ -1,4 +1,9 @@
-#ifndef EXTRAS_H
+/**
+ * extras.hpp file
+ * @brief [brief description]
+ * @details [long description]
+ * @return [description]
+ */#ifndef EXTRAS_H
 #define EXTRAS_H
 
 #include <core/level.h>

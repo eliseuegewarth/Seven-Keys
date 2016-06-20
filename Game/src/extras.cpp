@@ -1,4 +1,8 @@
-#include "extras.h"
+/**
+ * extras.cpp file.
+ */
+
+#include "extras.hpp"
 
 #include <ijengine/util/button.h>
 #include <core/font.h>
@@ -11,7 +15,6 @@ using namespace std;
 
 /**
  * @brief Creates the environment of the extras menu.
- * @details [long description]
  */
 Extras::Extras() : Level("extras")
 {

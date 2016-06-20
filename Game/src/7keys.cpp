@@ -11,8 +11,8 @@
 #include "titlescreen.h"
 #include "stage.h"
 #include "options.h"
-#include "credits.h"
-#include "extras.h"
+#include "credits.hpp"
+#include "extras.hpp"
 
 #include <cassert>
 #include <cstring>
