@@ -21,6 +21,8 @@ ResourcesManager::get_texture(const string& id) throw (Exception)
     if (m_textures.find(id) != m_textures.end())
     {
         return m_textures[id];
+    }else{
+        //do nothing
     }
 
     return acquire_texture(id);
@@ -34,6 +36,8 @@ ResourcesManager::acquire_texture(const string& id) throw (Exception)
     if (not texture)
     {
         throw Exception("Can't load texture " + id);
+    }else{
+        //do nothing
     }
 
     shared_ptr<Texture> ptr(texture);
@@ -48,6 +52,8 @@ ResourcesManager::get_font(const string& id) throw (Exception)
     if (m_fonts.find(id) != m_fonts.end())
     {
         return m_fonts[id];
+    }else{
+        //do nothing
     }
 
     return acquire_font(id);
@@ -61,6 +67,8 @@ ResourcesManager::acquire_font(const string& id) throw (Exception)
     if (not font)
     {
         throw Exception("Can't load font " + id);
+    }else{
+        //do nothing
     }
 
     shared_ptr<Font> ptr(font);
@@ -75,6 +83,8 @@ ResourcesManager::get_music(const string& id) throw (Exception)
     if (m_musics.find(id) != m_musics.end())
     {
         return m_musics[id];
+    }else{
+        //do nothing
     }
 
     return acquire_music(id);
@@ -88,6 +98,8 @@ ResourcesManager::acquire_music(const string& id) throw (Exception)
     if (not music)
     {
         throw Exception("Can't load music " + id);
+    }else{
+        //do nothing
     }
 
     shared_ptr<Music> ptr(music);
@@ -102,6 +114,8 @@ ResourcesManager::get_sound_effect(const string& id) throw (Exception)
     if (m_sound_effects.find(id) != m_sound_effects.end())
     {
         return m_sound_effects[id];
+    }else{
+        //do nothing
     }
 
     return acquire_sound_effect(id);
@@ -115,6 +129,8 @@ ResourcesManager::acquire_sound_effect(const string& id) throw (Exception)
     if (not sfx)
     {
         throw Exception("Can't load sound effect " + id);
+    }else{
+        //do nothing
     }
 
     shared_ptr<SoundEffect> ptr(sfx);
@@ -129,6 +145,8 @@ ResourcesManager::get_bitmap(const string& id) throw (Exception)
     if (m_bitmaps.find(id) != m_bitmaps.end())
     {
         return m_bitmaps[id];
+    }else{
+        //do nothing
     }
 
     return acquire_bitmap(id);
@@ -140,6 +158,8 @@ ResourcesManager::get_settings(const string& id) throw (Exception)
     if (m_settings.find(id) != m_settings.end())
     {
         return m_settings[id];
+    }else{
+        //do nothing
     }
 
     return acquire_settings(id);
@@ -153,6 +173,8 @@ ResourcesManager::acquire_bitmap(const string& id) throw (Exception)
     if (not bitmap)
     {
         throw Exception("Can't load bitmap " + id);
+    }else{
+        //do nothing
     }
 
     shared_ptr<Bitmap> ptr(bitmap);
@@ -169,6 +191,8 @@ ResourcesManager::acquire_settings(const string& id) throw (Exception)
     if (not settings)
     {
         settings = new Settings();
+    }else{
+        //do nothing
     }
 
     shared_ptr<Settings> ptr(settings);

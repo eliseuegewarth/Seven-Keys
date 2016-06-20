@@ -77,6 +77,8 @@ JoyStickEvent JoyStickEvent::from_SDL(const SDL_Event& event)
     {
         init_table_joystick();
         joystick_was_init = true;
+    }else{
+        //do nothing
     }
 
     JoyStickEvent::State state = JoyStickEvent::PRESSED;

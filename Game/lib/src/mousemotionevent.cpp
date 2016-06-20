@@ -86,16 +86,22 @@ MouseMotionEvent MouseMotionEvent::from_SDL(const SDL_Event& event)
     if (state & SDL_BUTTON(1))
     {
         left = DOWN;
+    }else{
+        //do nothing
     }
 
     if (state & SDL_BUTTON(2))
     {
         middle = DOWN;
+    }else{
+        //do nothing
     }
 
     if (state & SDL_BUTTON(3))
     {
         right = DOWN;
+    }else{
+        //do nothing
     }
 
     return MouseMotionEvent(x, y, xrel, yrel, left, right, middle);
