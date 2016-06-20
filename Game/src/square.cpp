@@ -108,11 +108,15 @@ void Square::update_self(unsigned long elapsed)
     {
         m_last = 0;
         return;
+    }else{
+        //do nothing
     }
 
     if (not m_last)
     {
         m_last = elapsed;
+    }else{
+        //do nothing
     }
 
     Environment *env = Environment::get_instance();
@@ -124,11 +128,15 @@ void Square::update_self(unsigned long elapsed)
     if (x < 0)
     {
         x = 0;
+    }else{
+        //do nothing
     }
 
     if (x + width() > env->canvas->width())
     {
         x = env->canvas->width() - width();
+    }else{
+        //do nothing
     }
 
     set_x(x);
