@@ -2,7 +2,7 @@
 #define GHOST_H
 
 #include "core/sprite.h"
-#include "room.h"
+#include "room.hpp"
 
 using namespace std;
 

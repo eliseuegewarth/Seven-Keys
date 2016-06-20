@@ -1,7 +1,7 @@
 #ifndef BOSS_H
 #define BOSS_H
 
-#include "room.h"
+#include "room.hpp"
 
 using namespace std;
 

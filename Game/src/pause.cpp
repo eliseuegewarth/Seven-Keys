@@ -1,4 +1,4 @@
-#include "pause.h"
+#include "pause.hpp"
 
 #include <ijengine/util/button.h>
 #include <core/font.h>

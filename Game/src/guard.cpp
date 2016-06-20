@@ -1,4 +1,4 @@
-#include "guard.h"
+#include "guard.hpp"
 
 #include "core/level.h"
 #include "core/environment.h"

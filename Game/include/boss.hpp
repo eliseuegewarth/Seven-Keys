@@ -1,8 +1,12 @@
+/**
+ * boss.hpp file
+ * Class that implements the boss enemie.
+ */
 #ifndef BOSS_H
 #define BOSS_H
 
-#include "room.h"
-
+#include "room.hpp"
+#define INITIAL_TIME_ELAPSED_VALUE 0
 using namespace std;
 
 /**
@@ -11,7 +15,7 @@ using namespace std;
 class Boss : public Object
 {
 public:
-    
+    const string BOSS_RUNNING_SPRITE_PATH = "res/sprites/boss_running.png";
     //Defines the direction in which the boss can move around.
     typedef enum { LEFT = 0, UP = 1, RIGHT = 2, DOWN = 3 } Direction;
     

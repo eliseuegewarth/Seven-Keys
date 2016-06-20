@@ -4,7 +4,7 @@
 #include <core/environment.h>
 #include <cassert>
 
-#include "item.h"
+#include "item.hpp"
 
 /**
  * item.cpp

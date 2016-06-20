@@ -1,4 +1,4 @@
-#include "ghost.h"
+#include "ghost.hpp"
 
 #include "core/level.h"
 #include "core/environment.h"

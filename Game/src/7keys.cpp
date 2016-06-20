@@ -6,13 +6,13 @@
 #include <ijengine/core/environment.h>
 #include <ijengine/core/level.h>
 
-#include "7keys.h"
+#include "7keys.hpp"
 #include <ijengine/util/frontend.h>
-#include "titlescreen.h"
-#include "stage.h"
-#include "options.h"
-#include "credits.h"
-#include "extras.h"
+#include "titlescreen.hpp"
+#include "stage.hpp"
+#include "options.hpp"
+#include "credits.hpp"
+#include "extras.hpp"
 
 #include <cassert>
 #include <cstring>

@@ -9,9 +9,9 @@
 #define PLAYER_H
 
 #include "core/sprite.h"
-#include "map.h"
-#include "sight.h"
-#include "weapon.h"
+#include "map.hpp"
+#include "sight.hpp"
+#include "weapon.hpp"
 
 using std::pair;
 

@@ -6,11 +6,11 @@
 
 #include <iostream>
 
-#include "item.h"
-#include "map.h"
-#include "room.h"
-#include "player.h"
-#include "stage.h"
+#include "item.hpp"
+#include "map.hpp"
+#include "room.hpp"
+#include "player.hpp"
+#include "stage.hpp"
 
 using namespace std;
 

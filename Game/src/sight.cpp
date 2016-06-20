@@ -3,7 +3,7 @@
 #include <core/animation.h>
 #include <core/environment.h>
 
-#include "sight.h"
+#include "sight.hpp"
 /**
  * [Sight::Sigth description]
  * @param *parent [The parent is the map Object that will contains the boss.]

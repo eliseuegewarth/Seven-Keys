@@ -1,4 +1,4 @@
-#include "credits.h"
+#include "credits.hpp"
 #include <ijengine/util/button.h>
 #include <core/font.h>
 #include <core/environment.h>

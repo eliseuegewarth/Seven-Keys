@@ -1,5 +1,5 @@
 /**
- * 7keys.h
+ * 7keys.hpp
  * Class that represents the entire game and manages the main screens.
  */
 
@@ -7,7 +7,7 @@
 #define TEST_H
 
 #include <core/game.h>
-#include "player.h"
+#include "player.hpp"
 
 
 class SevenKeys : public Game

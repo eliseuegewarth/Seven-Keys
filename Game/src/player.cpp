@@ -1,16 +1,12 @@
 /*
  * Implementação da classe Player.
- *
- * Autor: Edson Alves
- * Data: 15/05/2015
- * Licença: LGPL. Sem copyright.
  */
-#include "player.h"
+#include "player.hpp"
 #include "core/rect.h"
 #include "core/level.h"
 #include "core/environment.h"
 #include "core/keyboardevent.h"
-//#include "pause.h"
+//#include "pause.hpp"
 
 
 #include <cassert>

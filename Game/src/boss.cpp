@@ -1,4 +1,10 @@
-#include "boss.h"
+/**
+ * Boss.cpp file
+ * Class that implements the boss enemie.
+ */
+
+
+#include "boss.hpp"
 
 #include "core/level.h"
 #include "core/environment.h"
@@ -34,11 +40,11 @@ Boss::Boss(Object *parent, const ObjectID id, const double boss_horizontal_posit
     Object(parent, id, boss_horizontal_position, boss_vertical_position);
 
     this->boss_animation = (unique_ptr<Animation>) (new Animation(
-                                    "res/sprites/boss_running.png", 0, 0, 90, 90,
+                                    BOSS_RUNNING_SPRITE_PATH, 0, 0, 90, 90,
                                         6, 120, true));
 
     this->direction_of_movement = (Direction) initial_movement_direction;
-    this->last_game_time_saved = 0;
+    this->last_game_time_saved = INITIAL_TIME_ELAPSED_VALUE;
     this->set_mass(mass_of_boss);
     this->set_width(70);
     this->set_height(70);

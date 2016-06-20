@@ -10,8 +10,8 @@
 #include <core/level.h>
 #include <core/rect.h>
 
-#include "map.h"
-#include "room.h"
+#include "map.hpp"
+#include "room.hpp"
 
 class Player;
 class Map;

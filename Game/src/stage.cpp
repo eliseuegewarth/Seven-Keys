@@ -6,11 +6,11 @@
 
 #include <cmath>
 
-#include "guard.h"
-#include "stage.h"
-#include "item.h"
-#include "map.h"
-#include "player.h"
+#include "guard.hpp"
+#include "stage.hpp"
+#include "item.hpp"
+#include "map.hpp"
+#include "player.hpp"
 
 /**
  * stage.cpp

@@ -11,9 +11,9 @@
 #include <utility>
 #include <cassert>
 
-#include "room.h"
-#include "boss.h"
-#include "stage.h"
+#include "room.hpp"
+#include "boss.hpp"
+#include "stage.hpp"
 
 
 using std::pair;

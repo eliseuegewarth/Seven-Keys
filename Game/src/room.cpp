@@ -9,7 +9,7 @@
 #include <core/canvas.h>
 #include <core/image.h>
 
-#include "room.h"
+#include "room.hpp"
 
 ActionID Room::guardDeathID { "guardDeathID()" };
 

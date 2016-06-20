@@ -5,7 +5,7 @@
  * Data: 26/03/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "7keys.h"
+#include "7keys.hpp"
 
 #include <iostream>
 

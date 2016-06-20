@@ -1,9 +1,12 @@
+/**
+ * guard.hpp file.
+ */
 #ifndef GUARD_H
 #define GUARD_H
 
 #include "core/sprite.h"
-#include "room.h"
-#include "sight.h"
+#include "room.hpp"
+#include "sight.hpp"
 
 using namespace std;
 

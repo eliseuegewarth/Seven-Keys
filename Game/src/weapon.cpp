@@ -3,7 +3,7 @@
 #include <core/keyboardevent.h>
 #include <core/environment.h>
 
-#include "weapon.h"
+#include "weapon.hpp"
 
 /**
  * [Weapon::Weapon 	Receives the object parent (weapon),
