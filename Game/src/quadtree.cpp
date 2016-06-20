@@ -40,6 +40,8 @@ void Quadtree::clear()
 		{
 			m_nodes.at(i)->clear();
 			m_nodes.at(i) = NULL;
+		}else{
+			//do nothing
 		}
 	}
 }
@@ -95,16 +97,18 @@ int Quadtree::getIndex(Object * pRect)
    	// Object can completely fit within the left quadrants
    	if (pRect->x() < verticalMidpoint && pRect->x()
 		+ pRect->width() < verticalMidpoint)
+	{
+    	if (topQuadrant)
 		{
-	    	if (topQuadrant)
-			{
-	        	index = 1;
-	      	}
-	      	else if (bottomQuadrant)
-			{
-		        index = 2;
-		    }
-	    }
+        	index = 1;
+      	}
+      	else if (bottomQuadrant)
+		{
+	        index = 2;
+	    }else{
+			//do nothing
+		}
+	}
     // Object can completely fit within the right quadrants
     else if (pRect->x() > verticalMidpoint)
 	{
@@ -115,8 +119,12 @@ int Quadtree::getIndex(Object * pRect)
      	else if (bottomQuadrant)
 		{
        		index = 3;
-     	}
-   	}
+     	}else{
+			//do nothing
+		}
+   	}else{
+		//do nothing
+	}
    	return index;
 }
 
@@ -136,7 +144,9 @@ void Quadtree::insert(Object *pRect)
     	{
     		m_nodes[index]->insert(pRect);
        		return;
-     	}
+     	}else{
+			//do nothing
+		}
    	}
 
    	m_objects.push_back(pRect);
@@ -146,7 +156,9 @@ void Quadtree::insert(Object *pRect)
     	if (m_nodes[0] == NULL)
 		{
          	split();
-      	}
+      	}else{
+			//do nothing
+		}
 
     	int i = 0; //Counter
      	while (i < (int)m_objects.size())
@@ -156,14 +168,15 @@ void Quadtree::insert(Object *pRect)
        		{
          		m_nodes[index]->insert(m_objects.at(i));
          		m_objects.erase(m_objects.begin() + i);
-       		}
-       	else
-       	{
+       		}else
+       		{
          	i++;
-       	}
-     }
-   }
- }
+       		}
+     	}
+   	}else{
+		//do nothing
+	}
+}
 
  /**
   * [Quadtree::retrieve Insert objects of the previous phase
@@ -181,7 +194,9 @@ list<Object*> Quadtree::retrieve(list<Object*> returnObjects, Object* pRect)
    	if (index != -1 && m_nodes.at(0) != NULL)
    	{
      	m_nodes.at(index)->retrieve(returnObjects, pRect);
-   	}
+   	}else{
+		//do nothing
+	}
 
  	for(size_t i = 0; i < m_objects.size(); i++)
  	{
