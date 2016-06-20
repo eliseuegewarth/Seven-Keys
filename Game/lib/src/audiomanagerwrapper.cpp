@@ -36,6 +36,8 @@ AudioManagerWrapper::init() throw (Exception)
     if (not sfx_manager)
     {
         throw Exception("Out of memory for a new AudioManagerSfx");
+    }else{
+        //do nothing
     }
 
     music_manager = new AudioManagerMusic();
@@ -44,6 +46,8 @@ AudioManagerWrapper::init() throw (Exception)
     if (not music_manager)
     {
         throw Exception("Out of memory for a new AudioManagerMusic");
+    }else{
+        //do nothing
     }
 }
 
@@ -84,6 +88,8 @@ AudioManagerWrapper::close_audio()
 
         // Set the amount of times to close the audio to one, just for safety.
         times_to_close = 1;
+    }else{
+        //do nothing
     }
 
     // Close the audio the necessary amount of times.

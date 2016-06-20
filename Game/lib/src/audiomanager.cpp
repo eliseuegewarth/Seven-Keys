@@ -46,6 +46,8 @@ AudioManager<AudioType::Music>::play(const string& path, const int times)
     if (not k_played_music)
     {
         cout << "Couldn't play music (" << path << "). " << Mix_GetError() << endl;
+    }else{
+        //do nothing
     }
 }
 
@@ -93,6 +95,8 @@ AudioManager<AudioType::Music>::fade_out(const double seconds)
     if (not k_faded)
     {
         cout << "Could not fade music. Probably no music playing/already faded." << endl;
+    }else{
+        //do nothing
     }
 }
 
@@ -117,7 +121,6 @@ template <>
 void
 AudioManager<AudioType::SoundEffect>::play(const string& path, const int times)
 {
-
     assert((times == k_infinite_loop || times >= 1) && "Must be k_infinite_loop or >= 1.");
     assert((not path.empty()) && "Path can't be empty");
     const auto sound_effect =
@@ -131,6 +134,8 @@ AudioManager<AudioType::SoundEffect>::play(const string& path, const int times)
     {
         cout << "Failed to play sound effect for any channel (" << k_played_channel <<
             "). " << Mix_GetError() << endl;
+    }else{
+        //do nothing
     }
 }
 
