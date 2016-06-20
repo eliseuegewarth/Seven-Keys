@@ -8,7 +8,7 @@
 #include "item.hpp"
 #include "guard.hpp"
 #include "ghost.hpp"
-#include "quadtree.h"
+#include "quadtree.hpp"
 #include <cmath>
 
 #define INFINITE 99999.9

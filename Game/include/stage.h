@@ -11,7 +11,7 @@
 #include <core/rect.h>
 
 #include "map.hpp"
-#include "room.h"
+#include "room.hpp"
 
 class Player;
 class Map;

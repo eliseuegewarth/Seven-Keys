@@ -5,7 +5,7 @@
 #ifndef BOSS_H
 #define BOSS_H
 
-#include "room.h"
+#include "room.hpp"
 #define INITIAL_TIME_ELAPSED_VALUE 0
 using namespace std;
 

@@ -11,7 +11,7 @@
 #include <utility>
 #include <cassert>
 
-#include "room.h"
+#include "room.hpp"
 #include "boss.hpp"
 #include "stage.h"
 

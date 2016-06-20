@@ -1,7 +1,7 @@
 #include <cassert>
 #include <iostream>
 
-#include "quadtree.h"
+#include "quadtree.hpp"
 
 /**
  * [Quadtree::Quadtree The constructor that initialize m_nodes array
