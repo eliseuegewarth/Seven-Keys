@@ -2,7 +2,7 @@
 #include <core/keyboardevent.h>
 #include <core/environment.h>
 
-#include "square.h"
+#include "square.hpp"
 
 #include <cassert>
 
@@ -10,10 +10,10 @@
 
 /**
  * [Square::Square description]
- * @param  parent                   [The parent is the map object that
- *                                  will contains the ghost guard.]
- * @param  id                  [identifier of object]
- * @param size            [Square size that will be created, height and width]
+ * @param parent [The parent is the map object that
+ *                              will contains the ghost guard.]
+ * @param id [identifier of object]
+ * @param size [Square size that will be created, height and width]
  */
 Square::Square(Object *parent, ObjectID id, double size)
 {

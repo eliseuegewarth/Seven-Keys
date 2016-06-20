@@ -13,7 +13,7 @@
 
 #include "room.hpp"
 #include "boss.hpp"
-#include "stage.h"
+#include "stage.hpp"
 
 
 using std::pair;

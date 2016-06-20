@@ -8,8 +8,8 @@
 
 #include "7keys.hpp"
 #include <ijengine/util/frontend.h>
-#include "titlescreen.h"
-#include "stage.h"
+#include "titlescreen.hpp"
+#include "stage.hpp"
 #include "options.hpp"
 #include "credits.hpp"
 #include "extras.hpp"

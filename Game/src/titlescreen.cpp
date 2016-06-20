@@ -5,7 +5,7 @@
  * Data: 29/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "titlescreen.h"
+#include "titlescreen.hpp"
 
 #include <ijengine/util/button.h>
 #include <core/font.h>

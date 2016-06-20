@@ -11,7 +11,7 @@
 #include "core/sprite.h"
 #include "map.hpp"
 #include "sight.hpp"
-#include "weapon.h"
+#include "weapon.hpp"
 
 using std::pair;
 

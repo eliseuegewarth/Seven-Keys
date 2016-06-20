@@ -10,7 +10,7 @@
 #include "map.hpp"
 #include "room.hpp"
 #include "player.hpp"
-#include "stage.h"
+#include "stage.hpp"
 
 using namespace std;
 

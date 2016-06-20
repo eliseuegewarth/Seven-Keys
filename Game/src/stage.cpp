@@ -7,7 +7,7 @@
 #include <cmath>
 
 #include "guard.hpp"
-#include "stage.h"
+#include "stage.hpp"
 #include "item.hpp"
 #include "map.hpp"
 #include "player.hpp"
