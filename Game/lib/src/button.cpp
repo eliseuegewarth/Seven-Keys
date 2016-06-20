@@ -84,6 +84,8 @@ public:
             sprintf(coords, "%.2f,%.2f", event.x(), event.y());
             m_button->notify(clickedID, coords);
             return true;
+        }else{
+            //do nothing
         }
 
         return false;
@@ -97,6 +99,8 @@ public:
             if (m_active_texture.get())
             {
                 m_button->set_dimensions(m_active_texture->width(), m_active_texture->height());
+            }else{
+                //do nothing
             }
             return true;
         }else
@@ -105,6 +109,8 @@ public:
             if (m_idle_texture.get())
             {
                 m_button->set_dimensions(m_idle_texture->width(), m_idle_texture->height());
+            }else{
+                //do nothing
             }
         }
         return false;
@@ -153,6 +159,8 @@ public:
         {
             m_text->align_to(m_button, Object::CENTER, Object::MIDDLE);
             m_text->draw();
+        }else{
+            //do nothing
         }
     }
 
