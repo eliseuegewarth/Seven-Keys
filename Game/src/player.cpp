@@ -2,10 +2,10 @@
  * Implementação da classe Player.
  */
 #include "player.hpp"
-#include "core/rect.h"
-#include "core/level.h"
-#include "core/environment.h"
-#include "core/keyboardevent.h"
+#include "core/rect.hpp"
+#include "core/level.hpp"
+#include "core/environment.hpp"
+#include "core/keyboardevent.hpp"
 //#include "pause.hpp"
 
 

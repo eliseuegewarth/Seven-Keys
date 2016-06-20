@@ -5,8 +5,8 @@
  * Data: 20/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "core/object.h"
-#include "core/rect.h"
+#include "core/object.hpp"
+#include "core/rect.hpp"
 
 #include <list>
 

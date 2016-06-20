@@ -3,10 +3,10 @@
  * Licença: LGPL. Sem copyright.
  */
  
-#include "core/bitmap.h"
-#include "core/rect.h"
-#include "core/exception.h"
-#include "core/environment.h"
+#include "core/bitmap.hpp"
+#include "core/rect.hpp"
+#include "core/exception.hpp"
+#include "core/environment.hpp"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>

@@ -5,7 +5,7 @@
  * Data: 25/05/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "core/listener.h"
+#include "core/listener.hpp"
 
 #include <cassert> 
 

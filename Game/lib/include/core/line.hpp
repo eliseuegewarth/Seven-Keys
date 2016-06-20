@@ -8,7 +8,7 @@
 #ifndef LINE_H
 #define LINE_H
 
-#include "point.h"
+#include "point.hpp"
 
 class Line
 {

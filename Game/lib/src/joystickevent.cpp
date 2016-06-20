@@ -1,4 +1,4 @@
-#include "core/joystickevent.h"
+#include "core/joystickevent.hpp"
 #include <cassert>
 #include <SDL2/SDL.h>
 #include <map>

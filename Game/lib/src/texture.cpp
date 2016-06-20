@@ -2,10 +2,10 @@
  * Implementation of a class that represents a texture.
  * Licença: LGPL. Sem copyright.
  */
-#include "core/texture.h"
-#include "core/exception.h"
-#include "core/environment.h"
-#include "core/settings.h"
+#include "core/texture.hpp"
+#include "core/exception.hpp"
+#include "core/environment.hpp"
+#include "core/settings.hpp"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>

@@ -5,11 +5,11 @@
  * Data: 14/05/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "core/text.h"
+#include "core/text.hpp"
 
-#include "core/font.h"
-#include "core/texture.h"
-#include "core/environment.h"
+#include "core/font.hpp"
+#include "core/texture.hpp"
+#include "core/environment.hpp"
 
 #include <SDL2/SDL.h>
 

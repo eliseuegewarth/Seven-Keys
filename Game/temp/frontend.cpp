@@ -11,7 +11,7 @@
 #include <joystickevent.h>
 #include <keyboardevent.h>
 
-#include "frontend.h"
+#include "frontend.hpp"
 
 FrontEnd::FrontEnd(const string& next, const string& image,
     unsigned long duration)

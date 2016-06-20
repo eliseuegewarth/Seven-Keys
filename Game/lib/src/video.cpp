@@ -4,10 +4,10 @@
  * Licença: LGPL. Sem copyright.
  */
  
-#include "core/video.h"
-#include "core/camera.h"
-#include "core/canvas.h"
-#include "core/environment.h"
+#include "core/video.hpp"
+#include "core/camera.hpp"
+#include "core/canvas.hpp"
+#include "core/environment.hpp"
 
 #include <SDL2/SDL_ttf.h>
 #include <cassert>

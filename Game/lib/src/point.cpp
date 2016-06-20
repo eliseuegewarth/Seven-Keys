@@ -5,7 +5,7 @@
  * Data: 13/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "core/point.h"
+#include "core/point.hpp"
 
 Point::Point(double x, double y)
     : m_x(x), m_y(y)

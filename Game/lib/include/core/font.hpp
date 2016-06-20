@@ -12,8 +12,8 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_ttf.h>
 
-#include "exception.h"
-#include "color.h"
+#include "exception.hpp"
+#include "color.hpp"
 
 using std::string;
 using std::unique_ptr;

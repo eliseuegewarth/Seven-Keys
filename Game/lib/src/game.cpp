@@ -2,12 +2,12 @@
  * Implementation of the class that represents a game using SDL.
  * Licença: LGPL. Sem copyright.
  */
-#include "core/game.h"
-#include "core/video.h"
-#include "core/environment.h"
-#include "core/systemevent.h"
-#include "core/keyboardevent.h"
-#include "core/settings.h"
+#include "core/game.hpp"
+#include "core/video.hpp"
+#include "core/environment.hpp"
+#include "core/systemevent.hpp"
+#include "core/keyboardevent.hpp"
+#include "core/settings.hpp"
 
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>

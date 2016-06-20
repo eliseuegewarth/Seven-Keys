@@ -3,16 +3,16 @@
  * Licença: LGPL. Sem copyright.
  */
 
-#include "core/canvas.h"
+#include "core/canvas.hpp"
 
-#include "core/point.h"
-#include "core/line.h"
-#include "core/rect.h"
-#include "core/circle.h"
-#include "core/texture.h"
-#include "core/font.h"
-#include "core/bitmap.h"
-#include "core/environment.h"
+#include "core/point.hpp"
+#include "core/line.hpp"
+#include "core/rect.hpp"
+#include "core/circle.hpp"
+#include "core/texture.hpp"
+#include "core/font.hpp"
+#include "core/bitmap.hpp"
+#include "core/environment.hpp"
 
 #include <cassert>
 

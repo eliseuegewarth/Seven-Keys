@@ -3,7 +3,7 @@
  * Licença: LGPL. Sem copyright.
  */
 
-#include "core/color.h"
+#include "core/color.hpp"
 
 #include <cassert>
 

@@ -8,8 +8,8 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#include "object.h"
-#include "environment.h"
+#include "object.hpp"
+#include "environment.hpp"
 
 #include <string>
 

@@ -5,7 +5,7 @@
  * Data: 17/05/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "core/music.h"
+#include "core/music.hpp"
 
 class Music::Impl
 {

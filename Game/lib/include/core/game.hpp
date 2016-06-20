@@ -8,9 +8,9 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "core/level.h"
-#include "core/listener.h"
-#include "core/exception.h"
+#include "core/level.hpp"
+#include "core/listener.hpp"
+#include "core/exception.hpp"
 
 #include <string>
 
