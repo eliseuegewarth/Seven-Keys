@@ -57,6 +57,9 @@ Guard::Guard(Object *parent, ObjectID id, const double guard_horizontal_position
     if(guard_type == "hard")
     {
         change_animation(GUARD_3_RUNNING_PATH);
+    }else
+    {
+        //do nothing
     }
 }
 
@@ -87,6 +90,9 @@ void Guard::update_vision()
         if(filho->id() == "visao")
         {
             remove_child(filho);
+        }else
+        {
+            //do nothing
         }
     }
 
@@ -109,6 +115,8 @@ void Guard::update_vision()
     {
         Sight *visao = new Sight(this, "visao", this->x(), this->y() + 40, 80, 200);
         add_child(visao);
+    }else{
+        //do nothing
     }
 
 }
@@ -159,6 +167,8 @@ void Guard::walk(unsigned long elapsed)
                 else if(x() > env->canvas->width() - this->width() - 80)
                 {
                     set_x(env->canvas->width() - this->width() - 80);
+                }else{
+                    //do nothing
                 }
             }
             if(direction() == Guard::UP || direction() == Guard::DOWN)
@@ -171,8 +181,14 @@ void Guard::walk(unsigned long elapsed)
                 else if(y() > env->canvas->height() - this->height() - 80)
                 {
                     set_y(env->canvas->height() - this->height() - 80);
+                }else{
+                    //do nothing
                 }
+            }else{
+                //do nothing
             }
+        }else{
+            //do nothing
         }
     }
     else if(guard_type == "follow")
@@ -188,6 +204,8 @@ void Guard::walk(unsigned long elapsed)
         else if(player_is_to_the_right)
         {
             set_x(x() + GUARD_SPEED);
+        }else{
+            //do nothing
         }
 
         const bool player_is_to_the_buttom = (player_vertical_position
@@ -201,6 +219,8 @@ void Guard::walk(unsigned long elapsed)
         else if(player_is_to_the_top)
         {
             set_y(y() + GUARD_SPEED);
+        }else{
+            //do nothing
         }
 
         /*
@@ -239,7 +259,11 @@ void Guard::walk(unsigned long elapsed)
         else if(player_is_to_the_right_to_set_direction)
         {
             set_direction(Guard::RIGHT);
+        }else{
+            //do nothing
         }
+    }else{
+        //do nothing
     }
 }
 
@@ -267,6 +291,8 @@ void Guard::update_direction(unsigned long elapsed)
                 set_direction(Guard::DOWN);
 
             last_game_time_saved = elapsed;
+        }else{
+            //do nothing
         }
     }
     else if (guard_type == "normal")
@@ -278,6 +304,8 @@ void Guard::update_direction(unsigned long elapsed)
             set_direction(new_direction);
 
             last_game_time_saved = elapsed;
+        }else{
+            //do nothing
         }
     }
     else if(guard_type == "hard" || guard_type == "follow")
@@ -304,7 +332,11 @@ void Guard::update_direction(unsigned long elapsed)
             }
 
             last_game_time_saved = elapsed;
+        }else{
+            //do nothing
         }
+    }else{
+        //do nothing
     }
     guard_animation->set_row(this->direction());
 }
@@ -422,5 +454,7 @@ void Guard::receive_dmg(double dmg)
     if(guard_health < 0)
     {
         guard_health = 0;
+    }else{
+        //do nothing
     }
 }

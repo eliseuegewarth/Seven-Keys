@@ -45,6 +45,7 @@ Ghost::Ghost(Object *parent, ObjectID id,
     ghost_guard_animation = (unique_ptr<Animation>)new Animation
                             (GHOST_GUARD_RUNNING_PATH, 0, 0, 70, 70, 8,
                             GHOST_GUARD_SPEED_IN_MILISECONDS, true);
+
     this->direction_of_movement = (Direction) initial_movement_direction;
     last_game_time_saved = 0;
 
@@ -159,7 +160,7 @@ void Ghost::walk()
         set_direction(Ghost::RIGHT);
     }else
     {
-
+        //do nothing
     }
 }
 /**

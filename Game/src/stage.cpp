@@ -18,6 +18,8 @@
  * Licença: LGPL. Sem copyright.
  */
 
+using namespace std;
+
 ActionID Stage::colisionID = "colisionID()";
 ActionID Stage::summonBossID = "summonBossID()";
 
@@ -40,10 +42,10 @@ Stage::Stage(ObjectID id, int lives, double * sanity)
     m_sanity = sanity;
 
     m_num_id = atoi(stage_number);
-
+    printf("m_num_id=%d\n", m_num_id);
     // Calculate the total rooms of the current stage {Min: 3 / Max: - }
     int total_rooms = (3 + m_num_id + (m_num_id - 1) * 2) *(1 + (1 - *m_sanity/100)*0.55);
-
+    printf("total_rooms=%d", total_rooms);
     cout << "Starting stage "<< m_num_id << ", " << total_rooms << " rooms created." << endl;
 
     // Instancing the current map
