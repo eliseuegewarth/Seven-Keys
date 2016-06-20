@@ -8,8 +8,8 @@
 
 #include "guard.hpp"
 #include "stage.h"
-#include "item.h"
-#include "map.h"
+#include "item.hpp"
+#include "map.hpp"
 #include "player.h"
 
 /**

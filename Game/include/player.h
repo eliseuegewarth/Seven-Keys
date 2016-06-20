@@ -9,7 +9,7 @@
 #define PLAYER_H
 
 #include "core/sprite.h"
-#include "map.h"
+#include "map.hpp"
 #include "sight.h"
 #include "weapon.h"
 

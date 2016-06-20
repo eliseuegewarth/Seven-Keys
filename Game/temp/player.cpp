@@ -6,8 +6,8 @@
 
 #include <iostream>
 
-#include "item.h"
-#include "map.h"
+#include "item.hpp"
+#include "map.hpp"
 #include "room.h"
 #include "player.h"
 #include "stage.h"

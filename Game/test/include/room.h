@@ -5,7 +5,7 @@
 #include <core/rect.h>
 #include <list>
 
-#include "item.h"
+#include "item.hpp"
 #include "guard.hpp"
 #include "ghost.hpp"
 #include "quadtree.h"
