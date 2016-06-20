@@ -8,8 +8,8 @@
  #ifndef BITMAP_H
  #define BITMAP_H
 
- #include "core/exception.h"
- #include "core/canvas.h"
+ #include "core/exception.hpp"
+ #include "core/canvas.hpp"
 
 #include <string>
 #include <memory>

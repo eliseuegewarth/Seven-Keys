@@ -8,9 +8,9 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include "core/color.h"
-#include "core/object.h"
-#include "core/listener.h"
+#include "core/color.hpp"
+#include "core/object.hpp"
+#include "core/listener.hpp"
 
 #include <memory>
 

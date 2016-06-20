@@ -5,9 +5,9 @@
  * Data: 06/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "core/environment.h"
-#include "core/video.h"
-#include "core/camera.h"
+#include "core/environment.hpp"
+#include "core/video.hpp"
+#include "core/camera.hpp"
 
 static Environment *env = nullptr;
 

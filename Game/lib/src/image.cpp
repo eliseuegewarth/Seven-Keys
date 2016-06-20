@@ -5,10 +5,10 @@
  * Data: 16/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "core/image.h"
+#include "core/image.hpp"
 
-#include "core/texture.h"
-#include "core/environment.h"
+#include "core/texture.hpp"
+#include "core/environment.hpp"
 
 #include <cassert>
 

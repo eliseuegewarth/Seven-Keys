@@ -12,7 +12,7 @@
 #include <SDL2/SDL_image.h>
 #include <string>
 
-#include "exception.h"
+#include "exception.hpp"
 
 using std::string;
 

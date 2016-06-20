@@ -5,7 +5,7 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#include "core/exception.h"
+#include "core/exception.hpp"
 
 #include <string>
 #include <memory>

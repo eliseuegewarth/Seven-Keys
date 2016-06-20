@@ -8,13 +8,13 @@
 #ifndef ENVIRONMENT_H
 #define ENVIRONMENT_H
 
-#include "exception.h"
-#include "video.h"
-#include "canvas.h"
-#include "resourcesmanager.h"
-#include "eventsmanager.h"
-#include "audiomanagerwrapper.h"
-#include "camera.h"
+#include "exception.hpp"
+#include "video.hpp"
+#include "canvas.hpp"
+#include "resourcesmanager.hpp"
+#include "eventsmanager.hpp"
+#include "audiomanagerwrapper.hpp"
+#include "camera.hpp"
 
 class Environment
 {

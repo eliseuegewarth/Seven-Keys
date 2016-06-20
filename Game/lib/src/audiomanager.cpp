@@ -5,13 +5,13 @@
  * Data: 17/05/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "core/audiomanager.h"
+#include "core/audiomanager.hpp"
 #include <cassert>
 #include <iostream>
 #include <SDL2/SDL_mixer.h>
-#include "core/music.h"
-#include "core/soundeffect.h"
-#include "core/environment.h"
+#include "core/music.hpp"
+#include "core/soundeffect.hpp"
+#include "core/environment.hpp"
 
 using std::cout;
 using std::endl;

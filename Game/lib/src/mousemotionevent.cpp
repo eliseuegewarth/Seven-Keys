@@ -1,4 +1,4 @@
-#include "core/mousemotionevent.h"
+#include "core/mousemotionevent.hpp"
 
 /**
  * [MouseMotionEvent::MouseMotionEvent description]

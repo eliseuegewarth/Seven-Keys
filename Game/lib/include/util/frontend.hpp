@@ -8,8 +8,8 @@
 #ifndef FRONT_END_H
 #define FRONT_END_H
 
-#include "core/level.h"
-#include "core/listener.h"
+#include "core/level.hpp"
+#include "core/listener.hpp"
 
 #include <memory>
 

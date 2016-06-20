@@ -11,7 +11,7 @@
 #include <string>
 #include <memory>
 #include <SDL2/SDL_mixer.h>
-#include "core/exception.h"
+#include "core/exception.hpp"
 
 using std::string;
 using std::unique_ptr;

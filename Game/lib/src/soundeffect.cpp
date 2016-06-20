@@ -2,7 +2,7 @@
  Implementation of AudioHandler class.
  * Licença: LGPL. Sem copyright.
  */
-#include "core/soundeffect.h"
+#include "core/soundeffect.hpp"
 
 /**
  * @brief [brief description]

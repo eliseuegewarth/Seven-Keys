@@ -5,8 +5,8 @@
  * Data: 27/05/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "core/camera.h"
-#include "core/rect.h"
+#include "core/camera.hpp"
+#include "core/rect.hpp"
 
 #include <iostream>
 using namespace std;

@@ -2,10 +2,10 @@
  * Implementation of the Sprite class.
  * Licença: LGPL. Sem copyright.
  */
-#include "core/rect.h"
-#include "core/sprite.h"
-#include "core/keyboardevent.h"
-#include "core/environment.h"
+#include "core/rect.hpp"
+#include "core/sprite.hpp"
+#include "core/keyboardevent.hpp"
+#include "core/environment.hpp"
 
 using std::make_pair;
 

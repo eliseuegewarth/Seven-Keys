@@ -8,8 +8,8 @@
 #ifndef AUDIOMANAGERWRAPPER_H
 #define AUDIOMANAGERWRAPPER_H
 
-#include "core/audiomanager.h"
-#include "core/exception.h"
+#include "core/audiomanager.hpp"
+#include "core/exception.hpp"
 
 class AudioManagerWrapper
 {

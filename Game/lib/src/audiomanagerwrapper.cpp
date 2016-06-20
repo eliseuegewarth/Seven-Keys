@@ -5,7 +5,7 @@
  * Data: 18/05/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "core/audiomanagerwrapper.h"
+#include "core/audiomanagerwrapper.hpp"
 #include <iostream>
 #include <cassert>
 #include <SDL2/SDL.h>

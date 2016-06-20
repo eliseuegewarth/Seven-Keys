@@ -8,10 +8,10 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "exception.h"
-#include "level.h"
-#include "systemeventlistener.h"
-#include "keyboardeventlistener.h"
+#include "exception.hpp"
+#include "level.hpp"
+#include "systemeventlistener.hpp"
+#include "keyboardeventlistener.hpp"
 
 #include <string>
 

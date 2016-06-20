@@ -5,7 +5,7 @@
  * Data: 20/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "core/level.h"
+#include "core/level.hpp"
 
 #include <cassert> 
 

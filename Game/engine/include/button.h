@@ -8,10 +8,10 @@
 #ifndef BUTTON_H
 #define BUTTON_H
 
-#include "core/color.h"
-#include "core/mousebuttoneventlistener.h"
-#include "core/mousemotioneventlistener.h"
-#include "core/object.h"
+#include "core/color.hpp"
+#include "core/mousebuttoneventlistener.hpp"
+#include "core/mousemotioneventlistener.hpp"
+#include "core/object.hpp"
 
 #include <memory>
 

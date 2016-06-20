@@ -11,7 +11,7 @@
 #include <string>
 #include <SDL2/SDL.h>
 
-#include "exception.h"
+#include "exception.hpp"
 
 using std::string;
 using std::pair;

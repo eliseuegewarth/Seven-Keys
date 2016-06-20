@@ -2,7 +2,7 @@
  * Implementation of the class that represents an operating system event.
  * Licença: LGPL. Sem copyright.
  */
-#include "core/systemevent.h"
+#include "core/systemevent.hpp"
 
 /**
  * @brief [brief description]

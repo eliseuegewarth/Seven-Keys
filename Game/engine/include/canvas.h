@@ -10,9 +10,9 @@
 
 #include <SDL2/SDL.h>
 
-#include "exception.h"
-#include "color.h"
-#include "font.h"
+#include "exception.hpp"
+#include "color.hpp"
+#include "font.hpp"
 
 using std::string;
 

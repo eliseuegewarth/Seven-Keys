@@ -5,9 +5,9 @@
  * Data: 18/04/2015
  * Licença: LGPL. Sem copyright.
  */
-#include "core/font.h"
-#include "core/environment.h"
-#include "core/settings.h"
+#include "core/font.hpp"
+#include "core/environment.hpp"
+#include "core/settings.hpp"
 
 #include <cassert> 
 
