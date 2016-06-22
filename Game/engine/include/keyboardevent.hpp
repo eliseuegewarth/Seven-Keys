@@ -23,7 +23,7 @@ public:
         ONE, TWO, THREE, FOUR, FIVE, SIX, SEVEN, EIGHT, NINE, COLON, SEMICOLON,
         LESS, EQUALS, GREATER, QUESTION, AT, LEFT_BRACKET, BACKSLASH,
         RIGHT_BRACKET, CARET, UNDERSCORE, BACKQUOTE, DELETE, A, B, C, D, E, F,
-        G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, W, X, Y, Z, LEFT,
+        G, H, I, J, K, L, M, N, O, P, Q, R, S, T, U, V, width, horizontal_position,vertical_position, Z, LEFT,
         RIGHT, UP, DOWN
          } Key;
 

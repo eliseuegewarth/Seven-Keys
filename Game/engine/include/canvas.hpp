@@ -49,8 +49,8 @@ public:
     void draw(const Circle& circle) const;
     void draw(const Circle& circle, const Color& color);
 
-    void draw(const Image *image, double x = 0, double y = 0) const;
-    void draw(const Image *image, Rect rect_clip, double x = 0, double y = 0)
+    void draw(const Image *image, double horizontal_position = 0, double vertical_position = 0) const;
+    void draw(const Image *image, Rect rect_clip, double horizontal_position = 0, double vertical_position = 0)
         const;
 
     void fill(const Rect& rect) const;
@@ -77,8 +77,8 @@ private:
     Font_Manager *m_font;
     Color m_color;
 
-    void draw_circle_points(int cx, int cy, int x, int y) const;
-    void fill_circle_points(int cx, int cy, int x, int y) const;
+    void draw_circle_points(int circle_horizontal_position, int circle_vertical_position, int horizontal_position, int vertical_position) const;
+    void fill_circle_points(int circle_horizontal_position, int circle_vertical_position, int horizontal_position, int vertical_position) const;
 };
 
 #endif

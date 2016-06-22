@@ -31,7 +31,7 @@ public:
     SDL_Texture * texture() const;
 
 private:
-    Image(SDL_Texture *texture, int w, int h);
+    Image(SDL_Texture *texture, int width, int height);
 
     SDL_Texture *m_texture;
     int m_w, m_h;
