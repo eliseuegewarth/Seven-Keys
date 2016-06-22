@@ -15,9 +15,9 @@ using std::list;
 class Object::Impl
 {
 public:
-    Impl(Object *base, Object *parent, ObjectID id, double x, double y,
-        double w, double h)
-        : m_base(base), m_parent(parent), m_id(id), m_box(x, y, w, h),
+    Impl(Object *base, Object *parent, ObjectID id, double horizontal_position, double vertical_position,
+        double width, double height)
+        : m_base(base), m_parent(parent), m_id(id), m_box(horizontal_position, vertical_position, width, height),
         m_visible(true), m_walkable(true), m_mass(0.0)
     {
     }
@@ -52,55 +52,55 @@ public:
         return m_id;
     }
 
-    void align_to(const Object* object, Alignment xaxis, Alignment yaxis)
+    void align_to(const Object* object, Alignment horizontal_axis, Alignment vertical_axis)
     {
         if (not object)
         {
             return;
         }
 
-        double x = m_box.x();
+        double horizontal_position = m_box.horizontal_position();
 
-        switch (xaxis)
+        switch (horizontal_axis)
         {
         case LEFT:
-            x = object->x();
+            horizontal_position = object->horizontal_position();
             break;
 
         case CENTER:
-            x = (object->width() - m_box.width())/2 + object->x();
+            horizontal_position = (object->width() - m_box.width())/2 + object->horizontal_position();
             break;
 
         case RIGHT:
-            x = object->width() - m_box.width() + object->x();
+            horizontal_position = object->width() - m_box.width() + object->horizontal_position();
             break;
 
         default:
             break;
         }
 
-        double y = m_box.y();
+        double vertical_position = m_box.vertical_position();
 
-        switch (yaxis)
+        switch (vertical_axis)
         {
         case TOP:
-            y = object->y();
+            vertical_position = object->vertical_position();
             break;
 
         case MIDDLE:
-            y = (object->height() - m_box.height())/2 + object->y();
+            vertical_position = (object->height() - m_box.height())/2 + object->vertical_position();
             break;
 
         case BOTTOM:
-            y = object->height() - m_box.height() + object->y();
+            vertical_position = object->height() - m_box.height() + object->vertical_position();
             break;
 
         default:
             break;
         }
 
-        m_box.set_position(x, y);
-        m_base->set_position(x, y);
+        m_box.set_position(horizontal_position, vertical_position);
+        m_base->set_position(horizontal_position, vertical_position);
     }
 
     void add_child(Object *child)
@@ -181,14 +181,14 @@ public:
         return m_box;
     }
 
-    double x() const
+    double horizontal_position() const
     {
-        return m_box.x();
+        return m_box.horizontal_position();
     }
 
-    double y() const
+    double vertical_position() const
     {
-        return m_box.y();
+        return m_box.vertical_position();
     }
 
     double width() const
@@ -201,14 +201,14 @@ public:
         return m_box.height();
     }
 
-    void set_x(double x)
+    void set_horizontal_position(double horizontal_position)
     {
-        m_box.set_x(x);
+        m_box.set_horizontal_position(horizontal_position);
     }
 
-    void set_y(double y)
+    void set_vertical_position(double vertical_position)
     {
-        m_box.set_y(y);
+        m_box.set_vertical_position(vertical_position);
     }
 
     void set_width(double width)
@@ -222,9 +222,9 @@ public:
     }
 
 
-    void set_position(double x, double y)
+    void set_position(double horizontal_position, double vertical_position)
     {
-        m_box.set_position(x, y);
+        m_box.set_position(horizontal_position, vertical_position);
     }
 
     void set_dimensions(double width, double height)
@@ -280,8 +280,8 @@ private:
     list<Object *> m_observers;
 };
 
-Object::Object(Object *parent, ObjectID id, double x, double y, double width,
-    double height) : m_impl(new Object::Impl(this, parent, id, x, y, width, height))
+Object::Object(Object *parent, ObjectID id, double horizontal_position, double vertical_position, double width,
+    double height) : m_impl(new Object::Impl(this, parent, id, horizontal_position, vertical_position, width, height))
 {
 }
 
@@ -302,15 +302,15 @@ Object::id() const
 }
 
 double
-Object::x() const
+Object::horizontal_position() const
 {
-    return m_impl->x();
+    return m_impl->horizontal_position();
 }
 
 double
-Object::y() const
+Object::vertical_position() const
 {
-    return m_impl->y();
+    return m_impl->vertical_position();
 }
 
 double
@@ -332,15 +332,15 @@ Object::bounding_box() const
 }
 
 void
-Object::set_x(double x)
+Object::set_horizontal_position(double horizontal_position)
 {
-    m_impl->set_x(x);
+    m_impl->set_horizontal_position(horizontal_position);
 }
 
 void
-Object::set_y(double y)
+Object::set_vertical_position(double vertical_position)
 {
-    m_impl->set_y(y);
+    m_impl->set_vertical_position(vertical_position);
 }
 
 void
@@ -356,9 +356,9 @@ Object::set_height(double height)
 }
 
 void
-Object::set_position(double x, double y)
+Object::set_position(double horizontal_position, double vertical_position)
 {
-    m_impl->set_position(x, y);
+    m_impl->set_position(horizontal_position, vertical_position);
 }
 
 void
@@ -438,9 +438,9 @@ Object::draw_self()
 }
 
 void
-Object::align_to(const Object* object, Alignment xaxis, Alignment yaxis)
+Object::align_to(const Object* object, Alignment horizontal_axis, Alignment vertical_axis)
 {
-    m_impl->align_to(object, xaxis, yaxis);
+    m_impl->align_to(object, horizontal_axis, vertical_axis);
 }
 
 bool

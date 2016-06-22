@@ -27,30 +27,30 @@ public:
     {
         if (m_mode == Camera::FOLLOWING and m_target)
         {
-            double x = m_target->x() + (m_target->width() - m_camera->width())/2;
-            double y = m_target->y() + (m_target->height() - m_camera->height())/2;
+            double horizontal_position = m_target->horizontal_position() + (m_target->width() - m_camera->width())/2;
+            double vertical_position = m_target->vertical_position() + (m_target->height() - m_camera->height())/2;
 
-            if (x < m_limits.x())
+            if (horizontal_position < m_limits.horizontal_position())
             {
-                x = m_limits.x();
+                horizontal_position = m_limits.horizontal_position();
             }
 
-            if (x + m_camera->width() > m_limits.x() + m_limits.width())
+            if (horizontal_position + m_camera->width() > m_limits.horizontal_position() + m_limits.width())
             {
-                x = m_limits.x() + m_limits.width() - m_camera->width();
+                horizontal_position = m_limits.horizontal_position() + m_limits.width() - m_camera->width();
             }
 
-            if (y < m_limits.y())
+            if (vertical_position < m_limits.vertical_position())
             {
-                y = m_limits.y();
+                vertical_position = m_limits.vertical_position();
             }
 
-            if (y + m_camera->height() > m_limits.y() + m_limits.height())
+            if (vertical_position + m_camera->height() > m_limits.vertical_position() + m_limits.height())
             {
-                y = m_limits.y() + m_limits.height() - m_camera->height();
+                vertical_position = m_limits.vertical_position() + m_limits.height() - m_camera->height();
             }
 
-            m_camera->set_position(x, y);
+            m_camera->set_position(horizontal_position, vertical_position);
         }
     }
 
@@ -68,8 +68,8 @@ private:
     Rect m_limits;
 };
 
-Camera::Camera(double x, double y, double width, double height, Mode mode)
-    : Object(nullptr, "", x, y, width, height), m_impl(new Camera::Impl(this, mode))
+Camera::Camera(double horizontal_position, double vertical_position, double width, double height, Mode mode)
+    : Object(nullptr, "", horizontal_position, vertical_position, width, height), m_impl(new Camera::Impl(this, mode))
 {
 }
 

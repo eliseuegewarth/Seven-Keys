@@ -13,21 +13,21 @@
 /**
  * [MouseButtonEvent::MouseButtonEvent description]
  * @method MouseButtonEvent::MouseButtonEvent
- * @param  x                    [Mouse position in axis x(horizontal)]
- * @param  y                    [Mouse position in axis y(vertical)]
+ * @param  horizontal_position                    [Mouse position in axis x(horizontal)]
+ * @param  vertical_position                    [Mouse position in axis y(vertical)]
  * @param  state                 [State of the button (if are pressed or not)]
  * @param  button                [Button that are pressed]
  */
 MouseButtonEvent::MouseButtonEvent(ButtonState state, Button button,
-                                    double x, double y)
+                                    double horizontal_position, double vertical_position)
 {
     assert((state >= 0) && "state can't be negative");
     assert((button >= 0) && "button can't be negative");
 
-    m_state = state;
-    m_button = button;
-    m_x = x;
-    m_y = y;
+    this->m_state = state;
+    this->m_button = button;
+    this->m_horizontal_position = horizontal_position;
+    this->m_vertical_position = vertical_position;
 }
 
 /**
@@ -39,7 +39,7 @@ MouseButtonEvent::MouseButtonEvent(ButtonState state, Button button,
 MouseButtonEvent::ButtonState
 MouseButtonEvent::state() const
 {
-    return m_state;
+    return this->m_state;
 }
 
 /**
@@ -50,29 +50,29 @@ MouseButtonEvent::state() const
 MouseButtonEvent::Button
 MouseButtonEvent::button() const
 {
-    return m_button;
+    return this->m_button;
 }
 
 /**
- * [MouseButtonEvent::x         position where the mouse button was
- * 					 			pressed on the screen in axis x(horizontal)]
- * @method MouseButtonEvent::x
- * @return                  [Returns the mouse position in axis x(horizontal)]
+ * [MouseButtonEvent::horizontal_position         position where the mouse button was
+ * 					 			pressed on the screen in axis horizontal_position(horizontal)]
+ * @method MouseButtonEvent::horizontal_position
+ * @return                  [Returns the mouse position in axis horizontal_position(horizontal)]
  */
-double MouseButtonEvent::x() const
+double MouseButtonEvent::horizontal_position() const
 {
-    return m_x;
+    return this->m_horizontal_position;
 }
 
 /**
- * [MouseButtonEvent::x             position where the mouse button was
+ * [MouseButtonEvent::y             position where the mouse button was
  * 					 				pressed on the screen in axis y(vertical)]
- * @method MouseButtonEvent::x
+ * @method MouseButtonEvent::y
  * @return                   [[Returns the mouse position in axis y(vertical)]
  */
-double MouseButtonEvent::y() const
+double MouseButtonEvent::vertical_position() const
 {
-    return m_y;
+    return this->m_vertical_position;
 }
 
 /**
