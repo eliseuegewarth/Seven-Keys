@@ -1,7 +1,7 @@
 #include "credits.hpp"
-#include <ijengine/util/button.h>
-#include <core/font.h>
-#include <core/environment.h>
+#include <ijengine/util/button.hpp>
+#include <core/font.hpp>
+#include <core/environment.hpp>
 #include <cassert>
 #include <iostream>
 
@@ -42,7 +42,7 @@ Credits::Credits() : Level("credits")
     assert(back != NULL && "Failed to create resume button.");
 
     back->align_to(this, Object::RIGHT, Object::RIGHT);
-    back->set_y(520);
+    back->set_vertical_position(520);
 
     back->add_observer(this);
     add_child(back);

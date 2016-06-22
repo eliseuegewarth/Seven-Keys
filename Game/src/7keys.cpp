@@ -3,11 +3,11 @@
  * Implementação da classe SevenKeys.
  * Class that represents the entire game and manages the main screens.
  */
-#include <ijengine/core/environment.h>
-#include <ijengine/core/level.h>
+#include <ijengine/core/environment.hpp>
+#include <ijengine/core/level.hpp>
 
 #include "7keys.hpp"
-#include <ijengine/util/frontend.h>
+#include <ijengine/util/frontend.hpp>
 #include "titlescreen.hpp"
 #include "stage.hpp"
 #include "options.hpp"

@@ -4,7 +4,7 @@
 #include "core/environment.hpp"
 #include "core/keyboardevent.hpp"
 
-#include <core/animation.h>
+#include <core/animation.hpp>
 
 #include <cassert>
 #include <iostream>
@@ -97,7 +97,7 @@ void Ghost::set_direction(Direction direction_of_movement)
  */
 void Ghost::draw_self()
 {
-    ghost_guard_animation->draw(x(), y());
+    ghost_guard_animation->draw(horizontal_position(), vertical_position());
 }
 /**
  * [Ghost::walk Walk to the player's position at a constant speed.]
@@ -106,43 +106,43 @@ void Ghost::draw_self()
 void Ghost::walk()
 {
     const bool player_is_to_the_right = (player_horizontal_position
-                                        > this->x());
+                                        > this->horizontal_position());
     const bool player_is_to_the_left = (player_horizontal_position
-                                        < this->x());
+                                        < this->horizontal_position());
     if(player_is_to_the_right)
     {
-        set_x(x() + GHOST_GUARD_SPEED);
+        set_horizontal_position(horizontal_position() + GHOST_GUARD_SPEED);
     }else if(player_is_to_the_left)
     {
-        set_x(x() - GHOST_GUARD_SPEED);
+        set_horizontal_position(horizontal_position() - GHOST_GUARD_SPEED);
     }else
     {
-        set_x(x() + GHOST_GUARD_SPEED);
+        set_horizontal_position(horizontal_position() + GHOST_GUARD_SPEED);
     }
     //
     const bool player_is_to_the_buttom = (player_vertical_position
-                                         < this->y());
+                                         < this->vertical_position());
     const bool player_is_to_the_top = (player_vertical_position
-                                      > this->y());
+                                      > this->vertical_position());
     if(player_is_to_the_buttom)
     {
-        set_y(y() - GHOST_GUARD_SPEED);
+        set_vertical_position(vertical_position() - GHOST_GUARD_SPEED);
     }else if(player_is_to_the_top)
     {
-        set_y(y() + GHOST_GUARD_SPEED);
+        set_vertical_position(vertical_position() + GHOST_GUARD_SPEED);
     }else
     {
-        set_y(y() + GHOST_GUARD_SPEED);
+        set_vertical_position(vertical_position() + GHOST_GUARD_SPEED);
     }
 
     const bool player_is_to_the_right_to_walk = (player_horizontal_position
-                                                > this->x() - 100);
+                                                > this->horizontal_position() - 100);
     const bool player_is_to_the_left_to_walk = (player_horizontal_position
-                                                < this->x() + 100);
+                                                < this->horizontal_position() + 100);
     const bool player_is_to_the_buttom_to_walk = (player_vertical_position
-                                                 < this->y() + 100);
+                                                 < this->vertical_position() + 100);
     const bool player_is_to_the_top_to_walk = (player_vertical_position
-                                              > this->y() - 100);
+                                              > this->vertical_position() - 100);
     const bool player_is_aligned_vertically = (player_is_to_the_right_to_walk
                                               and player_is_to_the_left_to_walk);
 
@@ -196,22 +196,22 @@ void Ghost::update_direction(unsigned long elapsed)
 }
 
 /**
- * [Ghost::get_playerx Receive the player's horizontal position.
+ * [Ghost::get_player_horizontal_position Receive the player's horizontal position.
  * This information is used at Ghost Guard artificial intelligence.]
- * @method Ghost::get_playerx
+ * @method Ghost::get_player_horizontal_position
  * @param  player_horizontal_position [That's the player's horizontal position.]
  */
-void Ghost::get_playerx(const unsigned int player_horizontal_position)
+void Ghost::get_player_horizontal_position(const unsigned int player_horizontal_position)
 {
     this->player_horizontal_position = player_horizontal_position;
 }
 /**
- * [Ghost::get_playery Receive the player's vertical position.
+ * [Ghost::get_player_vertical_position Receive the player's vertical position.
  * This information is used at Ghost Guard artificial intelligence.]
- * @method Ghost::get_playery
+ * @method Ghost::get_player_vertical_position
  * @param  player_vertical_position [That's the player's vertical position.]
  */
-void Ghost::get_playery(const unsigned int player_vertical_position)
+void Ghost::get_player_vertical_position(const unsigned int player_vertical_position)
 {
     this->player_vertical_position = player_vertical_position;
 }
@@ -231,8 +231,8 @@ double Ghost::damage()
  */
 void Ghost::update_self(unsigned long elapsed)
 {
-    set_x(this->x());
-    set_y(this->y());
+    set_horizontal_position(this->horizontal_position());
+    set_vertical_position(this->vertical_position());
 
     update_direction(elapsed);
     ghost_guard_animation->update(elapsed);
