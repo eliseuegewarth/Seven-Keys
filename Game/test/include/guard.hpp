@@ -25,7 +25,7 @@ public:
 
     #define GUARD_SPEED_IN_MILISECONDS 120
 
-    Guard(Object *parent, ObjectID id, const double x, const double y,
+    Guard(Object *parent, ObjectID id, const double horizontal_position, const double vertical_position,
           const unsigned int mass_of_guard, const bool walkable, string type, const unsigned int initial_movement_direction);
     ~Guard();
 
@@ -34,8 +34,8 @@ public:
 
 
     Direction direction();
-    void get_playerx(const unsigned int pos_x);
-    void get_playery(const unsigned int pos_y);
+    void get_player_horizontal_position(const unsigned int horizontal_position);
+    void get_player_vertical_position(const unsigned int vertical_position);
     void set_direction(Direction direction_of_movement);
     void update_vision();
     void walk(unsigned long elapsed);

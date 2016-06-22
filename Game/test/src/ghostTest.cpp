@@ -10,18 +10,18 @@ public:
     GhostTest(){
 
     }
-    void get_playerx_test()
+    void get_player_horizontal_position_test()
     {
         Ghost *ghost = new Ghost(this, name, 0, 0, 9999, true, "normal", randint(0,3));
         int player_horizontal_position = 0;
-        Ghost::get_playerx(player_horizontal_position);
+        Ghost::get_player_horizontal_position(player_horizontal_position);
         assert(this->player_horizontal_position == player_horizontal_position);
     }
-    void get_playery_test()
+    void get_player_vertical_position_test()
     {
         Ghost *ghost = new Ghost(this, name, 0, 0, 9999, true, "normal", randint(0,3));
         int player_vertical_position = 0;
-        Ghost::get_playery(player_vertical_position);
+        Ghost::get_player_vertical_position(player_vertical_position);
         assert(this->player_vertical_position == player_vertical_position);
     }
     void set_direction_test(Direction direction_of_movement)
@@ -36,8 +36,8 @@ public:
         Ghost *ghost = new Ghost(this, name, 0, 0, 9999, true, "normal", randint(0,3));
         int player_horizontal_position = 0;
         int player_vertical_position = 0;
-        Ghost::get_playerx(player_horizontal_position);
-        Ghost::get_playery(player_vertical_position);
+        Ghost::get_player_horizontal_position(player_horizontal_position);
+        Ghost::get_player_vertical_position(player_vertical_position);
         Ghost::walk();
     }
     void update_direction_test()
