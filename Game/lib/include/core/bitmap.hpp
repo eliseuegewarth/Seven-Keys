@@ -30,8 +30,8 @@ public:
     void * pixels() const;
     void clear();
 
-    Uint32 getpixel(SDL_Surface *surface, int x, int y);
-    void putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel);
+    Uint32 getpixel(SDL_Surface *surface, int horizontal_position, int vertical_position);
+    void putpixel(SDL_Surface *surface, int horizontal_position, int vertical_position, Uint32 pixel);
 
     static Bitmap * from_file(const string& path) throw (Exception);
 

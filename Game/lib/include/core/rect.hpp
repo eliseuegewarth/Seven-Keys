@@ -11,26 +11,26 @@
 class Rect
 {
 public:
-    Rect(double x = 0, double y = 0, double width = 0, double height = 0);
+    Rect(double horizontal_position = 0, double vertical_position = 0, double width = 0, double height = 0);
 
-    double x() const;
-    double y() const;
+    double horizontal_position() const;
+    double vertical_position() const;
     double width() const;
     double height() const;
 
-    void set_x(double x);
-    void set_y(double y);
+    void set_horizontal_position(double horizontal_position);
+    void set_vertical_position(double vertical_position);
     void set_width(double width);
     void set_height(double height);
 
-    void set_position(double x, double y);
+    void set_position(double horizontal_position, double vertical_position);
     void set_dimensions(double width, double height);
 
-    bool contains(double x, double y) const;
+    bool contains(double horizontal_position, double vertical_position) const;
     Rect intersection(const Rect& r) const;
 
 protected:
-    double m_x, m_y;
+    double m_horizontal_position, m_vertical_position;
     double m_width, m_height;
 };
 

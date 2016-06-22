@@ -11,17 +11,17 @@
 class Point
 {
 public:
-    Point(double x = 0, double y = 0);
+    Point(double horizontal_position = 0, double vertical_position = 0);
 
-    double x() const;
-    double y() const;
+    double horizontal_position() const;
+    double vertical_position() const;
 
-    void set_x(double x);
-    void set_y(double y);
-    void set(double x, double y);
+    void set_horizontal_position(double horizontal_position);
+    void set_vertical_position(double vertical_position);
+    void set(double horizontal_position, double vertical_position);
 
 private:
-    double m_x, m_y;
+    double m_horizontal_position, m_vertical_position;
 };
 
 #endif

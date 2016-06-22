@@ -26,16 +26,16 @@ typedef string Parameters;
 class Object
 {
 public:
-    Object(Object *parent = nullptr, ObjectID id = "", double x = 0,
-        double y = 0, double width = 1, double height = 1);
+    Object(Object *parent = nullptr, ObjectID id = "", double horizontal_position = 0,
+        double vertical_position = 0, double width = 1, double height = 1);
     virtual ~Object();
 
     Object * parent() const;
     const list<Object *>& children() const;
     ObjectID id() const;
 
-    double x() const;
-    double y() const;
+    double horizontal_position() const;
+    double vertical_position() const;
     double width() const;
     double height() const;
 
@@ -43,8 +43,8 @@ public:
 
     bool visible() const;
 
-    void set_x(double x);
-    void set_y(double y);
+    void set_horizontal_position(double horizontal_position);
+    void set_vertical_position(double vertical_position);
     void set_width(double width);
     void set_height(double height);
 
@@ -56,14 +56,14 @@ public:
     void set_walkable(bool walkable = true);
     void set_mass(double mass);
 
-    void set_position(double x, double y);
+    void set_position(double horizontal_position, double vertical_position);
     void set_dimensions(double width, double height);
     void set_parent(Object *parent);
 
     typedef enum { NONE, LEFT, CENTER, RIGHT, TOP, MIDDLE, BOTTOM }
         Alignment;
 
-    void align_to(const Object* object, Alignment xaxis, Alignment yaxis);
+    void align_to(const Object* object, Alignment horizontal_axis, Alignment vertical_axis);
 
     void add_child(Object *child);
     void remove_child(Object *child);
