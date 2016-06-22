@@ -78,10 +78,10 @@ public:
     {
         if (event.state() == MouseButtonEvent::PRESSED and
             event.button() == MouseButtonEvent::LEFT and
-            m_button->bounding_box().contains(event.x(), event.y()))
+            m_button->bounding_box().contains(event.horizontal_position(), event.vertical_position()))
         {
             char coords[64];
-            sprintf(coords, "%.2f,%.2f", event.x(), event.y());
+            sprintf(coords, "%.2f,%.2f", event.horizontal_position(), event.vertical_position());
             m_button->notify(clickedID, coords);
             return true;
         }else{
@@ -93,7 +93,7 @@ public:
 
     bool on_event(const MouseMotionEvent& event)
     {
-        if (m_button->bounding_box().contains(event.x(), event.y()))
+        if (m_button->bounding_box().contains(event.horizontal_position(), event.vertical_position()))
         {
             m_state = ACTIVE;
             if (m_active_texture.get())
@@ -137,7 +137,7 @@ public:
 
         if (image.get())
         {
-            env->canvas->draw(image.get(), m_button->x(), m_button->y());
+            env->canvas->draw(image.get(), m_button->horizontal_position(), m_button->vertical_position());
         }else
         {
             env->canvas->set_blend_mode(Canvas::BLEND);
@@ -147,7 +147,7 @@ public:
             {
                 env->canvas->draw(r, m_border);
 
-                r.set_position(r.x() + 1, r.y() + 1);
+                r.set_position(r.horizontal_position() + 1, r.vertical_position() + 1);
                 r.set_dimensions(r.width() - 2, r.height() - 2);
             }
 

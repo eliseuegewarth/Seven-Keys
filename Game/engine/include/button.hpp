@@ -21,7 +21,7 @@ class Button : public Object, public MouseButtonEventListener,
     MouseMotionEventListener
 {
 public:
-    Button(Object *parent, ObjectID id, double w, double h);
+    Button(Object *parent, ObjectID id, double width, double height);
     ~Button();
 
     static ActionID clickedID;

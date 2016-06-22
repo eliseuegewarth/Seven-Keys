@@ -16,20 +16,22 @@ public:
     typedef enum { DOWN, UP } State;
     typedef enum { LEFT, RIGHT, MIDDLE } Button;
 
-    MouseMotionEvent(int x, int y, int x_rel, int y_rel, State left,
+    MouseMotionEvent(int horizontal_position, int vertical_position, int relative_horizontal_position, int relative_vertical_position, State left,
         State right, State middle);
 
     State state(Button button) const;
-    int x() const;
-    int y() const;
-    int x_rel() const;
-    int y_rel() const;
+    int horizontal_position() const;
+    int vertical_position() const;
+    int relative_horizontal_position() const;
+    int relative_vertical_position() const;
 
     static MouseMotionEvent from_SDL(const SDL_Event& event);
 
 private:
-    int m_x, m_y;
-    int m_x_rel, m_y_rel;
+    int m_vertical_position;
+    int m_vertical_position;
+    int m_relative_horizontal_position;
+    int m_relative_vertical_position;
     State m_buttons[3];
 };
 

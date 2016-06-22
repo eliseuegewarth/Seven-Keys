@@ -1,8 +1,8 @@
-#include <core/environment.h>
-#include <core/music.h>
-#include <core/soundeffect.h>
-#include <core/audiomanager.h>
-#include <core/audiomanagerwrapper.h>
+#include <core/environment.hpp>
+#include <core/music.hpp>
+#include <core/soundeffect.hpp>
+#include <core/audiomanager.hpp>
+#include <core/audiomanagerwrapper.hpp>
 
 #include <cmath>
 
@@ -96,8 +96,8 @@ void Stage::threat_colision_boss(list<Object*> map_objects)
         if(object->id() == "boss")
         {
             Boss *boss = (Boss*) object;
-            boss->get_playerx(m_player->x());
-            boss->get_playery(m_player->y());
+            boss->get_player_horizontal_position(m_player->horizontal_position());
+            boss->get_player_vertical_position(m_player->vertical_position());
 
             // Withdraw player's life
             if (intersection.width() != 0 and intersection.height() != 0)
@@ -134,14 +134,14 @@ void Stage::threat_colision_not_walkable_objects(Object * item,
         {
             char message[512];
             sprintf(message, "%s,%s,%.2f,%.2f,%.2f,%.2f",
-                m_player->id().c_str(), item->id().c_str(), intersection.x(),
-                intersection.y(), intersection.width(), intersection.height());
+                m_player->id().c_str(), item->id().c_str(), intersection.horizontal_position(),
+                intersection.vertical_position(), intersection.width(), intersection.height());
 
             notify(Stage::colisionID, message);
 
-            if(bounding_box_player.y() > bounding_box_item.y())
+            if(bounding_box_player.vertical_position() > bounding_box_item.vertical_position())
             {
-                m_player->set_y(bounding_box_item.y() +
+                m_player->set_vertical_position(bounding_box_item.vertical_position() +
                 bounding_box_item.height() - 50);
             }
             else
@@ -158,22 +158,22 @@ void Stage::threat_colision_not_walkable_objects(Object * item,
     {
         char message[512];
         sprintf(message, "%s,%s,%.2f,%.2f,%.2f,%.2f", m_player->id().c_str(),
-            item->id().c_str(), intersection.x(), intersection.y(),
+            item->id().c_str(), intersection.horizontal_position(), intersection.vertical_position(),
             intersection.width(), intersection.height());
 
         notify(Stage::colisionID, message);
 
-        //eixo x
-        if(abs(bounding_box_player.x() - bounding_box_item.x()) >
-            abs(bounding_box_player.y() - bounding_box_item.y()))
+        //horizontal axis
+        if(abs(bounding_box_player.horizontal_position() - bounding_box_item.horizontal_position()) >
+            abs(bounding_box_player.vertical_position() - bounding_box_item.vertical_position()))
         {
-            if(bounding_box_player.x() < bounding_box_item.x())
+            if(bounding_box_player.horizontal_position() < bounding_box_item.horizontal_position())
             {
-                m_player->set_x(bounding_box_item.x() - bounding_box_player.width() + 1);
+                m_player->set_horizontal_position(bounding_box_item.horizontal_position() - bounding_box_player.width() + 1);
             }
-            else if(bounding_box_player.x() > bounding_box_item.x())
+            else if(bounding_box_player.horizontal_position() > bounding_box_item.horizontal_position())
             {
-                m_player->set_x(bounding_box_item.x() + bounding_box_item.width() - 1);
+                m_player->set_horizontal_position(bounding_box_item.horizontal_position() + bounding_box_item.width() - 1);
             }
             else
             {
@@ -182,13 +182,13 @@ void Stage::threat_colision_not_walkable_objects(Object * item,
         }
         else
         {
-            if(bounding_box_player.y() < bounding_box_item.y())
+            if(bounding_box_player.vertical_position() < bounding_box_item.vertical_position())
             {
-                m_player->set_y(bounding_box_item.y() - bounding_box_player.height() + 1);
+                m_player->set_vertical_position(bounding_box_item.vertical_position() - bounding_box_player.height() + 1);
             }
-            else if(bounding_box_player.y() > bounding_box_item.y())
+            else if(bounding_box_player.vertical_position() > bounding_box_item.vertical_position())
             {
-                m_player->set_y(bounding_box_item.y() + bounding_box_item.height() - 1);
+                m_player->set_vertical_position(bounding_box_item.vertical_position() + bounding_box_item.height() - 1);
             }
             else
             {
@@ -207,8 +207,8 @@ void Stage::threat_colision_walkable_objects(Object * item, Rect intersection)
     if (intersection.width() != 0 and intersection.height() != 0)
     {
         char message[512];
-        sprintf(message, "%s,%s,%.2f,%.2f,%.2f,%.2f", m_player->id().c_str(), item->id().c_str(), intersection.x(),
-            intersection.y(), intersection.width(), intersection.height());
+        sprintf(message, "%s,%s,%.2f,%.2f,%.2f,%.2f", m_player->id().c_str(), item->id().c_str(), intersection.horizontal_position(),
+            intersection.vertical_position(), intersection.width(), intersection.height());
 
         notify(Stage::colisionID, message);
 
@@ -217,25 +217,25 @@ void Stage::threat_colision_walkable_objects(Object * item, Rect intersection)
     {
         if(item->id() == "door")
         {
-            if(item->x() == 0 && item->y() == 320)
+            if(item->horizontal_position() == 0 && item->vertical_position() == 320)
             {
-                m_player->set_current("left", 1120, m_player->y());
-                m_map->m_boss->set_position(1120, m_player->y());
+                m_player->set_current("left", 1120, m_player->vertical_position());
+                m_map->m_boss->set_position(1120, m_player->vertical_position());
             }
-            else if(item->x() == 1200 && item->y() == 320)
+            else if(item->horizontal_position() == 1200 && item->vertical_position() == 320)
             {
-                m_player->set_current("right", 80, m_player->y());
-                m_map->m_boss->set_position(80, m_player->y());
+                m_player->set_current("right", 80, m_player->vertical_position());
+                m_map->m_boss->set_position(80, m_player->vertical_position());
             }
-            else if(item->x() == 600 && item->y() == 0)
+            else if(item->horizontal_position() == 600 && item->vertical_position() == 0)
             {
-                m_player->set_current("top", m_player->x(), 560);
-                m_map->m_boss->set_position(m_player->x(), 560);
+                m_player->set_current("top", m_player->horizontal_position(), 560);
+                m_map->m_boss->set_position(m_player->horizontal_position(), 560);
             }
-            else if(item->x() == 600 && item->y() == 640)
+            else if(item->horizontal_position() == 600 && item->vertical_position() == 640)
             {
-                m_player->set_current("bottom", m_player->x(), 80);
-                m_map->m_boss->set_position(m_player->x(), 80);
+                m_player->set_current("bottom", m_player->horizontal_position(), 80);
+                m_map->m_boss->set_position(m_player->horizontal_position(), 80);
             }
             else
             {
@@ -319,8 +319,8 @@ void Stage::threat_colision_guard(Object *item, Rect intersection)
 
     if(guard->type() == "follow")
     {
-        guard->get_playerx(m_player->x());
-        guard->get_playery(m_player->y());
+        guard->get_player_horizontal_position(m_player->horizontal_position());
+        guard->get_player_vertical_position(m_player->vertical_position());
     }
     else
     {
@@ -331,8 +331,8 @@ void Stage::threat_colision_guard(Object *item, Rect intersection)
 void Stage::threat_colision_ghost(Object *item, Rect intersection)
 {
     Ghost *ghost = (Ghost*) item;
-    ghost->get_playerx(m_player->x());
-    ghost->get_playery(m_player->y());
+    ghost->get_player_horizontal_position(m_player->horizontal_position());
+    ghost->get_player_vertical_position(m_player->vertical_position());
     const list<Object *> objects = item->children();
 
     //Withdraw player's life
@@ -485,7 +485,7 @@ bool Stage::on_message(Object *, MessageID id, Parameters p)
 
                         if(m_num_id >= 5)
                         {
-                            m_map->m_boss->set_position(m_player->x(), m_player->y());
+                            m_map->m_boss->set_position(m_player->horizontal_position(), m_player->vertical_position());
                             notify(Stage::summonBossID, "stage7");
                         }
                         else
@@ -591,15 +591,15 @@ bool Stage::on_message(Object *, MessageID id, Parameters p)
                 {
                     if(item->mass() <= m_player->strength())
                     {
-                        if(abs(bounding_box_player.x() - bounding_box_item.x()) > abs(bounding_box_player.y() - bounding_box_item.y()))
+                        if(abs(bounding_box_player.horizontal_position() - bounding_box_item.horizontal_position()) > abs(bounding_box_player.vertical_position() - bounding_box_item.vertical_position()))
                         {
-                            if(bounding_box_player.x() < bounding_box_item.x())
+                            if(bounding_box_player.horizontal_position() < bounding_box_item.horizontal_position())
                             {
-                                item->set_x(bounding_box_item.x() + 1);
+                                item->set_horizontal_position(bounding_box_item.horizontal_position() + 1);
                             }
-                            else if(bounding_box_player.x() > bounding_box_item.x())
+                            else if(bounding_box_player.horizontal_position() > bounding_box_item.horizontal_position())
                             {
-                                item->set_x(bounding_box_item.x() - 1);
+                                item->set_horizontal_position(bounding_box_item.horizontal_position() - 1);
                             }
                             else
                             {
@@ -608,13 +608,13 @@ bool Stage::on_message(Object *, MessageID id, Parameters p)
                         }
                         else
                         {
-                            if(bounding_box_player.y() < bounding_box_item.y())
+                            if(bounding_box_player.vertical_position() < bounding_box_item.vertical_position())
                             {
-                                item->set_y(bounding_box_item.y() + 1);
+                                item->set_vertical_position(bounding_box_item.vertical_position() + 1);
                             }
-                            else if(bounding_box_player.y() > bounding_box_item.y())
+                            else if(bounding_box_player.vertical_position() > bounding_box_item.vertical_position())
                             {
-                                item->set_y(bounding_box_item.y() - 1);
+                                item->set_vertical_position(bounding_box_item.vertical_position() - 1);
                             }
                             else
                             {

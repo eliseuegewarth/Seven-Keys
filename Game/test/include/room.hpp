@@ -33,8 +33,8 @@ public:
 
 	string type;
 	int stage_id;
-	int pos_y;
-	int pos_x;
+	int vertical_position;
+	int horizontal_position;
 
 	void check_entry();
 	string room_type();
@@ -61,9 +61,9 @@ private:
 
     void update_self(unsigned long);
 
-    void add_door(string type, char direction, int x, int y);
+    void add_door(string type, char direction, int horizontal_position, int vertical_position);
     void pre_drawing(const string item_name, string item_type, int percentage,
-    				int pos_x, int pos_y, int width, int height, bool walkable);
+    				int horizontal_position, int vertical_position, int width, int height, bool walkable);
 
     void fill_floor(const string& name);
     void add_walls(const string& name);
@@ -75,7 +75,7 @@ private:
     void add_final_door();
 
 
-    bool place(Object *object, double x, double y);
+    bool place(Object *object, double horizontal_position, double vertical_position);
 };
 
 #endif

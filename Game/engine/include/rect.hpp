@@ -23,11 +23,10 @@ public:
     void set_width(double width);
     void set_height(double height);
 
-    void set_position(double horizontal_position, double vertical_position);
+    void set(double horizontal_position, double vertical_position);
     void set_dimensions(double width, double height);
 
     bool contains(double horizontal_position, double vertical_position) const;
-    Rect intersection(const Rect& r) const;
 
 protected:
     double m_horizontal_position, m_vertical_position;

@@ -25,8 +25,8 @@ Video::Video()
     m_renderer = nullptr;
     m_canvas = nullptr;
     m_camera = nullptr;
-    m_w = 800;
-    m_h = 600;
+    m_width = 800;
+    m_height = 600;
 }
 
 /**
@@ -105,7 +105,7 @@ void Video::init() throw (Exception)
     }
 
     rc = TTF_Init();
-    rc = SDL_CreateWindowAndRenderer(m_w, m_h, 0, &m_window, &m_renderer);
+    rc = SDL_CreateWindowAndRenderer(m_width, m_height, 0, &m_window, &m_renderer);
 
     if (rc or not m_window or not m_renderer)
     {
@@ -116,7 +116,7 @@ void Video::init() throw (Exception)
         //nothing to do.
     }
 
-    m_canvas = new Canvas(m_renderer, m_w, m_h);
+    m_canvas = new Canvas(m_renderer, m_width, m_height);
 
     if (not m_canvas)
     {
@@ -127,7 +127,7 @@ void Video::init() throw (Exception)
         //nothing to do.
     }
 
-    m_camera = new Camera(0, 0, m_w, m_h);
+    m_camera = new Camera(0, 0, m_width, m_height);
 
     if (not m_camera)
     {
@@ -143,27 +143,27 @@ void Video::init() throw (Exception)
  * @brief [brief description]
  * @details [long description]
  * 
- * @param w [description]
- * @param h [description]
+ * @param width [description]
+ * @param height [description]
  * @param scale [description]
  */
-void Video::set_resolution(int w, int h, double scale) throw (Exception)
+void Video::set_resolution(int width, int height, double scale) throw (Exception)
 {
-    if (m_window and w > 0 and h > 0)
+    if (m_window and width > 0 and height > 0)
     {
-        m_w = w;
-        m_h = h;
-        SDL_SetWindowSize(m_window, w, h);
+        m_width = width;
+        m_height = height;
+        SDL_SetWindowSize(m_window, width, height);
 
-        int rc = SDL_RenderSetLogicalSize(m_renderer, m_w, m_h);
+        int rc = SDL_RenderSetLogicalSize(m_renderer, m_width, m_height);
 
         if (rc != 0)
         {
             throw Exception(SDL_GetError());
         }
 
-        m_canvas->set_resolution(w, h);
-        m_camera->set_dimensions(w, h);
+        m_canvas->set_resolution(width, height);
+        m_camera->set_dimensions(width, height);
 
          /* It is an object of the class environment. 
         Is a pointer to the current instance of the game environment.*/
@@ -236,13 +236,13 @@ void Video::set_window_name(const string& name)
  * @details [long description]
  * 
  * @param make_pair [description]
- * @param h [description]
+ * @param height [description]
  * 
  * @return [description]
  */
 pair<int, int> Video::resolution() const
 {
-    return make_pair(m_w, m_h);
+    return make_pair(m_width, m_height);
 }
 
 /**

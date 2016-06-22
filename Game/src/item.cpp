@@ -1,7 +1,7 @@
 #include <iostream>
-#include <core/image.h>
-#include <core/keyboardevent.h>
-#include <core/environment.h>
+#include <core/image.hpp>
+#include <core/keyboardevent.hpp>
+#include <core/environment.hpp>
 #include <cassert>
 
 #include "item.hpp"
@@ -12,13 +12,13 @@
  * Licença: LGPL. Sem copyright.
  */
 
-Item::Item(Object *parent, ObjectID id, const string& path, double x,
- double y, double mass, bool walkable)
+Item::Item(Object *parent, ObjectID id, const string& path, double horizontal_position,
+ double vertical_position, double mass, bool walkable)
     : Image(parent, id, path)
 {
     assert(parent != NULL && "Failed to pick up the instance of Object");
 
-    set_position(x, y);
+    set_position(horizontal_position, vertical_position);
     set_walkable(walkable);
     set_mass(mass);
 }

@@ -3,11 +3,11 @@
 #include <iostream>
 #include <list>
 
-#include <core/font.h>
-#include <core/rect.h>
-#include <core/environment.h>
-#include <core/canvas.h>
-#include <core/image.h>
+#include <core/font.hpp>
+#include <core/rect.hpp>
+#include <core/environment.hpp>
+#include <core/canvas.hpp>
+#include <core/image.hpp>
 
 #include "room.hpp"
 
@@ -114,7 +114,7 @@ void Room::add_items(int stage_id)
         bool walkable;
         bool unique;
         double mass;
-        int x, y;
+        int horizontal_position, vertical_position;
     } ItemInfo;
 
     list<ItemInfo> items;
@@ -214,12 +214,12 @@ void Room::add_items(int stage_id)
             sprintf(path, "%s%s.png", prepath, it->name.c_str());
         }
 
-        double x = it->x;
-        double y = it->y;
+        double horizontal_position = it->horizontal_position;
+        double vertical_position = it->vertical_position;
 
-        Item* item = new Item(this, it->name, path, x, y, it->mass, it->walkable);
+        Item* item = new Item(this, it->name, path, horizontal_position,vertical_position, it->mass, it->walkable);
 
-        if (place(item, x, y))
+        if (place(item, horizontal_position, vertical_position))
             {add_child(item);
         }else
         {
@@ -291,39 +291,39 @@ void Room::check_entry()
 }
 
 void
-Room::draw_id(Room * anterior, Room * sala, int x, int y)
+Room::draw_id(Room * anterior, Room * sala, int horizontal_position, int vertical_position)
 {
     //assert((anterior != NULL) && "Room can't be NULL");
 	Environment *env = Environment::get_instance();
 	shared_ptr <Font> font = env->resources_manager->get_font("res/fonts/TakaoExGothic.ttf");
 	env->canvas->set_font(font);
-	env->canvas->draw(sala->id(),x,y,Color::RED);
+	env->canvas->draw(sala->id(), horizontal_position, vertical_position, Color::RED);
 
 	if(sala->room_in_left && sala->room_in_left != anterior)
 	{
-		env->canvas->draw("-", x - 20, y,Color::RED);
-		draw_id(sala, sala->room_in_left, x - 100, y);
+		env->canvas->draw("-", horizontal_position - 20,vertical_position,Color::RED);
+		draw_id(sala, sala->room_in_left, horizontal_position - 100, vertical_position);
 	}else{
         //do nothing
     }
 	if(sala->room_in_top && sala->room_in_top != anterior)
 	{
-		env->canvas->draw("|", x + 20, y - 30,Color::RED);
-		draw_id(sala, sala->room_in_top, x, y - 60);
+		env->canvas->draw("|", horizontal_position + 20, vertical_position - 30,Color::RED);
+		draw_id(sala, sala->room_in_top, horizontal_position, vertical_position - 60);
 	}else{
         //do nothing
     }
 	if(sala->room_in_right && sala->room_in_right != anterior)
 	{
-		env->canvas->draw("-", x + 80, y,Color::RED);
-		draw_id(sala, sala->room_in_right, x + 100, y);
+		env->canvas->draw("-", horizontal_position + 80,vertical_position,Color::RED);
+		draw_id(sala, sala->room_in_right, horizontal_position + 100, vertical_position);
 	}else{
         //do nothing
     }
 	if(sala->room_in_bottom && sala->room_in_bottom != anterior)
 	{
-		env->canvas->draw("|", x + 20, y + 25,Color::RED);
-		draw_id(sala, sala->room_in_bottom, x, y + 60);
+		env->canvas->draw("|", horizontal_position + 20, vertical_position + 25,Color::RED);
+		draw_id(sala, sala->room_in_bottom, horizontal_position, vertical_position + 60);
 	}else{
         //do nothing
     }
@@ -339,7 +339,7 @@ Room::draw_self()
 }
 
 void
-Room::add_door(string type, char direction, int x, int y)
+Room::add_door(string type, char direction, int horizontal_position, int vertical_position)
 {
     assert((not type.empty()) && "type can't be empty");
     char doorID[128];
@@ -361,7 +361,7 @@ Room::add_door(string type, char direction, int x, int y)
     {
         sprintf(dooroom_in_sprite, "res/tile_sheets/porta%d%c.png", stages, direction);
         sprintf(doorID, "porta%c%s", direction, id().c_str());
-        Item *porta = new Item(this, "door", dooroom_in_sprite, x, y, INFINITE, true);
+        Item *porta = new Item(this, "door", dooroom_in_sprite, horizontal_position,vertical_position, INFINITE, true);
 
         add_child(porta);
     }
@@ -369,7 +369,7 @@ Room::add_door(string type, char direction, int x, int y)
     {
         sprintf(doorID, "stage");
         sprintf(dooroom_in_sprite, "res/door/porta%c.png", direction);
-        Item *porta = new Item(this, "finalDoor", dooroom_in_sprite, x, y, INFINITE, true);
+        Item *porta = new Item(this, "finalDoor", dooroom_in_sprite, horizontal_position,vertical_position, INFINITE, true);
 
         add_child(porta);
     }else{
@@ -383,7 +383,7 @@ Room::add_door(string type, char direction, int x, int y)
         sprintf(buffer, "parede");
         if(strcmp(item->id().c_str(), buffer) == 0)
         {
-            if((item->x() > x - item->width() && item->x() < x + item->width()) && item->y() == y)
+            if((item->horizontal_position() > horizontal_position - item->width() && item->horizontal_position() < horizontal_position + item->width()) && item->vertical_position() == vertical_position)
             {
                 item->set_walkable(true);
             }else{
@@ -398,8 +398,8 @@ Room::add_door(string type, char direction, int x, int y)
 void
 Room::add_final_door()
 {
-    double x = 0 + (room_in_top || room_in_bottom)*600 + (bool)room_in_left*1200;
-    double y = 0 + (room_in_left || room_in_right)*320 + (bool)room_in_top*640;
+    double horizontal_position = 0 + (room_in_top || room_in_bottom)*600 + (bool)room_in_left*1200;
+    double vertical_position = 0 + (room_in_left || room_in_right)*320 + (bool)room_in_top*640;
     char dir;
     if(this->room_in_right)
     {
@@ -420,7 +420,7 @@ Room::add_final_door()
         //do nothing
     }
 
-    add_door("finalDoor", dir, x, y);
+    add_door("finalDoor", dir, horizontal_position, vertical_position);
 }
 
 void
@@ -523,26 +523,26 @@ Room::add_walls(const string& name)
 
             for(int k = 1; k < 8; k++)
             {
-                double x = i % 2;
+                double horizontal_position = i % 2;
                 if(i % 2 != 0){
                 {
-                    x = image->width()*j;
+                    horizontal_position = image->width()*j;
                 }
                 }else
                 {
-                    x = i/2 * (canvas->width() - image->width());
+                    horizontal_position = i/2 * (canvas->width() - image->width());
                 }
-                double y = i % 2;
+                double vertical_position = i % 2;
                 if(i % 2 != 0){
                 {
-                    y = i/2 * (canvas->height() - image->height());
+                    vertical_position = i/2 * (canvas->height() - image->height());
                 }
                 }else
                 {
-                    y = image->height()*k;
+                    vertical_position = image->height()*k;
                 }
 
-                Item *wall = new Item(this, name, path, x, y, INFINITE, false);
+                Item *wall = new Item(this, name, path, horizontal_position,vertical_position, INFINITE, false);
                 add_child(wall);
             }
 
@@ -590,25 +590,25 @@ Room::add_corners(const string& name)
             continue;
         }
 
-        double x = 0;
+        double horizontal_position = 0;
         if(i % 3 != 0){
         {
-            x = canvas->width() - image->width();
+            horizontal_position = canvas->width() - image->width();
         }
         }else{
-             x = 0;
+             horizontal_position = 0;
         }
-        double y = 0;
+        double vertical_position = 0;
         if(i/2 != 0){
         {
-            y = canvas->height() - image->height();
+            vertical_position = canvas->height() - image->height();
         }
         }else{
-            y = 0;
+            vertical_position = 0;
         }
         delete image;
 
-	    Item *corner = new Item(this, name, path, x, y, INFINITE, false);
+	    Item *corner = new Item(this, name, path, horizontal_position,vertical_position, INFINITE, false);
 	    add_child(corner);
     }
 }
@@ -656,14 +656,14 @@ Room::add_ghost(const string& name)
 }
 
 bool
-Room::place(Object *object, double x, double y)
+Room::place(Object *object, double horizontal_position, double vertical_position)
 {
     assert((object != NULL) && "Object can't be NULL");
     int width = center_area.width();
     int height = center_area.height();
 
     int tries = 0;
-    bool ok, randomize = x < 0 and y < 0;
+    bool ok, randomize = horizontal_position < 0 and vertical_position < 0;
 
     do {
         ok = true;
@@ -671,18 +671,18 @@ Room::place(Object *object, double x, double y)
 
         if (randomize)
         {
-            x = (rand() % width) + center_area.x();
-            y = (rand() % height) + center_area.y();
+            horizontal_position = (rand() % width) + center_area.horizontal_position();
+            vertical_position = (rand() % height) + center_area.vertical_position();
         }
 
-        if (x + object->width() > width + center_area.x())
+        if (horizontal_position + object->width() > width + center_area.horizontal_position())
         {
-            x = width + center_area.x() - object->width();
+            horizontal_position = width + center_area.horizontal_position() - object->width();
         }
 
-        if (y + object->height() > height + center_area.y())
+        if (vertical_position + object->height() > height + center_area.vertical_position())
         {
-            y = height + center_area.y() - object->height();
+            vertical_position = height + center_area.vertical_position() - object->height();
         }
 
         for (auto obj : children())
@@ -692,7 +692,7 @@ Room::place(Object *object, double x, double y)
                 continue;
             }
 
-            Rect a { x, y, object->width(), object->height() };
+            Rect a { horizontal_position,vertical_position, object->width(), object->height() };
             Rect b = obj->bounding_box();
             Rect c = a.intersection(b);
 
@@ -710,7 +710,7 @@ Room::place(Object *object, double x, double y)
 
     } while (not ok and randomize);
 
-    object->set_position(x, y);
+    object->set_position(horizontal_position, vertical_position);
 
     return ok;
 }
@@ -777,27 +777,27 @@ Room::update_self(unsigned long)
                     {
                         if(guard->m_old_type == "hard")
                         {
-                            if(abs(a.x() - b.x()) > abs(a.y() - b.y()))
+                            if(abs(a.horizontal_position() - b.horizontal_position()) > abs(a.vertical_position() - b.vertical_position()))
                             {
-                                if(a.x() > b.x())
+                                if(a.horizontal_position() > b.horizontal_position())
                                 {
-                                    npc->set_x(a.x() - b.width() + 1);
+                                    npc->set_horizontal_position(a.horizontal_position() - b.width() + 1);
                                 }
-                                else if(a.x() < b.x())
+                                else if(a.horizontal_position() < b.horizontal_position())
                                 {
-                                    npc->set_x(a.x() + a.width() - 1);
+                                    npc->set_horizontal_position(a.horizontal_position() + a.width() - 1);
                                 }else{
                                     //do nothing
                                 }
                             }else
                             {
-                                if(a.y() > b.y())
+                                if(a.vertical_position() > b.vertical_position())
                                 {
-                                    npc->set_y(a.y() - b.height() + 1);
+                                    npc->set_vertical_position(a.vertical_position() - b.height() + 1);
                                 }
-                                else if(a.y() < b.y())
+                                else if(a.vertical_position() < b.vertical_position())
                                 {
-                                    npc->set_y(a.y() + a.height() - 1);
+                                    npc->set_vertical_position(a.vertical_position() + a.height() - 1);
                                 }else{
                                     //do nothing
                                 }
@@ -805,28 +805,28 @@ Room::update_self(unsigned long)
                         }
                         else
                         {
-                            if(abs(a.x() - b.x()) > abs(a.y() - b.y()))
+                            if(abs(a.horizontal_position() - b.horizontal_position()) > abs(a.vertical_position() - b.vertical_position()))
                             {
-                                if(a.x() < b.x())
+                                if(a.horizontal_position() < b.horizontal_position())
                                 {
-                                    npc2->set_x(b.x() - a.width() + 1);
+                                    npc2->set_horizontal_position(b.horizontal_position() - a.width() + 1);
                                 }
-                                else if(a.x() > b.x())
+                                else if(a.horizontal_position() > b.horizontal_position())
                                 {
-                                    npc2->set_x(b.x() + b.width() - 1);
+                                    npc2->set_horizontal_position(b.horizontal_position() + b.width() - 1);
                                 }else{
                                     //do nothing
                                 }
                             }
                             else
                             {
-                                if(a.y() < b.y())
+                                if(a.vertical_position() < b.vertical_position())
                                 {
-                                    npc2->set_y(b.y() - a.height() + 1);
+                                    npc2->set_vertical_position(b.vertical_position() - a.height() + 1);
                                 }
-                                else if(a.y() > b.y())
+                                else if(a.vertical_position() > b.vertical_position())
                                 {
-                                    npc2->set_y(b.y() + b.height() - 1);
+                                    npc2->set_vertical_position(b.vertical_position() + b.height() - 1);
                                 }else{
                                     //do nothing
                                 }
@@ -860,10 +860,10 @@ Room::update_self(unsigned long)
                     path = "res/sprites/death_guard2.png";
                 }
                 Item *body = new Item(this, "body", path, 0, 0, 9999, true);
-                place(body, npc->x(), npc->y());
+                place(body, npc->horizontal_position(), npc->vertical_position());
                 remove_child(npc);
                 add_child(body);
-                place(ghost, npc->x(), npc->y());
+                place(ghost, npc->horizontal_position(), npc->vertical_position());
                 add_child(ghost);
 
                 notify(guardDeathID, "guard");

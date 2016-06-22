@@ -26,7 +26,7 @@ public:
     void draw_self()
     {
         Environment *env = Environment::get_instance();
-        env->canvas->draw(m_texture.get(), m_parent->x(), m_parent->y());
+        env->canvas->draw(m_texture.get(), m_parent->horizontal_position(), m_parent->vertical_position());
     }
 
 private:

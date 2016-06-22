@@ -18,14 +18,14 @@ using std::unique_ptr;
 class Animation
 {
 public:
-    Animation(const string& image, double x, double y, double width, double height,
+    Animation(const string& image, double horizontal_position, double vertical_position, double width, double height,
         int frames, unsigned long speed_in_ms, bool loop = false);
     ~Animation();
 
     bool is_done() const;
 
     void update(unsigned long elapsed);
-    void draw(double x, double y);
+    void draw(double horizontal_position, double vertical_position);
 
     double width() const;
     double height() const;

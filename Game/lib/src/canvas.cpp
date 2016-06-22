@@ -189,10 +189,10 @@ void Canvas::draw(const Point& point) const
     Environment *env = Environment::get_instance();
     assert((env != NULL) && "env to pick up the instance of environment");
 
-    int x = point.x() - env->camera->x();
-    int y = point.y() - env->camera->y();
+    int horizontal_position = point.horizontal_position() - env->camera->horizontal_position();
+    int vertical_position = point.vertical_position() - env->camera->vertical_position();
 
-    SDL_RenderDrawPoint(m_renderer, x, y);
+    SDL_RenderDrawPoint(m_renderer, horizontal_position, vertical_position);
 }
 
 /**
@@ -224,12 +224,12 @@ void Canvas::draw(const Line& line) const
     Environment *env = Environment::get_instance();
     assert((env != NULL) && "env to pick up the instance of environment");
 
-    int xa = line.a().x() - env->camera->x();
-    int ya = line.a().y() - env->camera->y();
-    int xb = line.b().x() - env->camera->x();
-    int yb = line.b().y() - env->camera->y();
+    int horizontal_position_a = line.a().horizontal_position() - env->camera->horizontal_position();
+    int vertical_position_a = line.a().vertical_position() - env->camera->vertical_position();
+    int horizontal_position_b = line.b().horizontal_position() - env->camera->horizontal_position();
+    int vertical_position_b = line.b().vertical_position() - env->camera->vertical_position();
 
-    SDL_RenderDrawLine(m_renderer, xa, ya, xb, yb);
+    SDL_RenderDrawLine(m_renderer, horizontal_position_a, vertical_position_a, horizontal_position_b, vertical_position_b);
 }
 
 /**
@@ -261,12 +261,12 @@ void Canvas::draw(const Rect& rect) const
     Environment *env = Environment::get_instance();
     assert((env != NULL) && "env to pick up the instance of environment");
 
-    int x = rect.x() - env->camera->x();
-    int y = rect.y() - env->camera->y();
+    int horizontal_position = rect.horizontal_position() - env->camera->horizontal_position();
+    int vertical_position = rect.vertical_position() - env->camera->vertical_position();
 
     SDL_Rect rectangle;
-    rectangle.x = x;
-    rectangle.y = y;
+    rectangle.x = horizontal_position;
+    rectangle.y = vertical_position;
     rectangle.w = rect.width();
     rectangle.h = rect.height();
 
@@ -303,8 +303,8 @@ void Canvas::fill(const Rect& rect) const
     assert((env != NULL) && "env to pick up the instance of environment");
 
     SDL_Rect rectangle;
-    rectangle.x = rect.x() - env->camera->x();
-    rectangle.y = rect.y() - env->camera->y();
+    rectangle.x = rect.horizontal_position() - env->camera->horizontal_position();
+    rectangle.y = rect.vertical_position() - env->camera->vertical_position();
     rectangle.w = rect.width();
     rectangle.h = rect.height();
 
@@ -340,8 +340,8 @@ void Canvas::draw(const Circle& circle) const
     Environment *env = Environment::get_instance();
     assert((env != NULL) && "object to pick up the instance of environment");
 
-    int cx = circle.center().x() - env->camera->x();
-    int cy = circle.center().y() - env->camera->y();
+    int circle_horizontal_position = circle.center().horizontal_position() - env->camera->horizontal_position();
+    int circle_vertical_position = circle.center().vertical_position() - env->camera->vertical_position();
 
     int radius = circle.radius();
 
@@ -351,7 +351,7 @@ void Canvas::draw(const Circle& circle) const
 
     do
     {
-        draw_circle_points(cx, cy, i, j);
+        draw_circle_points(circle_horizontal_position, circle_vertical_position, i, j);
 
         if (error < 0)
         {
@@ -379,8 +379,8 @@ void Canvas::fill(const Circle& circle) const
     Environment *env = Environment::get_instance();
     assert((env != NULL) && "env to pick up the instance of environment");
 
-    int cx = circle.center().x() - env->camera->x();
-    int cy = circle.center().y() - env->camera->y();
+    int circle_horizontal_position = circle.center().horizontal_position() - env->camera->horizontal_position();
+    int circle_vertical_position = circle.center().vertical_position() - env->camera->vertical_position();
     int radius = circle.radius();
 
     int error = 3 - (radius << 1);
@@ -388,7 +388,7 @@ void Canvas::fill(const Circle& circle) const
 
     do
     {
-        fill_circle_points(cx, cy, i, j);
+        fill_circle_points(circle_horizontal_position, circle_vertical_position, i, j);
 
         if (error < 0)
         {
@@ -436,17 +436,23 @@ void Canvas::draw(const Circle& circle, const Color& color)
  * @brief [brief description]
  * @details [long description]
  * 
- * @param cx [description]
- * @param cy [description]
- * @param x [description]
- * @param y [description]
+ * @param circle_horizontal_position [description]
+ * @param circle_vertical_position [description]
+ * @param horizontal_position [description]
+ * @param vertical_position [description]
  */
-void Canvas::draw_circle_points(int cx, int cy, int x, int y) const
+void Canvas::draw_circle_points(int circle_horizontal_position, int circle_vertical_position, int horizontal_position, int vertical_position) const
 {
     SDL_Point points[]
     {
-        {cx + x, cy + y}, {cx + x, cy - y}, {cx + y, cy + x}, {cx + y, cy - x},
-        {cx - x, cy + y}, {cx - x, cy - y}, {cx - y, cy + x}, {cx - y, cy - x}
+        {circle_horizontal_position + horizontal_position, circle_vertical_position + vertical_position},
+         {circle_horizontal_position + horizontal_position, circle_vertical_position - vertical_position}, 
+         {circle_horizontal_position + vertical_position, circle_vertical_position + horizontal_position}, 
+         {circle_horizontal_position + vertical_position, circle_vertical_position - horizontal_position},
+        {circle_horizontal_position - horizontal_position, circle_vertical_position + vertical_position}, 
+        {circle_horizontal_position - horizontal_position, circle_vertical_position - vertical_position}, 
+        {circle_horizontal_position - vertical_position, circle_vertical_position + horizontal_position}, 
+        {circle_horizontal_position - vertical_position, circle_vertical_position - horizontal_position}
     };
 
     SDL_RenderDrawPoints(m_renderer, points, 8);
@@ -456,17 +462,35 @@ void Canvas::draw_circle_points(int cx, int cy, int x, int y) const
  * @brief [brief description]
  * @details [long description]
  * 
- * @param cx [description]
- * @param cy [description]
- * @param x [description]
- * @param y [description]
+ * @param circle_horizontal_position [description]
+ * @param circle_vertical_position [description]
+ * @param horizontal_position [description]
+ * @param vertical_position [description]
  */
-void Canvas::fill_circle_points(int cx, int cy, int x, int y) const
+void Canvas::fill_circle_points(int circle_horizontal_position, 
+                                            int circle_vertical_position, 
+                                            int horizontal_position, 
+                                            int vertical_position) const
 {
-    draw(Line(Point(cx + x, cy + y), Point(cx + x, cy - y)));
-    draw(Line(Point(cx - x, cy + y), Point(cx - x, cy - y)));
-    draw(Line(Point(cx + y, cy + x), Point(cx + y, cy - x)));
-    draw(Line(Point(cx - y, cy + x), Point(cx - y, cy - x)));
+    draw(Line(Point(circle_horizontal_position + horizontal_position, 
+                            circle_vertical_position + vertical_position), 
+                            Point(circle_horizontal_position + horizontal_position, 
+                                circle_vertical_position - vertical_position)));
+
+    draw(Line(Point(circle_horizontal_position - horizontal_position, 
+                            circle_vertical_position + vertical_position), 
+                            Point(circle_horizontal_position - horizontal_position, 
+                                circle_vertical_position - vertical_position)));
+
+    draw(Line(Point(circle_horizontal_position + vertical_position, 
+                            circle_vertical_position + horizontal_position), 
+                            Point(circle_horizontal_position + vertical_position, 
+                                circle_vertical_position - horizontal_position)));
+
+    draw(Line(Point(circle_horizontal_position - vertical_position, 
+                            circle_vertical_position + horizontal_position), 
+                            Point(circle_horizontal_position - vertical_position, 
+                                circle_vertical_position - horizontal_position)));
 }
 
 /**
@@ -474,10 +498,10 @@ void Canvas::fill_circle_points(int cx, int cy, int x, int y) const
  * @details [long description]
  * 
  * @param texture [description]
- * @param x [description]
- * @param y [description]
+ * @param horizontal_position [description]
+ * @param vertical_position [description]
  */
-void Canvas::draw(const Texture *texture, double x, double y) const
+void Canvas::draw(const Texture *texture, double horizontal_position, double vertical_position) const
 {
     if (not texture)
     {
@@ -486,7 +510,7 @@ void Canvas::draw(const Texture *texture, double x, double y) const
 
     Rect clip { 0, 0, (double) texture->size().first, (double) texture->size().second };
 
-    draw(texture, clip, x, y);
+    draw(texture, clip, horizontal_position, vertical_position);
 }
 
 /**
@@ -495,47 +519,47 @@ void Canvas::draw(const Texture *texture, double x, double y) const
  * 
  * @param texture [description]
  * @param clip [description]
- * @param x [description]
- * @param y [description]
+ * @param horizontal_position [description]
+ * @param vertical_position [description]
  * @param width [description]
  * @param height [description]
  */
-void Canvas::draw(const Texture *texture, Rect clip, double x, double y, double width, double height) const
+void Canvas::draw(const Texture *texture, Rect clip, double horizontal_position, double vertical_position, double width, double height) const
 {
     //It is an object of the class environment. Is a pointer to the current instance of the game environment.
     Environment *env = Environment::get_instance();
     assert((env != NULL) && "env to pick up the instance of environment");
 
 
-    int orig_x = (int) clip.x();
-    int orig_y = (int) clip.y();
-    int orig_width = (int) clip.width();
-    int orig_height = (int) clip.height();
+    int original_horizontal_position = (int) clip.horizontal_position();
+    int original_vertical_position = (int) clip.vertical_position();
+    int original_width = (int) clip.width();
+    int original_height = (int) clip.height();
 
-    int dest_x = (int) x - env->camera->x();
-    int dest_y = (int) y - env->camera->y();
+    int destination_horizontal_position = (int) horizontal_position - env->camera->horizontal_position();
+    int destination_vertical_position = (int) vertical_position - env->camera->vertical_position();
 
-    int dest_width = ((int) width );
+    int destination_width = ((int) width );
 
     if (width==0)
     {
-        dest_width = ((int) texture->width());
+        destination_width = ((int) texture->width());
     }else
     {
         // Nothing to do.
     }
 
-    int dest_height = ((int) height );
+    int destination_height = ((int) height );
     if (height==0)
     {
-        dest_height = ((int) texture->height());
+        destination_height = ((int) texture->height());
     }else
     {
         // Nothing to do.
     }
 
-    SDL_Rect orig { orig_x, orig_y, orig_width, orig_height };
-    SDL_Rect dest { dest_x, dest_y, dest_width, dest_height };
+    SDL_Rect orig { original_horizontal_position, original_vertical_position, original_width, original_height };
+    SDL_Rect dest { destination_horizontal_position, destination_vertical_position, destination_width, destination_height };
 
     SDL_Texture *image = static_cast<SDL_Texture *>(texture->data());
     assert((image != NULL) && "image to pick up the instance of environment");
@@ -553,11 +577,11 @@ SDL_Renderer * Canvas::renderer() const
  * @details [long description]
  * 
  * @param text [description]
- * @param x [description]
- * @param y [description]
+ * @param horizontal_position [description]
+ * @param vertical_position [description]
  * @param color [description]
  */
-void Canvas::draw(const string& text, double x, double y, const Color& color) const
+void Canvas::draw(const string& text, double horizontal_position, double vertical_position, const Color& color) const
 {
     if (not m_font.get())
     {
@@ -591,10 +615,10 @@ void Canvas::draw(const string& text, double x, double y, const Color& color) co
     Environment *env = Environment::get_instance();
     assert((env != NULL) && "env to pick up the instance of environment");
 
-    int dest_x = (int) x - env->camera->x();
-    int dest_y = (int) y - env->camera->y();
+    int destination_x = (int) horizontal_position - env->camera->horizontal_position();
+    int destination_y = (int) vertical_position - env->camera->vertical_position();
 
-    SDL_Rect dest { dest_x, dest_y, width, height };
+    SDL_Rect dest { destination_x, destination_y, width, height };
 
     SDL_RenderCopy(m_renderer, texture, NULL, &dest);
 
@@ -661,6 +685,6 @@ SDL_Surface * Canvas::bitmap() const
  */
 void Canvas::draw(const Bitmap *bitmap, double, double) const
 {
-    SDL_UpdateTexture(m_texture, NULL, bitmap->pixels(), m_width * sizeof(Uint32));
-    SDL_RenderCopy(m_renderer, m_texture, NULL, NULL);
+    SDL_UpdateTexture(this->m_texture, NULL, bitmap->pixels(), this->m_width * sizeof(Uint32));
+    SDL_RenderCopy(this->m_renderer, this->m_texture, NULL, NULL);
 }

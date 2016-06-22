@@ -2,7 +2,7 @@
 #define MAP_H
 
 
-#include <core/object.h>
+#include <core/object.hpp>
 #include <cstdlib>
 #include <iostream>
 #include <ctime>

@@ -16,19 +16,19 @@ public:
     typedef enum {PRESSED, RELEASED} State;
     typedef enum { LEFT, RIGHT, MIDDLE } Button;
 
-    MouseButtonEvent(State state, Button button, double x, double y);
+    MouseButtonEvent(State state, Button button, double horizontal_position, double vertical_position);
 
     State state() const;
     Button button() const;
-    double x() const;
-    double y() const;
+    double horizontal_position() const;
+    double vertical_position() const;
 
     static MouseButtonEvent from_SDL(const SDL_Event& event);
 
 private:
     State m_state;
     Button m_button;
-    double m_x, m_y;
+    double m_horizontal_position, m_vertical_position;
 };
 
 #endif
