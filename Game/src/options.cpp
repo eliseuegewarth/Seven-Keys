@@ -15,12 +15,12 @@ Options::Options() : Level("options")// Class that represents the option of the 
 
     set_dimensions(width, height);
 
-    Button *set_fullscreen = new Button(this, "fullscreen", "res/interface/menuOpcao/modoJanela.png",
-        "res/interface/menuOpcao/SmodoJanela.png");// Puts the screen in fullscreen.
+    Button *set_fullscreen = new Button(this, "fullscreen", "res/interface/menuOpcao/telaCheia.png",
+        "res/interface/menuOpcao/StelaCheia.png");// Puts the screen in fullscreen.
     set_fullscreen->align_to(this, Object::RIGHT, Object::MIDDLE);
 
-    Button *windowmode = new Button(this, "windowmode", "res/interface/menuOpcao/comoJogar.png",
-        "res/interface/menuOpcao/ScomoJogar.png");// Puts the screen in windowed mode.
+    Button *windowmode = new Button(this, "windowmode", "res/interface/menuOpcao/modoJanela.png",
+        "res/interface/menuOpcao/SmodoJanela.png");// Puts the screen in windowed mode.
     windowmode->align_to(this, Object::RIGHT, Object::NONE);
     windowmode->set_y(set_fullscreen->y() + set_fullscreen->height() + 20);
 
