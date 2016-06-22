@@ -30,7 +30,7 @@ public:
     void set_direction(Direction direction);
 
     const pair<double, double>& moviment() const;
-    void set_moviment(double xaxis, double yaxis);
+    void set_moviment(double horizontal_axis, double vertical_axis);
 
     static ActionID hitExitDoorID;
     static ActionID jumpNextLevelID;
@@ -41,7 +41,7 @@ public:
     static ActionID changeRoomID;
     static ActionID getHitID;
 
-    void set_current(string room, int x, int y);
+    void set_current(string room, int horizontal_position, int vertical_position);
 
     int life();
     double health();

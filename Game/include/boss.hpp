@@ -25,8 +25,8 @@ public:
     ~Boss();
 
     Direction direction();
-    void get_playerx(const unsigned int pos_x);
-    void get_playery(const unsigned int pos_y);
+    void get_player_horizontal_position(const unsigned int horizontal_position);
+    void get_player_vertical_position(const unsigned int vertical_position);
     void set_direction(const Direction direction);
     void update_vision();
     void walk();

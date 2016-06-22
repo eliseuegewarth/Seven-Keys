@@ -20,15 +20,15 @@ public:
 	#define GHOST_GUARD_SPEED_IN_MILISECONDS 60
 	#define GHOST_GUARD_SPEED_IN_MILISECONDS_HARD 120
 
-    Ghost(Object *parent, ObjectID id, const double x, const double y,
+    Ghost(Object *parent, ObjectID id, const double horizontal_position, const double vertical_position,
 		 const unsigned int mass_of_ghost_guard,
 		 const bool walkable, string type,
 		 const unsigned int initial_movement_direction);
     ~Ghost();
 
     Direction direction();
-    void get_playerx(const unsigned int player_horizontal_position);
-    void get_playery(const unsigned int player_vertical_position);
+    void get_player_horizontal_position(const unsigned int player_horizontal_position);
+    void get_player_vertical_position(const unsigned int player_vertical_position);
     void set_direction(Direction direction_of_movement);
     void update_vision();
     void walk();

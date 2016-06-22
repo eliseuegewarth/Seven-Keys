@@ -1,7 +1,7 @@
 #ifndef PAUSE_H
 #define PAUSE_H
 
-#include <core/level.h>
+#include <core/level.hpp>
 
 class Image;
 
