@@ -7,8 +7,8 @@
 #ifndef STAGE_H
 #define STAGE_H
 
-#include <core/level.hpp>
-#include <core/rect.hpp>
+#include "core/level.hpp"
+#include "core/rect.hpp"
 
 #include "map.hpp"
 #include "room.hpp"

@@ -1,7 +1,7 @@
 #include <list>
 #include <utility>
-#include <ijengine/core/environment.hpp>
-#include <ijengine/core/rect.hpp>
+#include "core/environment.hpp"
+#include "core/rect.hpp"
 #include <map>
 
 #include <cassert>

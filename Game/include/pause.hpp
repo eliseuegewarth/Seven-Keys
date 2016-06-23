@@ -1,12 +1,12 @@
 #ifndef PAUSE_H
 #define PAUSE_H
 
-#include <core/level.hpp>
+#include "core/level.hpp"
 
 class Image;
 
 // Class that represents the pause option of the main menu of the game.
-class Pause : public Level 
+class Pause : public Level
 {
 public:
     Pause();

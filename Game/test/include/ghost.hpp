@@ -4,7 +4,7 @@
 #ifndef GHOST_H
 #define GHOST_H
 
-#include "core/sprite.h"
+#include "core/sprite.hpp"
 #include "room.hpp"
 
 using namespace std;

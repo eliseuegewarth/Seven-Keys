@@ -10,7 +10,7 @@
 #include "core/environment.hpp"
 #include "core/keyboardevent.hpp"
 
-#include <core/animation.hpp>
+#include "core/animation.hpp"
 
 #include <cassert>
 #include <iostream>

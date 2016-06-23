@@ -3,11 +3,11 @@
 #include <iostream>
 #include <list>
 
-#include <core/font.hpp>
-#include <core/rect.hpp>
-#include <core/environment.hpp>
-#include <core/canvas.hpp>
-#include <core/image.hpp>
+#include "core/font.hpp"
+#include "core/rect.hpp"
+#include "core/environment.hpp"
+#include "core/canvas.hpp"
+#include "core/image.hpp"
 
 #include "room.hpp"
 

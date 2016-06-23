@@ -1,8 +1,8 @@
 #ifndef SIGHT_H
 #define SIGHT_H
 
-#include <core/object.hpp>
-#include <core/rect.hpp>
+#include "core/object.hpp"
+#include "core/rect.hpp"
 #include <string>
 
 using namespace std;

@@ -1,8 +1,8 @@
 #include "pause.hpp"
 
-#include <ijengine/util/button.hpp>
-#include <core/font.hpp>
-#include <core/environment.hpp>
+#include "util/button.hpp"
+#include "core/font.hpp"
+#include "core/environment.hpp"
 
 #include <iostream>
 #include <cassert>
@@ -16,7 +16,7 @@ using namespace std;
 Pause::Pause()
     : Level("pause")
 {
-    /* It is an object of the class environment. 
+    /* It is an object of the class environment.
     Is a pointer to the current instance of the game environment.*/
     Environment *env = Environment::get_instance();
     assert((env != NULL) && "Failed to pick up the instance of environment");
@@ -30,7 +30,7 @@ Pause::Pause()
     set_dimensions(width, height);
 
     // Directs the environment where the game was paused.
-    Button *backGame = new Button(this, "backGame", 
+    Button *backGame = new Button(this, "backGame",
                                   "res/EN-US/interface/menuPausa/voltarJogo.png",
                                   "res/EN-US/interface/menuPausa/SvoltarJogo.png");
 
@@ -40,7 +40,7 @@ Pause::Pause()
     backGame->set_vertical_position(200);
 
     // Directs to the main menu of the game.
-    Button *backMenu = new Button(this, "backMenu", 
+    Button *backMenu = new Button(this, "backMenu",
                                   "res/EN-US/interface/menuExtras/voltar.png",
                                   "res/EN-US/interface/menuExtras/Svoltar.png");
 
@@ -50,7 +50,7 @@ Pause::Pause()
     backMenu->set_vertical_position(backGame->vertical_position() + backGame->height()+20);
 
     // Closes the game.
-    Button *exit = new Button(this, "exit", 
+    Button *exit = new Button(this, "exit",
                               "res/EN-US/interface/menuExtras/sair.png",
                               "res/EN-US/interface/menuExtras/Ssair.png");
 
@@ -78,7 +78,7 @@ Pause::~Pause()
  */
 void Pause::draw_self()
 {
-    /* It is an object of the class environment. 
+    /* It is an object of the class environment.
     Is a pointer to the current instance of the game environment.*/
     Environment *env = Environment::get_instance();
     assert((env != NULL) && "Filed to pick up the instance of environment");
@@ -91,17 +91,17 @@ void Pause::draw_self()
 
 /**
  * @brief [Let the dynamic buttons]
- * 
+ *
  * @return [returns the status of the button, if it was clicked or not]
  */
- 
+
 bool Pause::on_message(Object *object, MessageID id, Parameters)
 {
     assert((object != NULL) && "Object needs to be different from NULL");
     assert((not id.empty()) && "id needs to be different drom the empty");
 
     bool status_button;
-    
+
     if (id != Button::clickedID)
     {
         status_button = false;
@@ -119,7 +119,7 @@ bool Pause::on_message(Object *object, MessageID id, Parameters)
     if (button->id() == "backGame")
     {
         status_button = false;
-    } 
+    }
 
     else if (button->id() == "backMenu")
     {

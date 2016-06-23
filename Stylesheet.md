@@ -83,11 +83,11 @@ guard.hpp
 ```c++
 #include "boss.hpp"
 
-#include "core/level.h"
-#include "core/environment.h"
-#include "core/keyboardevent.h"
+#include "core/level.hpp"
+#include "core/environment.hpp"
+#include "core/keyboardevent.hpp"
 
-#include <core/animation.h>
+#include "core/animation.hpp"
 
 #include <iostream>
 ```

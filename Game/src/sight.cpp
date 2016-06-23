@@ -1,7 +1,7 @@
 #include <cassert>
 #include <iostream>
-#include <core/animation.hpp>
-#include <core/environment.hpp>
+#include "core/animation.hpp"
+#include "core/environment.hpp"
 
 #include "sight.hpp"
 /**
