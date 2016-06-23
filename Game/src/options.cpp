@@ -1,9 +1,9 @@
 #include "options.hpp"
 
-#include <ijengine/util/button.hpp>
-#include <core/font.hpp>
-#include <core/environment.hpp>
-#include <core/mousemotionevent.hpp>
+#include "util/button.hpp"
+#include "core/font.hpp"
+#include "core/environment.hpp"
+#include "core/mousemotionevent.hpp"
 #include <iostream>
 using namespace std;
 

@@ -1,9 +1,9 @@
 #ifndef SQUARE_H
 #define SQUARE_H
 
-#include <core/object.hpp>
-#include <core/keyboardevent.hpp>
-#include <core/listener.hpp>
+#include "core/object.hpp"
+#include "core/keyboardevent.hpp"
+#include "core/listener.hpp"
 
 class Square : public Object, Listener
 {

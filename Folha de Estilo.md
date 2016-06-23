@@ -82,11 +82,11 @@ guard.hpp
 ```c++
 #include "boss.hpp"
 
-#include "core/level.h"
-#include "core/environment.h"
-#include "core/keyboardevent.h"
+#include "core/level.hpp"
+#include "core/environment.hpp"
+#include "core/keyboardevent.hpp"
 
-#include <core/animation.h>
+#include "core/animation.hpp"
 
 #include <iostream>
 ```
@@ -309,7 +309,7 @@ m_player->set_stamina(m_player->stamina() + 0.05);
 ```
 ### 5.4 Chaves
 
-Deve-se usar chaves sempre que possível, mesmo em situações em que a linguagem permita que não seja usada. 
+Deve-se usar chaves sempre que possível, mesmo em situações em que a linguagem permita que não seja usada.
 As chaves devem ser abertas uma linha abaixo do termino da expressão ou declaração e deve ser fechada uma linha abaixo do bloco de instruções:
 
 ```c++

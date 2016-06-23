@@ -1,7 +1,7 @@
 #include <iostream>
-#include <core/image.hpp>
-#include <core/keyboardevent.hpp>
-#include <core/environment.hpp>
+#include "core/image.hpp"
+#include "core/keyboardevent.hpp"
+#include "core/environment.hpp"
 
 #include "weapon.hpp"
 

@@ -2,7 +2,7 @@
 #define MAP_H
 
 
-#include <core/object.h>
+#include "core/object.hpp"
 #include <cstdlib>
 #include <iostream>
 #include <ctime>
@@ -35,7 +35,7 @@ public:
 	void set_current(Room *room);
 	void GenerateMap(int, int);
 	void remove_item(Object* );
-	
+
     const list<Object *>& items() ;
 
     Boss * m_boss;
@@ -44,7 +44,7 @@ private:
 	Room * last_room;
 
 	double last_summon;
-	
+
     bool **matriz;
 	void CreateRoom(Room *, int*, int, int, int, int);
 	bool on_message(Object *object, MessageID id, Parameters p);

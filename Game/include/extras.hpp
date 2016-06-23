@@ -6,7 +6,7 @@
  */#ifndef EXTRAS_H
 #define EXTRAS_H
 
-#include <core/level.hpp>
+#include "core/level.hpp"
 
 class Image;
 
@@ -16,7 +16,7 @@ public:
     Extras();
     virtual ~Extras();
 
-    bool on_message(Object *sender, MessageID id, Parameters parameters); 
+    bool on_message(Object *sender, MessageID id, Parameters parameters);
 
 private:
     void draw_self();

@@ -6,14 +6,14 @@
 #ifndef TEST_H
 #define TEST_H
 
-#include <core/game.hpp>
+#include "core/game.hpp"
 #include "player.hpp"
 
 
 class SevenKeys : public Game
 {
 public:
-    
+
     /*static namespace screen_type
     {
       const string& FONE = "fone";
@@ -40,11 +40,11 @@ private:
 
     //
     #define NEW_STRING_MAX_SIZE 256
-    
+
     #define MUSIC_PATH_STRING_MAX_SIZE 256
-    
+
     #define PATH_STRING_MAX_SIZE 256
-    
+
     #define STAGE_NUMBER_ARRAY_SIZE 10
 
 

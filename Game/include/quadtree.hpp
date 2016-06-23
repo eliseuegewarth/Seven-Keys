@@ -1,9 +1,9 @@
 #ifndef QUADTREE_H
 #define QUADTREE_H
 
-#include <core/rect.hpp>
+#include "core/rect.hpp"
 #include <vector>
-#include <core/object.hpp>
+#include "core/object.hpp"
 #include <array>
 
 using namespace std;

@@ -1,7 +1,7 @@
 #include "credits.hpp"
-#include <ijengine/util/button.hpp>
-#include <core/font.hpp>
-#include <core/environment.hpp>
+#include "util/button.hpp"
+#include "core/font.hpp"
+#include "core/environment.hpp"
 #include <cassert>
 #include <iostream>
 
