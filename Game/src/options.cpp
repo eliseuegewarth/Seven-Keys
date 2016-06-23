@@ -1,9 +1,9 @@
 #include "options.hpp"
 
-#include <ijengine/util/button.h>
-#include <core/font.h>
-#include <core/environment.h>
-#include <core/mousemotionevent.h>
+#include <ijengine/util/button.hpp>
+#include <core/font.hpp>
+#include <core/environment.hpp>
+#include <core/mousemotionevent.hpp>
 #include <iostream>
 using namespace std;
 
@@ -22,12 +22,12 @@ Options::Options() : Level("options")// Class that represents the option of the 
     Button *windowmode = new Button(this, "windowmode", "res/EN-US/interface/menuOpcao/modoJanela.png",
         "res/EN-US/interface/menuOpcao/SmodoJanela.png");// Puts the screen in windowed mode.
     windowmode->align_to(this, Object::RIGHT, Object::NONE);
-    windowmode->set_y(set_fullscreen->y() + set_fullscreen->height() + 20);
+    windowmode->set_vertical_position(set_fullscreen->vertical_position() + set_fullscreen->height() + 20);
 
     Button *back = new Button(this, "back", "res/EN-US/interface/menuOpcao/voltar.png",
         "res/EN-US/interface/menuOpcao/Svoltar.png");// Directs to the main menu of the game.
     back->align_to(this, Object::RIGHT, Object::NONE);
-    back->set_y(windowmode->y() + windowmode->height() + 20);
+    back->set_vertical_position(windowmode->vertical_position() + windowmode->height() + 20);
 
     set_fullscreen->add_observer(this);
     windowmode->add_observer(this);

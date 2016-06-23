@@ -58,7 +58,7 @@ class Text::Impl
             }
 
             Environment *env = Environment::get_instance();
-            env->canvas->draw(m_texture, m_parent->x(), m_parent->y());
+            env->canvas->draw(m_texture, m_parent->horizontal_position(), m_parent->vertical_position());
         }
 
     private:

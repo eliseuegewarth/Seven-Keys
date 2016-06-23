@@ -10,7 +10,7 @@
 #include "core/environment.hpp"
 #include "core/keyboardevent.hpp"
 
-#include <core/animation.h>
+#include <core/animation.hpp>
 
 #include <cassert>
 #include <iostream>
@@ -22,8 +22,8 @@ using namespace std;
  *
  * @param parent [The parent is the map Object that will contains the boss.]
  * @param id [Identifier of object type. in case of this class, aways have to be "boss".]
- * @param boss_horizontal_position [The position in horizontal(x) axis where boss will be placed. ]
- * @param boss_vertical_position [The position in vertival(y) axis where boss will be placed. ]
+ * @param boss_horizontal_position [The position in horizontal(horizontal_position) axis where boss will be placed. ]
+ * @param boss_vertical_position [The position in vertival(vertical_position) axis where boss will be placed. ]
  * @param mass_of_boss [Contains Object Boss mass information.]
  * @param walkable [Defines whether the boss is an object able to walk.]
  * @param initial_movement_direction [Sets the initial movement direction.]
@@ -96,7 +96,7 @@ Boss::set_direction(const Direction direction_of_movement)
 void
 Boss::draw_self()
 {
-    boss_animation->draw(x(), y());
+    boss_animation->draw(horizontal_position(), vertical_position());
 }
 
 /**
@@ -106,25 +106,25 @@ void
 Boss::walk()
 {
     //Moves the boss on the horizontal axis towards the player.
-    const bool player_is_to_the_right = (player_horizontal_position > this->x());
-    const bool player_is_to_the_left = (player_horizontal_position < this->x());
+    const bool player_is_to_the_right = (player_horizontal_position > this->horizontal_position());
+    const bool player_is_to_the_left = (player_horizontal_position < this->horizontal_position());
     if(player_is_to_the_left){
-        set_x(x() - BOSS_MOVEMENT_SPEED);
+        set_horizontal_position(horizontal_position() - BOSS_MOVEMENT_SPEED);
     }else if(player_is_to_the_right){
-        set_x(x() + BOSS_MOVEMENT_SPEED);
+        set_horizontal_position(horizontal_position() + BOSS_MOVEMENT_SPEED);
     }else{
-        set_x(x());
+        set_horizontal_position(horizontal_position());
     }
 
     //Moves the boss on the vertical axis towards the player.
-    const bool player_is_to_the_bottom = (player_vertical_position < this->y());
-    const bool player_is_to_the_top = (player_vertical_position > this->y());
+    const bool player_is_to_the_bottom = (player_vertical_position < this->vertical_position());
+    const bool player_is_to_the_top = (player_vertical_position > this->vertical_position());
     if(player_is_to_the_bottom){
-        set_y(y() - BOSS_MOVEMENT_SPEED);
+        set_vertical_position(vertical_position() - BOSS_MOVEMENT_SPEED);
     }else if(player_is_to_the_top){
-        set_y(y() + BOSS_MOVEMENT_SPEED);
+        set_vertical_position(vertical_position() + BOSS_MOVEMENT_SPEED);
     }else{
-        set_y(y());
+        set_vertical_position(vertical_position());
     }
 
     //
@@ -158,7 +158,7 @@ Boss::update_direction()
  * @param player_horizontal_position [That's the player's horizontal position.]
  */
 void
-Boss::get_playerx(const unsigned int player_horizontal_position)
+Boss::get_player_horizontal_position(const unsigned int player_horizontal_position)
 {
     this->player_horizontal_position = player_horizontal_position;
 }
@@ -169,7 +169,7 @@ Boss::get_playerx(const unsigned int player_horizontal_position)
  * @param player_vertical_position [That's the player's vertical position.]
  */
 void
-Boss::get_playery(const unsigned int player_vertical_position)
+Boss::get_player_vertical_position(const unsigned int player_vertical_position)
 {
     this->player_vertical_position = player_vertical_position;
 }
@@ -194,8 +194,8 @@ void
 Boss::update_self(const unsigned long elapsed)
 {
 
-    set_x(this->x());
-    set_y(this->y());
+    set_horizontal_position(this->horizontal_position());
+    set_vertical_position(this->vertical_position());
 
     update_direction();
     boss_animation->update(elapsed);
@@ -211,8 +211,8 @@ Boss::update_self(const unsigned long elapsed)
 void
 Boss::set_position(const double boss_horizontal_position, const double boss_vertical_position)
 {
-    set_x(boss_horizontal_position);
-    set_y(boss_vertical_position);
+    set_horizontal_position(boss_horizontal_position);
+    set_vertical_position(boss_vertical_position);
 }
 
 /**

@@ -19,7 +19,7 @@ using std::unique_ptr;
 class Button : public Object, public Listener
 {
 public:
-    Button(Object *parent, ObjectID id, double w, double h);
+    Button(Object *parent, ObjectID id, double width, double height);
     Button(Object *parent, ObjectID id, const string& idle_image_id,
            const string& active_image_id);
     ~Button();

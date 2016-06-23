@@ -57,7 +57,7 @@ public:
 
     void fill(const Rect& r, Uint32 color)
     {
-        SDL_Rect rect { (int) r.x(), (int) r.y(), (int) r.width(), (int) r.height() };
+        SDL_Rect rect { (int) r.horizontal_position(), (int) r.vertical_position(), (int) r.width(), (int) r.height() };
 
         SDL_FillRect(m_bitmap, &rect, color);
     }
@@ -127,12 +127,12 @@ void Bitmap::clear()
     m_impl->clear();
 }
 
-Uint32 Bitmap::getpixel(SDL_Surface *surface, const int x, const int y)
+Uint32 Bitmap::getpixel(SDL_Surface *surface, const int horizontal_position, const int vertical_position)
 {
     assert((surface != NULL) && "surface needs to be different from NULL");
 
     int bpp = surface->format->BytesPerPixel;
-    Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
+    Uint8 *p = (Uint8 *)surface->pixels + vertical_position * surface->pitch + horizontal_position * bpp;
     assert((p != NULL) && "p needs to be different from NULL");
 
     switch (bpp)
@@ -165,10 +165,10 @@ Uint32 Bitmap::getpixel(SDL_Surface *surface, const int x, const int y)
     }
 }
 
-void Bitmap::putpixel(SDL_Surface *surface, int x, int y, Uint32 pixel)
+void Bitmap::putpixel(SDL_Surface *surface, int horizontal_position, int vertical_position, Uint32 pixel)
 {
     int bpp = surface->format->BytesPerPixel;
-    Uint8 *p = (Uint8 *)surface->pixels + y * surface->pitch + x * bpp;
+    Uint8 *p = (Uint8 *)surface->pixels + vertical_position * surface->pitch + horizontal_position * bpp;
 
     switch (bpp)
     {

@@ -10,18 +10,18 @@ public:
     GuardTest(){
 
     }
-    void get_playerx_test()
+    void get_player_horizontal_position_test()
     {
         Guard *guard = new Guard(this, name, 0, 0, 60, false, type, randint(0,3));
         int player_horizontal_position = 0;
-        Guard::get_playerx(player_horizontal_position);
+        Guard::get_player_horizontal_position(player_horizontal_position);
         assert(this->player_horizontal_position == player_horizontal_position);
     }
-    void get_playery_test()
+    void get_player_vertical_position_test()
     {
         Guard *guard = new Guard(this, name, 0, 0, 60, false, type, randint(0,3));
         int player_vertical_position = 0;
-        Guard::get_playery(player_vertical_position);
+        Guard::get_player_vertical_position(player_vertical_position);
         assert(this->player_vertical_position == player_vertical_position);
     }
     void set_direction_test(Direction direction_of_movement)
@@ -36,8 +36,8 @@ public:
         Guard *guard = new Guard(this, name, 0, 0, 60, false, type, randint(0,3));
         int player_horizontal_position = 0;
         int player_vertical_position = 0;
-        Guard::get_playerx(player_horizontal_position);
-        Guard::get_playery(player_vertical_position);
+        Guard::get_player_horizontal_position(player_horizontal_position);
+        Guard::get_player_vertical_position(player_vertical_position);
         Guard::walk();
     }
     void update_direction_test()

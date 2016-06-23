@@ -57,14 +57,14 @@ public:
     void draw(const Circle& circle) const;
     void draw(const Circle& circle, const Color& color);
 
-    void draw(const Texture *texture, double x = 0, double y = 0) const;
-    void draw(const Texture *texture, Rect clip, double x = 0,
-              double y = 0, double width = 0, double height = 0) const;
+    void draw(const Texture *texture, double horizontal_position = 0, double vertical_position = 0) const;
+    void draw(const Texture *texture, Rect clip, double horizontal_position = 0,
+              double vertical_position = 0, double width = 0, double height = 0) const;
 
-    void draw(const string& text, double x = 0, double y = 0,
+    void draw(const string& text, double horizontal_position = 0, double vertical_position = 0,
               const Color& color = Color::WHITE) const;
 
-    void draw(const Bitmap *bitmap, double x = 0, double y = 0) const;
+    void draw(const Bitmap *bitmap, double horizontal_position = 0, double vertical_position = 0) const;
 
     void fill(const Rect& rect) const;
     void fill(const Rect& rect, const Color& color);
@@ -80,15 +80,16 @@ public:
 
 private:
     SDL_Renderer *m_renderer;
-    int m_width, m_height;
+    int m_width;
+    int m_height;
     Color m_color;
     shared_ptr<Font> m_font;
     BlendMode m_blend_mode;
     SDL_Surface *m_bitmap;
     SDL_Texture *m_texture;
 
-    void draw_circle_points(int cx, int cy, int x, int y) const;
-    void fill_circle_points(int cx, int cy, int x, int y) const;
+    void draw_circle_points(int circle_horizontal_position, int circle_vertical_position, int horizontal_position, int vertical_position) const;
+    void fill_circle_points(int circle_horizontal_position, int circle_vertical_position, int horizontal_position, int vertical_position) const;
 };
 
 #endif

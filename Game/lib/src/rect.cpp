@@ -16,15 +16,15 @@ using std::max;
  * @brief [brief description]
  * @details [long description]
  * 
- * @param x [description]
- * @param y [description]
+ * @param horizontal_position [description]
+ * @param vertical_position [description]
  * @param width [description]
  * @param height [description]
  */
-Rect::Rect(double x, double y, double width, double height)  
+Rect::Rect(double horizontal_position, double vertical_position, double width, double height)  
 {
-    m_x = x;
-    m_y = y;
+    m_horizontal_position = horizontal_position;
+    m_vertical_position = vertical_position;
     m_width = width;
     m_height = height;
 }
@@ -34,9 +34,9 @@ Rect::Rect(double x, double y, double width, double height)
  * @details [long description]
  * @return [description]
  */
-double Rect::x() const
+double Rect::horizontal_position() const
 {
-    return m_x;
+    return m_horizontal_position;
 }
 
 /**
@@ -44,9 +44,9 @@ double Rect::x() const
  * @details [long description]
  * @return [description]
  */
-double Rect::y() const
+double Rect::vertical_position() const
 {
-    return m_y;
+    return m_vertical_position;
 }
 
 /**
@@ -71,22 +71,22 @@ double Rect::height() const
  * @brief [brief description]
  * @details [long description]
  * 
- * @param x [description]
+ * @param horizontal_position [description]
  */
-void Rect::set_x(double x)
+void Rect::set_horizontal_position(double horizontal_position)
 {
-    m_x = x;
+    m_horizontal_position = horizontal_position;
 }
 
 /**
  * @brief [brief description]
  * @details [long description]
  * 
- * @param y [description]
+ * @param vertical_position [description]
  */
-void Rect::set_y(double y)
+void Rect::set_vertical_position(double vertical_position)
 {
-    m_y = y;
+    m_vertical_position = vertical_position;
 }
 
 /**
@@ -115,13 +115,13 @@ void Rect::set_height(double height)
  * @brief [brief description]
  * @details [long description]
  * 
- * @param x [description]
- * @param y [description]
+ * @param horizontal_position [description]
+ * @param vertical_position [description]
  */
-void Rect::set_position(double x, double y)
+void Rect::set_position(double horizontal_position, double vertical_position)
 {
-    m_x = x;
-    m_y = y;
+    m_horizontal_position = horizontal_position;
+    m_vertical_position = vertical_position;
 }
 
 /**
@@ -141,14 +141,14 @@ void Rect::set_dimensions(double width, double height)
  * @brief [brief description]
  * @details [long description]
  * 
- * @param x [description]
- * @param y [description]
+ * @param horizontal_position [description]
+ * @param vertical_position [description]
  * 
  * @return [description]
  */
-bool Rect::contains(double x, double y) const
+bool Rect::contains(double horizontal_position, double vertical_position) const
 {
-    return x >= m_x and x <= m_x + m_width and y >= m_y and y <= m_y + m_height;
+    return horizontal_position >= m_horizontal_position and horizontal_position <= m_horizontal_position + m_width and vertical_position >= m_vertical_position and vertical_position <= m_vertical_position + m_height;
 }
 
 /**
@@ -166,8 +166,8 @@ Rect Rect::intersection(const Rect& r) const
         double top, bottom;
     } Area;
 
-    Area a { x(), x() + width(), y(), y() + height() };
-    Area b { r.x(), r.x() + r.width(), r.y(), r.y() + r.height() };
+    Area a { horizontal_position(), horizontal_position() + width(), vertical_position(), vertical_position() + height() };
+    Area b { r.horizontal_position(), r.horizontal_position() + r.width(), r.vertical_position(), r.vertical_position() + r.height() };
 
     if (b.right < a.left or b.left > a.right or b.top > a.bottom
         or b.bottom < a.top)
@@ -176,11 +176,13 @@ Rect Rect::intersection(const Rect& r) const
     }
     else
     {
-        double xmin = (max)(a.left, b.left);
-        double xmax = (min)(a.right, b.right);
-        double ymin = (max)(a.top, b.top);
-        double ymax = (min)(a.bottom, b.bottom);
+        double horizontal_position_min = (max)(a.left, b.left);
+        double horizontal_position_max = (min)(a.right, b.right);
+        double vertical_position_min = (max)(a.top, b.top);
+        double vertical_position_max = (min)(a.bottom, b.bottom);
 
-        return Rect(xmin, ymin, xmax - xmin, ymax - ymin);
+        return Rect(horizontal_position_min, vertical_position_min, 
+                            horizontal_position_max - horizontal_position_min, 
+                            vertical_position_max - vertical_position_min);
     }
 }

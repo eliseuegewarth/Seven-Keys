@@ -1,7 +1,7 @@
 #ifndef CREDITS_H
 #define CREDITS_H
 
-#include <core/level.h>
+#include <core/level.hpp>
 
 /**
  * credits.h

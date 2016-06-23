@@ -7,38 +7,38 @@
  */
 #include "core/point.hpp"
 
-Point::Point(double x, double y)
-    : m_x(x), m_y(y)
+Point::Point(double horizontal_position, double vertical_position)
+    : m_horizontal_position(horizontal_position), m_vertical_position(vertical_position)
 {
 }
 
 double
-Point::x() const
+Point::horizontal_position() const
 {
-    return m_x;
+    return m_horizontal_position;
 }
 
 double
-Point::y() const
+Point::vertical_position() const
 {
-    return m_y;
+    return m_vertical_position;
 }
 
 void
-Point::set_x(double x)
+Point::set_horizontal_position(double horizontal_position)
 {
-    m_x = x;
+    m_horizontal_position = horizontal_position;
 }
 
 void
-Point::set_y(double y)
+Point::set_vertical_position(double vertical_position)
 {
-    m_y = y;
+    m_vertical_position = vertical_position;
 }
 
 void
-Point::set(double x, double y)
+Point::set(double horizontal_position, double vertical_position)
 {
-    m_x = x;
-    m_y = y;
+    m_horizontal_position = horizontal_position;
+    m_vertical_position = vertical_position;
 }

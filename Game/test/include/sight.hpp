@@ -10,7 +10,7 @@ using namespace std;
 class Sight : public Object
 {
 public:
-    Sight(Object *parent, ObjectID id, double x, double y, double w, double h);
+    Sight(Object *parent, ObjectID id, double horizontal_position, double vertical_position, double width, double height);
     ~Sight();
 
 private:

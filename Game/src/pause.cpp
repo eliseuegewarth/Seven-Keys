@@ -1,8 +1,8 @@
 #include "pause.hpp"
 
-#include <ijengine/util/button.h>
-#include <core/font.h>
-#include <core/environment.h>
+#include <ijengine/util/button.hpp>
+#include <core/font.hpp>
+#include <core/environment.hpp>
 
 #include <iostream>
 #include <cassert>
@@ -37,7 +37,7 @@ Pause::Pause()
     assert((backGame != NULL) && "Failed to pick up the instance of button");
 
     backGame->align_to(this, Object::RIGHT, Object::NONE);
-    backGame->set_y(200);
+    backGame->set_vertical_position(200);
 
     // Directs to the main menu of the game.
     Button *backMenu = new Button(this, "backMenu", 
@@ -47,7 +47,7 @@ Pause::Pause()
     assert((backMenu != NULL) && "Failed to pick up the instance of button");
 
     backMenu->align_to(this, Object::RIGHT, Object::NONE);
-    backMenu->set_y(backGame->y() + backGame->height()+20);
+    backMenu->set_vertical_position(backGame->vertical_position() + backGame->height()+20);
 
     // Closes the game.
     Button *exit = new Button(this, "exit", 
@@ -57,7 +57,7 @@ Pause::Pause()
     assert((exit != NULL) && "Failed to pick up the instance of button");
 
     exit->align_to(this, Object::RIGHT, Object::NONE);
-    exit->set_y(backGame->y() + backGame->height()+20);
+    exit->set_vertical_position(backGame->vertical_position() + backGame->height()+20);
 
     backGame->add_observer(this);
     backMenu->add_observer(this);

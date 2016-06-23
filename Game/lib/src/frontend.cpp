@@ -94,8 +94,8 @@ public:
 
         Environment *env = Environment::get_instance();
 
-        m_x = (env->camera->width() - m_texture->width())/2 + env->camera->x();
-        m_y = (env->camera->height() - m_texture->height())/2 + env->camera->y();
+        m_horizontal_position = (env->camera->width() - m_texture->width())/2 + env->camera->horizontal_position();
+        m_vertical_position = (env->camera->height() - m_texture->height())/2 + env->camera->vertical_position();
     }
 
     void draw_self()
@@ -103,7 +103,7 @@ public:
         Environment *env = Environment::get_instance();
 
         env->canvas->clear(m_background);
-        env->canvas->draw(m_texture.get(), m_x, m_y);
+        env->canvas->draw(m_texture.get(), m_horizontal_position, m_vertical_position);
 
         env->canvas->set_blend_mode(Canvas::BLEND);
         Rect r { 0, 0, (double) env->canvas->width(), (double) env->canvas->height() };
@@ -117,7 +117,7 @@ private:
     Color m_background, m_fad;
     unsigned long m_start, m_duration;
     unsigned long m_in, m_out;
-    int m_x, m_y;
+    int m_horizontal_position, m_vertical_position;
 };
 
 FrontEnd::FrontEnd(const string& id, const string& next, const string& texture,

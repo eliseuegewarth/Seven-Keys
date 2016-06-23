@@ -40,15 +40,15 @@ public:
 
     const pair<double, double>& moviment() const { return m_moviment; }
 
-    void set_moviment(double xaxis, double yaxis)
+    void set_moviment(double horizontal_axis, double vertical_axis)
     {
-        m_moviment = make_pair(xaxis, yaxis);
+        m_moviment = make_pair(horizontal_axis, vertical_axis);
     }
 
     void set_current(string nova, int posx, int posy)
     {
-        m_player->set_x(posx);
-        m_player->set_y(posy);
+        m_player->set_horizontal_position(posx);
+        m_player->set_vertical_position(posy);
         m_player->notify(changeRoomID, nova);
     }
 
@@ -330,22 +330,22 @@ public:
 
         if(direction() == Player::RIGHT)
         {
-            Sight *visao = new Sight(m_player, "visao", m_player->x()+40, m_player->y() + m_player->height()/4, 100, 40);
+            Sight *visao = new Sight(m_player, "visao", m_player->horizontal_position()+40, m_player->vertical_position() + m_player->height()/4, 100, 40);
             m_player->add_child(visao);
         }
         else if(direction() == Player::LEFT)
         {
-            Sight *visao = new Sight(m_player, "visao", m_player->x() - 70, m_player->y() + m_player->height()/4, 100, 40);
+            Sight *visao = new Sight(m_player, "visao", m_player->horizontal_position() - 70, m_player->vertical_position() + m_player->height()/4, 100, 40);
             m_player->add_child(visao);
         }
         else if(direction() == Player::UP)
         {
-            Sight *visao = new Sight(m_player, "visao", m_player->x() + m_player->width()/4, m_player->y() - 70, 40, 100);
+            Sight *visao = new Sight(m_player, "visao", m_player->horizontal_position() + m_player->width()/4, m_player->vertical_position() - 70, 40, 100);
             m_player->add_child(visao);
         }
         else if(direction() == Player::DOWN)
         {
-            Sight *visao = new Sight(m_player, "visao", m_player->x()+ m_player->width()/4, m_player->y() + 40, 40, 100);
+            Sight *visao = new Sight(m_player, "visao", m_player->horizontal_position()+ m_player->width()/4, m_player->vertical_position() + 40, 40, 100);
             m_player->add_child(visao);
         }
     }
@@ -505,7 +505,7 @@ public:
 
     void draw()
     {
-        m_animation->draw(m_player->x(), m_player->y());
+        m_animation->draw(m_player->horizontal_position(), m_player->vertical_position());
         m_player->show_health();
         m_player->show_sanity();
         m_player->show_inventory();
@@ -630,9 +630,9 @@ public:
         if (from == Player::IDLE)
         {
             auto moviment = m_player->moviment();
-            double x = moviment.first * m_speed;
-            double y = moviment.second * m_speed;
-            m_player->set_moviment(x, y);
+            double horizontal_position = moviment.first * m_speed;
+            double vertical_position = moviment.second * m_speed;
+            m_player->set_moviment(horizontal_position, vertical_position);
         }
     }
 
@@ -642,7 +642,7 @@ public:
 
     void draw()
     {
-        m_animation->draw(m_player->x(), m_player->y());
+        m_animation->draw(m_player->horizontal_position(), m_player->vertical_position());
         m_player->show_health();
         m_player->show_sanity();
         m_player->show_inventory();
@@ -831,36 +831,36 @@ public:
 
         auto moviment = m_player->moviment();
         unsigned long delta = elapsed - m_last;
-        double x = m_player->x() + (moviment.first * delta)/1000.0;
-        double y = m_player->y() + (moviment.second * delta)/1000.0;
+        double horizontal_position = m_player->horizontal_position() + (moviment.first * delta)/1000.0;
+        double vertical_position = m_player->vertical_position() + (moviment.second * delta)/1000.0;
 
         /*limite da sala */
         Environment *env = Environment::get_instance();
 
-        if (x + m_player->width() > env->canvas->width())
+        if (horizontal_position + m_player->width() > env->canvas->width())
         {
-            x = env->canvas->width() - m_player->width();
+            horizontal_position = env->canvas->width() - m_player->width();
         }
 
-        if ((x >= env->canvas->width() - m_player->width() and moviment.first > 0) or
-            (x <= 0 and moviment.first < 0))
+        if ((horizontal_position >= env->canvas->width() - m_player->width() and moviment.first > 0) or
+            (horizontal_position <= 0 and moviment.first < 0))
         {
-            x -= (moviment.first * delta)/1000.0;
+            horizontal_position -= (moviment.first * delta)/1000.0;
         }
 
-        if (y + m_player->height() > env->canvas->height())
+        if (vertical_position + m_player->height() > env->canvas->height())
         {
-            y = env->canvas->height() - m_player->height();
+            vertical_position = env->canvas->height() - m_player->height();
         }
 
-        if ((y >= env->canvas->height() - m_player->height() and moviment.second > 0) or
-            (y <= 0 and moviment.second < 0))
+        if ((vertical_position >= env->canvas->height() - m_player->height() and moviment.second > 0) or
+            (vertical_position <= 0 and moviment.second < 0))
         {
-            y -= (moviment.second * delta)/1000.0;
+            vertical_position -= (moviment.second * delta)/1000.0;
         }
 
-        m_player->set_x(x);
-        m_player->set_y(y);
+        m_player->set_horizontal_position(horizontal_position);
+        m_player->set_vertical_position(vertical_position);
 
         m_last = elapsed;
         m_animation->update(elapsed);
@@ -991,7 +991,7 @@ public:
 
     void draw()
     {
-        m_animation->draw(m_player->x(), m_player->y());
+        m_animation->draw(m_player->horizontal_position(), m_player->vertical_position());
         m_player->show_health();
         m_player->show_sanity();
         m_player->show_inventory();
@@ -1098,9 +1098,9 @@ Player::moviment() const
 }
 
 void
-Player::set_moviment(double xaxis, double yaxis)
+Player::set_moviment(double horizontal_axis, double vertical_axis)
 {
-    m_impl->set_moviment(xaxis, yaxis);
+    m_impl->set_moviment(horizontal_axis, vertical_axis);
 }
 
 void

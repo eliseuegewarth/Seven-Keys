@@ -24,27 +24,27 @@ typedef string Parameters;
 class Object
 {
 public:
-    Object(Object *parent = nullptr, ObjectID id = "", double x = 0,
-        double y = 0, double w = 1, double h = 1);
+    Object(Object *parent = nullptr, ObjectID id = "", double horizontal_position = 0,
+        double vertical_position = 0, double width = 1, double height = 1);
     virtual ~Object();
 
     Object * parent() const;
     ObjectID id() const;
 
-    double x() const;
-    double y() const;
+    double horizontal_position() const;
+    double vertical_position() const;
     double w() const;
     double h() const;
 
     const Rect& bounding_box() const;
 
-    void set_x(double x);
-    void set_y(double y);
-    void set_w(double w);
-    void set_h(double h);
+    void set_horizontal_position(double horizontal_position);
+    void set_vertical_position(double vertical_position);
+    void set_width(double width);
+    void set_height(double height);
 
-    void set_position(double x, double y);
-    void set_dimensions(double w, double h);
+    void set_position(double horizontal_position, double vertical_position);
+    void set_dimensions(double width, double height);
     void set_parent(Object *parent);
 
     void add_child(Object *child);

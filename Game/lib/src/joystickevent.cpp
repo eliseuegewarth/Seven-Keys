@@ -55,7 +55,7 @@ JoyStickEvent::State JoyStickEvent::state() const
  * [JoyStickEvent::button description]
  * @method JoyStickEvent::button
  * @return [returns the button that are pressed in the joystick
- *         X, CIRCLE, SQUARE, TRIANGLE, SHARE, HOME,
+ *         horizontal_position, CIRCLE, SQUARE, TRIANGLE, SHARE, HOME,
  *         START, L3, R3, L1, R1, UP, DOWN, LEFT, RIGHT]
  */
 JoyStickEvent::Button JoyStickEvent::button() const

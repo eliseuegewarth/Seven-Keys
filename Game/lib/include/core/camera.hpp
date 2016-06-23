@@ -19,7 +19,7 @@ class Camera : public Object
 public:
     typedef enum { STATIC, FOLLOWING } Mode;
 
-    Camera(double x = 0, double y = 0, double w = 1, double h = 1,
+    Camera(double horizontal_position = 0, double vertical_position = 0, double width = 1, double height = 1,
         Mode mode = STATIC);
     ~Camera();
 

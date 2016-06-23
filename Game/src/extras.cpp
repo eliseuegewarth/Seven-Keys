@@ -4,9 +4,9 @@
 
 #include "extras.hpp"
 
-#include <ijengine/util/button.h>
-#include <core/font.h>
-#include <core/environment.h>
+#include <ijengine/util/button.hpp>
+#include <core/font.hpp>
+#include <core/environment.hpp>
 
 #include <iostream>
 #include <cassert>
@@ -38,7 +38,7 @@ Extras::Extras() : Level("extras")
 
     assert((cutscene != NULL) && "Failed to pick up the instance of button");
     cutscene->align_to(this, Object::MIDDLE, Object::NONE);
-    cutscene->set_y(200);
+    cutscene->set_vertical_position(200);
 
     // Directs to the history of the game.
     Button *historia = new Button(this, "historia", 
@@ -47,7 +47,7 @@ Extras::Extras() : Level("extras")
 
     assert((historia != NULL) && "Failed to pick up the instance of button");
     historia->align_to(this, Object::MIDDLE, Object::NONE);
-    historia->set_y(cutscene->y() + cutscene->height() + 20);
+    historia->set_vertical_position(cutscene->vertical_position() + cutscene->height() + 20);
 
     // Directs to the main menu of the game.
     Button *back = new Button(this, "back", 
@@ -56,7 +56,7 @@ Extras::Extras() : Level("extras")
 
     assert((back != NULL) && "Failed to pick up the instance of button");
     back->align_to(this, Object::MIDDLE, Object::NONE);
-    back->set_y(historia->y() + historia->height() + 20);
+    back->set_vertical_position(historia->vertical_position() + historia->height() + 20);
 
     cutscene->add_observer(this);
     historia->add_observer(this);

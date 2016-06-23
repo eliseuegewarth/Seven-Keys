@@ -26,7 +26,7 @@ public:
 
     void init() throw (Exception);
 
-    void set_resolution(int w, int h, double scale = 1) throw (Exception);
+    void set_resolution(int width, int height, double scale = 1) throw (Exception);
     void set_fullscreen(bool fullscreen = true) throw (Exception);
     void set_window_name(const string& name);
 
@@ -41,7 +41,7 @@ private:
     Canvas *m_canvas;
     Camera *m_camera;
 
-    int m_w, m_h;
+    int m_width, m_height;
 };
 
 #endif

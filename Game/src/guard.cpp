@@ -98,22 +98,22 @@ void Guard::update_vision()
 
     if(direction() == Guard::RIGHT)
     {
-        Sight *visao = new Sight(this, "visao", this->x()+40, this->y(), 200, 80);
+        Sight *visao = new Sight(this, "visao", this->horizontal_position()+40, this->vertical_position(), 200, 80);
         add_child(visao);
     }
     else if(direction() == Guard::LEFT)
     {
-        Sight *visao = new Sight(this, "visao", this->x() - 200, this->y(), 240, 80);
+        Sight *visao = new Sight(this, "visao", this->horizontal_position() - 200, this->vertical_position(), 240, 80);
         add_child(visao);
     }
     else if(direction() == Guard::UP)
     {
-        Sight *visao = new Sight(this, "visao", this->x(), this->y() - 200, 80, 240);
+        Sight *visao = new Sight(this, "visao", this->horizontal_position(), this->vertical_position() - 200, 80, 240);
         add_child(visao);
     }
     else if(direction() == Guard::DOWN)
     {
-        Sight *visao = new Sight(this, "visao", this->x(), this->y() + 40, 80, 200);
+        Sight *visao = new Sight(this, "visao", this->horizontal_position(), this->vertical_position() + 40, 80, 200);
         add_child(visao);
     }else{
         //do nothing
@@ -137,7 +137,7 @@ void Guard::set_direction(Direction direction_of_moviment)
  */
 void Guard::draw_self()
 {
-    guard_animation->draw(x(), y());
+    guard_animation->draw(horizontal_position(), vertical_position());
 }
 
 /**
@@ -159,28 +159,28 @@ void Guard::walk(unsigned long elapsed)
         {
             if(direction() == Guard::RIGHT || direction() == Guard::LEFT)
             {
-                set_x(x() - GUARD_SPEED + (GUARD_SPEED * direction()));
-                if(x() < 0 + 80)
+                set_horizontal_position(horizontal_position() - GUARD_SPEED + (GUARD_SPEED * direction()));
+                if(horizontal_position() < 0 + 80)
                 {
-                    set_x(80);
+                    set_horizontal_position(80);
                 }
-                else if(x() > env->canvas->width() - this->width() - 80)
+                else if(horizontal_position() > env->canvas->width() - this->width() - 80)
                 {
-                    set_x(env->canvas->width() - this->width() - 80);
+                    set_horizontal_position(env->canvas->width() - this->width() - 80);
                 }else{
                     //do nothing
                 }
             }
             if(direction() == Guard::UP || direction() == Guard::DOWN)
             {
-                set_y(y() - 2 * GUARD_SPEED + (GUARD_SPEED * direction()));
-                if(y() < 0 + 80)
+                set_vertical_position(vertical_position() - 2 * GUARD_SPEED + (GUARD_SPEED * direction()));
+                if(vertical_position() < 0 + 80)
                 {
-                    set_y(80);
+                    set_vertical_position(80);
                 }
-                else if(y() > env->canvas->height() - this->height() - 80)
+                else if(vertical_position() > env->canvas->height() - this->height() - 80)
                 {
-                    set_y(env->canvas->height() - this->height() - 80);
+                    set_vertical_position(env->canvas->height() - this->height() - 80);
                 }else{
                     //do nothing
                 }
@@ -194,31 +194,31 @@ void Guard::walk(unsigned long elapsed)
     else if(guard_type == "follow")
     {
         const bool player_is_to_the_right = (player_horizontal_position
-                                            > this->x() + 70);
+                                            > this->horizontal_position() + 70);
         const bool player_is_to_the_left = (player_horizontal_position
-                                            < this->x() - 70);
+                                            < this->horizontal_position() - 70);
         if(player_is_to_the_left)
         {
-            set_x(x() - GUARD_SPEED);
+            set_horizontal_position(horizontal_position() - GUARD_SPEED);
         }
         else if(player_is_to_the_right)
         {
-            set_x(x() + GUARD_SPEED);
+            set_horizontal_position(horizontal_position() + GUARD_SPEED);
         }else{
             //do nothing
         }
 
         const bool player_is_to_the_buttom = (player_vertical_position
-                                             < this->y() - 70);
+                                             < this->vertical_position() - 70);
         const bool player_is_to_the_top = (player_vertical_position
-                                          > this->y() + 70);
+                                          > this->vertical_position() + 70);
         if(player_is_to_the_buttom)
         {
-            set_y(y() - GUARD_SPEED);
+            set_vertical_position(vertical_position() - GUARD_SPEED);
         }
         else if(player_is_to_the_top)
         {
-            set_y(y() + GUARD_SPEED);
+            set_vertical_position(vertical_position() + GUARD_SPEED);
         }else{
             //do nothing
         }
@@ -227,19 +227,19 @@ void Guard::walk(unsigned long elapsed)
 
          */
         const bool player_is_to_the_right_to_walk = (player_horizontal_position
-                                                    > this->x() - 100);
+                                                    > this->horizontal_position() - 100);
         const bool player_is_to_the_left_to_walk = (player_horizontal_position
-                                                    < this->x() + 100);
+                                                    < this->horizontal_position() + 100);
         const bool player_is_aligned_vertically = (player_is_to_the_right_to_walk
                                                   and player_is_to_the_left_to_walk);
         const bool player_is_to_the_left_to_set_direction = (player_horizontal_position
-         < this->x());
+         < this->horizontal_position());
         const bool player_is_to_the_right_to_set_direction = (player_horizontal_position
-         > this->x());
+         > this->horizontal_position());
         const bool player_is_to_the_buttom_to_walk = (player_vertical_position
-         > this->y());
+         > this->vertical_position());
         const bool player_is_to_the_top_to_walk = (player_vertical_position
-                                                  < this->y());
+                                                  < this->vertical_position());
 
         if (player_is_aligned_vertically and player_is_to_the_top_to_walk)
         {
@@ -342,23 +342,23 @@ void Guard::update_direction(unsigned long elapsed)
 }
 
 /**
- * [Ghost::get_playerx Receive the player's horizontal position.
+ * [Ghost::get_player_horizontal_position Receive the player's horizontal position.
  * This information is used at Guard artificial intelligence.]
- * @method Guard::get_playerx
+ * @method Guard::get_playe_horizontal_position
  * @param  player_horizontal_position [That's the player's horizontal position.]
  */
-void Guard::get_playerx(const unsigned int player_horizontal_position)
+void Guard::get_player_horizontal_position(const unsigned int player_horizontal_position)
 {
     this->player_horizontal_position  = player_horizontal_position;
 }
 
 /**
- * [Ghost::get_playery Receive the player's vertical position.
+ * [Ghost::get_player_vertical_position Receive the player's vertical position.
  * This information is used at Guard artificial intelligence.]
- * @method Guard::get_playery
+ * @method Guard::get_player_vertical_position
  * @param  player_vertical_position [That's the player's vertical position.]
  */
-void Guard::get_playery(const unsigned int player_vertical_position)
+void Guard::get_player_vertical_position(const unsigned int player_vertical_position)
 {
     this->player_vertical_position = player_vertical_position;
 }
@@ -380,8 +380,8 @@ double Guard::damage()
  */
 void Guard::update_self(unsigned long elapsed)
 {
-    set_x(this->x());
-    set_y(this->y());
+    set_horizontal_position(this->horizontal_position());
+    set_vertical_position(this->vertical_position());
 
     update_direction(elapsed);
     guard_animation->update(elapsed);

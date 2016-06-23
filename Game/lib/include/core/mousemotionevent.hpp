@@ -16,21 +16,21 @@ public:
     typedef enum { DOWN, UP } MotionState; //Define the Motion states of mouse moviment
     typedef enum { LEFT, RIGHT, MIDDLE } Button; //Define the states of mouse button
 
-    MouseMotionEvent(int x, int y, int x_rel, int y_rel, MotionState left,
+    MouseMotionEvent(int horizontal_position, int vertical_position, int relative_horizontal_position, int relative_vertical_position, MotionState left,
         MotionState right, MotionState middle);
 
     MotionState state(Button button) const;
-    int x() const;
-    int y() const;
-    int x_rel() const;
-    int y_rel() const;
+    int horizontal_position() const;
+    int vertical_position() const;
+    int relative_horizontal_position() const;
+    int relative_vertical_position() const;
 
     static MouseMotionEvent from_SDL(const SDL_Event& event);
 
 private:
-    int m_x; //Mouse position in axis x(horizontal)
-    int m_y; //Mouse position in axis y(vertical)
-    int m_x_rel, m_y_rel;
+    int m_horizontal_position; //Mouse position in axis x(horizontal)
+    int m_vertical_position; //Mouse position in axis y(vertical)
+    int m_relative_horizontal_position, m_relative_vertical_position;
     MotionState m_buttons[3];
 };
 
