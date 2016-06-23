@@ -24,27 +24,27 @@ TitleScreen::TitleScreen()
 
     set_dimensions(w, h);
 
-    Button *jogar = new Button(this, "jogar", "res/interface/menuInicial/jogar.png",
-        "res/interface/menuInicial/Sjogar.png");
+    Button *jogar = new Button(this, "jogar", "res/EN-US/interface/menuInicial/jogar.png",
+        "res/EN-US/interface/menuInicial/Sjogar.png");
     jogar->align_to(this, Object::RIGHT , Object::MIDDLE);
 
-    Button *options = new Button(this, "options", "res/interface/menuInicial/opcao.png",
-        "res/interface/menuInicial/Sopcao.png");
+    Button *options = new Button(this, "options", "res/EN-US/interface/menuInicial/opcao.png",
+        "res/EN-US/interface/menuInicial/Sopcao.png");
     options->align_to(this, Object::RIGHT, Object::NONE);
     options->set_y(jogar->y() + jogar->height() + 15);
 
-    Button *creditos = new Button(this, "creditos", "res/interface/menuInicial/creditos.png",
-        "res/interface/menuInicial/Screditos.png");
+    Button *creditos = new Button(this, "creditos", "res/EN-US/interface/menuInicial/creditos.png",
+        "res/EN-US/interface/menuInicial/Screditos.png");
     creditos->align_to(this, Object::RIGHT, Object::NONE);
     creditos->set_y(options->y() + options->height()+15);
 
-    Button *exit = new Button(this, "exit", "res/interface/menuInicial/sair.png",
-        "res/interface/menuInicial/Ssair.png");
+    Button *exit = new Button(this, "exit", "res/EN-US/interface/menuInicial/sair.png",
+        "res/EN-US/interface/menuInicial/Ssair.png");
     exit->align_to(this, Object::RIGHT, Object::NONE);
     exit->set_y(creditos->y() + creditos->height() + 15);
 
-    Button *extras = new Button (this, "extras", "res/interface/menuInicial/extras.png",
-        "res/interface/menuInicial/Sextras.png");
+    Button *extras = new Button (this, "extras", "res/EN-US/interface/menuInicial/extras.png",
+        "res/EN-US/interface/menuInicial/Sextras.png");
     creditos->align_to(this, Object::MIDDLE, Object::NONE);
     extras->set_y(creditos->y() +creditos->height() + 15);
 
@@ -71,7 +71,7 @@ TitleScreen::draw_self()
     Environment *env = Environment::get_instance();
     env->canvas->clear(Color::WHITE);
 
-    shared_ptr<Texture> image = env->resources_manager->get_texture("res/interface/menuInicial/menuInicial.png");
+    shared_ptr<Texture> image = env->resources_manager->get_texture("res/EN-US/interface/menuInicial/menuInicial.png");
     env->canvas->draw(image.get(), 1, 0);
 }
 

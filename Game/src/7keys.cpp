@@ -43,19 +43,19 @@ SevenKeys::load_level(const string& screen_type) {
 
     if (screen_type == "fone")
     {
-        level_to_be_loaded = (Level*) new FrontEnd("logo", "logo", "res/images/fone.png");
+        level_to_be_loaded = (Level*) new FrontEnd("logo", "logo", "res/EN-US/images/fone.png");
     }
     else if (screen_type == "logo")
     {
-        level_to_be_loaded = (Level*) new FrontEnd("logo", "tecnologias", "res/images/manateam.png");
+        level_to_be_loaded = (Level*) new FrontEnd("logo", "tecnologias", "res/EN-US/images/manateam.png");
     }
     else if (screen_type == "tecnologias")
     {
-        level_to_be_loaded = (Level*) new FrontEnd("tecnologias", "classificacao", "res/images/tecnologias.png");
+        level_to_be_loaded = (Level*) new FrontEnd("tecnologias", "classificacao", "res/EN-US/images/tecnologias.png");
     }
     else if (screen_type == "classificacao")
     {
-        level_to_be_loaded = (Level*) new FrontEnd("classificacao", "title", "res/images/classificacao_indicativa.png");
+        level_to_be_loaded = (Level*) new FrontEnd("classificacao", "title", "res/EN-US/images/classificacao_indicativa.png");
     }
     else if (screen_type == "title")
     {
@@ -70,13 +70,13 @@ SevenKeys::load_level(const string& screen_type) {
     else if (strstr(screen_type.c_str(), "trans"))
     {
 
-        /* It is an object of the class environment. 
+        /* It is an object of the class environment.
         Is a pointer to the current instance of the game environment.*/
         Environment *env = Environment::get_instance();
 
         assert(env != NULL && "failed to pick up the instance of Environment");
 
-        // Comment This 
+        // Comment This
         shared_ptr <Font> font = env->resources_manager->get_font("res/fonts/TakaoExGothic.ttf");
         env->canvas->set_font(font);
 
@@ -110,11 +110,11 @@ SevenKeys::load_level(const string& screen_type) {
         char path[PATH_STRING_MAX_SIZE] = "";
         if(new_stage_number < 6)
         {
-            sprintf(path, "res/interface/transicao/Fase%d.png", new_stage_number);
+            sprintf(path, "res/EN-US/interface/transicao/Fase%d.png", new_stage_number);
         }
         else
         {
-            sprintf(path, "res/interface/transicao/Bonus.png");
+            sprintf(path, "res/EN-US/interface/transicao/Bonus.png");
         }
 
         char music_path[MUSIC_PATH_STRING_MAX_SIZE];
@@ -166,7 +166,7 @@ SevenKeys::load_level(const string& screen_type) {
 
         this->number_of_players_lives--;
 
-        level_to_be_loaded = (Level*) new FrontEnd(screen_type, stage_screen_type, "res/images/transition.png");
+        level_to_be_loaded = (Level*) new FrontEnd(screen_type, stage_screen_type, "res/EN-US/images/transition.png");
     }
     else if(screen_type == "gameover")
     {
@@ -183,7 +183,7 @@ SevenKeys::load_level(const string& screen_type) {
         Level *lvl = new Level(screen_type, screen_type);
         assert(lvl != NULL && "failed to create a Level instance");
         lvl->set_dimensions(width, height);
-        level_to_be_loaded = (Level*) new FrontEnd(screen_type, "title", "res/interface/transicao/gameOver.png");
+        level_to_be_loaded = (Level*) new FrontEnd(screen_type, "title", "res/EN-US/interface/transicao/gameOver.png");
     }
     else if (strstr(screen_type.c_str(), "stage"))
     {

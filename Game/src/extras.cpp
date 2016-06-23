@@ -33,8 +33,8 @@ Extras::Extras() : Level("extras")
 
     // Directs to the cutscene of the game.
     Button *cutscene = new Button(this, "cutscene", 
-                                  "res/interface/menuExtras/cutscenes.png",
-                                  "res/interface/menuExtras/Scutscenes.png");
+                                  "res/EN-US/interface/menuExtras/cutscenes.png",
+                                  "res/EN-US/interface/menuExtras/Scutscenes.png");
 
     assert((cutscene != NULL) && "Failed to pick up the instance of button");
     cutscene->align_to(this, Object::MIDDLE, Object::NONE);
@@ -42,8 +42,8 @@ Extras::Extras() : Level("extras")
 
     // Directs to the history of the game.
     Button *historia = new Button(this, "historia", 
-                                  "res/interface/menuExtras/historia.png",
-                                  "res/interface/menuExtras/Shistoria.png");
+                                  "res/EN-US/interface/menuExtras/historia.png",
+                                  "res/EN-US/interface/menuExtras/Shistoria.png");
 
     assert((historia != NULL) && "Failed to pick up the instance of button");
     historia->align_to(this, Object::MIDDLE, Object::NONE);
@@ -51,8 +51,8 @@ Extras::Extras() : Level("extras")
 
     // Directs to the main menu of the game.
     Button *back = new Button(this, "back", 
-                              "res/interface/menuExtras/voltar.png",
-                              "res/interface/menuExtras/Svoltar.png");
+                              "res/EN-US/interface/menuExtras/voltar.png",
+                              "res/EN-US/interface/menuExtras/Svoltar.png");
 
     assert((back != NULL) && "Failed to pick up the instance of button");
     back->align_to(this, Object::MIDDLE, Object::NONE);
@@ -84,7 +84,7 @@ void Extras::draw_self()
     env->canvas->clear(Color::WHITE);
 
     const shared_ptr<Texture> image = env->resources_manager->
-                        get_texture("res/interface/menuExtras/menuExtras.png");
+                        get_texture("res/EN-US/interface/menuExtras/menuExtras.png");
     assert((image != NULL) && "image to pick up the instance of environment");
     env->canvas->draw(image.get(), 1, 0);
 }

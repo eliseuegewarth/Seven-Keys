@@ -31,8 +31,8 @@ Pause::Pause()
 
     // Directs the environment where the game was paused.
     Button *backGame = new Button(this, "backGame", 
-                                  "res/interface/menuPausa/voltarJogo.png",
-                                  "res/interface/menuPausa/SvoltarJogo.png");
+                                  "res/EN-US/interface/menuPausa/voltarJogo.png",
+                                  "res/EN-US/interface/menuPausa/SvoltarJogo.png");
 
     assert((backGame != NULL) && "Failed to pick up the instance of button");
 
@@ -41,8 +41,8 @@ Pause::Pause()
 
     // Directs to the main menu of the game.
     Button *backMenu = new Button(this, "backMenu", 
-                                  "res/interface/menuExtras/voltar.png",
-                                  "res/interface/menuExtras/Svoltar.png");
+                                  "res/EN-US/interface/menuExtras/voltar.png",
+                                  "res/EN-US/interface/menuExtras/Svoltar.png");
 
     assert((backMenu != NULL) && "Failed to pick up the instance of button");
 
@@ -51,8 +51,8 @@ Pause::Pause()
 
     // Closes the game.
     Button *exit = new Button(this, "exit", 
-                              "res/interface/menuExtras/sair.png",
-                              "res/interface/menuExtras/Ssair.png");
+                              "res/EN-US/interface/menuExtras/sair.png",
+                              "res/EN-US/interface/menuExtras/Ssair.png");
 
     assert((exit != NULL) && "Failed to pick up the instance of button");
 
@@ -84,7 +84,7 @@ void Pause::draw_self()
     assert((env != NULL) && "Filed to pick up the instance of environment");
     env->canvas->clear(Color::WHITE);
 
-    shared_ptr<Texture> image = env->resources_manager->get_texture("res/interface/menuPausa/fundoPausa.png");
+    shared_ptr<Texture> image = env->resources_manager->get_texture("res/EN-US/interface/menuPausa/fundoPausa.png");
     assert((image != NULL) && "image to pick up the instance of environment");
     env->canvas->draw(image.get(), 1, 0);
 }

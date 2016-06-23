@@ -13,12 +13,12 @@
 
 using namespace std;
 
-const string resume_button_path = "res/interface/menuCredits/resume.png";
+const string resume_button_path = "res/EN-US/interface/menuCredits/resume.png";
 
-const string resume_button_path_highlight = "res/interface/menuCredits/ \
+const string resume_button_path_highlight = "res/EN-US/interface/menuCredits/ \
                                                 resumeHighlight.png";
 
-const string screen_credits_image_path = "res/interface/menuCredits/ \
+const string screen_credits_image_path = "res/EN-US/interface/menuCredits/ \
                                                 screenCredits.png";
 
 Credits::Credits() : Level("credits")

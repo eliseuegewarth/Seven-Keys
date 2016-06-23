@@ -15,17 +15,17 @@ Options::Options() : Level("options")// Class that represents the option of the 
 
     set_dimensions(width, height);
 
-    Button *set_fullscreen = new Button(this, "fullscreen", "res/interface/menuOpcao/telaCheia.png",
-        "res/interface/menuOpcao/StelaCheia.png");// Puts the screen in fullscreen.
+    Button *set_fullscreen = new Button(this, "fullscreen", "res/EN-US/interface/menuOpcao/telaCheia.png",
+        "res/EN-US/interface/menuOpcao/StelaCheia.png");// Puts the screen in fullscreen.
     set_fullscreen->align_to(this, Object::RIGHT, Object::MIDDLE);
 
-    Button *windowmode = new Button(this, "windowmode", "res/interface/menuOpcao/modoJanela.png",
-        "res/interface/menuOpcao/SmodoJanela.png");// Puts the screen in windowed mode.
+    Button *windowmode = new Button(this, "windowmode", "res/EN-US/interface/menuOpcao/modoJanela.png",
+        "res/EN-US/interface/menuOpcao/SmodoJanela.png");// Puts the screen in windowed mode.
     windowmode->align_to(this, Object::RIGHT, Object::NONE);
     windowmode->set_y(set_fullscreen->y() + set_fullscreen->height() + 20);
 
-    Button *back = new Button(this, "back", "res/interface/menuOpcao/voltar.png",
-        "res/interface/menuOpcao/Svoltar.png");// Directs to the main menu of the game.
+    Button *back = new Button(this, "back", "res/EN-US/interface/menuOpcao/voltar.png",
+        "res/EN-US/interface/menuOpcao/Svoltar.png");// Directs to the main menu of the game.
     back->align_to(this, Object::RIGHT, Object::NONE);
     back->set_y(windowmode->y() + windowmode->height() + 20);
 
@@ -50,7 +50,7 @@ void Options::draw_self()// Drow options pinctures on the screen.
     Environment *env = Environment::get_instance();// It is an object of the class environment. Is a pointer to the current instance of the game environment.
     env->canvas->clear(Color::WHITE);
 
-    shared_ptr<Texture> image = env->resources_manager->get_texture("res/interface/menuOpcao/menuOpcao.png");
+    shared_ptr<Texture> image = env->resources_manager->get_texture("res/EN-US/interface/menuOpcao/menuOpcao.png");
     env->canvas->draw(image.get(), 1, 0);
 }
 
