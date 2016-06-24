@@ -5,6 +5,8 @@
 #include <cassert>
 #include <iostream>
 
+#include "internacionalization.hpp"
+
 /**
  * credits.cpp
  * @brief [Class that implements the credits of the game.]
@@ -13,13 +15,6 @@
 
 using namespace std;
 
-const string resume_button_path = "res/EN-US/interface/menuCredits/resume.png";
-
-const string resume_button_path_highlight = "res/EN-US/interface/menuCredits/ \
-                                                resumeHighlight.png";
-
-const string screen_credits_image_path = "res/EN-US/interface/menuCredits/ \
-                                                screenCredits.png";
 
 Credits::Credits() : Level("credits")
 {
@@ -36,8 +31,11 @@ Credits::Credits() : Level("credits")
     set_dimensions(width, height);
 
     // Button used to return to main menu
-    Button *back = new Button(this, "back", resume_button_path,
-                              resume_button_path_highlight);
+    Internacionalization * internacionalization = Internacionalization::get_instance();
+    string path_back = internacionalization->load_string("interface/menuCredits/resume.png");
+    string path_back_highlight = internacionalization->load_string("interface/menuCredits/resumeHighlight.png");
+    Button *back = new Button(this, "back", path_back,
+                              path_back_highlight);
 
     assert(back != NULL && "Failed to create resume button.");
 
@@ -58,8 +56,10 @@ void Credits::draw_self()
     env->canvas->clear(Color::WHITE);
 
     // Image background of the credits
+    Internacionalization * internacionalization = Internacionalization::get_instance();
+    string path_credits = internacionalization->load_string("interface/menuCredits/screenCredits.png");
     shared_ptr<Texture> image = env->resources_manager->
-          get_texture(screen_credits_image_path);
+          get_texture(path_credits);
 
     assert(image != NULL && "Unable to find screenCredits.png path");
     env->canvas->draw(image.get(), 1, 0);

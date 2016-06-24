@@ -8,7 +8,7 @@
 
 #define MENU_LANGUAGE_IMAGE "res/language/menuLanguage.png"
 
-#define ENGLISH_LANGUAGE "res/language/english"
+#define ENGLISH_LANGUAGE "english"
 #define ENGLISH_BUTTON_IMAGE "res/language/english.png"
 #define ENGLISH_SELECTED_BUTTON_IMAGE "res/language/Senglish.png"
 
@@ -90,6 +90,8 @@ Internacionalization::Internacionalization() : Level(LANGUAGE_PATH)// Class that
     add_child(french);
     add_child(next);
     add_child(previous);
+
+    set_language(DEFAULT_LANGUAGE_PATH);
 }
 
 Internacionalization::~Internacionalization()
@@ -101,7 +103,7 @@ void Internacionalization::draw_self()// Drow Internacionalization pinctures on 
     Environment *environment = Environment::get_instance();// It is an object of the class environment. Is a pointer to the current instance of the game environment.
     environment->canvas->clear(Color::WHITE);
 
-    shared_ptr<Texture> image = environment->resources_manager->get_texture( MENU_LANGUAGE_IMAGE);
+    shared_ptr<Texture> image = environment->resources_manager->get_texture(MENU_LANGUAGE_IMAGE);
     environment->canvas->draw(image.get(), 1, 0);
 }
 
@@ -110,53 +112,57 @@ bool Internacionalization::on_message(Object *object, MessageID id, Parameters)/
     Environment *environment = Environment::get_instance();// It is an object of the class environment. Is a pointer to the current instance of the game environment.
     Button *button = dynamic_cast<Button *>(object);
     environment->sfx->play("res/sounds/navegacaomenu.wav", 1);
-
+    cout << "chegou aqui" <<endl;
+    cout << game_language << endl;
     if (id != Button::clickedID)
     {
         return false;
     }
-
+    cout << "chegou aqui2" <<endl;
     if (not button)
     {
         return false;
     }
-
+    cout << "chegou aqui3" <<endl;
     if(button->id() == ENGLISH_LANGUAGE || button->id() == ESPANISH_LANGUAGE ||
-       button->id() == "portuguese" || button->id() == "french" ||
+       button->id() == PORTUGUESE_LANGUAGE || button->id() == FRENCH_LANGUAGE ||
        button->id() == "next" || button->id() == "previous")
         {
             environment->sfx->play("res/sounds/navegacaomenu.wav",1);
         }
-
+        cout << "chegou aqui4" <<endl;
     if (button->id() == ENGLISH_LANGUAGE)
     {
         set_next("fone");
-        set_language(DEFAULT_LANGUAGE_PATH);
+        set_language("EN-US");
+        cout << "chegou aqui4,1" <<endl;
+        cout << game_language <<endl;
     }
     else if (button->id() == ESPANISH_LANGUAGE)
     {
         set_next("fone");
-        set_language(ESPANISH_LANGUAGE);
+        set_language("ES-GT");
+        cout << "chegou aqui5" <<endl;
+        cout << game_language <<endl;
     }
-    else if (button->id() == "portuguese")
+    else if (button->id() == PORTUGUESE_LANGUAGE)
     {
         set_next("fone");
-        set_language("portuguese");
-    }
-    else if (button->id() == "french")
-    {
-        set_next("fone");
-        set_language("french");
+        set_language("PT-BR");
+        cout << "chegou aqui6" <<endl;
+        cout << game_language <<endl;
     }
     else if (button->id() == "next")
     {
         set_next("fone");
         set_language(DEFAULT_LANGUAGE_PATH);
+        cout << "chegou aqui7" <<endl;
     }
     else if (button->id() == "previous")
     {
         set_next("fone");
         set_language(DEFAULT_LANGUAGE_PATH);
+        cout << "chegou aqui8" <<endl;
     }
 
     finish();
@@ -171,13 +177,17 @@ Internacionalization* Internacionalization::get_instance()
     if (not singleton)
     {
         singleton = new Internacionalization();
+        cout << "internacionalizou" <<endl;
+        cout << singleton->game_language << endl;
     }
+    cout << "chegou aqui9" <<endl;
     return singleton;
 }
 
 void Internacionalization::set_language(const string& language)
 {
     this->game_language = language;
+    cout << "chegou aqui10" <<endl;
 }
 
 string Internacionalization::get_language()
@@ -192,8 +202,12 @@ string Internacionalization::load_string(const string& source_to_translate)
     assert(language != nullptr);
     assert(source_to_translate != nullptr);
     */
+    cout << "chegou aqui11" <<endl;
     string path_string;
+    cout << "chegou aqui12" <<endl;
+    cout << source_to_translate << endl;
+    cout << game_language << endl;
     path_string = (Internacionalization::GAME_RESOURCE_PATH + "/" + this->game_language + "/" + source_to_translate);
-
+    cout << "chegou aqui13" <<endl;
     return path_string;
 }
