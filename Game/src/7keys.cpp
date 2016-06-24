@@ -13,14 +13,14 @@
 #include "options.hpp"
 #include "credits.hpp"
 #include "extras.hpp"
-
+#include "internacionalization.hpp"
 #include <cassert>
 #include <cstring>
 /**
  * @brief [This is the class constructor method. He starts the game in "headset" and plays a song.]
  */
 SevenKeys::SevenKeys()
-    : Game("fone")
+    : Game("language")
 {
     // Instance of the audio manager that is responsible for playing the game music.
     AudioManagerMusic * music2 = new AudioManagerMusic();
@@ -44,6 +44,10 @@ SevenKeys::load_level(const string& screen_type) {
     if (screen_type == "fone")
     {
         level_to_be_loaded = (Level*) new FrontEnd("logo", "logo", "res/EN-US/images/fone.png");
+    }
+    else if (screen_type == "language")
+    {
+        level_to_be_loaded = (Level*) Internacionalization::get_instance();
     }
     else if (screen_type == "logo")
     {
