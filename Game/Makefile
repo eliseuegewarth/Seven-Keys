@@ -20,7 +20,7 @@ OBJ = ${addprefix $(OBJ_DIR)/, ${notdir ${SRC:.cpp=.o}}}
 .PHONY: clean depend
 
 all:
-	cd lib; sudo make clean && sudo make install
+#cd lib; sudo make clean && sudo make install
 	@mkdir -p $(OBJ_DIR) $(LIB_DIR) $(BIN_DIR)
 	$(MAKE) $(GAME)
 

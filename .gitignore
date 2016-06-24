@@ -33,6 +33,7 @@
 *.h~
 *.cpp~
 *.txt~
+*.txt
 *.gitignore~
 *.gitignore
 

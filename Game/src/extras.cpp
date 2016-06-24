@@ -3,6 +3,7 @@
  */
 
 #include "extras.hpp"
+#include "internacionalization.hpp"
 
 #include "util/button.hpp"
 #include "core/font.hpp"
@@ -32,27 +33,27 @@ Extras::Extras() : Level("extras")
     set_dimensions(width, height);
 
     // Directs to the cutscene of the game.
-    Button *cutscene = new Button(this, "cutscene",
-                                  "res/EN-US/interface/menuExtras/cutscenes.png",
-                                  "res/EN-US/interface/menuExtras/Scutscenes.png");
+    string path_cutscenes = Internacionalization::load_string("interface/menuExtras/cutscenes.png");
+    string path_Scutscenes = Internacionalization::load_string("interface/menuExtras/Scutscenes.png");
+    Button *cutscene = new Button(this, "cutscene", path_cutscenes, path_Scutscenes);
 
     assert((cutscene != NULL) && "Failed to pick up the instance of button");
     cutscene->align_to(this, Object::MIDDLE, Object::NONE);
     cutscene->set_vertical_position(200);
 
     // Directs to the history of the game.
-    Button *historia = new Button(this, "historia",
-                                  "res/EN-US/interface/menuExtras/historia.png",
-                                  "res/EN-US/interface/menuExtras/Shistoria.png");
+    string path_history = Internacionalization::load_string("interface/menuExtras/historia.png");
+    string path_Shistory = Internacionalization::load_string("interface/menuExtras/Shistoria.png");
+    Button *historia = new Button(this, "historia", path_history, path_Shistory);
 
     assert((historia != NULL) && "Failed to pick up the instance of button");
     historia->align_to(this, Object::MIDDLE, Object::NONE);
     historia->set_vertical_position(cutscene->vertical_position() + cutscene->height() + 20);
 
     // Directs to the main menu of the game.
-    Button *back = new Button(this, "back",
-                              "res/EN-US/interface/menuExtras/voltar.png",
-                              "res/EN-US/interface/menuExtras/Svoltar.png");
+    string path_back = Internacionalization::load_string("interface/menuExtras/voltar.png");
+    string path_Sback = Internacionalization::load_string("interface/menuExtras/Svoltar.png");
+    Button *back = new Button(this, "back", path_back, path_Sback);
 
     assert((back != NULL) && "Failed to pick up the instance of button");
     back->align_to(this, Object::MIDDLE, Object::NONE);
@@ -65,7 +66,6 @@ Extras::Extras() : Level("extras")
     add_child(cutscene);
     add_child(historia);
     add_child(back);
-
 }
 
 Extras::~Extras()
@@ -83,8 +83,8 @@ void Extras::draw_self()
     assert((env != NULL) && "Failed to pick up the instance of environment");
     env->canvas->clear(Color::WHITE);
 
-    const shared_ptr<Texture> image = env->resources_manager->
-                        get_texture("res/EN-US/interface/menuExtras/menuExtras.png");
+    string path_menu_extras = Internacionalization::load_string("interface/menuExtras/menuExtras.png");
+    const shared_ptr<Texture> image = env->resources_manager->get_texture(path_menu_extras);
     assert((image != NULL) && "image to pick up the instance of environment");
     env->canvas->draw(image.get(), 1, 0);
 }

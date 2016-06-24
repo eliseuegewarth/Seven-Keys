@@ -12,16 +12,16 @@ class Internacionalization : public Level
 {
 public:
     /*static string load_string(const string& language, const string& source_to_translate);*/
-    string load_string(const string& source_to_translate);
-    static Internacionalization* get_instance();
-    void set_language(const string& language);
-    string get_language();
+    Internacionalization();
+
+    static string load_string(const string& source_to_translate);
     virtual ~Internacionalization();
 
     bool on_message(Object *object, MessageID id, Parameters);
 
 private:
-    Internacionalization();
+    void set_language(const string& language);
+    static string get_language();
     static const string GAME_RESOURCE_PATH;
     string game_language;
     void draw_self();

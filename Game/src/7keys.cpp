@@ -14,8 +14,11 @@
 #include "credits.hpp"
 #include "extras.hpp"
 #include "internacionalization.hpp"
+
 #include <cassert>
 #include <cstring>
+
+
 /**
  * @brief [This is the class constructor method. He starts the game in "headset" and plays a song.]
  */
@@ -41,25 +44,32 @@ SevenKeys::load_level(const string& screen_type) {
     // Represents the screen that will be loaded.
     Level * level_to_be_loaded = nullptr;
 
-    if (screen_type == "fone")
+    if (screen_type == "language")
     {
-        level_to_be_loaded = (Level*) new FrontEnd("logo", "logo", "res/EN-US/images/fone.png");
+        level_to_be_loaded = (Level*) new Internacionalization();
     }
-    else if (screen_type == "language")
+    else if (screen_type == "fone")
     {
-        level_to_be_loaded = (Level*) Internacionalization::get_instance();
+        string path_fone = Internacionalization::load_string("images/fone.png");
+        cout << "deu ruim2" <<endl;
+        level_to_be_loaded = (Level*) new FrontEnd("logo", "logo", path_fone);
     }
     else if (screen_type == "logo")
     {
-        level_to_be_loaded = (Level*) new FrontEnd("logo", "tecnologias", "res/EN-US/images/manateam.png");
+        string path_mana_team = Internacionalization::load_string("images/manateam.png");
+        level_to_be_loaded = (Level*) new FrontEnd("logo", "tecnologias", path_mana_team);
     }
     else if (screen_type == "tecnologias")
     {
-        level_to_be_loaded = (Level*) new FrontEnd("tecnologias", "classificacao", "res/EN-US/images/tecnologias.png");
+        string path_tecnologias = Internacionalization::load_string("images/tecnologias.png");
+        level_to_be_loaded = (Level*) new FrontEnd("tecnologias", "classificacao", path_tecnologias);
     }
     else if (screen_type == "classificacao")
     {
-        level_to_be_loaded = (Level*) new FrontEnd("classificacao", "title", "res/EN-US/images/classificacao_indicativa.png");
+        cout << "deu ruim" <<endl;
+        string path_classificacao = Internacionalization::load_string("images/classificacao_indicativa.png");
+        cout << path_classificacao <<endl;
+        level_to_be_loaded = (Level*) new FrontEnd("classificacao", "title", path_classificacao);
     }
     else if (screen_type == "title")
     {
@@ -112,13 +122,15 @@ SevenKeys::load_level(const string& screen_type) {
         sprintf(stage_number_array_of_characters, "%s", string_of_stage_number.c_str());
         int new_stage_number = atoi(stage_number_array_of_characters);
         char path[PATH_STRING_MAX_SIZE] = "";
+        string path_transition_fase;
         if(new_stage_number < 6)
         {
-            sprintf(path, "res/EN-US/interface/transicao/Fase%d.png", new_stage_number);
+            sprintf(path, "interface/transicao/Fase%d.png", new_stage_number);
+            path_transition_fase = Internacionalization::load_string(path);
         }
         else
         {
-            sprintf(path, "res/EN-US/interface/transicao/Bonus.png");
+            path_transition_fase = Internacionalization::load_string("interface/transicao/Bonus.png");
         }
 
         char music_path[MUSIC_PATH_STRING_MAX_SIZE];
@@ -136,7 +148,8 @@ SevenKeys::load_level(const string& screen_type) {
 
         cout << stage_screen_type << endl;
 
-        level_to_be_loaded = (Level*) new FrontEnd(screen_type, stage_screen_type, path);
+        level_to_be_loaded = (Level*) new FrontEnd(screen_type, stage_screen_type,
+                                                   path_transition_fase);
     }
 
     else if(strstr(screen_type.c_str(), "death"))
@@ -169,8 +182,8 @@ SevenKeys::load_level(const string& screen_type) {
         stage_screen_type[4] = 'e';
 
         this->number_of_players_lives--;
-
-        level_to_be_loaded = (Level*) new FrontEnd(screen_type, stage_screen_type, "res/EN-US/images/transition.png");
+        string path_transition = Internacionalization::load_string("images/transition.png");
+        level_to_be_loaded = (Level*) new FrontEnd(screen_type, stage_screen_type, path_transition);
     }
     else if(screen_type == "gameover")
     {
@@ -187,7 +200,8 @@ SevenKeys::load_level(const string& screen_type) {
         Level *lvl = new Level(screen_type, screen_type);
         assert(lvl != NULL && "failed to create a Level instance");
         lvl->set_dimensions(width, height);
-        level_to_be_loaded = (Level*) new FrontEnd(screen_type, "title", "res/EN-US/interface/transicao/gameOver.png");
+        string path_transition_game_over = Internacionalization::load_string("interface/transicao/gameOver.png");
+        level_to_be_loaded = (Level*) new FrontEnd(screen_type, "title", path_transition_game_over);
     }
     else if (strstr(screen_type.c_str(), "stage"))
     {

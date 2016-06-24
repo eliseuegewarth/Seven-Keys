@@ -8,7 +8,7 @@
 
 #include "core/game.hpp"
 #include "player.hpp"
-
+#include "internacionalization.hpp"
 
 class SevenKeys : public Game
 {

@@ -5,30 +5,35 @@
 #include "core/environment.hpp"
 #include "core/mousemotionevent.hpp"
 #include <iostream>
+#include <fstream>
 
 #define MENU_LANGUAGE_IMAGE "res/language/menuLanguage.png"
 
-#define ENGLISH_LANGUAGE "res/language/english"
+#define ENGLISH_LANGUAGE "EN-US"
+#define ENGLISH_BUTTON_NAME "english"
 #define ENGLISH_BUTTON_IMAGE "res/language/english.png"
 #define ENGLISH_SELECTED_BUTTON_IMAGE "res/language/Senglish.png"
 
-#define ESPANISH_LANGUAGE "espanish"
+#define ESPANISH_LANGUAGE "ES-GT"
+#define ESPANISH_BUTTON_NAME "espanish"
 #define ESPANISH_BUTTON_IMAGE "res/language/espanish.png"
 #define ESPANISH_SELECTED_BUTTON_IMAGE "res/language/Sespanish.png"
 
-#define PORTUGUESE_LANGUAGE "portuguese"
+#define PORTUGUESE_LANGUAGE "PT-BR"
+#define PORTUGUESE_BUTTON_NAME "portuguese"
 #define PORTUGUESE_BUTTON_IMAGE "res/language/portuguese.png"
 #define PORTUGUESE_SELECTED_BUTTON_IMAGE "res/language/Sportuguese.png"
 
-#define FRENCH_LANGUAGE "french"
+#define FRENCH_LANGUAGE "FR-FR"
+#define FRENCH_BUTTON_NAME "french"
 #define FRENCH_BUTTON_IMAGE "res/language/french.png"
 #define FRENCH_SELECTED_BUTTON_IMAGE "res/language/Sfrench.png"
 
-#define NEXT "next"
+#define NEXT_BUTTON_NAME "next"
 #define NEXT_BUTTON_IMAGE "res/language/next.png"
 #define NEXT_SELECTED_BUTTON_IMAGE "res/language/Snext.png"
 
-#define PREVIOUS "previous"
+#define PREVIOUS_BUTTON_NAME "previous"
 #define PREVIOUS_BUTTON_IMAGE "res/language/previous.png"
 #define PREVIOUS_SELECTED_BUTTON_IMAGE "res/language/Sprevious.png"
 
@@ -45,33 +50,33 @@ Internacionalization::Internacionalization() : Level(LANGUAGE_PATH)// Class that
 
     set_dimensions(width, height);
 
-    Button *english = new Button(this, ENGLISH_LANGUAGE, ENGLISH_BUTTON_IMAGE,
+    Button *english = new Button(this, ENGLISH_BUTTON_NAME, ENGLISH_BUTTON_IMAGE,
         ENGLISH_SELECTED_BUTTON_IMAGE);// Puts the screen in fullscreen.
     english->align_to(this, Object::RIGHT, Object::MIDDLE);
     english->set_vertical_position(150);
 
-    Button *espanish = new Button(this, ESPANISH_LANGUAGE, ESPANISH_BUTTON_IMAGE,
+    Button *espanish = new Button(this, ESPANISH_BUTTON_NAME, ESPANISH_BUTTON_IMAGE,
         ESPANISH_SELECTED_BUTTON_IMAGE);// Puts the screen in windowed mode.
     espanish->align_to(this, Object::RIGHT, Object::NONE);
     espanish->set_vertical_position(english->vertical_position() + english->height() + 16);
 
-    Button *portuguese = new Button(this, PORTUGUESE_LANGUAGE, PORTUGUESE_BUTTON_IMAGE,
+    Button *portuguese = new Button(this, PORTUGUESE_BUTTON_NAME, PORTUGUESE_BUTTON_IMAGE,
         PORTUGUESE_SELECTED_BUTTON_IMAGE);// Puts the screen in windowed mode.
     portuguese->align_to(this, Object::RIGHT, Object::NONE);
     portuguese->set_vertical_position(espanish->vertical_position() + espanish->height() + 16    );
 
-    Button *french = new Button(this, FRENCH_LANGUAGE, FRENCH_BUTTON_IMAGE,
+    Button *french = new Button(this, FRENCH_BUTTON_NAME, FRENCH_BUTTON_IMAGE,
         FRENCH_SELECTED_BUTTON_IMAGE);// Puts the screen in windowed mode.
     french->align_to(this, Object::RIGHT, Object::NONE);
     french->set_vertical_position(portuguese->vertical_position() + portuguese->height() + 16);
 
-    Button *next = new Button(this, NEXT, NEXT_BUTTON_IMAGE,
+    Button *next = new Button(this, NEXT_BUTTON_NAME, NEXT_BUTTON_IMAGE,
         NEXT_SELECTED_BUTTON_IMAGE);// Directs to the main menu of the game.
     next->align_to(this, Object::RIGHT, Object::NONE);
     next->set_vertical_position(french->vertical_position() + french->height() + 16);
 
-    Button *previous = new Button(this, "previous", "res/language/previous.png",
-        "res/language/Sprevious.png");// Directs to the main menu of the game.
+    Button *previous = new Button(this, PREVIOUS_BUTTON_NAME, PREVIOUS_BUTTON_IMAGE,
+        PREVIOUS_SELECTED_BUTTON_IMAGE);// Directs to the main menu of the game.
     previous->align_to(this, Object::MIDDLE, Object::NONE);
     previous->set_vertical_position(next->vertical_position());
     previous->set_horizontal_position(next->horizontal_position() - next->width() - 16);
@@ -90,70 +95,71 @@ Internacionalization::Internacionalization() : Level(LANGUAGE_PATH)// Class that
     add_child(french);
     add_child(next);
     add_child(previous);
+
+
 }
 
 Internacionalization::~Internacionalization()
 {
 }
 
-void Internacionalization::draw_self()// Drow Internacionalization pinctures on the screen.
+// Drow Internacionalization pinctures on the screen.
+void Internacionalization::draw_self()
 {
-    Environment *environment = Environment::get_instance();// It is an object of the class environment. Is a pointer to the current instance of the game environment.
+    // It is an object of the class environment. Is a pointer to the current instance of the game environment.
+    Environment *environment = Environment::get_instance();
     environment->canvas->clear(Color::WHITE);
 
-    shared_ptr<Texture> image = environment->resources_manager->get_texture( MENU_LANGUAGE_IMAGE);
+    shared_ptr<Texture> image = environment->resources_manager->get_texture(MENU_LANGUAGE_IMAGE);
     environment->canvas->draw(image.get(), 1, 0);
 }
 
 bool Internacionalization::on_message(Object *object, MessageID id, Parameters)// Let the dynamic buttons.
 {
-    Environment *environment = Environment::get_instance();// It is an object of the class environment. Is a pointer to the current instance of the game environment.
+    Environment *environment = Environment::get_instance();
+    // It is an object of the class environment. Is a pointer to the current instance of the game environment.
     Button *button = dynamic_cast<Button *>(object);
     environment->sfx->play("res/sounds/navegacaomenu.wav", 1);
-
     if (id != Button::clickedID)
     {
         return false;
     }
-
     if (not button)
     {
         return false;
     }
-
     if(button->id() == ENGLISH_LANGUAGE || button->id() == ESPANISH_LANGUAGE ||
-       button->id() == "portuguese" || button->id() == "french" ||
+       button->id() == PORTUGUESE_LANGUAGE || button->id() == FRENCH_LANGUAGE ||
        button->id() == "next" || button->id() == "previous")
         {
             environment->sfx->play("res/sounds/navegacaomenu.wav",1);
         }
-
-    if (button->id() == ENGLISH_LANGUAGE)
+    if (button->id() == ENGLISH_BUTTON_NAME)
     {
         set_next("fone");
-        set_language(DEFAULT_LANGUAGE_PATH);
+        set_language(ENGLISH_LANGUAGE);
     }
-    else if (button->id() == ESPANISH_LANGUAGE)
+    else if (button->id() == ESPANISH_BUTTON_NAME)
     {
         set_next("fone");
         set_language(ESPANISH_LANGUAGE);
     }
-    else if (button->id() == "portuguese")
+    else if (button->id() == PORTUGUESE_BUTTON_NAME)
     {
         set_next("fone");
-        set_language("portuguese");
+        set_language(PORTUGUESE_LANGUAGE);
     }
-    else if (button->id() == "french")
+    else if (button->id() == FRENCH_BUTTON_NAME)
     {
         set_next("fone");
-        set_language("french");
+        set_language(PORTUGUESE_LANGUAGE);
     }
-    else if (button->id() == "next")
+    else if (button->id() == NEXT_BUTTON_NAME)
     {
         set_next("fone");
         set_language(DEFAULT_LANGUAGE_PATH);
     }
-    else if (button->id() == "previous")
+    else if (button->id() == PREVIOUS_BUTTON_NAME)
     {
         set_next("fone");
         set_language(DEFAULT_LANGUAGE_PATH);
@@ -164,36 +170,27 @@ bool Internacionalization::on_message(Object *object, MessageID id, Parameters)/
     return true;
 }
 
-Internacionalization* Internacionalization::get_instance()
-{
-    static Internacionalization* singleton;
-
-    if (not singleton)
-    {
-        singleton = new Internacionalization();
-    }
-    return singleton;
-}
-
 void Internacionalization::set_language(const string& language)
 {
-    this->game_language = language;
+    ofstream language_preferences;
+    language_preferences.open("language_preferences.txt", ios::out);
+    language_preferences << language << endl;
+    language_preferences.close();
 }
 
 string Internacionalization::get_language()
 {
-    return this->game_language;
+    ifstream language_preferences;
+    language_preferences.open("language_preferences.txt", ios::in);
+    string language;
+    getline (language_preferences,language);
+    language_preferences.close();
+    return language;
 }
 
-/*string Internacionalization::load_string(const string& language, const string& source_to_translate)*/
 string Internacionalization::load_string(const string& source_to_translate)
 {
-    /*
-    assert(language != nullptr);
-    assert(source_to_translate != nullptr);
-    */
     string path_string;
-    path_string = (Internacionalization::GAME_RESOURCE_PATH + "/" + this->game_language + "/" + source_to_translate);
-
+    path_string = (Internacionalization::GAME_RESOURCE_PATH + "/" + Internacionalization::get_language() + "/" + source_to_translate);
     return path_string;
 }
