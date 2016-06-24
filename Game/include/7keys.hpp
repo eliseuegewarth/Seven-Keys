@@ -13,22 +13,6 @@
 class SevenKeys : public Game
 {
 public:
-
-    /*static namespace screen_type
-    {
-      const string& FONE = "fone";
-      const string& LOGO = "logo";
-      const string& TECNOLOGIAS = "tecnologias";
-      const string& CLASSIFICACAO = "classificacao";
-      const string& TITLE = "title";
-      const string& OPTIONS = "options";
-      const string& TRANSITION = "trans";
-      const string& DEATH = "death";
-      const string& GAMEOVER = "gameover";
-      const string& STAGE = "stage";
-      const string& CREDITOS = "creditos";
-      const string& EXTRAS = "extras";
-    }Screen_type;*/
     SevenKeys();
 
 private:
