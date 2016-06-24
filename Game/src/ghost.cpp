@@ -139,10 +139,6 @@ void Ghost::walk()
                                                 > this->horizontal_position() - 100);
     const bool player_is_to_the_left_to_walk = (player_horizontal_position
                                                 < this->horizontal_position() + 100);
-    const bool player_is_to_the_buttom_to_walk = (player_vertical_position
-                                                 < this->vertical_position() + 100);
-    const bool player_is_to_the_top_to_walk = (player_vertical_position
-                                              > this->vertical_position() - 100);
     const bool player_is_aligned_vertically = (player_is_to_the_right_to_walk
                                               and player_is_to_the_left_to_walk);
 
