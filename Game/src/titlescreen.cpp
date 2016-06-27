@@ -15,6 +15,19 @@
 #include <iostream>
 using namespace std;
 
+#define PATH_OF_MUSIC_MENU "res/sounds/navegacaomenu.wav"
+#define PLAY_BUTTON_PATH "interface/menuInicial/jogar.png"
+#define ON_FOCUS_PLAY_BUTTON_PATH "interface/menuInicial/Sjogar.png"
+#define OPTIONS_BUTTON_PATH "interface/menuInicial/opcao.png"
+#define ON_FOCUS_OPTIONS_BUTTON_PATH "interface/menuInicial/Sopcao.png"
+#define CREDITS_BUTTON_PATH "interface/menuInicial/creditos.png"
+#define ON_FOCUS_CREDITS_BUTTON_PATH "interface/menuInicial/Screditos.png"
+#define EXIT_BUTTON_PATH "interface/menuInicial/sair.png"
+#define ON_FOCUS_EXIT_BUTTON_PATH "interface/menuInicial/Ssair.png"
+#define EXTRAS_BUTTON_PATH "interface/menuInicial/extras.png"
+#define ON_FOCUS_EXTRAS_BUTTON_PATH "interface/menuInicial/Sextras.png"
+#define MAIN_MENU_PATH "interface/menuInicial/menuInicial.png"
+
 TitleScreen::TitleScreen()
     : Level("title")
 {
@@ -25,31 +38,31 @@ TitleScreen::TitleScreen()
 
     set_dimensions(width, height);
 
-    string path_play_button = Internacionalization::load_string("interface/menuInicial/jogar.png");
-    string path_Splay_button = Internacionalization::load_string("interface/menuInicial/Sjogar.png");
+    string path_play_button = Internacionalization::load_string(PLAY_BUTTON_PATH);
+    string path_Splay_button = Internacionalization::load_string(ON_FOCUS_PLAY_BUTTON_PATH);
     Button *jogar = new Button(this, "jogar", path_play_button, path_Splay_button);
     jogar->align_to(this, Object::RIGHT , Object::MIDDLE);
 
-    string path_option_button = Internacionalization::load_string("interface/menuInicial/opcao.png");
-    string path_Soption_button = Internacionalization::load_string("interface/menuInicial/Sopcao.png");
+    string path_option_button = Internacionalization::load_string(OPTIONS_BUTTON_PATH);
+    string path_Soption_button = Internacionalization::load_string(ON_FOCUS_OPTIONS_BUTTON_PATH);
     Button *options = new Button(this, "options", path_option_button, path_Soption_button);
     options->align_to(this, Object::RIGHT, Object::NONE);
     options->set_vertical_position(jogar->vertical_position() + jogar->height() + 15);
 
-    string path_credits_button = Internacionalization::load_string("interface/menuInicial/creditos.png");
-    string path_Scredits_button = Internacionalization::load_string("interface/menuInicial/Screditos.png");
+    string path_credits_button = Internacionalization::load_string(CREDITS_BUTTON_PATH);
+    string path_Scredits_button = Internacionalization::load_string(ON_FOCUS_CREDITS_BUTTON_PATH);
     Button *creditos = new Button(this, "creditos", path_credits_button, path_Scredits_button);
     creditos->align_to(this, Object::RIGHT, Object::NONE);
     creditos->set_vertical_position(options->vertical_position() + options->height()+15);
 
-    string path_exit_button = Internacionalization::load_string("interface/menuInicial/sair.png");
-    string path_Sexit_button = Internacionalization::load_string("interface/menuInicial/Ssair.png");
+    string path_exit_button = Internacionalization::load_string(EXIT_BUTTON_PATH);
+    string path_Sexit_button = Internacionalization::load_string(ON_FOCUS_EXIT_BUTTON_PATH);
     Button *exit = new Button(this, "exit", path_exit_button, path_Sexit_button);
     exit->align_to(this, Object::RIGHT, Object::NONE);
     exit->set_vertical_position(creditos->vertical_position() + creditos->height() + 15);
 
-    string path_extras_button = Internacionalization::load_string("interface/menuInicial/extras.png");
-    string path_Sextras_button = Internacionalization::load_string("interface/menuInicial/Sextras.png");
+    string path_extras_button = Internacionalization::load_string(EXTRAS_BUTTON_PATH);
+    string path_Sextras_button = Internacionalization::load_string(ON_FOCUS_EXTRAS_BUTTON_PATH);
     Button *extras = new Button (this, "extras", path_extras_button, path_Sextras_button);
     creditos->align_to(this, Object::MIDDLE, Object::NONE);
     extras->set_vertical_position(creditos->vertical_position() +creditos->height() + 15);
@@ -77,7 +90,7 @@ TitleScreen::draw_self()
     Environment *env = Environment::get_instance();
     env->canvas->clear(Color::WHITE);
 
-    string path_main_menu = Internacionalization::load_string("interface/menuInicial/menuInicial.png");
+    string path_main_menu = Internacionalization::load_string(MAIN_MENU_PATH);
     shared_ptr<Texture> image = env->resources_manager->get_texture(path_main_menu);
     env->canvas->draw(image.get(), 1, 0);
 }
@@ -102,7 +115,7 @@ TitleScreen::on_message(Object *object, MessageID id, Parameters)
         set_next("trans1");
     } else if (button->id() == "options")
     {
-        env->sfx->play("res/sounds/navegacaomenu.wav", 1);
+        env->sfx->play(PATH_OF_MUSIC_MENU, 1);
         set_next("options");
     }
     else if(button->id() == "creditos")
