@@ -28,21 +28,29 @@ Options::Options() : Level("options")// Class that represents the option of the 
     windowmode->align_to(this, Object::RIGHT, Object::NONE);
     windowmode->set_vertical_position(set_fullscreen->vertical_position() + set_fullscreen->height() + 20);
 
+    string path_language_options = Internacionalization::load_string("interface/menuOpcao/modoJanela.png");
+    string path_Slanguage_options = Internacionalization::load_string("interface/menuOpcao/SmodoJanela.png");
+    Button *language_options = new Button(this, "language", path_language_options, path_Slanguage_options);
+    // Puts the screen in windowed mode.
+    language_options->align_to(this, Object::RIGHT, Object::NONE);
+    language_options->set_vertical_position(windowmode->vertical_position() + windowmode->height() + 20);
+
     string path_back = Internacionalization::load_string("interface/menuOpcao/voltar.png");
     string path_Sback = Internacionalization::load_string("interface/menuOpcao/Svoltar.png");
     Button *back = new Button(this, "back", path_back, path_Sback);
     // Directs to the main menu of the game.
     back->align_to(this, Object::RIGHT, Object::NONE);
-    back->set_vertical_position(windowmode->vertical_position() + windowmode->height() + 20);
+    back->set_vertical_position(language_options->vertical_position() + language_options->height() + 20);
 
     set_fullscreen->add_observer(this);
     windowmode->add_observer(this);
     back->add_observer(this);
+    language_options->add_observer(this);
 
     add_child(set_fullscreen);
     add_child(windowmode);
     add_child(back);
-
+    add_child(language_options);
 
 
 }
@@ -89,6 +97,10 @@ bool Options::on_message(Object *object, MessageID id, Parameters)// Let the dyn
     {
         env->video->set_fullscreen(false);
         set_next("options");
+    }
+    else if (button->id() == "language")
+    {
+        set_next("language");
     }
 
     else if (button->id() == "back")
