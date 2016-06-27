@@ -6,6 +6,7 @@
  * Licença: LGPL. Sem copyright.
  */
 #include "titlescreen.hpp"
+#include "7keys.hpp"
 
 #include "util/button.hpp"
 #include "core/font.hpp"
@@ -15,7 +16,7 @@
 using namespace std;
 
 TitleScreen::TitleScreen()
-    : Level("title")
+    : Level(SevenKeys::ScreenType::MAIN_SCREEN)
 {
     Environment *env = Environment::get_instance();
 
@@ -28,12 +29,12 @@ TitleScreen::TitleScreen()
         "res/EN-US/interface/menuInicial/Sjogar.png");
     jogar->align_to(this, Object::RIGHT , Object::MIDDLE);
 
-    Button *options = new Button(this, "options", "res/EN-US/interface/menuInicial/opcao.png",
+    Button *options = new Button(this, SevenKeys::ScreenType::OPTIONS, "res/EN-US/interface/menuInicial/opcao.png",
         "res/EN-US/interface/menuInicial/Sopcao.png");
     options->align_to(this, Object::RIGHT, Object::NONE);
     options->set_vertical_position(jogar->vertical_position() + jogar->height() + 15);
 
-    Button *creditos = new Button(this, "creditos", "res/EN-US/interface/menuInicial/creditos.png",
+    Button *creditos = new Button(this, SevenKeys::ScreenType::CREDITS, "res/EN-US/interface/menuInicial/creditos.png",
         "res/EN-US/interface/menuInicial/Screditos.png");
     creditos->align_to(this, Object::RIGHT, Object::NONE);
     creditos->set_vertical_position(options->vertical_position() + options->height()+15);
@@ -43,7 +44,7 @@ TitleScreen::TitleScreen()
     exit->align_to(this, Object::RIGHT, Object::NONE);
     exit->set_vertical_position(creditos->vertical_position() + creditos->height() + 15);
 
-    Button *extras = new Button (this, "extras", "res/EN-US/interface/menuInicial/extras.png",
+    Button *extras = new Button (this, SevenKeys::ScreenType::EXTRAS, "res/EN-US/interface/menuInicial/extras.png",
         "res/EN-US/interface/menuInicial/Sextras.png");
     creditos->align_to(this, Object::MIDDLE, Object::NONE);
     extras->set_vertical_position(creditos->vertical_position() +creditos->height() + 15);
@@ -93,15 +94,15 @@ TitleScreen::on_message(Object *object, MessageID id, Parameters)
     if (button->id() == "jogar")
     {
         set_next("trans1");
-    } else if (button->id() == "options")
+    } else if (button->id() == SevenKeys::ScreenType::OPTIONS)
     {
         env->sfx->play("res/sounds/navegacaomenu.wav", 1);
-        set_next("options");
+        set_next(SevenKeys::ScreenType::OPTIONS);
     }
-    else if(button->id() == "creditos")
-        set_next("creditos");
-    else if (button-> id() == "extras")
-        set_next("extras");
+    else if(button->id() == SevenKeys::ScreenType::CREDITS)
+        set_next(SevenKeys::ScreenType::CREDITS);
+    else if (button-> id() == SevenKeys::ScreenType::EXTRAS)
+        set_next(SevenKeys::ScreenType::EXTRAS);
 
     finish();
 

@@ -1,4 +1,5 @@
 #include "options.hpp"
+#include "7keys.hpp"
 #include "internacionalization.hpp"
 
 #include "util/button.hpp"
@@ -8,7 +9,7 @@
 #include <iostream>
 using namespace std;
 
-Options::Options() : Level("options")// Class that represents the option of the main menu of the game.
+Options::Options() : Level(SevenKeys::ScreenType::OPTIONS)// Class that represents the option of the main menu of the game.
 {
     Environment *env = Environment::get_instance();// It is an object of the class environment. Is a pointer to the current instance of the game environment.
     double width = env->canvas->width();// Receives the width of the game environment.
@@ -83,17 +84,17 @@ bool Options::on_message(Object *object, MessageID id, Parameters)// Let the dyn
     if (button->id() == "fullscreen")
     {
         env->video->set_fullscreen();
-        set_next("options");
+        set_next(SevenKeys::ScreenType::OPTIONS);
     }
     else if (button->id() == "windowmode")
     {
         env->video->set_fullscreen(false);
-        set_next("options");
+        set_next(SevenKeys::ScreenType::OPTIONS);
     }
 
     else if (button->id() == "back")
     {
-        set_next("title");
+        set_next(SevenKeys::ScreenType::MAIN_SCREEN);
     }
 
     finish();

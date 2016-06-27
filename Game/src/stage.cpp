@@ -8,6 +8,7 @@
 
 #include "guard.hpp"
 #include "stage.hpp"
+#include "7keys.hpp"
 #include "item.hpp"
 #include "map.hpp"
 #include "player.hpp"
@@ -459,7 +460,7 @@ bool Stage::on_message(Object *, MessageID id, Parameters p)
             *m_sanity = m_player->sanity();
         }
         else
-            sprintf(new_stage, "gameover");
+            sprintf(new_stage, "%s", SevenKeys::ScreenType::GAME_OVER.c_str());
         m_player->notify(Player::hitExitDoorID, new_stage);
         return true;
     }

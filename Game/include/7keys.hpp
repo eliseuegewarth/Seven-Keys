@@ -15,6 +15,25 @@ class SevenKeys : public Game
 public:
     SevenKeys();
 
+    // Class that represents the screen types of game.
+    class ScreenType
+    {
+    public:
+        static const string& LANGUAGUE;
+        static const string& HEADPHONE;
+        static const string& COMPANY_LOGO;
+        static const string& USED_TECHNOLOGIES;
+        static const string& AGE_RATING;
+        static const string& MAIN_SCREEN;
+        static const string& OPTIONS;
+        static const string& STAGE;
+        static const string& TRANSITION;
+        static const string& DEATH;
+        static const string& GAME_OVER;
+        static const string& CREDITS;
+        static const string& EXTRAS;
+        static const string& PAUSE;
+    };
 private:
     // Is the initial value of sanity (HP) of the player.
     #define INITIAL_SANITY_OF_THE_PLAYER 100
