@@ -1,5 +1,6 @@
 #include "pause.hpp"
 #include "7keys.hpp"
+#include "internacionalization.hpp"
 
 #include "util/button.hpp"
 #include "core/font.hpp"
@@ -9,6 +10,21 @@
 #include <cassert>
 
 using namespace std;
+
+#define RESUME_GAME_BUTTON_PATH "interface/menuPausa/voltarJogo.png"
+//Path of button "resume"
+#define ON_FOCUS_RESUME_GAME_BUTTON_PATH "interface/menuPausa/SvoltarJogo.png"
+//Path of button "resume", used when is selected
+#define BACK_TO_MAIN_MENU_BUTTON_PATH "interface/menuExtras/voltar.png"
+//Path of button "back to main menu"
+#define ON_FOCUS_BACK_TO_MAIN_MENU_BUTTON_PATH "interface/menuExtras/voltar.png"
+//Path of button "back to main menu", used when is selected
+#define EXIT_BUTTON_PATH "interface/menuExtras/sair.png"
+//Path of button "exit"
+#define ON_FOCUS_EXIT_BUTTON_PATH "interface/menuExtras/Ssair.png"
+//Path of button "exit", used when is selected
+#define PAUSE_BACKGROUD_PATH "interface/menuPausa/fundoPausa.png"
+//Path of background of pause menu
 
 /**
  * @brief Creates the environment of the pause menu.
@@ -31,9 +47,9 @@ Pause::Pause()
     set_dimensions(width, height);
 
     // Directs the environment where the game was paused.
-    Button *backGame = new Button(this, "backGame",
-                                  "res/EN-US/interface/menuPausa/voltarJogo.png",
-                                  "res/EN-US/interface/menuPausa/SvoltarJogo.png");
+    string path_resume_button = Internacionalization::load_string(RESUME_GAME_BUTTON_PATH);
+    string path_Sresume_button = Internacionalization::load_string(ON_FOCUS_RESUME_GAME_BUTTON_PATH);
+    Button *backGame = new Button(this, "backGame", path_resume_button, path_Sresume_button);
 
     assert((backGame != NULL) && "Failed to pick up the instance of button");
 
@@ -41,9 +57,9 @@ Pause::Pause()
     backGame->set_vertical_position(200);
 
     // Directs to the main menu of the game.
-    Button *backMenu = new Button(this, "backMenu",
-                                  "res/EN-US/interface/menuExtras/voltar.png",
-                                  "res/EN-US/interface/menuExtras/Svoltar.png");
+    string path_back_button = Internacionalization::load_string(BACK_TO_MAIN_MENU_BUTTON_PATH);
+    string path_Sback_button = Internacionalization::load_string(ON_FOCUS_BACK_TO_MAIN_MENU_BUTTON_PATH);
+    Button *backMenu = new Button(this, "backMenu", path_back_button, path_Sback_button);
 
     assert((backMenu != NULL) && "Failed to pick up the instance of button");
 
@@ -51,9 +67,9 @@ Pause::Pause()
     backMenu->set_vertical_position(backGame->vertical_position() + backGame->height()+20);
 
     // Closes the game.
-    Button *exit = new Button(this, "exit",
-                              "res/EN-US/interface/menuExtras/sair.png",
-                              "res/EN-US/interface/menuExtras/Ssair.png");
+    string path_sair = Internacionalization::load_string(EXIT_BUTTON_PATH);
+    string path_Ssair = Internacionalization::load_string(ON_FOCUS_EXIT_BUTTON_PATH);
+    Button *exit = new Button(this, "exit", path_sair, path_Ssair);
 
     assert((exit != NULL) && "Failed to pick up the instance of button");
 
@@ -85,7 +101,8 @@ void Pause::draw_self()
     assert((env != NULL) && "Filed to pick up the instance of environment");
     env->canvas->clear(Color::WHITE);
 
-    shared_ptr<Texture> image = env->resources_manager->get_texture("res/EN-US/interface/menuPausa/fundoPausa.png");
+    string path_fundo_pausa = Internacionalization::load_string(PAUSE_BACKGROUD_PATH);
+    shared_ptr<Texture> image = env->resources_manager->get_texture(path_fundo_pausa);
     assert((image != NULL) && "image to pick up the instance of environment");
     env->canvas->draw(image.get(), 1, 0);
 }
