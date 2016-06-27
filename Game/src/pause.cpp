@@ -1,4 +1,5 @@
 #include "pause.hpp"
+#include "7keys.hpp"
 #include "internacionalization.hpp"
 
 #include "util/button.hpp"
@@ -30,7 +31,7 @@ using namespace std;
  * instantiates the pause page, from the time, the buttons and the background.
  */
 Pause::Pause()
-    : Level("pause")
+    : Level(SevenKeys::ScreenType::PAUSE)
 {
     /* It is an object of the class environment.
     Is a pointer to the current instance of the game environment.*/
@@ -140,7 +141,7 @@ bool Pause::on_message(Object *object, MessageID id, Parameters)
 
     else if (button->id() == "backMenu")
     {
-        set_next("title");
+        set_next(SevenKeys::ScreenType::MAIN_SCREEN);
     }
 
     finish();

@@ -1,4 +1,5 @@
 #include "credits.hpp"
+#include "7keys.hpp"
 #include "util/button.hpp"
 #include "core/font.hpp"
 #include "core/environment.hpp"
@@ -16,7 +17,7 @@
 using namespace std;
 
 
-Credits::Credits() : Level("credits")
+Credits::Credits() : Level(SevenKeys::ScreenType::CREDITS)
 {
     /* It is an object of the class environment.
     Is a pointer to the current instance of the game environment.
@@ -82,7 +83,7 @@ bool Credits::on_message(Object *object, MessageID id, Parameters)
     }
     if (button->id() == "back")
     {
-        set_next("title");
+        set_next(SevenKeys::ScreenType::MAIN_SCREEN);
     }
 
     finish();

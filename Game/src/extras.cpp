@@ -3,6 +3,7 @@
  */
 
 #include "extras.hpp"
+#include "7keys.hpp"
 #include "internacionalization.hpp"
 
 #include "util/button.hpp"
@@ -17,7 +18,7 @@ using namespace std;
 /**
  * @brief Creates the environment of the extras menu.
  */
-Extras::Extras() : Level("extras")
+Extras::Extras() : Level(SevenKeys::ScreenType::EXTRAS)
 {
     /* It is an object of the class environment.
     Is a pointer to the current instance of the game environment.*/
@@ -121,7 +122,7 @@ bool Extras::on_message(Object *object, MessageID id, Parameters)
     }
     if (button->id() == "back")
     {
-        set_next("title");
+        set_next(SevenKeys::ScreenType::MAIN_SCREEN);
     }
     else
     {

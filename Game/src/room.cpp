@@ -10,6 +10,7 @@
 #include "core/image.hpp"
 
 #include "room.hpp"
+#include "7keys.hpp"
 
 ActionID Room::guardDeathID { "guardDeathID()" };
 
@@ -367,7 +368,7 @@ Room::add_door(string type, char direction, int horizontal_position, int vertica
     }
     else if (type == "finalDoor")
     {
-        sprintf(doorID, "stage");
+        sprintf(doorID, "%s", SevenKeys::ScreenType::STAGE.c_str());
         sprintf(dooroom_in_sprite, "res/door/porta%c.png", direction);
         Item *porta = new Item(this, "finalDoor", dooroom_in_sprite, horizontal_position,vertical_position, INFINITE, true);
 

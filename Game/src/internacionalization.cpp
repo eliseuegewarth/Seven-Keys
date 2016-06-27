@@ -1,4 +1,5 @@
 #include "internacionalization.hpp"
+#include "7keys.hpp"
 
 #include "util/button.hpp"
 #include "core/font.hpp"
@@ -139,13 +140,13 @@ bool Internacionalization::on_message(Object *object, MessageID id, Parameters)/
 
     if (button->id() == ENGLISH_BUTTON_NAME)
     {
-        set_next("fone");
+        set_next(SevenKeys::ScreenType::HEADPHONE);
         set_language(ENGLISH_LANGUAGE);
 
     }
     else if (button->id() == ESPANISH_BUTTON_NAME)
     {
-        set_next("fone");
+        set_next(SevenKeys::ScreenType::HEADPHONE);
         set_language("ES-GT");
         cout << "chegou aqui5" <<endl;
         cout << game_language <<endl;
@@ -153,24 +154,24 @@ bool Internacionalization::on_message(Object *object, MessageID id, Parameters)/
 
     else if (button->id() == PORTUGUESE_BUTTON_NAME)
     {
-        set_next("fone");
+        set_next(SevenKeys::ScreenType::HEADPHONE);
         set_language(PORTUGUESE_LANGUAGE);
     }
     else if (button->id() == FRENCH_BUTTON_NAME)
     {
-        set_next("fone");
+        set_next(SevenKeys::ScreenType::HEADPHONE);
         set_language(PORTUGUESE_LANGUAGE);
 
     }
     else if (button->id() == NEXT_BUTTON_NAME)
     {
-        set_next("fone");
+        set_next(SevenKeys::ScreenType::HEADPHONE);
         set_language(DEFAULT_LANGUAGE_PATH);
         cout << "chegou aqui7" <<endl;
     }
     else if (button->id() == PREVIOUS_BUTTON_NAME)
     {
-        set_next("fone");
+        set_next(SevenKeys::ScreenType::HEADPHONE);
         set_language(DEFAULT_LANGUAGE_PATH);
         cout << "chegou aqui8" <<endl;
     }

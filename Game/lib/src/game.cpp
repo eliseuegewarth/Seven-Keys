@@ -86,7 +86,7 @@ void Game::init(const string& path) throw (Exception)
 
     shared_ptr<Settings> settings = env->resources_manager->get_settings(path);
 
-    string title = settings->read<string>("Game", "title", "Test Game");
+    string title = settings->read<string>("Game", SevenKeys::ScreenType::MAIN_SCREEN, "Test Game");
 
     //variable that stores the width of the resolution.
     int width = settings->read<int>("Game", "w", 800); 
