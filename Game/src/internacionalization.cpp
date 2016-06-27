@@ -96,7 +96,6 @@ Internacionalization::Internacionalization() : Level(LANGUAGE_PATH)// Class that
     add_child(next);
     add_child(previous);
 
-
 }
 
 Internacionalization::~Internacionalization()
@@ -120,30 +119,38 @@ bool Internacionalization::on_message(Object *object, MessageID id, Parameters)/
     // It is an object of the class environment. Is a pointer to the current instance of the game environment.
     Button *button = dynamic_cast<Button *>(object);
     environment->sfx->play("res/sounds/navegacaomenu.wav", 1);
+
     if (id != Button::clickedID)
     {
         return false;
     }
+
     if (not button)
     {
         return false;
     }
+
     if(button->id() == ENGLISH_LANGUAGE || button->id() == ESPANISH_LANGUAGE ||
        button->id() == PORTUGUESE_LANGUAGE || button->id() == FRENCH_LANGUAGE ||
        button->id() == "next" || button->id() == "previous")
         {
             environment->sfx->play("res/sounds/navegacaomenu.wav",1);
         }
+
     if (button->id() == ENGLISH_BUTTON_NAME)
     {
         set_next("fone");
         set_language(ENGLISH_LANGUAGE);
+
     }
     else if (button->id() == ESPANISH_BUTTON_NAME)
     {
         set_next("fone");
-        set_language(ESPANISH_LANGUAGE);
+        set_language("ES-GT");
+        cout << "chegou aqui5" <<endl;
+        cout << game_language <<endl;
     }
+
     else if (button->id() == PORTUGUESE_BUTTON_NAME)
     {
         set_next("fone");
@@ -153,16 +160,19 @@ bool Internacionalization::on_message(Object *object, MessageID id, Parameters)/
     {
         set_next("fone");
         set_language(PORTUGUESE_LANGUAGE);
+
     }
     else if (button->id() == NEXT_BUTTON_NAME)
     {
         set_next("fone");
         set_language(DEFAULT_LANGUAGE_PATH);
+        cout << "chegou aqui7" <<endl;
     }
     else if (button->id() == PREVIOUS_BUTTON_NAME)
     {
         set_next("fone");
         set_language(DEFAULT_LANGUAGE_PATH);
+        cout << "chegou aqui8" <<endl;
     }
 
     finish();
@@ -191,6 +201,8 @@ string Internacionalization::get_language()
 string Internacionalization::load_string(const string& source_to_translate)
 {
     string path_string;
-    path_string = (Internacionalization::GAME_RESOURCE_PATH + "/" + Internacionalization::get_language() + "/" + source_to_translate);
+    path_string = (Internacionalization::GAME_RESOURCE_PATH +
+                  "/" + Internacionalization::get_language() +
+                  "/" + source_to_translate);
     return path_string;
 }

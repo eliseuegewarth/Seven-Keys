@@ -54,8 +54,6 @@ void Credits::draw_self()
     assert((env != NULL) && "Failed to pick up the instance of environment");
     env->canvas->clear(Color::WHITE);
 
-    // Image background of the credits
-    //Internacionalization * internacionalization = Internacionalization::get_instance();
     string path_credits = Internacionalization::load_string("interface/menuCredits/screenCredits.png");
     shared_ptr<Texture> image = env->resources_manager->
           get_texture(path_credits);
