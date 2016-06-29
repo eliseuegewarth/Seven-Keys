@@ -17,6 +17,7 @@
 using namespace std;
 
 #define PATH_OF_MUSIC_MENU "res/sounds/navegacaomenu.wav"
+#define PLAY_BUTTON_NAME "play"
 #define PLAY_BUTTON_PATH "interface/startMenu/play.png"
 #define ON_FOCUS_PLAY_BUTTON_PATH "interface/startMenu/Splay.png"
 #define OPTIONS_BUTTON_PATH "interface/startMenu/options.png"
@@ -41,7 +42,7 @@ TitleScreen::TitleScreen()
 
     string path_play_button = Internacionalization::load_string(PLAY_BUTTON_PATH);
     string path_Splay_button = Internacionalization::load_string(ON_FOCUS_PLAY_BUTTON_PATH);
-    Button *play = new Button(this, "play", path_play_button, path_Splay_button);
+    Button *play = new Button(this, PLAY_BUTTON_NAME, path_play_button, path_Splay_button);
     play->align_to(this, Object::RIGHT , Object::MIDDLE);
 
     string path_option_button = Internacionalization::load_string(OPTIONS_BUTTON_PATH);
@@ -58,7 +59,7 @@ TitleScreen::TitleScreen()
 
     string path_exit_button = Internacionalization::load_string(EXIT_BUTTON_PATH);
     string path_Sexit_button = Internacionalization::load_string(ON_FOCUS_EXIT_BUTTON_PATH);
-    Button *exit = new Button(this, "exit", path_exit_button, path_Sexit_button);
+    Button *exit = new Button(this, SevenKeys::ScreenType::EXIT, path_exit_button, path_Sexit_button);
     exit->align_to(this, Object::RIGHT, Object::NONE);
     exit->set_vertical_position(credits->vertical_position() + credits->height() + 15);
 
@@ -111,7 +112,7 @@ TitleScreen::on_message(Object *object, MessageID id, Parameters)
         return false;
     }
 
-    if (button->id() == "play")
+    if (button->id() == PLAY_BUTTON_NAME)
     {
         set_next("trans1");
     }
@@ -128,9 +129,9 @@ TitleScreen::on_message(Object *object, MessageID id, Parameters)
     {
         set_next(SevenKeys::ScreenType::EXTRAS);
     }
-    else if(button->id() == "exit")
+    else if(button->id() == SevenKeys::ScreenType::EXIT)
     {
-        exit(0);
+        set_next(SevenKeys::ScreenType::EXIT);
     }
 
     finish();
