@@ -21,6 +21,7 @@ Options::Options() : Level(SevenKeys::ScreenType::OPTIONS)// Class that represen
     Button *set_fullscreen = new Button(this, "fullscreen", path_fullscreen, path_Sfullscreen);
     // Puts the screen in fullscreen.
     set_fullscreen->align_to(this, Object::RIGHT, Object::MIDDLE);
+    set_fullscreen->set_vertical_position(230);
 
     string path_windowed_mode = Internacionalization::load_string("interface/optionsMenu/windowedMode.png");
     string path_Swindowed_mode = Internacionalization::load_string("interface/optionsMenu/SwindowedMode.png");
@@ -29,8 +30,8 @@ Options::Options() : Level(SevenKeys::ScreenType::OPTIONS)// Class that represen
     windowmode->align_to(this, Object::RIGHT, Object::NONE);
     windowmode->set_vertical_position(set_fullscreen->vertical_position() + set_fullscreen->height() + 20);
 
-    string path_language_options = Internacionalization::load_string("interface/optionsMenu/windowedMode.png");
-    string path_Slanguage_options = Internacionalization::load_string("interface/optionsMenu/SwindowedMode.png");
+    string path_language_options = Internacionalization::load_string("interface/optionsMenu/language.png");
+    string path_Slanguage_options = Internacionalization::load_string("interface/optionsMenu/Slanguage.png");
     Button *language_options = new Button(this, "language", path_language_options, path_Slanguage_options);
     // Puts the screen in windowed mode.
     language_options->align_to(this, Object::RIGHT, Object::NONE);
