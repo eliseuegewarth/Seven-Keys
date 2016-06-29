@@ -20,9 +20,9 @@ using namespace std;
 #define ON_FOCUS_BACK_TO_MAIN_MENU_BUTTON_PATH "interface/pauseMenu/mainMenu.png"
 //Path of button "back to main menu", used when is selected
 #define EXIT_BUTTON_PATH "interface/pauseMenu/exit.png"
-//Path of button "exit"
+//Path of button exit
 #define ON_FOCUS_EXIT_BUTTON_PATH "interface/pauseMenu/Sexit.png"
-//Path of button "exit", used when is selected
+//Path of button exit, used when is selected
 #define PAUSE_BACKGROUD_PATH "interface/pauseMenu/pauseMenu.png"
 //Path of background of pause menu
 
@@ -69,7 +69,7 @@ Pause::Pause()
     // Closes the game.
     string path_exit = Internacionalization::load_string(EXIT_BUTTON_PATH);
     string path_Sexit = Internacionalization::load_string(ON_FOCUS_EXIT_BUTTON_PATH);
-    Button *exit = new Button(this, "exit", path_exit, path_Sexit);
+    Button *exit = new Button(this, SevenKeys::ScreenType::EXIT, path_exit, path_Sexit);
 
     assert((exit != NULL) && "Failed to pick up the instance of button");
 

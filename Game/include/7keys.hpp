@@ -33,6 +33,7 @@ public:
         static const string& CREDITS;
         static const string& EXTRAS;
         static const string& PAUSE;
+        static const string& EXIT;
     };
 private:
     // Is the initial value of sanity (HP) of the player.
