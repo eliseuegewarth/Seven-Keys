@@ -16,12 +16,12 @@ public:
 
     static string load_string(const string& source_to_translate);
     virtual ~Internacionalization();
+    static string get_language();
 
     bool on_message(Object *object, MessageID id, Parameters);
 
 private:
     void set_language(const string& language);
-    static string get_language();
     static const string GAME_RESOURCE_PATH;
     string game_language;
     void draw_self();
