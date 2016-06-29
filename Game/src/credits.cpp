@@ -14,6 +14,12 @@
  * Licença: LGPL. Sem copyright.
  */
 
+#define RESUME_BUTTON_IMAGE_PATH "interface/creditsMenu/back.png"
+#define RESUME_BUTTON_SELECTED_IMAGE_PATH "interface/creditsMenu/Sback.png"
+#define CREDITS_BACKGROUND_IMAGE_PATH "interface/creditsMenu/creditsMenu.png"
+#define CREDITS_RESUME_BUTTON_ID "back"
+
+
 using namespace std;
 
 
@@ -32,9 +38,9 @@ Credits::Credits() : Level(SevenKeys::ScreenType::CREDITS)
     set_dimensions(width, height);
 
     // Button used to return to main menu
-    string path_back = Internacionalization::load_string("interface/menuCredits/resume.png");
-    string path_back_highlight = Internacionalization::load_string("interface/menuCredits/resumeHighlight.png");
-    Button *back = new Button(this, "back", path_back,
+    string path_back = Internacionalization::load_string(RESUME_BUTTON_IMAGE_PATH);
+    string path_back_highlight = Internacionalization::load_string(RESUME_BUTTON_SELECTED_IMAGE_PATH);
+    Button *back = new Button(this, CREDITS_RESUME_BUTTON_ID, path_back,
                               path_back_highlight);
 
     assert(back != NULL && "Failed to create resume button.");
@@ -55,7 +61,7 @@ void Credits::draw_self()
     assert((env != NULL) && "Failed to pick up the instance of environment");
     env->canvas->clear(Color::WHITE);
 
-    string path_credits = Internacionalization::load_string("interface/menuCredits/screenCredits.png");
+    string path_credits = Internacionalization::load_string(CREDITS_BACKGROUND_IMAGE_PATH);
     shared_ptr<Texture> image = env->resources_manager->
           get_texture(path_credits);
 
@@ -81,7 +87,7 @@ bool Credits::on_message(Object *object, MessageID id, Parameters)
     {
         return false;
     }
-    if (button->id() == "back")
+    if (button->id() == CREDITS_RESUME_BUTTON_ID)
     {
         set_next(SevenKeys::ScreenType::MAIN_SCREEN);
     }

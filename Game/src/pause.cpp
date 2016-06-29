@@ -11,19 +11,19 @@
 
 using namespace std;
 
-#define RESUME_GAME_BUTTON_PATH "interface/menuPausa/voltarJogo.png"
+#define RESUME_GAME_BUTTON_PATH "interface/pauseMenu/resume.png"
 //Path of button "resume"
-#define ON_FOCUS_RESUME_GAME_BUTTON_PATH "interface/menuPausa/SvoltarJogo.png"
+#define ON_FOCUS_RESUME_GAME_BUTTON_PATH "interface/pauseMenu/Sresume.png"
 //Path of button "resume", used when is selected
-#define BACK_TO_MAIN_MENU_BUTTON_PATH "interface/menuExtras/voltar.png"
+#define BACK_TO_MAIN_MENU_BUTTON_PATH "interface/pauseMenu/mainMenu.png"
 //Path of button "back to main menu"
-#define ON_FOCUS_BACK_TO_MAIN_MENU_BUTTON_PATH "interface/menuExtras/voltar.png"
+#define ON_FOCUS_BACK_TO_MAIN_MENU_BUTTON_PATH "interface/pauseMenu/mainMenu.png"
 //Path of button "back to main menu", used when is selected
-#define EXIT_BUTTON_PATH "interface/menuExtras/sair.png"
+#define EXIT_BUTTON_PATH "interface/pauseMenu/exit.png"
 //Path of button "exit"
-#define ON_FOCUS_EXIT_BUTTON_PATH "interface/menuExtras/Ssair.png"
+#define ON_FOCUS_EXIT_BUTTON_PATH "interface/pauseMenu/Sexit.png"
 //Path of button "exit", used when is selected
-#define PAUSE_BACKGROUD_PATH "interface/menuPausa/fundoPausa.png"
+#define PAUSE_BACKGROUD_PATH "interface/pauseMenu/pauseMenu.png"
 //Path of background of pause menu
 
 /**
@@ -49,39 +49,39 @@ Pause::Pause()
     // Directs the environment where the game was paused.
     string path_resume_button = Internacionalization::load_string(RESUME_GAME_BUTTON_PATH);
     string path_Sresume_button = Internacionalization::load_string(ON_FOCUS_RESUME_GAME_BUTTON_PATH);
-    Button *backGame = new Button(this, "backGame", path_resume_button, path_Sresume_button);
+    Button *resume = new Button(this, "resume", path_resume_button, path_Sresume_button);
 
-    assert((backGame != NULL) && "Failed to pick up the instance of button");
+    assert((resume != NULL) && "Failed to pick up the instance of button");
 
-    backGame->align_to(this, Object::RIGHT, Object::NONE);
-    backGame->set_vertical_position(200);
+    resume->align_to(this, Object::RIGHT, Object::NONE);
+    resume->set_vertical_position(200);
 
     // Directs to the main menu of the game.
     string path_back_button = Internacionalization::load_string(BACK_TO_MAIN_MENU_BUTTON_PATH);
     string path_Sback_button = Internacionalization::load_string(ON_FOCUS_BACK_TO_MAIN_MENU_BUTTON_PATH);
-    Button *backMenu = new Button(this, "backMenu", path_back_button, path_Sback_button);
+    Button *main_menu_button = new Button(this, "main_menu_button", path_back_button, path_Sback_button);
 
-    assert((backMenu != NULL) && "Failed to pick up the instance of button");
+    assert((main_menu_button != NULL) && "Failed to pick up the instance of button");
 
-    backMenu->align_to(this, Object::RIGHT, Object::NONE);
-    backMenu->set_vertical_position(backGame->vertical_position() + backGame->height()+20);
+    main_menu_button->align_to(this, Object::RIGHT, Object::NONE);
+    main_menu_button->set_vertical_position(resume->vertical_position() + resume->height()+20);
 
     // Closes the game.
-    string path_sair = Internacionalization::load_string(EXIT_BUTTON_PATH);
-    string path_Ssair = Internacionalization::load_string(ON_FOCUS_EXIT_BUTTON_PATH);
-    Button *exit = new Button(this, "exit", path_sair, path_Ssair);
+    string path_exit = Internacionalization::load_string(EXIT_BUTTON_PATH);
+    string path_Sexit = Internacionalization::load_string(ON_FOCUS_EXIT_BUTTON_PATH);
+    Button *exit = new Button(this, "exit", path_exit, path_Sexit);
 
     assert((exit != NULL) && "Failed to pick up the instance of button");
 
     exit->align_to(this, Object::RIGHT, Object::NONE);
-    exit->set_vertical_position(backGame->vertical_position() + backGame->height()+20);
+    exit->set_vertical_position(resume->vertical_position() + resume->height()+20);
 
-    backGame->add_observer(this);
-    backMenu->add_observer(this);
+    resume->add_observer(this);
+    main_menu_button->add_observer(this);
     exit->add_observer(this);
 
-    add_child(backGame);
-    add_child(backMenu);
+    add_child(resume);
+    add_child(main_menu_button);
     add_child(exit);
 
 }
@@ -134,12 +134,12 @@ bool Pause::on_message(Object *object, MessageID id, Parameters)
         status_button = false;
     }
 
-    if (button->id() == "backGame")
+    if (button->id() == "resume")
     {
         status_button = false;
     }
 
-    else if (button->id() == "backMenu")
+    else if (button->id() == "main_menu_button")
     {
         set_next(SevenKeys::ScreenType::MAIN_SCREEN);
     }

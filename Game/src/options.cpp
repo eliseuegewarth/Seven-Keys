@@ -16,21 +16,21 @@ Options::Options() : Level(SevenKeys::ScreenType::OPTIONS)// Class that represen
     double height = env->canvas->height();// Receives the height of the game environment.
 
     set_dimensions(width, height);
-    string path_fullscreen = Internacionalization::load_string("interface/menuOpcao/telaCheia.png");
-    string path_Sfullscreen = Internacionalization::load_string("interface/menuOpcao/StelaCheia.png");
+    string path_fullscreen = Internacionalization::load_string("interface/optionsMenu/fullScreen.png");
+    string path_Sfullscreen = Internacionalization::load_string("interface/optionsMenu/SfullScreen.png");
     Button *set_fullscreen = new Button(this, "fullscreen", path_fullscreen, path_Sfullscreen);
     // Puts the screen in fullscreen.
     set_fullscreen->align_to(this, Object::RIGHT, Object::MIDDLE);
 
-    string path_windowed_mode = Internacionalization::load_string("interface/menuOpcao/modoJanela.png");
-    string path_Swindowed_mode = Internacionalization::load_string("interface/menuOpcao/SmodoJanela.png");
+    string path_windowed_mode = Internacionalization::load_string("interface/optionsMenu/windowedMode.png");
+    string path_Swindowed_mode = Internacionalization::load_string("interface/optionsMenu/SwindowedMode.png");
     Button *windowmode = new Button(this, "windowmode", path_windowed_mode, path_Swindowed_mode);
     // Puts the screen in windowed mode.
     windowmode->align_to(this, Object::RIGHT, Object::NONE);
     windowmode->set_vertical_position(set_fullscreen->vertical_position() + set_fullscreen->height() + 20);
 
-    string path_back = Internacionalization::load_string("interface/menuOpcao/voltar.png");
-    string path_Sback = Internacionalization::load_string("interface/menuOpcao/Svoltar.png");
+    string path_back = Internacionalization::load_string("interface/optionsMenu/back.png");
+    string path_Sback = Internacionalization::load_string("interface/optionsMenu/Sback.png");
     Button *back = new Button(this, "back", path_back, path_Sback);
     // Directs to the main menu of the game.
     back->align_to(this, Object::RIGHT, Object::NONE);
@@ -57,7 +57,7 @@ void Options::draw_self()// Drow options pinctures on the screen.
     Environment *env = Environment::get_instance();// It is an object of the class environment. Is a pointer to the current instance of the game environment.
     env->canvas->clear(Color::WHITE);
 
-    string path_option_menu = Internacionalization::load_string("interface/menuOpcao/menuOpcao.png");
+    string path_option_menu = Internacionalization::load_string("interface/optionsMenu/optionsMenu.png");
     shared_ptr<Texture> image = env->resources_manager->get_texture(path_option_menu);
     env->canvas->draw(image.get(), 1, 0);
 }
