@@ -32,9 +32,9 @@
 // Path of game font used in game
 #define PATH_OF_GAME_FONT "res/fonts/TakaoExGothic.ttf"
 // Formatted string of path of stage screen image file
-#define STAGE_TRANSITION_IMAGE_PATH "interface/transicao/Fase%d.png"
+#define STAGE_TRANSITION_IMAGE_PATH "interface/transition/stage%d.png"
 // Path of bonus stage screen image
-#define BONUS_STAGE_TRANSITION_IMAGE_PATH "interface/transicao/Bonus.png"
+#define BONUS_STAGE_TRANSITION_IMAGE_PATH "interface/transition/Bonus.png"
 // Formatted string of path of stage music file
 #define PATH_OF_MUSIC_OF_STAGE "res/sounds/Fase%d.wav"
 // Path of Bonus stage music file
@@ -47,7 +47,7 @@
 #define PATH_OF_GAME_OVER_MUSIC "res/sounds/gameOver.wav"
 
 // Path of Game Over transition image.
-#define GAME_OVER_IMAGE_PATH "interface/transicao/gameOver.png"
+#define GAME_OVER_IMAGE_PATH "interface/transition/gameOver.png"
 
 
 /**
@@ -100,16 +100,21 @@ SevenKeys::load_level(const string& screen_type) {
     else if (screen_type == SevenKeys::ScreenType::HEADPHONE)
     {
         string path_fone = Internacionalization::load_string(HEADPHONE_IMAGE_PATH);
-        cout << "deu ruim2" <<endl;
+        /*LOG.info("Showing Headphone hint screen.")*/
+        cout << "Showing Headphone hint screen." <<endl;
         level_to_be_loaded = (Level*) new FrontEnd(SevenKeys::ScreenType::COMPANY_LOGO, SevenKeys::ScreenType::COMPANY_LOGO, path_fone);
     }
     else if (screen_type == SevenKeys::ScreenType::COMPANY_LOGO)
     {
+        /*LOG.info("Showing company logo.")*/
+        cout << "Showing company logo." << endl;
         string path_mana_team = Internacionalization::load_string(MANA_TEAM_IMAGE_PATH);
         level_to_be_loaded = (Level*) new FrontEnd(SevenKeys::ScreenType::COMPANY_LOGO, SevenKeys::ScreenType::USED_TECHNOLOGIES, path_mana_team);
     }
     else if (screen_type == SevenKeys::ScreenType::USED_TECHNOLOGIES)
     {
+        /*LOG.info("Showing company logo.")*/
+        cout << "Showing company logo." << endl;
         string path_tecnologias = Internacionalization::load_string(USED_TECNOLOGIES_IMAGE_PATH);
         level_to_be_loaded = (Level*) new FrontEnd(SevenKeys::ScreenType::USED_TECHNOLOGIES, SevenKeys::ScreenType::AGE_RATING, path_tecnologias);
     }
