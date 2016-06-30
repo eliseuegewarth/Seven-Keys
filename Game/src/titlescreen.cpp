@@ -1,10 +1,9 @@
 /*
+ * titlescreen.cpp file
  * Implementação da classe TitleScreen.
- *
- * Autor: Edson Alves
- * Data: 29/04/2015
  * Licença: LGPL. Sem copyright.
  */
+
 #include "titlescreen.hpp"
 #include "7keys.hpp"
 #include "internacionalization.hpp"
@@ -29,112 +28,150 @@ using namespace std;
 #define EXTRAS_BUTTON_PATH "interface/startMenu/extras.png"
 #define ON_FOCUS_EXTRAS_BUTTON_PATH "interface/startMenu/Sextras.png"
 #define MAIN_MENU_PATH "interface/startMenu/startMenu.png"
+#define VERTICAL_DISTANCE_OF_BUTTONS_IN_PIXELS 15
 
-TitleScreen::TitleScreen()
-    : Level(SevenKeys::ScreenType::MAIN_SCREEN)
+
+
+TitleScreen::TitleScreen( )
+    : Level( SevenKeys::ScreenType::MAIN_SCREEN)
 {
-    Environment *env = Environment::get_instance();
+    Environment *env = Environment::get_instance( );
 
-    double width = env->canvas->width();
-    double height = env->canvas->height();
+    double width = env->canvas->width( );
+    double height = env->canvas->height( );
 
-    set_dimensions(width, height);
+    set_dimensions( width, height);
 
-    string path_play_button = Internacionalization::load_string(PLAY_BUTTON_PATH);
-    string path_Splay_button = Internacionalization::load_string(ON_FOCUS_PLAY_BUTTON_PATH);
-    Button *play = new Button(this, PLAY_BUTTON_NAME, path_play_button, path_Splay_button);
-    play->align_to(this, Object::RIGHT , Object::MIDDLE);
+    string path_play_button = Internacionalization::load_string( PLAY_BUTTON_PATH);
 
-    string path_option_button = Internacionalization::load_string(OPTIONS_BUTTON_PATH);
-    string path_Soption_button = Internacionalization::load_string(ON_FOCUS_OPTIONS_BUTTON_PATH);
-    Button *options = new Button(this, SevenKeys::ScreenType::OPTIONS, path_option_button, path_Soption_button);
-    options->align_to(this, Object::RIGHT, Object::NONE);
-    options->set_vertical_position(play->vertical_position() + play->height() + 15);
+    string path_Splay_button = Internacionalization::load_string( ON_FOCUS_PLAY_BUTTON_PATH);
 
-    string path_credits_button = Internacionalization::load_string(CREDITS_BUTTON_PATH);
-    string path_Scredits_button = Internacionalization::load_string(ON_FOCUS_CREDITS_BUTTON_PATH);
-    Button *credits = new Button(this, SevenKeys::ScreenType::CREDITS, path_credits_button, path_Scredits_button);
-    credits->align_to(this, Object::RIGHT, Object::NONE);
-    credits->set_vertical_position(options->vertical_position() + options->height()+15);
+    Button *play = new Button( this, PLAY_BUTTON_NAME, path_play_button, 
+                                                path_Splay_button);
 
-    string path_exit_button = Internacionalization::load_string(EXIT_BUTTON_PATH);
-    string path_Sexit_button = Internacionalization::load_string(ON_FOCUS_EXIT_BUTTON_PATH);
-    Button *exit = new Button(this, SevenKeys::ScreenType::EXIT, path_exit_button, path_Sexit_button);
-    exit->align_to(this, Object::RIGHT, Object::NONE);
-    exit->set_vertical_position(credits->vertical_position() + credits->height() + 15);
+    play->align_to( this, Object::RIGHT , Object::MIDDLE);
 
-    string path_extras_button = Internacionalization::load_string(EXTRAS_BUTTON_PATH);
-    string path_Sextras_button = Internacionalization::load_string(ON_FOCUS_EXTRAS_BUTTON_PATH);
-    Button *extras = new Button (this, SevenKeys::ScreenType::EXTRAS, path_extras_button, path_Sextras_button);
-    credits->align_to(this, Object::MIDDLE, Object::NONE);
-    extras->set_vertical_position(credits->vertical_position() +credits->height() + 15);
+    string path_option_button = Internacionalization::load_string( OPTIONS_BUTTON_PATH);
 
-    play->add_observer(this);
-    options->add_observer(this);
-    credits->add_observer(this);
-    exit->add_observer(this);
-    extras->add_observer(this);
+    string path_Soption_button = Internacionalization::load_string( ON_FOCUS_OPTIONS_BUTTON_PATH);
 
-    add_child(play);
-    add_child(options);
-    add_child(credits);
-    add_child(exit);
-    add_child(extras);
+    Button *options = new Button( this, SevenKeys::ScreenType::OPTIONS, 
+                                                    path_option_button, path_Soption_button);
+
+    options->align_to( this, Object::RIGHT, Object::NONE);
+
+    options->set_vertical_position( play->vertical_position( ) + 
+                                                    play->height( ) + 
+                                                    VERTICAL_DISTANCE_OF_BUTTONS_IN_PIXELS);
+
+    string path_credits_button = Internacionalization::load_string( CREDITS_BUTTON_PATH);
+
+    string path_Scredits_button = Internacionalization::load_string( ON_FOCUS_CREDITS_BUTTON_PATH);
+
+    Button *credits = new Button( this, SevenKeys::ScreenType::CREDITS, 
+                                                    path_credits_button, 
+                                                    path_Scredits_button);
+
+    credits->align_to( this, Object::RIGHT, Object::NONE);
+
+    credits->set_vertical_position( options->vertical_position( ) + 
+                                                    options->height( ) + 
+                                                    VERTICAL_DISTANCE_OF_BUTTONS_IN_PIXELS);
+
+    string path_exit_button = Internacionalization::load_string( EXIT_BUTTON_PATH);
+
+    string path_Sexit_button = Internacionalization::load_string( ON_FOCUS_EXIT_BUTTON_PATH);
+
+    Button *exit = new Button( this, SevenKeys::ScreenType::EXIT, 
+                                                path_exit_button, 
+                                                path_Sexit_button);
+
+    exit->align_to( this, Object::RIGHT, Object::NONE);
+
+    exit->set_vertical_position( credits->vertical_position( ) + 
+                                                credits->height( ) + 
+                                                VERTICAL_DISTANCE_OF_BUTTONS_IN_PIXELS);
+
+    string path_extras_button = Internacionalization::load_string( EXTRAS_BUTTON_PATH);
+
+    string path_Sextras_button = Internacionalization::load_string( ON_FOCUS_EXTRAS_BUTTON_PATH);
+
+    Button *extras = new Button ( this, SevenKeys::ScreenType::EXTRAS, 
+                                                    path_extras_button, 
+                                                    path_Sextras_button);
+
+    credits->align_to( this, Object::MIDDLE, Object::NONE);
+
+    extras->set_vertical_position( credits->vertical_position( ) + 
+                                                    credits->height( ) + 
+                                                    VERTICAL_DISTANCE_OF_BUTTONS_IN_PIXELS);
+
+    play->add_observer( this);
+    options->add_observer( this);
+    credits->add_observer( this);
+    exit->add_observer( this);
+    extras->add_observer( this);
+
+    add_child( play);
+    add_child( options);
+    add_child( credits);
+    add_child( exit);
+    add_child( extras);
 }
 
-TitleScreen::~TitleScreen()
+TitleScreen::~TitleScreen( )
 {
 }
 
 void
-TitleScreen::draw_self()
+TitleScreen::draw_self( )
 {
-    Environment *env = Environment::get_instance();
-    env->canvas->clear(Color::WHITE);
+    Environment *env = Environment::get_instance( );
+    env->canvas->clear( Color::WHITE);
 
-    string path_main_menu = Internacionalization::load_string(MAIN_MENU_PATH);
-    shared_ptr<Texture> image = env->resources_manager->get_texture(path_main_menu);
-    env->canvas->draw(image.get(), 1, 0);
+    string path_main_menu = Internacionalization::load_string( MAIN_MENU_PATH);
+    shared_ptr<Texture> image = env->resources_manager->get_texture( path_main_menu);
+    env->canvas->draw( image.get( ), 1, 0);
 }
 
 bool
-TitleScreen::on_message(Object *object, MessageID id, Parameters)
+TitleScreen::on_message( Object *object, MessageID id, Parameters)
 {
-    if (id != Button::clickedID)
+    if ( id != Button::clickedID)
     {
         return false;
     }
 
-    Button *button = dynamic_cast<Button *>(object);
-    Environment *env = Environment::get_instance();
-    if (not button)
+    Button *button = dynamic_cast<Button *>( object);
+    Environment *env = Environment::get_instance( );
+    if ( not button)
     {
         return false;
     }
 
-    if (button->id() == PLAY_BUTTON_NAME)
+    if ( button->id( ) == PLAY_BUTTON_NAME)
     {
-        set_next("trans1");
+        set_next( "trans1");
     }
-    else if (button->id() == SevenKeys::ScreenType::OPTIONS)
+    else if ( button->id( ) == SevenKeys::ScreenType::OPTIONS)
     {
-        env->sfx->play(PATH_OF_MUSIC_MENU, 1);
-        set_next(SevenKeys::ScreenType::OPTIONS);
+        env->sfx->play( PATH_OF_MUSIC_MENU, 1);
+        set_next( SevenKeys::ScreenType::OPTIONS);
     }
-    else if(button->id() == SevenKeys::ScreenType::CREDITS)
+    else if( button->id( ) == SevenKeys::ScreenType::CREDITS)
     {
-        set_next(SevenKeys::ScreenType::CREDITS);
+        set_next( SevenKeys::ScreenType::CREDITS);
     }
-    else if (button-> id() == SevenKeys::ScreenType::EXTRAS)
+    else if ( button-> id( ) == SevenKeys::ScreenType::EXTRAS)
     {
-        set_next(SevenKeys::ScreenType::EXTRAS);
+        set_next( SevenKeys::ScreenType::EXTRAS);
     }
-    else if(button->id() == SevenKeys::ScreenType::EXIT)
+    else if( button->id( ) == SevenKeys::ScreenType::EXIT)
     {
-        set_next(SevenKeys::ScreenType::EXIT);
+        set_next( SevenKeys::ScreenType::EXIT);
     }
 
-    finish();
+    finish( );
 
     return true;
 }
