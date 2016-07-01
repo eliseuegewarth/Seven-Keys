@@ -1,3 +1,9 @@
+/**
+ * pause.cpp
+ * Class that implements the resume game menu.
+ * Licença: LGPL. Sem copyright.
+ */
+
 #include "pause.hpp"
 #include "7keys.hpp"
 #include "internacionalization.hpp"

@@ -1,8 +1,11 @@
 /**
- * ghost.hpp file
+ * ghost.hpp
+ * This class describes the attributes and behaviors of the ghost guard enemie.
+ * Licença: LGPL. Sem copyright.
  */
-#ifndef GHOST_H
-#define GHOST_H
+
+#ifndef GHOST_HPP
+#define GHOST_HPP
 
 #include "core/sprite.hpp"
 #include "room.hpp"
@@ -13,17 +16,17 @@ class Ghost : public Object
 {
 public:
 
-	typedef enum { NONE, IDLE, RUNNING } State;
+    typedef enum { NONE, IDLE, RUNNING } State;
     typedef enum { MOVED, STOPPED } Event;
     typedef enum { LEFT = 0, UP = 1, RIGHT = 2, DOWN = 3 } Direction;
 
-	#define GHOST_GUARD_SPEED_IN_MILISECONDS 60
-	#define GHOST_GUARD_SPEED_IN_MILISECONDS_HARD 120
+    #define GHOST_GUARD_SPEED_IN_MILISECONDS 60
+    #define GHOST_GUARD_SPEED_IN_MILISECONDS_HARD 120
 
     Ghost(Object *parent, ObjectID id, const double horizontal_position, const double vertical_position,
-		 const unsigned int mass_of_ghost_guard,
-		 const bool walkable, string type,
-		 const unsigned int initial_movement_direction);
+    const unsigned int mass_of_ghost_guard,
+    const bool walkable, string type,
+    const unsigned int initial_movement_direction);
     ~Ghost();
 
     Direction direction();
@@ -42,7 +45,7 @@ private:
     int player_horizontal_position;
     int player_vertical_position;
     const double GHOST_GUARD_DAMAGE = 0.05;
-	const double GHOST_GUARD_SPEED = 0.6;
+    const double GHOST_GUARD_SPEED = 0.6;
 
     void draw_self();
     void update_self(unsigned long elapsed);

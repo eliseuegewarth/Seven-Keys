@@ -1,3 +1,9 @@
+/**
+ * square.cpp
+ * Class that implements the square object of the game.
+ * Licença: LGPL. Sem copyright.
+ */
+
 #include "core/rect.hpp"
 #include "core/keyboardevent.hpp"
 #include "core/environment.hpp"

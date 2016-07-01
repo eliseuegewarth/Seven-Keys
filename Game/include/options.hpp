@@ -1,3 +1,9 @@
+/**
+ * options.hpp
+ * Class that implements the options game menu.
+ * Licença: LGPL. Sem copyright.
+ */
+
 #ifndef OPTIONS_HPP
 #define OPTIONS_HPP
 

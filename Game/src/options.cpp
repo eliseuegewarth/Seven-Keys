@@ -1,3 +1,9 @@
+/**
+ * options.cpp
+ * Class that implements the options game menu.
+ * Licença: LGPL. Sem copyright.
+ */
+
 #include "options.hpp"
 #include "7keys.hpp"
 #include "internacionalization.hpp"

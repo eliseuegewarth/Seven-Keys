@@ -1,16 +1,18 @@
 /**
- * extras.hpp file
- * @brief [brief description]
- * @details [long description]
- * @return [description]
- */#ifndef EXTRAS_H
-#define EXTRAS_H
+ * extras.hpp
+ * Class that represents the extra option of the main menu of the game.
+ * Licença: LGPL. Sem copyright.
+ */
+
+#ifndef EXTRAS_HPP
+#define EXTRAS_HPP
 
 #include "core/level.hpp"
 
 class Image;
 
-class Extras : public Level //Class that represents the extra option of the main menu of the game.
+//Class that represents the extra option of the main menu of the game.
+class Extras : public Level
 {
 public:
     Extras();

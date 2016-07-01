@@ -1,12 +1,11 @@
-/*
- * Classe que representa o sprite do teste.
- *
- * Autor: Edson Alves
- * Data: 15/05/2015
+/**
+ * player.hpp
+ * Class that implements the player object and it states.
  * Licença: LGPL. Sem copyright.
  */
-#ifndef PLAYER_H
-#define PLAYER_H
+
+#ifndef PLAYER_HPP
+#define PLAYER_HPP
 
 #include "core/sprite.hpp"
 #include "map.hpp"

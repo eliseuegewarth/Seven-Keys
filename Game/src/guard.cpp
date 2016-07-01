@@ -1,3 +1,9 @@
+/**
+ * guard.cpp
+ * This class describes the attributes and behaviors of the guard enemie.
+ * Licença: LGPL. Sem copyright.
+ */
+
 #include "guard.hpp"
 
 #include "core/level.hpp"

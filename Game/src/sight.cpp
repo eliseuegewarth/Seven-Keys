@@ -1,3 +1,9 @@
+/**
+ * sight.cpp
+ * Class that implements the sight object of the game.
+ * Licença: LGPL. Sem copyright.
+ */
+
 #include <cassert>
 #include <iostream>
 #include "core/animation.hpp"

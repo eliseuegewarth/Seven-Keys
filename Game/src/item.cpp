@@ -1,3 +1,9 @@
+/**
+ * item.cpp
+ * Class that implements the Item object class.
+ * Licença: LGPL. Sem copyright.
+ */
+
 #include <iostream>
 #include "core/image.hpp"
 #include "core/keyboardevent.hpp"

@@ -1,10 +1,9 @@
-/*
- * Teste elementar das funcionalidades da biblioteca.
- *
- * Autor: Edson Alves
- * Data: 26/03/2015
+/**
+ * map.hpp
+ * Main function where SevenKeys game class are instantiated. Here game also run.
  * Licença: LGPL. Sem copyright.
  */
+
 #include "7keys.hpp"
 
 #include <iostream>

@@ -1,3 +1,9 @@
+/**
+ * ghost.cpp
+ * This class describes the attributes and behaviors of the ghost guard enemie.
+ * Licença: LGPL. Sem copyright.
+ */
+
 #include "ghost.hpp"
 
 #include "core/level.hpp"

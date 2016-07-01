@@ -1,5 +1,7 @@
 /**
- * extras.cpp file.
+ * extras.cpp
+ * Class that represents the extra option of the main menu of the game.
+ * Licença: LGPL. Sem copyright.
  */
 
 #include "extras.hpp"

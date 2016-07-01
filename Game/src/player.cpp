@@ -1,6 +1,9 @@
-/*
- * Implementação da classe Player.
+/**
+ * player.cpp
+ * Class that implements the player object and it states.
+ * Licença: LGPL. Sem copyright.
  */
+
 #include "player.hpp"
 #include "core/rect.hpp"
 #include "core/level.hpp"

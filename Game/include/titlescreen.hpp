@@ -1,12 +1,11 @@
 /*
- * Exemplo de uma tela de apresentação.
- *
- * Autor: Edson Alves
- * Data: 29/04/2015
+ * titlescreen.hpp
+ * This class implements the start menu screen.
  * Licença: LGPL. Sem copyright.
  */
-#ifndef TITLE_SCREEN_H
-#define TITLE_SCREEN_H
+
+#ifndef TITLE_SCREEN_HPP
+#define TITLE_SCREEN_HPP
 
 #include "core/level.hpp"
 

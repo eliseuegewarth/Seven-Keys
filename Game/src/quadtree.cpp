@@ -1,3 +1,9 @@
+/**
+ * quadtree.cpp
+ * Class that implements 
+ * Licença: LGPL. Sem copyright.
+ */
+
 #include <cassert>
 #include <iostream>
 

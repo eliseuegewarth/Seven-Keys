@@ -1,3 +1,9 @@
+/**
+ * map.cpp
+ * Class that implements the map. Map is a entire stage map and contains all rooms.
+ * Licença: LGPL. Sem copyright.
+ */
+
 #include <list>
 #include <utility>
 #include "core/environment.hpp"

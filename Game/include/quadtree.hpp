@@ -1,10 +1,16 @@
-#ifndef QUADTREE_H
-#define QUADTREE_H
+/**
+ * quadtree.hpp
+ * Class that implements 
+ * Licença: LGPL. Sem copyright.
+ */
 
-#include "core/rect.hpp"
+#ifndef QUADTREE_HPP
+#define QUADTREE_HPP
+
 #include <vector>
-#include "core/object.hpp"
 #include <array>
+#include "core/rect.hpp"
+#include "core/object.hpp"
 
 using namespace std;
 using std::vector;

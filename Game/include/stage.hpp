@@ -1,11 +1,11 @@
 /**
- * stage.h
- * @brief [Class that implements the stages of the game.]
+ * stage.hpp
+ * Class that implements the stages of the game.
  * Licença: LGPL. Sem copyright.
  */
 
-#ifndef STAGE_H
-#define STAGE_H
+#ifndef STAGE_HPP
+#define STAGE_HPP
 
 #include "core/level.hpp"
 #include "core/rect.hpp"
@@ -33,7 +33,10 @@ private:
     void threat_colision();
     void threat_colision_boss(list<Object*> map_objects);
     void threat_colision_not_walkable_objects(Object *item,
-        Rect bounding_box_player, Rect bounding_box_item, Rect intersection);
+                                                                    Rect bounding_box_player, 
+                                                                    Rect bounding_box_item, 
+                                                                    Rect intersection);
+    
     void threat_colision_walkable_objects(Object * item, Rect intersection);
     void threat_colision_guard(Object *item, Rect intersection);
     void threat_colision_ghost(Object *item, Rect intersection);

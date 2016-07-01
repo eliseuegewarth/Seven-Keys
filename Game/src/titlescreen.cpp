@@ -1,6 +1,6 @@
 /*
- * titlescreen.cpp file
- * Implementação da classe TitleScreen.
+ * titlescreen.hpp
+ * This class implements the start menu screen.
  * Licença: LGPL. Sem copyright.
  */
 

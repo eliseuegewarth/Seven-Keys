@@ -1,8 +1,9 @@
 /*
  * 7keys.cpp
- * Implementação da classe SevenKeys.
  * Class that represents the entire game and manages the main screens.
+ * Licença: LGPL. Sem copyright.
  */
+
 #include "core/environment.hpp"
 #include "core/level.hpp"
 
