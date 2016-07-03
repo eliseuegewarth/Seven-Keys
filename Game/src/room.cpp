@@ -1,3 +1,9 @@
+/**
+ * room.cpp
+ * Class that implements the room of game. The room will contais objects like enemies and obstacles.
+ * Licença: LGPL. Sem copyright.
+ */
+
 #include <cassert>
 #include <string>
 #include <iostream>

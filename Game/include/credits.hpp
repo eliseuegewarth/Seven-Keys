@@ -1,13 +1,14 @@
-#ifndef CREDITS_H
-#define CREDITS_H
+/**
+ * credits.hpp
+ * Class that implements the credits of the game.
+ * Licença: LGPL. Sem copyright.
+ */
+
+#ifndef CREDITS_HPP
+#define CREDITS_HPP
 
 #include "core/level.hpp"
 
-/**
- * credits.h
- * @brief [Class that implements the credits of the game.]
- * Licença: LGPL. Sem copyright.
- */
 
 class Image;
 

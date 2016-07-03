@@ -1,5 +1,11 @@
-#ifndef SIGHT_H
-#define SIGHT_H
+/**
+ * sight.hpp
+ * Class that implements the sight object of the game.
+ * Licença: LGPL. Sem copyright.
+ */
+
+#ifndef SIGHT_HPP
+#define SIGHT_HPP
 
 #include "core/object.hpp"
 #include "core/rect.hpp"

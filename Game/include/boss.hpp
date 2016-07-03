@@ -1,9 +1,11 @@
 /**
- * boss.hpp file
+ * boss.hpp
  * Class that implements the boss enemie.
+ * Licença: LGPL. Sem copyright.
  */
-#ifndef BOSS_H
-#define BOSS_H
+
+#ifndef BOSS_HPP
+#define BOSS_HPP
 
 #include "room.hpp"
 #define INITIAL_TIME_ELAPSED_VALUE 0

@@ -1,8 +1,8 @@
 /**
- * Boss.cpp file
+ * Boss.cpp
  * Class that implements the boss enemie.
+ * Licença: LGPL. Sem copyright.
  */
-
 
 #include "boss.hpp"
 

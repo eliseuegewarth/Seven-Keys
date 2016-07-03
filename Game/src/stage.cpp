@@ -1,3 +1,9 @@
+/**
+ * stage.cpp
+ * Class that implements the stages of the game.
+ * Licença: LGPL. Sem copyright.
+ */
+
 #include "core/environment.hpp"
 #include "core/music.hpp"
 #include "core/soundeffect.hpp"

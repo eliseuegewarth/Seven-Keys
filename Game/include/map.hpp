@@ -1,5 +1,11 @@
-#ifndef MAP_H
-#define MAP_H
+/**
+ * map.hpp
+ * Class that implements the map. Map is a entire stage map and contains all rooms.
+ * Licença: LGPL. Sem copyright.
+ */
+
+#ifndef MAP_HPP
+#define MAP_HPP
 
 
 #include "core/object.hpp"

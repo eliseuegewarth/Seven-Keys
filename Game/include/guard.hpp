@@ -1,8 +1,11 @@
 /**
- * guard.hpp file.
+ * guard.hpp
+ * This class describes the attributes and behaviors of the guard enemie.
+ * Licença: LGPL. Sem copyright.
  */
-#ifndef GUARD_H
-#define GUARD_H
+
+#ifndef GUARD_HPP
+#define GUARD_HPP
 
 #include "core/sprite.hpp"
 #include "room.hpp"
@@ -10,11 +13,6 @@
 
 using namespace std;
 
-/**
- * @brief [brief description]
- * @details [long description]
- *
- */
 class Guard : public Object
 {
 public:

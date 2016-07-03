@@ -1,5 +1,11 @@
-#ifndef PAUSE_H
-#define PAUSE_H
+/**
+ * pause.hpp
+ * Class that implements the resume game menu.
+ * Licença: LGPL. Sem copyright.
+ */
+
+#ifndef PAUSE_HPP
+#define PAUSE_HPP
 
 #include "core/level.hpp"
 

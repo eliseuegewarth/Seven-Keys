@@ -1,5 +1,11 @@
-#ifndef SQUARE_H
-#define SQUARE_H
+/**
+ * square.hpp
+ * Class that implements the square object of the game.
+ * Licença: LGPL. Sem copyright.
+ */
+
+#ifndef SQUARE_HPP
+#define SQUARE_HPP
 
 #include "core/object.hpp"
 #include "core/keyboardevent.hpp"

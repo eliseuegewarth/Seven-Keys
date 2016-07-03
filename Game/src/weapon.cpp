@@ -1,3 +1,9 @@
+/**
+ * weapon.cpp
+ * This class implements a weapon game object. Player will use this to kill his enemies in game.
+ * Licença: LGPL. Sem copyright.
+ */
+
 #include <iostream>
 #include "core/image.hpp"
 #include "core/keyboardevent.hpp"

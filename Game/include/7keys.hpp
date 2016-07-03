@@ -1,10 +1,11 @@
 /**
  * 7keys.hpp
  * Class that represents the entire game and manages the main screens.
+ * Licença: LGPL. Sem copyright.
  */
 
-#ifndef TEST_H
-#define TEST_H
+#ifndef SEVENKEYS_HPP
+#define SEVENKEYS_HPP
 
 #include "core/game.hpp"
 #include "player.hpp"

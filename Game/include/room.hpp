@@ -1,5 +1,11 @@
-#ifndef ROOM_H
-#define ROOM_H
+/**
+ * room.hpp
+ * Class that implements the room of game. The room will contais objects like enemies and obstacles.
+ * Licença: LGPL. Sem copyright.
+ */
+
+#ifndef ROOM_HPP
+#define ROOM_HPP
 
 #include "core/object.hpp"
 #include "core/rect.hpp"

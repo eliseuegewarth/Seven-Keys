@@ -1,3 +1,9 @@
+/**
+ * credits.cpp
+ * Class that implements the credits of the game.
+ * Licença: LGPL. Sem copyright.
+ */
+
 #include "credits.hpp"
 #include "7keys.hpp"
 #include "util/button.hpp"
@@ -7,12 +13,6 @@
 #include <iostream>
 
 #include "internacionalization.hpp"
-
-/**
- * credits.cpp
- * @brief [Class that implements the credits of the game.]
- * Licença: LGPL. Sem copyright.
- */
 
 #define RESUME_BUTTON_IMAGE_PATH "interface/creditsMenu/back.png"
 #define RESUME_BUTTON_SELECTED_IMAGE_PATH "interface/creditsMenu/Sback.png"

@@ -1,5 +1,11 @@
-#ifndef INTERNACIONALIZATION
-#define INTERNACIONALIZATION
+/**
+ * internacionalization.hpp
+ * Class that implements the Internacionalization class. That Class implements multi language support.
+ * Licença: LGPL. Sem copyright.
+ */
+
+#ifndef INTERNACIONALIZATION_HPP
+#define INTERNACIONALIZATION_HPP
 
 #include "core/level.hpp"
 #include <string>
