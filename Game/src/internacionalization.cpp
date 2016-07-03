@@ -166,7 +166,7 @@ bool Internacionalization::on_message(Object *object, MessageID id, Parameters)/
     else if (button->id() == FRENCH_BUTTON_NAME)
     {
         set_next(SevenKeys::ScreenType::HEADPHONE);
-        set_language(PORTUGUESE_LANGUAGE);
+        set_language(FRENCH_LANGUAGE);
 
     }
     else if (button->id() == NEXT_BUTTON_NAME)
