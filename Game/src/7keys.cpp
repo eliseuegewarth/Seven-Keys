@@ -44,7 +44,7 @@
 #define PATH_OF_DEATH_MUSIC "res/sounds/pregameover.wav"
 // Path of Empty black transition image used when player die.
 #define EMPTY_BLACK_TRANSITION_PATH "images/transition.png"
-// 
+//
 #define PATH_OF_GAME_OVER_MUSIC "res/sounds/gameOver.wav"
 
 // Path of Game Over transition image.
@@ -55,6 +55,7 @@
  * @brief [ScreenType class definition. All string literals of screen types are definied here.]
  */
 const string& SevenKeys::ScreenType::LANGUAGUE = "language";
+const string& SevenKeys::ScreenType::LANGUAGUE_OPTIONS = "language_options";
 const string& SevenKeys::ScreenType::HEADPHONE = "headphone";
 const string& SevenKeys::ScreenType::COMPANY_LOGO = "Company_Logo";
 const string& SevenKeys::ScreenType::USED_TECHNOLOGIES = "Technologies";
@@ -97,9 +98,21 @@ SevenKeys::load_level(const string& screen_type) {
 
     if (screen_type == SevenKeys::ScreenType::LANGUAGUE)
     {
+		if(not Internacionalization::LanguageType::is_language()){
+			/*LOG.info("Showing Language menu screen.")*/
+			cout << "Showing Language menu screen." <<endl;
+			level_to_be_loaded = (Level*) new Internacionalization(false);
+		}else{
+			cout << "Showing Headphone hint screen." <<endl;
+	        string path_fone = Internacionalization::load_string(HEADPHONE_IMAGE_PATH);
+	        level_to_be_loaded = (Level*) new FrontEnd(SevenKeys::ScreenType::COMPANY_LOGO, SevenKeys::ScreenType::COMPANY_LOGO, path_fone);
+		}
+    }
+	else if (screen_type == SevenKeys::ScreenType::LANGUAGUE_OPTIONS)
+    {
         /*LOG.info("Showing Language menu screen.")*/
         cout << "Showing Language menu screen." <<endl;
-        level_to_be_loaded = (Level*) new Internacionalization();
+        level_to_be_loaded = (Level*) new Internacionalization(true);
     }
     else if (screen_type == SevenKeys::ScreenType::HEADPHONE)
     {

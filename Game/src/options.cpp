@@ -108,7 +108,7 @@ bool Options::on_message(Object *object, MessageID id, Parameters)// Let the dyn
     }
     else if (button->id() == "language")
     {
-        set_next("language");
+		set_next("language_options");
     }
 
     else if (button->id() == "back")

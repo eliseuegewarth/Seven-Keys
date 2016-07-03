@@ -16,22 +16,24 @@
 
 #define MENU_LANGUAGE_IMAGE "res/language/menuLanguage.png"
 
-#define ENGLISH_LANGUAGE "EN-US"
+
+const string& Internacionalization::LanguageType::ENGLISH_LANGUAGE = "EN-US";
+const string& Internacionalization::LanguageType::ESPANISH_LANGUAGE = "ES-GT";
+const string& Internacionalization::LanguageType::PORTUGUESE_LANGUAGE = "PT-BR";
+const string& Internacionalization::LanguageType::FRENCH_LANGUAGE = "FR-FR";
+
 #define ENGLISH_BUTTON_NAME "english"
 #define ENGLISH_BUTTON_IMAGE "res/language/english.png"
 #define ENGLISH_SELECTED_BUTTON_IMAGE "res/language/Senglish.png"
 
-#define ESPANISH_LANGUAGE "ES-GT"
 #define ESPANISH_BUTTON_NAME "espanish"
 #define ESPANISH_BUTTON_IMAGE "res/language/espanish.png"
 #define ESPANISH_SELECTED_BUTTON_IMAGE "res/language/Sespanish.png"
 
-#define PORTUGUESE_LANGUAGE "PT-BR"
 #define PORTUGUESE_BUTTON_NAME "portuguese"
 #define PORTUGUESE_BUTTON_IMAGE "res/language/portuguese.png"
 #define PORTUGUESE_SELECTED_BUTTON_IMAGE "res/language/Sportuguese.png"
 
-#define FRENCH_LANGUAGE "FR-FR"
 #define FRENCH_BUTTON_NAME "french"
 #define FRENCH_BUTTON_IMAGE "res/language/french.png"
 #define FRENCH_SELECTED_BUTTON_IMAGE "res/language/Sfrench.png"
@@ -49,7 +51,7 @@ using namespace std;
 
 const string Internacionalization::GAME_RESOURCE_PATH = "res";
 
-Internacionalization::Internacionalization() : Level(LANGUAGE_PATH)// Class that represents the option of the main menu of the game.
+Internacionalization::Internacionalization(bool options) : Level(LANGUAGE_PATH)// Class that represents the option of the main menu of the game.
 {
     Environment *environment = Environment::get_instance();// It is an object of the class environment. Is a pointer to the current instance of the game environment.
     double width = environment->canvas->width();// Receives the width of the game environment.
@@ -103,6 +105,7 @@ Internacionalization::Internacionalization() : Level(LANGUAGE_PATH)// Class that
     add_child(next);
     add_child(previous);
 
+	this->options = options;
 }
 
 Internacionalization::~Internacionalization()
@@ -137,49 +140,53 @@ bool Internacionalization::on_message(Object *object, MessageID id, Parameters)/
         return false;
     }
 
-    if(button->id() == ENGLISH_LANGUAGE || button->id() == ESPANISH_LANGUAGE ||
-       button->id() == PORTUGUESE_LANGUAGE || button->id() == FRENCH_LANGUAGE ||
-       button->id() == "next" || button->id() == "previous")
+    if(button->id() == Internacionalization::LanguageType::ENGLISH_LANGUAGE ||
+	   button->id() == Internacionalization::LanguageType::ESPANISH_LANGUAGE ||
+       button->id() == Internacionalization::LanguageType::PORTUGUESE_LANGUAGE ||
+	   button->id() == Internacionalization::LanguageType::FRENCH_LANGUAGE ||
+       button->id() == NEXT_BUTTON_NAME || button->id() == PREVIOUS_BUTTON_NAME)
         {
             environment->sfx->play("res/sounds/navegacaomenu.wav",1);
         }
 
-    if (button->id() == ENGLISH_BUTTON_NAME)
-    {
-        set_next(SevenKeys::ScreenType::HEADPHONE);
-        set_language(ENGLISH_LANGUAGE);
+	string next_screen = SevenKeys::ScreenType::HEADPHONE;
+	if(this->options){
+		next_screen = SevenKeys::ScreenType::OPTIONS;
+	}else{
+		next_screen = SevenKeys::ScreenType::HEADPHONE;
+	}
 
+	if (button->id() == ENGLISH_BUTTON_NAME)
+    {
+		set_next(next_screen);
+		set_language(Internacionalization::LanguageType::ENGLISH_LANGUAGE);
     }
     else if (button->id() == ESPANISH_BUTTON_NAME)
     {
-        set_next(SevenKeys::ScreenType::HEADPHONE);
-        set_language("ES-GT");
-        cout << "chegou aqui5" <<endl;
-        cout << game_language <<endl;
+		set_next(next_screen);
+        set_language(Internacionalization::LanguageType::ESPANISH_LANGUAGE);
     }
 
     else if (button->id() == PORTUGUESE_BUTTON_NAME)
     {
-        set_next(SevenKeys::ScreenType::HEADPHONE);
-        set_language(PORTUGUESE_LANGUAGE);
+		set_next(next_screen);
+        set_language(Internacionalization::LanguageType::PORTUGUESE_LANGUAGE);
     }
     else if (button->id() == FRENCH_BUTTON_NAME)
     {
-        set_next(SevenKeys::ScreenType::HEADPHONE);
-        set_language(FRENCH_LANGUAGE);
+		set_next(next_screen);
+        set_language(Internacionalization::LanguageType::FRENCH_LANGUAGE);
 
     }
     else if (button->id() == NEXT_BUTTON_NAME)
     {
-        set_next(SevenKeys::ScreenType::HEADPHONE);
+		set_next(next_screen);
         set_language(DEFAULT_LANGUAGE_PATH);
-        cout << "chegou aqui7" <<endl;
     }
     else if (button->id() == PREVIOUS_BUTTON_NAME)
     {
-        set_next(SevenKeys::ScreenType::HEADPHONE);
+		set_next(next_screen);
         set_language(DEFAULT_LANGUAGE_PATH);
-        cout << "chegou aqui8" <<endl;
     }
 
     finish();
@@ -195,11 +202,12 @@ void Internacionalization::set_language(const string& language)
     language_preferences.close();
 }
 
+
 string Internacionalization::get_language()
 {
     ifstream language_preferences;
     language_preferences.open("language_preferences.txt", ios::in);
-    string language;
+    string language = "no language";
     getline (language_preferences,language);
     language_preferences.close();
     return language;
@@ -212,4 +220,16 @@ string Internacionalization::load_string(const string& source_to_translate)
                   "/" + Internacionalization::get_language() +
                   "/" + source_to_translate);
     return path_string;
+}
+
+bool Internacionalization::LanguageType::is_language(){
+	const string language = Internacionalization::get_language();
+	if(language != Internacionalization::LanguageType::ENGLISH_LANGUAGE &&
+	   language != Internacionalization::LanguageType::ESPANISH_LANGUAGE &&
+	   language != Internacionalization::LanguageType::PORTUGUESE_LANGUAGE &&
+	   language != Internacionalization::LanguageType::FRENCH_LANGUAGE){
+	    return false;
+	}else{
+		return true;
+	}
 }
