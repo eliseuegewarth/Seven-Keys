@@ -9,6 +9,7 @@
 #include "core/keyboardevent.hpp"
 #include "core/settings.hpp"
 
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_mixer.h>
 
@@ -17,7 +18,7 @@
 /**
  * @brief [brief description]
  * @details [long description]
- * 
+ *
  * @param id Map identifier file.
  */
 Game::Game(const string& id)
@@ -26,7 +27,7 @@ Game::Game(const string& id)
     m_level = nullptr; //Stores the game levels.
     m_done = false; //Stores if it was create or not the level.
 
-    /*It is an object of the class environment. 
+    /*It is an object of the class environment.
     Is a pointer to the current instance of the game environment.*/
     env = Environment::get_instance();
     assert((env != NULL) && "Failed to pick up the instance of environment");
@@ -46,14 +47,14 @@ Game::~Game()
 
 /**
  * @brief initializes the game with all the preconditions
- * 
+ *
  * @param whdth variable that stores the width of the resolution.
  * @param height variable that stores the screen resolution height.
  * @param scale variable that stores the display scale.
  * @param fullscreen boolean variable that stores the state of the screen.
  * @param volume Variable that stores the game audio volume.
  */
-void Game::init(const string& title, unsigned const int width, 
+void Game::init(const string& title, unsigned const int width,
                 unsigned const int height,const double scale,
                 bool fullscreen, unsigned int volume) throw (Exception)
 {
@@ -77,7 +78,7 @@ void Game::init(const string& title, unsigned const int width,
 
 /**
  * @brief Method to init the game.
- * 
+ *
  * @param path [description]
  */
 void Game::init(const string& path) throw (Exception)
@@ -86,36 +87,36 @@ void Game::init(const string& path) throw (Exception)
 
     shared_ptr<Settings> settings = env->resources_manager->get_settings(path);
 
-    string title = settings->read<string>("Game", SevenKeys::ScreenType::MAIN_SCREEN, "Test Game");
+    string title = "Main Screen";
 
     //variable that stores the width of the resolution.
-    int width = settings->read<int>("Game", "w", 800); 
+    int width = 800;
 
     //variable that stores the screen resolution height.
-    int height = settings->read<int>("Game", "h", 600); 
+    int height = 600;
 
     //variable that stores the display scale.
-    double scale = settings->read<double>("Game", "scale", 1); 
+    double scale = 1;
 
     //boolean variable that stores the state of the screen.
-    bool fullscreen = settings->read<bool>("Game", "fullscreen", false); 
+    bool fullscreen = false;
 
     //Variable that stores the game audio volume.
-    int volume = settings->read<int>("Game", "volume", 50); 
+    int volume = 50;
 
     init(title, width, height, scale, fullscreen, volume);
 }
 
 /**
  * @brief Method to start the game.
- * 
+ *
  */
 void Game::run()
 {
     while (m_level and not m_done)
     {
-        //Number of milliseconds since the SDL library initialized. 
-        unsigned long now = update_timestep(); 
+        //Number of milliseconds since the SDL library initialized.
+        unsigned long now = update_timestep();
         env->events_manager->dispatch_pending_events();
 
         m_level->update(now);
@@ -164,7 +165,7 @@ bool Game::on_event(const KeyboardEvent& event)
 
 void Game::update_screen()
 {
-    /* It is an object of the class environment. 
+    /* It is an object of the class environment.
     Is a pointer to the current instance of the game environment.*/
     Environment *env = Environment::get_instance();
     assert((env != NULL) && "Failed to pick up the instance of environment");

@@ -29,12 +29,11 @@ static int randint(int a, int b)
 }
 
 Room::Room(Object *parent, ObjectID id, string type, Room *left, Room *top,
-           Room *right, Room *bottom, int s_id)
+           Room *right, Room *bottom, int s_id) : Object(parent, id)
 {
     assert((parent != NULL) && "parent can't be NULL");
     assert((not id.empty()) && "id can't be empty");
     assert((not type.empty()) && "id can't be empty");
-    Object(parent, id);
     room_in_left = left;
     room_in_right = right;
     room_in_top = top;
