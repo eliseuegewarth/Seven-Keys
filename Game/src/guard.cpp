@@ -53,10 +53,10 @@ Guard::Guard(Object *parent, ObjectID id, const double guard_horizontal_position
     direction_of_movement = (Direction) initial_movement_direction;
     last_game_time_saved = 0;
 
-    this->set_mass(mass_of_guard);
+    this->set_mass(mass_of_guard);//Contains mass information of the guard object
     set_width(70);
     set_height(70);
-    this->set_walkable(walkable);
+    this->set_walkable(walkable);//Defines if the ghost guard is an object able to walk
     this->set_old_type(t);
     update_vision();
 
