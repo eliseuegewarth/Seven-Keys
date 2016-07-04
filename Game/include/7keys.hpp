@@ -21,7 +21,7 @@ public:
     {
     public:
         static const string& LANGUAGUE;
-		static const string& LANGUAGUE_OPTIONS;
+        static const string& LANGUAGUE_OPTIONS;
         static const string& HEADPHONE;
         static const string& COMPANY_LOGO;
         static const string& USED_TECHNOLOGIES;

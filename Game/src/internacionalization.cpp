@@ -105,7 +105,7 @@ Internacionalization::Internacionalization(bool options) : Level(LANGUAGE_PATH)/
     add_child(next);
     add_child(previous);
 
-	this->options = options;
+    this->options = options;
 }
 
 Internacionalization::~Internacionalization()
@@ -141,51 +141,51 @@ bool Internacionalization::on_message(Object *object, MessageID id, Parameters)/
     }
 
     if(button->id() == Internacionalization::LanguageType::ENGLISH_LANGUAGE ||
-	   button->id() == Internacionalization::LanguageType::ESPANISH_LANGUAGE ||
+       button->id() == Internacionalization::LanguageType::ESPANISH_LANGUAGE ||
        button->id() == Internacionalization::LanguageType::PORTUGUESE_LANGUAGE ||
-	   button->id() == Internacionalization::LanguageType::FRENCH_LANGUAGE ||
+       button->id() == Internacionalization::LanguageType::FRENCH_LANGUAGE ||
        button->id() == NEXT_BUTTON_NAME || button->id() == PREVIOUS_BUTTON_NAME)
         {
             environment->sfx->play("res/sounds/navegacaomenu.wav",1);
         }
 
-	string next_screen = SevenKeys::ScreenType::HEADPHONE;
-	if(this->options){
-		next_screen = SevenKeys::ScreenType::OPTIONS;
-	}else{
-		next_screen = SevenKeys::ScreenType::HEADPHONE;
-	}
+    string next_screen = SevenKeys::ScreenType::HEADPHONE;
+    if(this->options){
+        next_screen = SevenKeys::ScreenType::OPTIONS;
+    }else{
+        next_screen = SevenKeys::ScreenType::HEADPHONE;
+    }
 
-	if (button->id() == ENGLISH_BUTTON_NAME)
+    if (button->id() == ENGLISH_BUTTON_NAME)
     {
-		set_next(next_screen);
-		set_language(Internacionalization::LanguageType::ENGLISH_LANGUAGE);
+        set_next(next_screen);
+        set_language(Internacionalization::LanguageType::ENGLISH_LANGUAGE);
     }
     else if (button->id() == ESPANISH_BUTTON_NAME)
     {
-		set_next(next_screen);
+        set_next(next_screen);
         set_language(Internacionalization::LanguageType::ESPANISH_LANGUAGE);
     }
 
     else if (button->id() == PORTUGUESE_BUTTON_NAME)
     {
-		set_next(next_screen);
+        set_next(next_screen);
         set_language(Internacionalization::LanguageType::PORTUGUESE_LANGUAGE);
     }
     else if (button->id() == FRENCH_BUTTON_NAME)
     {
-		set_next(next_screen);
+        set_next(next_screen);
         set_language(Internacionalization::LanguageType::FRENCH_LANGUAGE);
 
     }
     else if (button->id() == NEXT_BUTTON_NAME)
     {
-		set_next(next_screen);
+        set_next(next_screen);
         set_language(DEFAULT_LANGUAGE_PATH);
     }
     else if (button->id() == PREVIOUS_BUTTON_NAME)
     {
-		set_next(next_screen);
+        set_next(next_screen);
         set_language(DEFAULT_LANGUAGE_PATH);
     }
 
@@ -223,13 +223,13 @@ string Internacionalization::load_string(const string& source_to_translate)
 }
 
 bool Internacionalization::LanguageType::is_language(){
-	const string language = Internacionalization::get_language();
-	if(language != Internacionalization::LanguageType::ENGLISH_LANGUAGE &&
-	   language != Internacionalization::LanguageType::ESPANISH_LANGUAGE &&
-	   language != Internacionalization::LanguageType::PORTUGUESE_LANGUAGE &&
-	   language != Internacionalization::LanguageType::FRENCH_LANGUAGE){
-	    return false;
-	}else{
-		return true;
-	}
+    const string language = Internacionalization::get_language();
+    if(language != Internacionalization::LanguageType::ENGLISH_LANGUAGE &&
+       language != Internacionalization::LanguageType::ESPANISH_LANGUAGE &&
+       language != Internacionalization::LanguageType::PORTUGUESE_LANGUAGE &&
+       language != Internacionalization::LanguageType::FRENCH_LANGUAGE){
+        return false;
+    }else{
+        return true;
+    }
 }

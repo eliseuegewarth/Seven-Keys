@@ -32,7 +32,7 @@ MouseButtonEvent::MouseButtonEvent(ButtonState state, Button button,
 
 /**
  * [MouseButtonEvent::state             State of the buttons,
- * 									 	if it is pressed or not]
+ *                                          if it is pressed or not]
  * @method MouseMotionEvent::state
  * @return                         [Return the state of button]
  */
@@ -55,7 +55,7 @@ MouseButtonEvent::button() const
 
 /**
  * [MouseButtonEvent::horizontal_position         position where the mouse button was
- * 					 			pressed on the screen in axis horizontal_position(horizontal)]
+ *                                  pressed on the screen in axis horizontal_position(horizontal)]
  * @method MouseButtonEvent::horizontal_position
  * @return                  [Returns the mouse position in axis horizontal_position(horizontal)]
  */
@@ -66,7 +66,7 @@ double MouseButtonEvent::horizontal_position() const
 
 /**
  * [MouseButtonEvent::y             position where the mouse button was
- * 					 				pressed on the screen in axis y(vertical)]
+ *                                      pressed on the screen in axis y(vertical)]
  * @method MouseButtonEvent::y
  * @return                   [[Returns the mouse position in axis y(vertical)]
  */
@@ -77,7 +77,7 @@ double MouseButtonEvent::vertical_position() const
 
 /**
  * [MouseButtonEvent::from_SDL      Reads the state of the buttons from the
- * 							   		SDL library and returns the states for class]
+ *                                        SDL library and returns the states for class]
  * @method MouseButtonEvent::from_SDL
  * @param  event                      [mouse event detected by the SDL library]
  * @return                            [mouse buttons event]

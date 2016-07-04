@@ -100,13 +100,13 @@ Room::~Room()
  */
 string Room::room_type()
 {
-	if (this->type == "CelaH" || this->type == "CelaV")
+    if (this->type == "CelaH" || this->type == "CelaV")
     {
-		return "Cela";
+        return "Cela";
     }else{
         //do nothing
     }
-	return this->type;
+    return this->type;
 }
 
 //Add_items add the items in the room as the bench, bottles, chairs, etc.]
@@ -168,8 +168,8 @@ void Room::add_items(int stage_id)
         total_widtheight += item.weight;
     }
 
-	if (room_type() == "KeyRoom")
-	{
+    if (room_type() == "KeyRoom")
+    {
         char prepath[256];
         sprintf(prepath,"res/items/");
         char newpath[256];
@@ -182,7 +182,7 @@ void Room::add_items(int stage_id)
         while (not place(item, -1, -1));
 
         add_child(item);
-	}else{
+    }else{
         //do nothing
     }
 
@@ -245,7 +245,7 @@ void Room::add_items(int stage_id)
 void Room::add_list(Object  * item)
 {
     assert((item != NULL) && "Item should be diferent of NULL");
-	this->items.push_back(item);
+    this->items.push_back(item);
 }
 
 /**
@@ -255,43 +255,43 @@ void Room::add_list(Object  * item)
  */
 const list<Object *>& Room::get_items()
 {
-	return children();
+    return children();
 }
 
 
 void Room::check_entry()
 {
-	Environment *env = Environment::get_instance();
-	if(this->room_in_left)
-	{
-		Rect l_door {0, 340, 80, 80};
-		env->canvas->draw(l_door, Color::WHITE);
+    Environment *env = Environment::get_instance();
+    if(this->room_in_left)
+    {
+        Rect l_door {0, 340, 80, 80};
+        env->canvas->draw(l_door, Color::WHITE);
 
-	}else{
+    }else{
         //do nothing
     }
-	if(this->room_in_top)
-	{
-		Rect t_door {600, 0, 80, 80};
-		env->canvas->draw(t_door, Color::WHITE);
+    if(this->room_in_top)
+    {
+        Rect t_door {600, 0, 80, 80};
+        env->canvas->draw(t_door, Color::WHITE);
 
-	}else{
+    }else{
         //do nothing
     }
-	if(this->room_in_right)
-	{
-		Rect room_in_door {1200, 340, 80, 80};
-		env->canvas->draw(room_in_door, Color::WHITE);
+    if(this->room_in_right)
+    {
+        Rect room_in_door {1200, 340, 80, 80};
+        env->canvas->draw(room_in_door, Color::WHITE);
 
-	}else{
+    }else{
         //do nothing
     }
-	if(this->room_in_bottom)
-	{
-		Rect b_door {600, 640, 80, 80};
-		env->canvas->draw(b_door, Color::WHITE);
+    if(this->room_in_bottom)
+    {
+        Rect b_door {600, 640, 80, 80};
+        env->canvas->draw(b_door, Color::WHITE);
 
-	}else{
+    }else{
         //do nothing
     }
 }
@@ -300,37 +300,37 @@ void
 Room::draw_id(Room * anterior, Room * sala, int horizontal_position, int vertical_position)
 {
     //assert((anterior != NULL) && "Room can't be NULL");
-	Environment *env = Environment::get_instance();
-	shared_ptr <Font> font = env->resources_manager->get_font("res/fonts/TakaoExGothic.ttf");
-	env->canvas->set_font(font);
-	env->canvas->draw(sala->id(), horizontal_position, vertical_position, Color::RED);
+    Environment *env = Environment::get_instance();
+    shared_ptr <Font> font = env->resources_manager->get_font("res/fonts/TakaoExGothic.ttf");
+    env->canvas->set_font(font);
+    env->canvas->draw(sala->id(), horizontal_position, vertical_position, Color::RED);
 
-	if(sala->room_in_left && sala->room_in_left != anterior)
-	{
-		env->canvas->draw("-", horizontal_position - 20,vertical_position,Color::RED);
-		draw_id(sala, sala->room_in_left, horizontal_position - 100, vertical_position);
-	}else{
+    if(sala->room_in_left && sala->room_in_left != anterior)
+    {
+        env->canvas->draw("-", horizontal_position - 20,vertical_position,Color::RED);
+        draw_id(sala, sala->room_in_left, horizontal_position - 100, vertical_position);
+    }else{
         //do nothing
     }
-	if(sala->room_in_top && sala->room_in_top != anterior)
-	{
-		env->canvas->draw("|", horizontal_position + 20, vertical_position - 30,Color::RED);
-		draw_id(sala, sala->room_in_top, horizontal_position, vertical_position - 60);
-	}else{
+    if(sala->room_in_top && sala->room_in_top != anterior)
+    {
+        env->canvas->draw("|", horizontal_position + 20, vertical_position - 30,Color::RED);
+        draw_id(sala, sala->room_in_top, horizontal_position, vertical_position - 60);
+    }else{
         //do nothing
     }
-	if(sala->room_in_right && sala->room_in_right != anterior)
-	{
-		env->canvas->draw("-", horizontal_position + 80,vertical_position,Color::RED);
-		draw_id(sala, sala->room_in_right, horizontal_position + 100, vertical_position);
-	}else{
+    if(sala->room_in_right && sala->room_in_right != anterior)
+    {
+        env->canvas->draw("-", horizontal_position + 80,vertical_position,Color::RED);
+        draw_id(sala, sala->room_in_right, horizontal_position + 100, vertical_position);
+    }else{
         //do nothing
     }
-	if(sala->room_in_bottom && sala->room_in_bottom != anterior)
-	{
-		env->canvas->draw("|", horizontal_position + 20, vertical_position + 25,Color::RED);
-		draw_id(sala, sala->room_in_bottom, horizontal_position, vertical_position + 60);
-	}else{
+    if(sala->room_in_bottom && sala->room_in_bottom != anterior)
+    {
+        env->canvas->draw("|", horizontal_position + 20, vertical_position + 25,Color::RED);
+        draw_id(sala, sala->room_in_bottom, horizontal_position, vertical_position + 60);
+    }else{
         //do nothing
     }
 }
@@ -433,7 +433,7 @@ void
 Room::remove_item(Object *item)
 {
     assert((item != NULL) && "item can't be NULL");
-	remove_child(item);
+    remove_child(item);
 }
 
 void
@@ -476,13 +476,13 @@ Room::fill_floor(const string& name)
     center_area.set_dimensions(canvas->width() - 2*image->width(), canvas->height() - 2*image->height());
 
     for(int i = 1; i < width - 1; i++)
-	{
-		for(int j = 1; j < height - 1; j++)
-		{
-			Item *floor = new Item(this, name, path, i*image->width(), j*image->height(), INFINITE, true);
-	 		add_child(floor);
-		}
-	}
+    {
+        for(int j = 1; j < height - 1; j++)
+        {
+            Item *floor = new Item(this, name, path, i*image->width(), j*image->height(), INFINITE, true);
+             add_child(floor);
+        }
+    }
 
     delete image;
 }
@@ -614,8 +614,8 @@ Room::add_corners(const string& name)
         }
         delete image;
 
-	    Item *corner = new Item(this, name, path, horizontal_position,vertical_position, INFINITE, false);
-	    add_child(corner);
+        Item *corner = new Item(this, name, path, horizontal_position,vertical_position, INFINITE, false);
+        add_child(corner);
     }
 }
 
@@ -643,7 +643,7 @@ Room::add_guard(const string& name)
     {
         Guard *guard = new Guard(this, name, 0, 0, 60, false, type, randint(0,3));
         place(guard, -1, -1);
-	    add_child(guard);
+        add_child(guard);
     }
 }
 

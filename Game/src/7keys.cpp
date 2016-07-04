@@ -98,17 +98,17 @@ SevenKeys::load_level(const string& screen_type) {
 
     if (screen_type == SevenKeys::ScreenType::LANGUAGUE)
     {
-		if(not Internacionalization::LanguageType::is_language()){
-			/*LOG.info("Showing Language menu screen.")*/
-			cout << "Showing Language menu screen." <<endl;
-			level_to_be_loaded = (Level*) new Internacionalization(false);
-		}else{
-			cout << "Showing Headphone hint screen." <<endl;
-	        string path_fone = Internacionalization::load_string(HEADPHONE_IMAGE_PATH);
-	        level_to_be_loaded = (Level*) new FrontEnd(SevenKeys::ScreenType::COMPANY_LOGO, SevenKeys::ScreenType::COMPANY_LOGO, path_fone);
-		}
+        if(not Internacionalization::LanguageType::is_language()){
+            /*LOG.info("Showing Language menu screen.")*/
+            cout << "Showing Language menu screen." <<endl;
+            level_to_be_loaded = (Level*) new Internacionalization(false);
+        }else{
+            cout << "Showing Headphone hint screen." <<endl;
+            string path_fone = Internacionalization::load_string(HEADPHONE_IMAGE_PATH);
+            level_to_be_loaded = (Level*) new FrontEnd(SevenKeys::ScreenType::COMPANY_LOGO, SevenKeys::ScreenType::COMPANY_LOGO, path_fone);
+        }
     }
-	else if (screen_type == SevenKeys::ScreenType::LANGUAGUE_OPTIONS)
+    else if (screen_type == SevenKeys::ScreenType::LANGUAGUE_OPTIONS)
     {
         /*LOG.info("Showing Language menu screen.")*/
         cout << "Showing Language menu screen." <<endl;

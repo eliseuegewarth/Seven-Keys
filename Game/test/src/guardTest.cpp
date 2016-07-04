@@ -23,13 +23,13 @@ class TestGuard : public CppUnit::TestCase
       Room * RoomTestObj;
       Map * MapTestObj;
 
-    	void get_playerx_test ();
-    	//void			anotherExample ();
-    	//void			testEquals ();
+        void get_playerx_test ();
+        //void            anotherExample ();
+        //void            testEquals ();
 
     public:
 
-    	void setUp ();
+        void setUp ();
       void tearDown();
     };
 

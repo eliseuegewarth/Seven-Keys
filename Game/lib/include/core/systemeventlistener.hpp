@@ -10,8 +10,8 @@ class SystemEvent;
 
 class SystemEventListener
 {
-	public:
-	    virtual bool onSystemEvent(const SystemEvent& event) = 0;
+    public:
+        virtual bool onSystemEvent(const SystemEvent& event) = 0;
 };
 
 #endif

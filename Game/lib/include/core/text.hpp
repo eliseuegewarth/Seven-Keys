@@ -16,15 +16,15 @@ using std::unique_ptr;
 
 class Text : public Object
 {
-	public:
-    	Text(Object *parent, const string& text, const Color& color = Color::BLACK);
-    	~Text();
+    public:
+        Text(Object *parent, const string& text, const Color& color = Color::BLACK);
+        ~Text();
 
-	private:
-    	class Impl;
-    	unique_ptr<Impl> m_impl;
+    private:
+        class Impl;
+        unique_ptr<Impl> m_impl;
 
-    	void draw_self();
+        void draw_self();
 };
 
 #endif

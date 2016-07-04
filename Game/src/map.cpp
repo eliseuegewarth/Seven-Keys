@@ -18,7 +18,7 @@ using namespace std;
 
 Map::Map(int qnt_salas, int stage_id) : current_room(nullptr), m_boss(NULL)
 {
-	GenerateMap(qnt_salas, stage_id);
+    GenerateMap(qnt_salas, stage_id);
 
     Boss *boss = new Boss(this, "boss", 0, 0, 999, true, Boss::LEFT);
     assert((boss != NULL) && "");
@@ -29,11 +29,11 @@ Map::Map(int qnt_salas, int stage_id) : current_room(nullptr), m_boss(NULL)
 // Room Criation
 void Map::CreateRoom(Room *room, int *id,int horizontal_position, int vertical_position, int qnt, int stage_id)
 {
-	int randomVar;
+    int randomVar;
     int randomType = rand() % 3;
     string type;
 
-	randomVar = rand() % 100+1;
+    randomVar = rand() % 100+1;
 
     if(randomVar <= 25)
     {
@@ -75,17 +75,17 @@ void Map::CreateRoom(Room *room, int *id,int horizontal_position, int vertical_p
         return;
     }
 
-	switch(randomVar)
-	{
-		case LEFT:
-			if(room->room_in_left != nullptr)
-				CreateRoom(room->room_in_left, id, horizontal_position-1,vertical_position, qnt, stage_id);
-			else if(horizontal_position-1 >= 0 && matriz[horizontal_position-1][vertical_position] == false && (room->room_type() != "Cela" || (room->room_type() == "Cela" && room->room_in_right)))
+    switch(randomVar)
+    {
+        case LEFT:
+            if(room->room_in_left != nullptr)
+                CreateRoom(room->room_in_left, id, horizontal_position-1,vertical_position, qnt, stage_id);
+            else if(horizontal_position-1 >= 0 && matriz[horizontal_position-1][vertical_position] == false && (room->room_type() != "Cela" || (room->room_type() == "Cela" && room->room_in_right)))
             {
                 if(type == "Cela")
                     type += 'H';
 
-            	room->Room::room_in_left = new Room(this, sala, type, nullptr, nullptr, room, nullptr, stage_id);
+                room->Room::room_in_left = new Room(this, sala, type, nullptr, nullptr, room, nullptr, stage_id);
                 room_list.push_back(room->room_in_left);
                 room->room_in_left->horizontal_position = horizontal_position-1;
                 room->room_in_left->vertical_position = vertical_position;
@@ -96,17 +96,17 @@ void Map::CreateRoom(Room *room, int *id,int horizontal_position, int vertical_p
                 *id-=1;
                 return;
             }
-			break;
+            break;
 
-		case RIGHT:
-			if(room->room_in_right != nullptr)
-				CreateRoom(room->room_in_right, id, horizontal_position+1,vertical_position, qnt, stage_id);
-			else if(horizontal_position+1 < qnt && matriz[horizontal_position+1][vertical_position] == false && (room->room_type() != "Cela" || (room->room_type() == "Cela" && room->room_in_left)))
+        case RIGHT:
+            if(room->room_in_right != nullptr)
+                CreateRoom(room->room_in_right, id, horizontal_position+1,vertical_position, qnt, stage_id);
+            else if(horizontal_position+1 < qnt && matriz[horizontal_position+1][vertical_position] == false && (room->room_type() != "Cela" || (room->room_type() == "Cela" && room->room_in_left)))
             {
                 if(type == "Cela")
                     type += 'H';
 
-            	room->room_in_right = new Room(this, sala, type, room, nullptr, nullptr, nullptr, stage_id);
+                room->room_in_right = new Room(this, sala, type, room, nullptr, nullptr, nullptr, stage_id);
                 room_list.push_back(room->room_in_right);
                 room->room_in_right->horizontal_position = horizontal_position+1;
                 room->room_in_right->vertical_position = vertical_position;
@@ -117,17 +117,17 @@ void Map::CreateRoom(Room *room, int *id,int horizontal_position, int vertical_p
                 *id-=1;
                 return;
             }
-			break;
+            break;
 
-		case TOP:
-			if(room->room_in_top != nullptr)
-				CreateRoom(room->room_in_top, id, horizontal_position, vertical_position-1, qnt, stage_id);
-			else if(vertical_position-1 >= 0 && matriz[horizontal_position][vertical_position-1] == false && (room->room_type() != "Cela" || (room->room_type() == "Cela" && room->room_in_bottom)))
+        case TOP:
+            if(room->room_in_top != nullptr)
+                CreateRoom(room->room_in_top, id, horizontal_position, vertical_position-1, qnt, stage_id);
+            else if(vertical_position-1 >= 0 && matriz[horizontal_position][vertical_position-1] == false && (room->room_type() != "Cela" || (room->room_type() == "Cela" && room->room_in_bottom)))
             {
                 if(type == "Cela")
                     type += 'V';
 
-				room->room_in_top = new Room(this, sala, type, nullptr, nullptr, nullptr, room, stage_id);
+                room->room_in_top = new Room(this, sala, type, nullptr, nullptr, nullptr, room, stage_id);
                 room_list.push_back(room->room_in_top);
                 room->room_in_top->horizontal_position = horizontal_position;
                 room->room_in_top->vertical_position = vertical_position-1;
@@ -138,17 +138,17 @@ void Map::CreateRoom(Room *room, int *id,int horizontal_position, int vertical_p
                 *id-=1;
                 return;
             }
-			break;
+            break;
 
-		case BOTTOM:
-			if(room->room_in_bottom != nullptr)
-				CreateRoom(room->room_in_bottom, id, horizontal_position, vertical_position+1, qnt, stage_id);
-			else if(vertical_position+1 < qnt && matriz[horizontal_position][vertical_position+1] == false && (room->room_type() != "Cela" || (room->room_type() == "Cela" && room->room_in_top)))
+        case BOTTOM:
+            if(room->room_in_bottom != nullptr)
+                CreateRoom(room->room_in_bottom, id, horizontal_position, vertical_position+1, qnt, stage_id);
+            else if(vertical_position+1 < qnt && matriz[horizontal_position][vertical_position+1] == false && (room->room_type() != "Cela" || (room->room_type() == "Cela" && room->room_in_top)))
             {
                 if(type == "Cela")
                     type += 'V';
 
-				room->room_in_bottom = new Room(this, sala, type, nullptr, room, nullptr, nullptr, stage_id);
+                room->room_in_bottom = new Room(this, sala, type, nullptr, room, nullptr, nullptr, stage_id);
                 room_list.push_back(room->room_in_bottom);
                 room->room_in_bottom->horizontal_position = horizontal_position;
                 room->room_in_bottom->vertical_position = vertical_position+1;
@@ -159,8 +159,8 @@ void Map::CreateRoom(Room *room, int *id,int horizontal_position, int vertical_p
                 *id-=1;
                 return;
             }
-			break;
-	}
+            break;
+    }
 }
 
 // Generate all the map
@@ -175,31 +175,31 @@ void Map::GenerateMap(int quantidade_salas, int stage_id)
 
     for(int i = 0; i < quantidade_salas; i++)
     {
-    	matriz[i] = (bool*) malloc(sizeof(bool)*(quantidade_salas));
+        matriz[i] = (bool*) malloc(sizeof(bool)*(quantidade_salas));
         for(int j = 0; j < quantidade_salas; j++)
-	        {
+            {
             matriz[i][j] = false;
         }
     }
 
-	Room *room = new Room(this, "sala 0", "None", nullptr, nullptr, nullptr, nullptr, stage_id);
+    Room *room = new Room(this, "sala 0", "None", nullptr, nullptr, nullptr, nullptr, stage_id);
     assert((room != NULL) && "Failed to pick up the instance of environment");
     room_list.push_back(room);
     set_current(room);
     last_room = room;
 
-	matriz[horizontal_position][vertical_position] = true;
+    matriz[horizontal_position][vertical_position] = true;
 
     Room * aux = room_list.at(rand() % id);
     aux->horizontal_position = horizontal_position;
     aux->vertical_position = vertical_position;
 
-	for(int id = 1; id < quantidade_salas; id++)
-	{
+    for(int id = 1; id < quantidade_salas; id++)
+    {
         Room * aux = room_list.at(rand() % id);
-		CreateRoom(aux, &id, aux->horizontal_position, aux->vertical_position, quantidade_salas, stage_id);
+        CreateRoom(aux, &id, aux->horizontal_position, aux->vertical_position, quantidade_salas, stage_id);
         aux ++;
-	}
+    }
     for(int i=quantidade_salas-1; i>=0; i--)
     {
         free (matriz[i]);
@@ -215,7 +215,7 @@ void Map::remove_item(Object *item)
 
 Room * Map::room()
 {
-	return current_room;
+    return current_room;
 }
 
 void Map::set_current(Room *nova)
@@ -227,7 +227,7 @@ void Map::set_current(Room *nova)
         current_room->remove_observer(this);
     }
 
-	current_room = nova;
+    current_room = nova;
     add_child(current_room);
     add_observer(current_room);
     current_room->add_observer(this);

@@ -42,7 +42,7 @@ JoyStickEvent::JoyStickEvent(State state, Button button)
 
 /**
  * [JoyStickEvent::state            method that returns the state of
- * 									the joystick, like a "get"]
+ *                                     the joystick, like a "get"]
  * @method JoyStickEvent::state
  * @return [returns the state of the joystick, PRESSED or RELEASED]
  */
@@ -65,7 +65,7 @@ JoyStickEvent::Button JoyStickEvent::button() const
 
 /**
  * [JoyStickEvent::from_SDL     method that returns the button that
- * 								are pressed in the joystick, like a "get"]
+ *                                 are pressed in the joystick, like a "get"]
  * @method JoyStickEvent::from_SDL
  * @param  event                   [Joystick event detected by the SDL library]
  * @return                         [returns the complete state of the joystick

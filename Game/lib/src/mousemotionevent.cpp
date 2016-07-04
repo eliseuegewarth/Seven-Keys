@@ -68,7 +68,7 @@ MouseMotionEvent::relative_vertical_position() const
 
 /**
  * [MouseMotionEvent::from_SDL      Reads the movements from the SDL library
- * 									and returns the states for class]
+ *                                     and returns the states for class]
  * @method MouseMotionEvent::from_SDL
  * @param  event                      [mouse event detected by the SDL library]
  * @return                            [mouse movement]
