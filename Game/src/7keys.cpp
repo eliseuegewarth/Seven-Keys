@@ -50,6 +50,8 @@
 // Path of Game Over transition image.
 #define GAME_OVER_IMAGE_PATH "interface/transition/gameOver.png"
 
+#define EMPTY_STRING ""
+#define NUMBER_OF_STAGES 5
 
 /**
  * @brief [ScreenType class definition. All string literals of screen types are definied here.]
@@ -105,7 +107,10 @@ SevenKeys::load_level(const string& screen_type) {
         }else{
             cout << "Showing Headphone hint screen." <<endl;
             string path_fone = Internacionalization::load_string(HEADPHONE_IMAGE_PATH);
-            level_to_be_loaded = (Level*) new FrontEnd(SevenKeys::ScreenType::COMPANY_LOGO, SevenKeys::ScreenType::COMPANY_LOGO, path_fone);
+
+            level_to_be_loaded = (Level*) new FrontEnd( SevenKeys::ScreenType::COMPANY_LOGO, 
+                                                                                SevenKeys::ScreenType::COMPANY_LOGO, 
+                                                                                path_fone);
         }
     }
     else if (screen_type == SevenKeys::ScreenType::LANGUAGUE_OPTIONS)
@@ -119,21 +124,27 @@ SevenKeys::load_level(const string& screen_type) {
         /*LOG.info("Showing Headphone hint screen.")*/
         cout << "Showing Headphone hint screen." <<endl;
         string path_fone = Internacionalization::load_string(HEADPHONE_IMAGE_PATH);
-        level_to_be_loaded = (Level*) new FrontEnd(SevenKeys::ScreenType::COMPANY_LOGO, SevenKeys::ScreenType::COMPANY_LOGO, path_fone);
+        level_to_be_loaded = (Level*) new FrontEnd(SevenKeys::ScreenType::COMPANY_LOGO, 
+                                                                            SevenKeys::ScreenType::COMPANY_LOGO, 
+                                                                            path_fone);
     }
     else if (screen_type == SevenKeys::ScreenType::COMPANY_LOGO)
     {
         /*LOG.info("Showing company logo.")*/
         cout << "Showing company logo." << endl;
         string path_mana_team = Internacionalization::load_string(MANA_TEAM_IMAGE_PATH);
-        level_to_be_loaded = (Level*) new FrontEnd(SevenKeys::ScreenType::COMPANY_LOGO, SevenKeys::ScreenType::USED_TECHNOLOGIES, path_mana_team);
+        level_to_be_loaded = (Level*) new FrontEnd(SevenKeys::ScreenType::COMPANY_LOGO, 
+                                                                            SevenKeys::ScreenType::USED_TECHNOLOGIES, 
+                                                                            path_mana_team);
     }
     else if (screen_type == SevenKeys::ScreenType::USED_TECHNOLOGIES)
     {
         /*LOG.info("Showing used Technologies.")*/
         cout << "Showing used Technologies." << endl;
         string path_technologies = Internacionalization::load_string(USED_TECNOLOGIES_IMAGE_PATH);
-        level_to_be_loaded = (Level*) new FrontEnd(SevenKeys::ScreenType::USED_TECHNOLOGIES, SevenKeys::ScreenType::AGE_RATING, path_technologies);
+        level_to_be_loaded = (Level*) new FrontEnd(SevenKeys::ScreenType::USED_TECHNOLOGIES, 
+                                                                            SevenKeys::ScreenType::AGE_RATING, 
+                                                                            path_technologies);
     }
     else if (screen_type == SevenKeys::ScreenType::AGE_RATING)
     {
@@ -141,7 +152,9 @@ SevenKeys::load_level(const string& screen_type) {
         cout << "Showing the game age rating." << endl;
         string path_classificacao = Internacionalization::load_string(AGE_RATING_IMAGE_PATH);
         cout << path_classificacao <<endl;
-        level_to_be_loaded = (Level*) new FrontEnd(SevenKeys::ScreenType::AGE_RATING, SevenKeys::ScreenType::MAIN_SCREEN, path_classificacao);
+        level_to_be_loaded = (Level*) new FrontEnd(SevenKeys::ScreenType::AGE_RATING, 
+                                                                            SevenKeys::ScreenType::MAIN_SCREEN, 
+                                                                            path_classificacao);
     }
     else if (screen_type == SevenKeys::ScreenType::MAIN_SCREEN)
     {
@@ -170,38 +183,25 @@ SevenKeys::load_level(const string& screen_type) {
 
         // Comment This
         shared_ptr <Font> font = env->resources_manager->get_font(PATH_OF_GAME_FONT);
+        assert(font != nullptr);
         env->canvas->set_font(font);
-
-        // Width of screen in pixels.
-        double width = env->canvas->width();
-        // Height of screen in pixels.
-        double height = env->canvas->height();
 
         // String that contains the old type of screen.
         string ant = screen_type;
 
-        // The screen to be loaded.
-        Level *lvl = new Level(screen_type, screen_type);
-        assert(lvl != NULL && "failed to create a Level instance");
-        lvl->set_dimensions(width, height);
+        char stage_screen_type[NEW_STRING_MAX_SIZE] = EMPTY_STRING;
+        cout << "Creating " <<  stage_screen_type << " stage Screen" << endl;
+        snprintf(stage_screen_type, NEW_STRING_MAX_SIZE, "stage%c", screen_type.c_str()[5]);
 
-        char stage_screen_type[NEW_STRING_MAX_SIZE];
-        snprintf(stage_screen_type, NEW_STRING_MAX_SIZE, "%s", screen_type.c_str());
-
-        stage_screen_type[0] = 's';
-        stage_screen_type[1] = 't';
-        stage_screen_type[2] = 'a';
-        stage_screen_type[3] = 'g';
-        stage_screen_type[4] = 'e';
-
-
-        string string_of_stage_number = screen_type.substr(5,5);
-        char stage_number_array_of_characters[ STAGE_NUMBER_ARRAY_SIZE] = "";
-        sprintf(stage_number_array_of_characters, "%s", string_of_stage_number.c_str());
-        int new_stage_number = atoi(stage_number_array_of_characters);
-        char path[PATH_STRING_MAX_SIZE] = "";
+        cout << "Created " <<  stage_screen_type << " stage Screen" << endl;
+        cout << "Created " <<  screen_type.substr(5,5) << " stage number string" << endl; 
+        char stage_number_array_of_characters[ STAGE_NUMBER_ARRAY_SIZE] = EMPTY_STRING;
+        sprintf(stage_number_array_of_characters, "%s", screen_type.substr(5,5).c_str());
+        const int new_stage_number = atoi(stage_number_array_of_characters);
+        assert(new_stage_number >= 0 && "Stage number must be greater than zero");
+        char path[PATH_STRING_MAX_SIZE] = EMPTY_STRING;
         string path_transition_fase;
-        if(new_stage_number < 6)
+        if(new_stage_number <= NUMBER_OF_STAGES)
         {
             sprintf(path, STAGE_TRANSITION_IMAGE_PATH, new_stage_number);
             path_transition_fase = Internacionalization::load_string(path);
@@ -211,8 +211,8 @@ SevenKeys::load_level(const string& screen_type) {
             path_transition_fase = Internacionalization::load_string(BONUS_STAGE_TRANSITION_IMAGE_PATH);
         }
 
-        char music_path[MUSIC_PATH_STRING_MAX_SIZE];
-        if(new_stage_number < 6)
+        char music_path[MUSIC_PATH_STRING_MAX_SIZE] = EMPTY_STRING;
+        if(new_stage_number <= NUMBER_OF_STAGES)
         {
             sprintf(music_path, PATH_OF_MUSIC_OF_STAGE, new_stage_number);
         }
@@ -221,8 +221,6 @@ SevenKeys::load_level(const string& screen_type) {
             sprintf(music_path, PATH_OF_MUSIC_OF_BONUS_STAGE);
         }
         env->music->play(music_path, -1);
-
-        env->canvas->draw(screen_type, width/2, height/2 ,Color::RED);
 
         cout << stage_screen_type << endl;
 
@@ -240,26 +238,8 @@ SevenKeys::load_level(const string& screen_type) {
         shared_ptr <Font> font = env->resources_manager->get_font(PATH_OF_GAME_FONT);
         env->canvas->set_font(font);
 
-        // Width of screen in pixels.
-        double width = env->canvas->width();
-        // Height of screen in pixels.
-        double height = env->canvas->height();
-
-        // String that contains the old type of screen.
-        string ant = screen_type;
-
-        // The screen to be loaded.
-        Level *lvl = new Level(screen_type, screen_type);
-        assert(lvl != NULL && "failed to create a Level instance");
-        lvl->set_dimensions(width, height);
-
-        char stage_screen_type[NEW_STRING_MAX_SIZE];
-        sprintf(stage_screen_type, "%s",screen_type.c_str());
-        stage_screen_type[0] = 's';
-        stage_screen_type[1] = 't';
-        stage_screen_type[2] = 'a';
-        stage_screen_type[3] = 'g';
-        stage_screen_type[4] = 'e';
+        char stage_screen_type[NEW_STRING_MAX_SIZE] = EMPTY_STRING;
+        sprintf(stage_screen_type, "stage%c",screen_type.c_str()[5]);
 
         this->number_of_players_lives--;
         string path_transition = Internacionalization::load_string(EMPTY_BLACK_TRANSITION_PATH);
@@ -273,23 +253,18 @@ SevenKeys::load_level(const string& screen_type) {
         assert(env != NULL && "failed to pick up the instance of Environment");
         env->sfx->play(PATH_OF_GAME_OVER_MUSIC,1);
 
-        // Width of screen in pixels.
-        double width = env->canvas->width();
-        // Height of screen in pixels.
-        double height = env->canvas->height();
-
-        // The screen to be loaded.
-        Level *lvl = new Level(screen_type, screen_type);
-        assert(lvl != NULL && "failed to create a Level instance");
-        lvl->set_dimensions(width, height);
         string path_transition_game_over = Internacionalization::load_string(GAME_OVER_IMAGE_PATH);
-        level_to_be_loaded = (Level*) new FrontEnd(screen_type, SevenKeys::ScreenType::MAIN_SCREEN, path_transition_game_over);
+        level_to_be_loaded = (Level*) new FrontEnd(screen_type, 
+                                                                            SevenKeys::ScreenType::MAIN_SCREEN, 
+                                                                            path_transition_game_over);
     }
     else if (strstr(screen_type.c_str(), SevenKeys::ScreenType::STAGE.c_str()))
     {
         /*LOG.info("Showing new stage screen.")*/
         cout << "Showing new stage screen." <<endl;
-        level_to_be_loaded = (Level*) new Stage(screen_type, this->number_of_players_lives, &(this->player_sanity));
+        level_to_be_loaded = (Level*) new Stage(screen_type, 
+                                                                    this->number_of_players_lives, 
+                                                                    &(this->player_sanity));
     }
     else if (screen_type == SevenKeys::ScreenType::CREDITS)
     {
