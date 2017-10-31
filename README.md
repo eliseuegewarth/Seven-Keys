@@ -1,5 +1,5 @@
 # Seven Keys
-
+O seguinte tutorial está deprecated pois um dos comandos não está bem descrito.
 
 # Instalação
 Usando o terminal, acesse a pasta /Game/lib:
